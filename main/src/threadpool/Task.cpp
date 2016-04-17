@@ -1,7 +1,7 @@
 #include "Task.h"
 
 Task::Task(void (*fn_ptr)(void*), void* arg) : m_fn_ptr(fn_ptr), m_arg(arg) {
-
+    m_status = TASKINIT;
 }
 
 Task::~Task() {
@@ -10,11 +10,29 @@ Task::~Task() {
 
 void Task::operator()() {
     (*m_fn_ptr)(m_arg);
+    m_status = TASKCOMPELETE;
     if (m_arg != NULL) {
         delete m_arg;
     }
 }
 
 void Task::run() {
+    m_status = TASKRUNNING;
     (*m_fn_ptr)(m_arg);
+}
+
+void Task::setTaskID(string task_id) {
+    m_task_id = task_id;
+}
+
+const string Task::getTaskID() {
+    return  m_task_id;
+}
+
+pthread_t Task::getThreadID() {
+    return pthread_self();
+}
+
+TASKSTATUS Task::getTaskStatus() {
+    return m_status;
 }

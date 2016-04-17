@@ -7,8 +7,16 @@
 #include <vector>
 #include <errno.h>
 #include <string.h>
+#include <string>
 
 using namespace std;
+
+enum TASKSTATUS {
+    TASKINIT,
+    TASKRUNNING,
+    TASKCOMPELETE,
+    TASKERROR
+};
 
 class Task {
 public:
@@ -17,9 +25,17 @@ public:
 
 public:
     void operator()();
+
+public:
     void run();
+    void setTaskID(string task_id);
+    const string getTaskID();
+    pthread_t getThreadID();
+    TASKSTATUS getTaskStatus();
 
 private:
     void (*m_fn_ptr)(void*);
     void* m_arg;
+    string m_task_id;
+    TASKSTATUS m_status;
 };

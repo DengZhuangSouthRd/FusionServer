@@ -10,6 +10,7 @@
 #include <string.h>
 #include <string>
 #include <map>
+#include <set>
 
 #include "Mutex.h"
 #include "Task.h"
@@ -42,6 +43,7 @@ public:
 public:
     int initialize_threadpool();
     int destroy_threadpool();
+    void wait_alltask();
 
 public:
     int runningNumbers();
@@ -50,7 +52,6 @@ public:
     int add_task(Task* task, const string& task_id);
     bool is_aready_In_Map(const string& task_id);
     pthread_t getThreadIDByTaskID(const string& task_id);
-    void join_task(const string& task_id);
 
 private:
     int m_pool_size;
@@ -59,10 +60,12 @@ private:
 
 private:
     Mutex m_task_mutex;
+    Mutex m_map_mutex;
     CondVar m_task_cond_var;
 
 private:
-    std::vector<pthread_t> m_threads;
+    std::set<pthread_t> m_idle_threads;
+    std::set<pthread_t> m_run_threads;
     map<string, Task*> taskMap; // for <task_id, task*>
     map<string, pthread_t> threadMap; // for <task_id, pthread_t>
     std::deque<Task*> m_tasks;

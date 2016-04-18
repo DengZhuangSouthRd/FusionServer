@@ -24,9 +24,6 @@ public:
     ~Task();
 
 public:
-    void operator()();
-
-public:
     void run();
     void setTaskID(string task_id);
     const string getTaskID();

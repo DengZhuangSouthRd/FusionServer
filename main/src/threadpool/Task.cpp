@@ -8,17 +8,10 @@ Task::~Task() {
 
 }
 
-void Task::operator()() {
-    (*m_fn_ptr)(m_arg);
-    m_status = TASKCOMPELETE;
-    if (m_arg != NULL) {
-        delete m_arg;
-    }
-}
-
 void Task::run() {
     m_status = TASKRUNNING;
     (*m_fn_ptr)(m_arg);
+    m_status = TASKCOMPELETE;
 }
 
 void Task::setTaskID(string task_id) {

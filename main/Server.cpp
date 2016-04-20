@@ -41,6 +41,10 @@ string ImageFusion::askProcess(const DirArgs& mapArg, const Ice::Current&) {
 
 ::RPCWiseFuse::FusionInf ImageFusion::fetchFuseRes(const DirArgs& mapArg, const Ice::Current&) {
     ::RPCWiseFuse::FusionInf obj;
+    if(mapArg.count("id") == 0) {
+
+    }
+    //string task_id = mapArg;
     return obj;
 }
 

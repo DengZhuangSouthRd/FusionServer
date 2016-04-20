@@ -109,7 +109,6 @@ void* ThreadPool::execute_task(pthread_t thread_id) {
 
         task = m_tasks.front();
         m_tasks.pop_front();
-        threadMap[task->getTaskID()] = thread_id;
         if(m_run_threads.count(thread_id) == 0) {
             m_run_threads.insert(thread_id);
             m_idle_threads.erase(thread_id);
@@ -126,7 +125,6 @@ void* ThreadPool::execute_task(pthread_t thread_id) {
         *m_pOutLog << "deleted the complete task !" << endl;
         m_map_mutex.lock();
             taskMap[task_id] = NULL;
-            threadMap[task_id] = -1;
             m_run_threads.erase(thread_id);
         m_map_mutex.unlock();
 
@@ -151,9 +149,3 @@ bool ThreadPool::is_aready_In_Map(const string &task_id) {
     return true;
 }
 
-pthread_t ThreadPool::getThreadIDByTaskID(const string &task_id) {
-    if(threadMap.count(task_id) == 0) {
-        return 0;
-    }
-    return threadMap[task_id];
-}

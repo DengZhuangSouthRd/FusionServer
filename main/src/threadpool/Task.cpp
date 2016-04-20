@@ -1,6 +1,8 @@
 #include "Task.h"
 
-Task::Task(void (*fn_ptr)(void*), void* arg) : m_fn_ptr(fn_ptr), m_arg(arg) {
+Task::Task(void (*fn_ptr)(void*), void* arg) {
+    m_fn_ptr = fn_ptr;
+    m_arg = arg;
     m_status = TASKINIT;
 }
 
@@ -10,7 +12,7 @@ Task::~Task() {
 
 void Task::run() {
     m_status = TASKRUNNING;
-    (*m_fn_ptr)(m_arg);
+    (*m_fn_ptr)((void*)(&m_arg));
     m_status = TASKCOMPELETE;
 }
 

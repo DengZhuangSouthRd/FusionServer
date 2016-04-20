@@ -51,7 +51,6 @@ public:
     void* execute_task(pthread_t thread_id);
     int add_task(Task* task, const string& task_id);
     bool is_aready_In_Map(const string& task_id);
-    pthread_t getThreadIDByTaskID(const string& task_id);
 
 private:
     int m_pool_size;
@@ -67,7 +66,6 @@ private:
     std::set<pthread_t> m_idle_threads;
     std::set<pthread_t> m_run_threads;
     map<string, Task*> taskMap; // for <task_id, task*>
-    map<string, pthread_t> threadMap; // for <task_id, pthread_t>
     std::deque<Task*> m_tasks;
 };
 

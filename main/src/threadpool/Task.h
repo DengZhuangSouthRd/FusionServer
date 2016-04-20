@@ -25,6 +25,8 @@ public:
 
 public:
     void run();
+
+public:
     void setTaskID(string task_id);
     const string getTaskID();
     pthread_t getThreadID();
@@ -33,6 +35,8 @@ public:
 private:
     void (*m_fn_ptr)(void*);
     void* m_arg;
+
+private:
     string m_task_id;
     TASKSTATUS m_status;
 };

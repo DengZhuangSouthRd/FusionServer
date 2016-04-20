@@ -949,9 +949,7 @@ bool CurveletFusion::MeanStd_Curvelet_HCS_Fusion_New(const char* Input_PAN_FileN
     for (i = 0; i < COLS; i++){
         PANData[i] = PANData[i]*(s)+mean-s > 0 ? sqrt(PANData[i]*(s)+mean-s) : 0; //截断
         DATA2D(New_MSData, 0, i, COLS) = sqrt(DATA2D(New_MSData, 0, i, COLS));    //开平方 恢复原来的图像
-
     }
-
 
     //进行PAN影像与MS影像融合
 
@@ -1054,16 +1052,15 @@ bool CurveletFusion::MeanStd_Curvelet_HCS_Fusion_New(const char* Input_PAN_FileN
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
         delete PANInf;
         delete MSInf;
-        delete New_MSData;
         return false;
     }
     //释放内存
     MSInf->ClearImageData();
+    New_MSData = NULL;
     PANData = NULL;
     MSData = NULL;
 
     //释放内存
-    delete New_MSData; New_MSData = NULL;
     delete MSInf;	MSInf = NULL;
     delete PANInf;	PANInf = NULL;
 

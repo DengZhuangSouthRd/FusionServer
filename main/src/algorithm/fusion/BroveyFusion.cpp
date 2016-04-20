@@ -177,7 +177,6 @@ bool BroveyFusion::Brovey_Fusion(const char* Input_PAN_FileName, const char* Inp
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
         delete MSInf;
         delete PANInf;
-        delete New_MSData;
         return false;
     }
     //释放内存

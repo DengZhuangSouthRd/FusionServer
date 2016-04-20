@@ -220,6 +220,7 @@ bool GramSchmidtFusion::GramSchmidt_Fusion(const char* Input_PAN_FileName, const
         delete New_MSData;
         return false;
     }
+
     //释放内存
     delete[] New_MSData; New_MSData = NULL;
     delete MSInf;	MSInf = NULL;

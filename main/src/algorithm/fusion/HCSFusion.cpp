@@ -173,16 +173,15 @@ bool HCSFusion::MeanStd_HCS_Fusion(const char* Input_PAN_FileName, const char* I
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
         delete PANInf;
         delete MSInf;
-        delete New_MSData;
         return false;
     }
     //释放内存
     MSInf->ClearImageData();
+    New_MSData = NULL;
     PANData = NULL;
     MSData = NULL;
 
     //释放内存
-    delete New_MSData; New_MSData = NULL;
     delete MSInf;	MSInf = NULL;
     delete PANInf;	PANInf = NULL;
 

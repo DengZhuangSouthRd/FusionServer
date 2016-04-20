@@ -27,7 +27,7 @@ class HSIFusion: public Tools,public HSI{
 
 public:
     //通过HSI算法实现PAN影像与MS影像融合
-    void MeanStd_HSI_Fusion(const char* Input_PAN_FileName, const char* Input_MS_FileName, const char* Output_MS_FileName,const char* LogName,int* bandlist,int InterpolationMethod);
+    bool MeanStd_HSI_Fusion(const char* Input_PAN_FileName, const char* Input_MS_FileName, const char* Output_MS_FileName,const char* LogName,int* bandlist,int InterpolationMethod);
 };
 
 #endif

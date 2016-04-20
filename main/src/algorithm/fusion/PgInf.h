@@ -149,7 +149,8 @@ public:
         this->finf.projectionunits = "WGS84";		//投影单位
         this->finf.projcentralmeridian = 0;			//投影带中央经线
 
-        GDALClose(ReadDataSet);ReadDataSet = NULL;
+        GDALClose(ReadDataSet);
+        ReadDataSet = NULL;
     }
 
     //融合产品信息写入数据库

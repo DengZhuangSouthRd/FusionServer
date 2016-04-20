@@ -26,7 +26,7 @@ class DWTFusion: public Tools,public HSI{
 
 public:
     //通过DWT算法实现PAN影像与MS影像融合
-    void MeanStd_DWT_HIS_Fusion(const char* Input_PAN_FileName, const char* Input_MS_FileName, const char* Output_MS_FileName,const char* LogName,int* bandlist,int InterpolationMethod);
+    bool MeanStd_DWT_HIS_Fusion(const char* Input_PAN_FileName, const char* Input_MS_FileName, const char* Output_MS_FileName,const char* LogName,int* bandlist,int InterpolationMethod);
 };
 
 #endif

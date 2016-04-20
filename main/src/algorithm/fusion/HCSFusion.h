@@ -25,7 +25,7 @@ class HCSFusion: public Tools,public HCS{
 
 public:
     //版本1
-    void MeanStd_HCS_Fusion(const char* Input_PAN_FileName, const char* Input_MS_FileName, const char* Output_MS_FileName,const char* LogName,int* bandlist,int InterpolationMethod);
+    bool MeanStd_HCS_Fusion(const char* Input_PAN_FileName, const char* Input_MS_FileName, const char* Output_MS_FileName,const char* LogName,int* bandlist,int InterpolationMethod);
 };
 
 #endif

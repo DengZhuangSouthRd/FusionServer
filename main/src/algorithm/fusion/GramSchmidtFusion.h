@@ -74,7 +74,7 @@ public:
     *《Process for enhangcing the spatial resolution of mutispectral imagery using pan-sharpening》
     *author:Laten et al.	2000
     */
-    void GramSchmidt_Fusion(const char* Input_PAN_FileName, const char* Input_MS_FileName, const char* Output_MS_FileName,const char* LogName,int* bandlist,int InterpolationMethod);
+    bool GramSchmidt_Fusion(const char* Input_PAN_FileName, const char* Input_MS_FileName, const char* Output_MS_FileName,const char* LogName,int* bandlist,int InterpolationMethod);
 
 };
 

@@ -15,6 +15,11 @@
 #include "Mutex.h"
 #include "Task.h"
 
+/*
+ * This thread pool not manage the memory delete and free
+ * Who Malloc and New, who should pay attention to the memory management !
+*/
+
 const int DEFAULT_POOL_SIZE = 10;
 const int STARTED = 0;
 const int STOPPED = 1;
@@ -43,7 +48,6 @@ public:
 public:
     int initialize_threadpool();
     int destroy_threadpool();
-    void wait_alltask();
 
 public:
     int runningNumbers();
@@ -59,11 +63,10 @@ private:
 
 private:
     Mutex m_task_mutex;
-    Mutex m_map_mutex;
     CondVar m_task_cond_var;
 
 private:
-    std::set<pthread_t> m_idle_threads;
+    std::vector<pthread_t> m_threads;
     std::set<pthread_t> m_run_threads;
     map<string, Task*> taskMap; // for <task_id, task*>
     std::deque<Task*> m_tasks;

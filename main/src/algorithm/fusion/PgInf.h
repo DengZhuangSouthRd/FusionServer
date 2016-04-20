@@ -20,7 +20,6 @@
 #include <iostream>
 using namespace std;
 
-
 struct FusionInf{
 	//数据库写入信息
 	double	cnttimeuse;				//所用时间
@@ -41,6 +40,7 @@ struct FusionInf{
 	string	projectionunits;		//投影单位
 	float	projcentralmeridian;	//投影带中央经线 
 };
+
 class PgInf{
 private:
 	FusionInf finf;
@@ -65,6 +65,7 @@ public:
 		finf.projectionunits = "";		//投影单位
 		finf.projcentralmeridian =0;		//投影带中央经线 
 	}
+
 	FusionInf GetInf(){
 		return this->finf;
 	}
@@ -97,7 +98,7 @@ public:
 		double adfGeoTransform[6] = {0,0,0,0,0,0};
 		if (ReadDataSet->GetGeoTransform(adfGeoTransform) == CE_None)
 		{
-			this->finf.resolution = abs(adfGeoTransform[1]); //空间分辨率
+            this->finf.resolution = fabs(adfGeoTransform[1]); //空间分辨率
 		}
 		else
 		{

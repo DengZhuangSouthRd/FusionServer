@@ -17,7 +17,7 @@ int fdct_wrapping(int N1, int N2, int nbscales, int nbangles_coarse, int allcurv
   //---------------------------------------------
   assert(N1==x.m() && N2==x.n());
   
-  int F1 = N1/2;  int F2 = N2/2;
+  //int F1 = N1/2;  int F2 = N2/2;
   // ifft original data
   CpxNumMat T(x);
   fftwnd_plan p = fftw2d_create_plan(N2, N1, FFTW_FORWARD, FFTW_ESTIMATE | FFTW_IN_PLACE);
@@ -239,7 +239,7 @@ int fdct_wrapping_sepangle(double XL1, double XL2, int nbangle, CpxOffMat& Xhgh,
 int fdct_wrapping_wavelet(CpxOffMat& Xhgh, vector<CpxNumMat>& csc)
 {
   int N1 = Xhgh.m();  int N2 = Xhgh.n();
-  int F1 = -Xhgh.s();  int F2 = -Xhgh.t();
+  //int F1 = -Xhgh.s();  int F2 = -Xhgh.t();
   CpxNumMat T(N1, N2);
   fdct_wrapping_ifftshift(Xhgh, T);
   fftwnd_plan p = fftw2d_create_plan(N2, N1, FFTW_BACKWARD, FFTW_ESTIMATE | FFTW_IN_PLACE);

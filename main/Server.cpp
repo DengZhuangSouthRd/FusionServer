@@ -16,8 +16,8 @@ void ImageFusion::setLogPath(string logPath) {
     m_logPath = logPath;
 }
 
-FusionInf ImageFusion::fuseSyn(const DirArgs& mapArg, const Ice::Current &) {
-    FusionInf obj;
+::RPCWiseFuse::FusionInf ImageFusion::fuseSyn(const DirArgs& mapArg, const Ice::Current &) {
+    ::RPCWiseFuse::FusionInf obj;
     FusionArgs args;
     bool flag = checkFusionArgv(mapArg, m_logPath, args);
     if(flag == false) {
@@ -39,8 +39,8 @@ string ImageFusion::askProcess(const DirArgs& mapArg, const Ice::Current&) {
     return "";
 }
 
-FusionInf ImageFusion::fetchFuseRes(const DirArgs& mapArg, const Ice::Current&) {
-    FusionInf obj;
+::RPCWiseFuse::FusionInf ImageFusion::fetchFuseRes(const DirArgs& mapArg, const Ice::Current&) {
+    ::RPCWiseFuse::FusionInf obj;
     return obj;
 }
 

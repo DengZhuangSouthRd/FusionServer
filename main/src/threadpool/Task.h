@@ -9,18 +9,14 @@
 #include <string.h>
 #include <string>
 
-using namespace std;
+#include "../algorithm/fusion/PgInf.h"
+#include "../utils/utils.h"
 
-enum TASKSTATUS {
-    TASKINIT,
-    TASKRUNNING,
-    TASKCOMPELETE,
-    TASKERROR
-};
+using namespace std;
 
 class Task {
 public:
-    Task(void (*fn_ptr)(void*), void* arg); 
+    Task(void* (*fn_ptr)(void*), void* arg);
     ~Task();
 
 public:
@@ -31,12 +27,15 @@ public:
     const string getTaskID();
     pthread_t getThreadID();
     TASKSTATUS getTaskStatus();
+    void* getTaskResult();
 
 private:
-    void (*m_fn_ptr)(void*);
+    void* (*m_fn_ptr)(void*);
     void* m_arg;
+    void* m_result;
 
 private:
     string m_task_id;
     TASKSTATUS m_status;
+
 };

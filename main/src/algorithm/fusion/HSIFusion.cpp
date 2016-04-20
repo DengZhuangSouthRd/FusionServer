@@ -42,7 +42,7 @@ void HSIFusion::Local_MaxMin_HSI_Fusion(const char* Input_PAN_FileName, const ch
 	GDALAllRegister();         //利用GDAL读取图片，先要进行注册  
 	CPLSetConfigOption("GDAL_FILENAME_IS_UTF8", "NO");   //设置支持中文路径 
 
-	int i,j;
+    int i;
 	
 	//读取PAN影像信息
 	GdalInf* PANInf = new GdalInf();
@@ -173,7 +173,7 @@ void HSIFusion::Local_MaxMin_HSI_Fusion(const char* Input_PAN_FileName, const ch
 			}
 			PANData = PANInf->GetImgData();    //PAN图像数据指针
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 	
 			//对MS做HSI变换
@@ -264,7 +264,7 @@ void HSIFusion::Local_MeanStd_HSI_Fusion(const char* Input_PAN_FileName, const c
 	GDALAllRegister();         //利用GDAL读取图片，先要进行注册  
 	CPLSetConfigOption("GDAL_FILENAME_IS_UTF8", "NO");   //设置支持中文路径 
 
-	int i,j;
+    int i;
 	
 	//读取PAN影像信息
 	GdalInf* PANInf = new GdalInf();
@@ -395,7 +395,7 @@ void HSIFusion::Local_MeanStd_HSI_Fusion(const char* Input_PAN_FileName, const c
 			}
 			PANData = PANInf->GetImgData();    //PAN图像数据指针
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 	
 			//对MS做HSI变换
@@ -486,7 +486,7 @@ void HSIFusion::Global_MaxMin_HSI_Fusion(const char* Input_PAN_FileName, const c
 	GDALAllRegister();         //利用GDAL读取图片，先要进行注册  
 	CPLSetConfigOption("GDAL_FILENAME_IS_UTF8", "NO");   //设置支持中文路径 
 
-	int i,j;
+    int i;
 	
 	//读取PAN影像信息
 	GdalInf* PANInf = new GdalInf();
@@ -610,7 +610,7 @@ void HSIFusion::Global_MaxMin_HSI_Fusion(const char* Input_PAN_FileName, const c
 			//释放内存
 			MSInf->ClearImageData();MSData = NULL;  
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 	
 			//求MS的I分量
@@ -704,7 +704,7 @@ void HSIFusion::Global_MaxMin_HSI_Fusion(const char* Input_PAN_FileName, const c
 			}
 			PANData = PANInf->GetImgData();    //PAN图像数据指针
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 
 
@@ -783,7 +783,7 @@ void HSIFusion::Global_MeanStd_HSI_Fusion(const char* Input_PAN_FileName, const 
 	GDALAllRegister();         //利用GDAL读取图片，先要进行注册  
 	CPLSetConfigOption("GDAL_FILENAME_IS_UTF8", "NO");   //设置支持中文路径 
 
-	int i,j;
+    int i;
 	
 	//读取PAN影像信息
 	GdalInf* PANInf = new GdalInf();
@@ -908,7 +908,7 @@ void HSIFusion::Global_MeanStd_HSI_Fusion(const char* Input_PAN_FileName, const 
 			//释放内存
 			MSInf->ClearImageData();MSData = NULL;  
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 	
 			//求MS的I分量
@@ -991,7 +991,7 @@ void HSIFusion::Global_MeanStd_HSI_Fusion(const char* Input_PAN_FileName, const 
 			//释放内存
 			MSInf->ClearImageData();MSData = NULL;  
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 
 			//求MS的I分量
@@ -1084,7 +1084,7 @@ void HSIFusion::Global_MeanStd_HSI_Fusion(const char* Input_PAN_FileName, const 
 			}
 			PANData = PANInf->GetImgData();    //PAN图像数据指针
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 
 
@@ -1155,7 +1155,7 @@ void HSIFusion::MeanStd_HSI_Fusion(const char* Input_PAN_FileName, const char* I
 	CPLSetConfigOption("GDAL_FILENAME_IS_UTF8", "NO");   //设置支持中文路径 
 
 	try{
-		int i,j;
+        int i;
 		Log(LogName,"01|01");//写入log日志
 
 		//读取PAN影像信息
@@ -1259,7 +1259,7 @@ void HSIFusion::MeanStd_HSI_Fusion(const char* Input_PAN_FileName, const char* I
 
 		Log(LogName,"01|03");//写入log日志
 
-		int ROWS = MS_Bandcount;
+//		int ROWS = MS_Bandcount;
 		int COLS = PAN_Width*PAN_Height;
 	
 		//对MS做HSI变换

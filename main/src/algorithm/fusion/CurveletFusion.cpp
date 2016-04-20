@@ -176,7 +176,7 @@ void CurveletFusion::Local_MaxMin_Curvelet_HIS_Fusion(const char* Input_PAN_File
 			PANData = PANInf->GetImgData();    //PAN图像数据指针
 
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 	
 			//对MS做HSI变换
@@ -456,7 +456,7 @@ void CurveletFusion::Local_MeanStd_Curvelet_HIS_Fusion(const char* Input_PAN_Fil
 			PANData = PANInf->GetImgData();    //PAN图像数据指针
 
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 	
 			//对MS做HSI变换
@@ -712,7 +712,7 @@ void CurveletFusion::Global_MaxMin_Curvelet_HIS_Fusion(const char* Input_PAN_Fil
 			//释放内存
 			MSInf->ClearImageData();MSData = NULL;  
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 
 			//求MS的I分量
@@ -806,7 +806,7 @@ void CurveletFusion::Global_MaxMin_Curvelet_HIS_Fusion(const char* Input_PAN_Fil
 			}
 			PANData = PANInf->GetImgData();    //PAN图像数据指针
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 
 
@@ -1054,7 +1054,7 @@ void CurveletFusion::Global_MeanStd_Curvelet_HIS_Fusion(const char* Input_PAN_Fi
 			//释放内存
 			MSInf->ClearImageData();MSData = NULL;  
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 
 			//求MS的I分量
@@ -1137,7 +1137,7 @@ void CurveletFusion::Global_MeanStd_Curvelet_HIS_Fusion(const char* Input_PAN_Fi
 			//释放内存
 			MSInf->ClearImageData();MSData = NULL;  
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 
 			//求MS的I分量
@@ -1230,7 +1230,7 @@ void CurveletFusion::Global_MeanStd_Curvelet_HIS_Fusion(const char* Input_PAN_Fi
 			}
 			PANData = PANInf->GetImgData();    //PAN图像数据指针
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 
 
@@ -1459,7 +1459,7 @@ void CurveletFusion::MeanStd_Curvelet_HIS_Fusion(const char* Input_PAN_FileName,
 
 		Log(LogName,"01|03");//写入log日志
 
-		int ROWS = MS_Bandcount;
+//		int ROWS = MS_Bandcount;
 		int COLS = PAN_Width*PAN_Height;
 
 		//对MS做HSI变换
@@ -1726,7 +1726,7 @@ void CurveletFusion::MeanStd_Curvelet_HCS_Fusion(const char* Input_PAN_FileName,
 
 		Log(LogName,"01|03");//写入log日志
 
-		int ROWS = MS_Bandcount;
+//		int ROWS = MS_Bandcount;
 		int COLS = PAN_Width*PAN_Height;
 
 		//对MS做HSI变换
@@ -2342,7 +2342,7 @@ void CurveletFusion::MeanStd_Curvelet_HCS_Fusion_New(const char* Input_PAN_FileN
 
 		Log(LogName,"01|03");//写入log日志
 
-		int ROWS = MS_Bandcount;
+//		int ROWS = MS_Bandcount;
 		int COLS = PAN_Width*PAN_Height;
 
 		//对MS做HSI变换

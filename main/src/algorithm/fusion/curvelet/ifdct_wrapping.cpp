@@ -16,7 +16,7 @@ int ifdct_wrapping(int N1, int N2, int nbscales, int nbangles_coarse, int allcur
 {
   assert(nbscales==c.size() && nbangles_coarse==c[1].size());
   
-  int F1 = N1/2;  int F2 = N2/2;
+  //int F1 = N1/2;  int F2 = N2/2;
   //-------------------------------------------angles to Xhgh
   vector<int> nbangles(nbscales);
   vector<CpxOffMat> Xhghs;  Xhghs.resize(nbscales);

@@ -173,7 +173,7 @@ void DWTFusion::Local_MaxMin_DWT_HIS_Fusion(const char* Input_PAN_FileName, cons
 			PANData = PANInf->GetImgData();    //PAN图像数据指针
 
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 	
 			//对MS做HSI变换
@@ -458,7 +458,7 @@ void DWTFusion::Local_MeanStd_DWT_HIS_Fusion(const char* Input_PAN_FileName, con
 			PANData = PANInf->GetImgData();    //PAN图像数据指针
 
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 	
 			//对MS做HSI变换
@@ -720,7 +720,7 @@ void DWTFusion::Global_MaxMin_DWT_HIS_Fusion(const char* Input_PAN_FileName, con
 			//释放内存
 			MSInf->ClearImageData();MSData = NULL;  
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 
 			//求MS的I分量
@@ -814,7 +814,7 @@ void DWTFusion::Global_MaxMin_DWT_HIS_Fusion(const char* Input_PAN_FileName, con
 			}
 			PANData = PANInf->GetImgData();    //PAN图像数据指针
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 
 
@@ -1066,7 +1066,7 @@ void DWTFusion::Global_MeanStd_DWT_HIS_Fusion(const char* Input_PAN_FileName, co
 			//释放内存
 			MSInf->ClearImageData();MSData = NULL;  
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 
 			//求MS的I分量
@@ -1149,7 +1149,7 @@ void DWTFusion::Global_MeanStd_DWT_HIS_Fusion(const char* Input_PAN_FileName, co
 			//释放内存
 			MSInf->ClearImageData();MSData = NULL;  
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 
 			//求MS的I分量
@@ -1242,7 +1242,7 @@ void DWTFusion::Global_MeanStd_DWT_HIS_Fusion(const char* Input_PAN_FileName, co
 			}
 			PANData = PANInf->GetImgData();    //PAN图像数据指针
 
-			int ROWS = MS_Bandcount;
+//			int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 
 
@@ -1478,7 +1478,7 @@ void DWTFusion::MeanStd_DWT_HIS_Fusion(const char* Input_PAN_FileName, const cha
 
 		Log(LogName,"01|03");//写入log日志
 
-		int ROWS = MS_Bandcount;
+//		int ROWS = MS_Bandcount;
 		int COLS = PAN_Width*PAN_Height;
 	
 		//对MS做HSI变换

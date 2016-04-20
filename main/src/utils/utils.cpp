@@ -1,31 +1,5 @@
-#ifndef UTILS_HPP
-#define UTILS_HPP
+#include "utils.h"
 
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <string>
-#include <map>
-#include <unistd.h>
-#include <vector>
-#include <exception>
-
-using namespace std;
-
-enum FileMode {
-    EXISTS,
-    WRITEABLE,
-    READABLE,
-    RWABLE,
-    NOTEXISTS
-};
-
-typedef struct _ResultStatus {
-    int stauts;
-    FileMode mode;
-    string desc;
-}ResultStatus;
 
 void checkFileInfo(string filePath, ResultStatus& status) {
     if(access(filePath.c_str(), 0) == 0) {
@@ -58,5 +32,14 @@ void checkFileInfo(string filePath, ResultStatus& status) {
     }
 }
 
-#endif // UTILS_HPP
-
+//FusionInf fusion(string PanUrl,string MsUrl,string OutUrl,string LogUrl,int idalg,int* band,int interpolation);
+void* fusionInterface(void * args) {
+    FusionArgs* param = (FusionArgs*) args;
+    FusionInf* pObj = (FusionInf*)malloc(sizeof(FusionInf));
+    int* band = (int*)malloc(sizeof(int) * param->band.size());
+    for(size_t i=0;i<param->band.size();++i)
+        band[i] = param->band[i];
+    *pObj = fusion(param->panurl, param->msurl, param->outurl, param->logurl, param->idalg, band, param->idinter);
+    free(band);
+    return (void*)pObj;
+}

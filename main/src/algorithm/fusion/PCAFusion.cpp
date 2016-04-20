@@ -40,7 +40,7 @@ void PCAFusion::Local_MaxMin_PCA_Fusion(const char* Input_PAN_FileName, const ch
 	GDALAllRegister();         //利用GDAL读取图片，先要进行注册  
 	CPLSetConfigOption("GDAL_FILENAME_IS_UTF8", "NO");   //设置支持中文路径 
 
-	int i,j;
+    int i;
 
 	//读取PAN影像信息
 	GdalInf* PANInf = new GdalInf();
@@ -283,7 +283,7 @@ void PCAFusion::Local_MeanStd_PCA_Fusion(const char* Input_PAN_FileName, const c
 	GDALAllRegister();         //利用GDAL读取图片，先要进行注册  
 	CPLSetConfigOption("GDAL_FILENAME_IS_UTF8", "NO");   //设置支持中文路径 
 
-	int i,j;
+    int i;
 
 	//读取PAN影像信息
 	GdalInf* PANInf = new GdalInf();
@@ -651,7 +651,7 @@ void PCAFusion::Global_MaxMin_PCA_Fusion(const char* Input_PAN_FileName, const c
 			//释放内存
 			MSInf->ClearImageData();MSData = NULL;  
 
-			int ROWS = MS_Bandcount;
+            //int ROWS = MS_Bandcount;
 			int COLS = height*ratio*width*ratio;
 
 			float tmp;
@@ -1045,7 +1045,7 @@ void PCAFusion::MeanStd_PCA_Fusion(const char* Input_PAN_FileName, const char* I
 	GDALAllRegister();         //利用GDAL读取图片，先要进行注册  
 	CPLSetConfigOption("GDAL_FILENAME_IS_UTF8", "NO");   //设置支持中文路径 
 	try{
-		int i,j;
+        int i;
 		Log(LogName,"01|01");//写入log日志
 
 		//读取PAN影像信息

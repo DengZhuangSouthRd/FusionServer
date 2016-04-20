@@ -106,7 +106,9 @@ SOURCES += \
     main/src/algorithm/fusion/curvelet/fftw/fftwf77.c \
     main/src/algorithm/fusion/curvelet/fftw/executor.c \
     main/src/algorithm/fusion/curvelet/fftw/config.c \
-    main/src/algorithm/fusion/curvelet/fftw/malloc.cpp
+    main/src/algorithm/fusion/curvelet/fftw/malloc.cpp \
+    main/src/utils/utils.cpp \
+    main/src/algorithm/fusion/Fusion.cpp
 
 HEADERS += \
     main/Server.h \
@@ -139,8 +141,8 @@ HEADERS += \
     main/src/algorithm/fusion/curvelet/fftw/fftw.h \
     main/src/algorithm/fusion/curvelet/fftw/fftw-int.h \
     main/src/algorithm/fusion/curvelet/fftw/config.h \
-    main/src/algorithm/fusion/Fusion.hpp \
-    main/src/utils/utils.hpp
+    main/src/algorithm/fusion/Fusion.h \
+    main/src/utils/utils.h
 
 DISTFILES +=
 

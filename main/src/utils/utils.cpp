@@ -1,6 +1,5 @@
 #include "utils.h"
 
-
 void checkFileInfo(string filePath, ResultStatus& status) {
     if(access(filePath.c_str(), 0) == 0) {
 

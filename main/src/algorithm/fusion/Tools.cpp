@@ -1,6 +1,5 @@
 #include "Tools.h"
 
-
 //边界处理——插值内部 扩充边界
 inline float Tools::Pixels(float* Mat, int row, int col, int band, int height, int width)
 {

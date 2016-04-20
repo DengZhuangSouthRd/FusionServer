@@ -24,7 +24,7 @@ using namespace std;
 typedef unsigned short int ushort;
 
 
-class Inf{
+class Inf {
 protected:
     //图像基本信息
     int height;					// 行数

@@ -32,13 +32,13 @@ class CurveletFusion: public HSI,public HCS,public GramSchmidtFusion{ //GramSchm
 public:
     //通过Curvelet算法实现PAN影像与MS影像融合
     //版本1
-    void MeanStd_Curvelet_HIS_Fusion(const char* Input_PAN_FileName, const char* Input_MS_FileName, const char* Output_MS_FileName,const char* LogName,int* bandlist,int InterpolationMethod);
+    bool MeanStd_Curvelet_HIS_Fusion(const char* Input_PAN_FileName, const char* Input_MS_FileName, const char* Output_MS_FileName,const char* LogName,int* bandlist,int InterpolationMethod);
     //2016.3.7
-    void MeanStd_Curvelet_HCS_Fusion(const char* Input_PAN_FileName, const char* Input_MS_FileName, const char* Output_MS_FileName,const char* LogName,int* bandlist,int InterpolationMethod);
+    bool MeanStd_Curvelet_HCS_Fusion(const char* Input_PAN_FileName, const char* Input_MS_FileName, const char* Output_MS_FileName,const char* LogName,int* bandlist,int InterpolationMethod);
     //2016.3.8
-    void MeanStd_Curvelet_GramSchmidt_Fusion(const char* Input_PAN_FileName, const char* Input_MS_FileName, const char* Output_MS_FileName,const char* LogName,int* bandlist,int InterpolationMethod);
+    bool MeanStd_Curvelet_GramSchmidt_Fusion(const char* Input_PAN_FileName, const char* Input_MS_FileName, const char* Output_MS_FileName,const char* LogName,int* bandlist,int InterpolationMethod);
 
-    void MeanStd_Curvelet_HCS_Fusion_New(const char* Input_PAN_FileName, const char* Input_MS_FileName, const char* Output_MS_FileName,const char* LogName,int* bandlist,int InterpolationMethod);
+    bool MeanStd_Curvelet_HCS_Fusion_New(const char* Input_PAN_FileName, const char* Input_MS_FileName, const char* Output_MS_FileName,const char* LogName,int* bandlist,int InterpolationMethod);
 
     //计算局部均值，标准差及方向信息熵
     void LocalMeanStdEntropy(CpxNumMat Mat,int i,int j,int localSize,float & Mean,float &Std,float &Entropy){

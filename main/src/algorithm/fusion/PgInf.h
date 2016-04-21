@@ -51,6 +51,8 @@ public:
 	PgInf();
 	//返回写入数据库信息
     FusionStruct GetInf();
+    void DataDeepCopy(FusionStruct** dest);
+
 	//记录算法所用时间
 	inline void SetCnttimeuse(double Cnttimeuse);
 	inline void SetProducetime(string Producetime);
@@ -60,8 +62,6 @@ public:
 	
 	//待写入数据库的融合产品相关信息
     int ReadInfToDB(double Cnttimeuse,string OutUrl,string Producetime, bool status);
-
-	~PgInf();
 };
 
 

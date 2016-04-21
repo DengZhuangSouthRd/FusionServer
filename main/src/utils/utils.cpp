@@ -34,11 +34,10 @@ void checkFileInfo(string filePath, ResultStatus& status) {
 //FusionStruct fusion(string PanUrl,string MsUrl,string OutUrl,string LogUrl,int idalg,int* band,int interpolation);
 void* fusionInterface(void * args) {
     FusionArgs* param = (FusionArgs*) args;
-    FusionStruct* pObj = (FusionStruct*)malloc(sizeof(FusionStruct));
-    int* band = (int*)malloc(sizeof(int) * param->band.size());
+    FusionStruct* pObj = NULL;
+    int band[3];
     for(size_t i=0;i<param->band.size();++i)
         band[i] = param->band[i];
-    *pObj = fusion(param->panurl, param->msurl, param->outurl, param->logurl, param->idalg, band, param->idinter);
-    free(band);
+    pObj = fusion(param->panurl, param->msurl, param->outurl, param->logurl, param->idalg, band, param->idinter);
     return (void*)pObj;
 }

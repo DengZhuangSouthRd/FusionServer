@@ -779,8 +779,9 @@ void Tools::ImageBlock(int ImageHeight,int ImageWidth,int &BlockHeight,int &Bloc
 }
 
 //写日志 NULL
-void Tools::Log(const char* LogName,const char* str){
-    ofstream fout(LogName,ofstream::out| ofstream::app);  //c_str() 将string转换成char*
+void Tools::Log(const char* LogName,const char* str) {
+    if(LogName == NULL) return ;
+    ofstream fout(LogName, ofstream::out|ofstream::app);  //c_str() 将string转换成char*
     if (!fout) {
         cerr << "Log File Name Error!" << endl;
         exit(1);

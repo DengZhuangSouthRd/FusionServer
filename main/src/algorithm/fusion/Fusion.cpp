@@ -1,7 +1,7 @@
 #include "Fusion.h"
 
 
-FusionStruct fusion(string PanUrl,string MsUrl,string OutUrl,string LogUrl,int idalg,int* band,int interpolation) {
+FusionStruct* fusion(string PanUrl,string MsUrl,string OutUrl,string LogUrl,int idalg,int* band,int interpolation) {
     /*
     *融合接口：fusion
     *PanUrl            全色图像或SAR图像存放路径
@@ -25,43 +25,43 @@ FusionStruct fusion(string PanUrl,string MsUrl,string OutUrl,string LogUrl,int i
     switch (idalg) {
     case 1: //BroveyFusion
         BroveyFusion brovey;
-        algorithmStatus = brovey.Brovey_Fusion(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),LogUrl.c_str(),band,interpolation);
+        algorithmStatus = brovey.Brovey_Fusion(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),NULL,band,interpolation);
         break;
     case 2: //HISFusion
         HSIFusion hsi;
-        algorithmStatus = hsi.MeanStd_HSI_Fusion(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),LogUrl.c_str(),band,interpolation);
+        algorithmStatus = hsi.MeanStd_HSI_Fusion(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),NULL,band,interpolation);
         break;
     case 3: //PCAFusion
         PCAFusion pca;
-        algorithmStatus = pca.MeanStd_PCA_Fusion(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),LogUrl.c_str(),band,interpolation);
+        algorithmStatus = pca.MeanStd_PCA_Fusion(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),NULL,band,interpolation);
         break;
     case 4: //DWTFusion
         DWTFusion dwt;
-        algorithmStatus = dwt.MeanStd_DWT_HIS_Fusion(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),LogUrl.c_str(),band,interpolation);
+        algorithmStatus = dwt.MeanStd_DWT_HIS_Fusion(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),NULL,band,interpolation);
         break;
     case 5: //Curvelet与HIS
         CurveletFusion curvelet_his;
-        algorithmStatus = curvelet_his.MeanStd_Curvelet_HIS_Fusion(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),LogUrl.c_str(),band,interpolation);
+        algorithmStatus = curvelet_his.MeanStd_Curvelet_HIS_Fusion(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),NULL,band,interpolation);
         break;
     case 6://GramSchmidtFusion
         GramSchmidtFusion GramSchmidt;
-        algorithmStatus = GramSchmidt.GramSchmidt_Fusion(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),LogUrl.c_str(),band,interpolation);
+        algorithmStatus = GramSchmidt.GramSchmidt_Fusion(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),NULL,band,interpolation);
         break;
     case 7://HCS
         HCSFusion hcs;
-        algorithmStatus = hcs.MeanStd_HCS_Fusion(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),LogUrl.c_str(),band,interpolation);
+        algorithmStatus = hcs.MeanStd_HCS_Fusion(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),NULL,band,interpolation);
         break;
     case 8://Curvelet与HCS
         CurveletFusion curvelet_hcs;
-        algorithmStatus = curvelet_hcs.MeanStd_Curvelet_HCS_Fusion(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),LogUrl.c_str(),band,interpolation);
+        algorithmStatus = curvelet_hcs.MeanStd_Curvelet_HCS_Fusion(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),NULL,band,interpolation);
         break;
     case 9://Curvelet与GramSchmidt
         CurveletFusion curvelet_gs;
-        algorithmStatus = curvelet_gs.MeanStd_Curvelet_GramSchmidt_Fusion(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),LogUrl.c_str(),band,interpolation);
+        algorithmStatus = curvelet_gs.MeanStd_Curvelet_GramSchmidt_Fusion(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),NULL,band,interpolation);
         break;
     case 10://Curvelet与HCS
         CurveletFusion curvelet;
-        algorithmStatus = curvelet.MeanStd_Curvelet_HCS_Fusion_New(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),LogUrl.c_str(),band,interpolation);
+        algorithmStatus = curvelet.MeanStd_Curvelet_HCS_Fusion_New(PanUrl.c_str(),MsUrl.c_str(),OutUrl.c_str(),NULL,band,interpolation);
         break;
 
     default:
@@ -80,6 +80,10 @@ FusionStruct fusion(string PanUrl,string MsUrl,string OutUrl,string LogUrl,int i
 
     PgInf pginf;
     pginf.ReadInfToDB(Cnttimeuse, OutUrl, Producetime, algorithmStatus);//待写入数据库的相关信息
-
-    return pginf.GetInf();
+    FusionStruct* tmp = new(std::nothrow) FusionStruct;
+    if(tmp == NULL) {
+        return NULL;
+    }
+    pginf.DataDeepCopy(&tmp);
+    return tmp;
 }

@@ -6,15 +6,13 @@ using namespace std;
 ImageFusion::ImageFusion() {
     m_threadPool.setPoolSize(20);
     m_logPath = "/home/fighter/Documents/ImageFusion/main/data/log/loginfo.log";
-    cout << "Image Fusion Initialize !" << endl;
+    Log::Initialise(m_logPath);
+    Log::SetThreshold(Log::LOG_TYPE_INFO);
+    PUSH_LOG_STACK;
 }
 
 ImageFusion::~ImageFusion() {
 
-}
-
-void ImageFusion::setLogPath(string logPath) {
-    m_logPath = logPath;
 }
 
 void ImageFusion::updateStructInfo(FusionStruct srcInf, FusionInf &destInf) {
@@ -35,19 +33,40 @@ void ImageFusion::updateStructInfo(FusionStruct srcInf, FusionInf &destInf) {
 
     destInf.resolution = srcInf.resolution;
     destInf.status = srcInf.status;
+    string str = "brcoorvalidLatitude = " + to_string(destInf.brcoorvalidLatitude)
+            + " brcoorvalidLongitude = " + to_string(destInf.brcoorvalidLongitude)
+            + " brcoorwholeLatitude = " + to_string(destInf.brcoorwholeLatitude)
+            + " brcoorwholeLongitude = " + to_string(destInf.brcoorwholeLongitude)
+            + " cnttimeuse = " + to_string(destInf.cnttimeuse)
+            + " datumname = " + destInf.datumname
+            + " producetime = " + destInf.producetime
+            + " productFormat = " + destInf.productFormat
+            + " projcentralmeridian = " + to_string(destInf.projcentralmeridian)
+            + " projectioncode = " + destInf.projectioncode
+            + " projectiontype = " + destInf.projectiontype
+            + " projectionunits = " + destInf.projectionunits
+            + " resolution = " + to_string(destInf.resolution);
+    Log::Info(str);
 }
 
 ::RPCWiseFuse::FusionInf ImageFusion::fuseSyn(const DirArgs& mapArg, const Ice::Current &) {
     ::RPCWiseFuse::FusionInf obj;
     FusionArgs args;
     bool flag = checkFusionArgv(mapArg, m_logPath, args);
-    cout << "After Check Fusion Argv, the status is " << flag << endl;
     if(flag == false) {
         obj.status = ARGERROR;
+        cerr << "Image Fusion Parameters Error !" << endl;
+        return obj;
     }
     FusionStruct* test = NULL;
-    test = (FusionStruct*)fusionInterface((void*)(&args));
+    void* tmp = NULL;
+    tmp = fusionInterface((void*)(&args));
+    if(tmp == NULL) {
+        return obj;
+    }
+    test = (FusionStruct*)tmp;
     updateStructInfo(*test, obj);
+    free(test);
     return obj;
 }
 
@@ -102,50 +121,42 @@ bool ImageFusion::checkFusionArgv(DirArgs mapArgs, string &logPath, FusionArgs &
         return false;
     }
 
-    checkFileInfo(mapArgs["outurl"], status);
-    if(status.stauts != -1) {
-        cerr << status.desc << endl;
+    int idalg, interpolation;
+    int band[3] = {0,0,0};
+    try {
+        //FusionMethod
+        idalg = stoi(mapArgs["idalg"]);
+        if(idalg<1 || idalg>10)
+            throw "Fusion Method does not exist";
+
+        //Bandlist
+        band[0] = stoi(mapArgs["band1"]);
+        band[1] = stoi(mapArgs["band2"]);
+        band[2] = stoi(mapArgs["band3"]);
+
+        //InterpolationMethod
+        interpolation = stoi(mapArgs["idinter"]);
+
+        if(interpolation<1 || interpolation>5)
+            throw "Interpolation Method does not exist";
+
+        //compare the Fusion Args
+        args.panurl = mapArgs["panurl"];
+        args.msurl = mapArgs["msurl"];
+        args.outurl = mapArgs["outurl"];
+        //args.logurl = logPath;
+        args.idalg = idalg;
+        args.idinter = interpolation;
+        args.band.assign(band, band+3);
+
+    } catch (exception& e) {
+        cerr << e.what() << endl;
+        return false;
+    } catch (const char * msg) {
+        cerr << msg << endl;
         return false;
     }
 
-    checkFileInfo(logPath, status);
-    if(status.stauts == -1 || (status.stauts == 0 && (status.mode == WRITEABLE || status.mode == RWABLE))) {
-        int idalg, interpolation;
-        int band[3] = {0,0,0};
-        try {
-            //FusionMethod
-            idalg = stoi(mapArgs["idalg"]);
-            if(idalg<1 || idalg>10)
-                throw "Fusion Method does not exist";
-
-            //Bandlist
-            band[0] = stoi(mapArgs["band1"]);
-            band[1] = stoi(mapArgs["band2"]);
-            band[2] = stoi(mapArgs["band3"]);
-
-            //InterpolationMethod
-            interpolation = stoi(mapArgs["idinter"]);
-
-            if(interpolation<1 || interpolation>5)
-                throw "Interpolation Method does not exist";
-
-            //compare the Fusion Args
-            args.panurl = mapArgs["panurl"];
-            args.msurl = mapArgs["msurl"];
-            args.outurl = mapArgs["outurl"];
-            args.logurl = logPath;
-            args.idalg = idalg;
-            args.idinter = interpolation;
-            args.band.assign(band, band+3);
-
-        } catch (exception& e) {
-            cerr << e.what() << endl;
-            return false;
-        }
-    } else {
-        cerr << "Log File Has Not Write Permission" << endl;
-        return false;
-    }
     return true;
 }
 

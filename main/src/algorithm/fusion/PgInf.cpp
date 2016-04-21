@@ -32,10 +32,11 @@ PgInf::PgInf(){
 	finf.projectioncode = "";		//投影编码
 	finf.projectionunits = "";		//投影单位
 	finf.projcentralmeridian =0;		//投影带中央经线 
+    finf.status = 0; // 0 meas failed; 1 means True;
 }
 
 //返回写入数据库信息
-FusionInf PgInf::GetInf(){
+FusionStruct PgInf::GetInf(){
 	return this->finf;
 }
 
@@ -46,9 +47,11 @@ inline void PgInf::SetCnttimeuse(double Cnttimeuse){
 
 //记录融合产品生成时间
 inline void PgInf::SetProducetime(string Producetime){
+    this->finf.producetime=Producetime;
+}
 
-	this->finf.producetime=Producetime;
-
+inline void PgInf::SetStatus(bool status) {
+    this->finf.status = (int)status;
 }
 
 //记录融合产品地理、分辨率等信息
@@ -149,7 +152,7 @@ int PgInf::SetProductInf(string Outrl){
 }
 
 //融合产品信息写入数据库
-int PgInf::ReadInfToDB(double Cnttimeuse,string OutUrl,string Producetime){
+int PgInf::ReadInfToDB(double Cnttimeuse, string OutUrl, string Producetime, bool status){
 	/*ReadInfToDB 待写入数据库的相关信息
 	*Cnttimeuse		融合算法所用时间
 	*OutUrl			融合产品路径
@@ -161,13 +164,16 @@ int PgInf::ReadInfToDB(double Cnttimeuse,string OutUrl,string Producetime){
 	*/
 	this->SetCnttimeuse(Cnttimeuse);
 	this->SetProducetime(Producetime);
-	if(this->SetProductInf(OutUrl)==0)//
-		return 0;
-	else
-		return -1;
+
+    if(this->SetProductInf(OutUrl) == 0 && status) {
+        this->SetStatus(true);
+        return true;
+    }
+    else
+        this->SetStatus(false);
+    return false;
 }
 
 //析构函数
 PgInf::~PgInf(){
-
 }

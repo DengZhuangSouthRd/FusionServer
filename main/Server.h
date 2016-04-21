@@ -40,6 +40,7 @@ public:
 public:
     bool checkFusionArgv(::RPCWiseFuse::DirArgs mapArgs, string& logPath, FusionArgs& args);
     void setLogPath(string logPath);
+    void updateStructInfo(FusionStruct srcInf, FusionInf& destInf);
 
 private:
     string m_logPath;

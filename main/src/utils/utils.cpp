@@ -31,10 +31,10 @@ void checkFileInfo(string filePath, ResultStatus& status) {
     }
 }
 
-//FusionInf fusion(string PanUrl,string MsUrl,string OutUrl,string LogUrl,int idalg,int* band,int interpolation);
+//FusionStruct fusion(string PanUrl,string MsUrl,string OutUrl,string LogUrl,int idalg,int* band,int interpolation);
 void* fusionInterface(void * args) {
     FusionArgs* param = (FusionArgs*) args;
-    FusionInf* pObj = (FusionInf*)malloc(sizeof(FusionInf));
+    FusionStruct* pObj = (FusionStruct*)malloc(sizeof(FusionStruct));
     int* band = (int*)malloc(sizeof(int) * param->band.size());
     for(size_t i=0;i<param->band.size();++i)
         band[i] = param->band[i];

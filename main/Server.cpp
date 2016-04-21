@@ -4,8 +4,9 @@
 using namespace std;
 
 ImageFusion::ImageFusion() {
-    m_threadPool.setPoolSize(50);
-    m_logPath = "./data/log/loginfo.log";
+    m_threadPool.setPoolSize(20);
+    m_logPath = "/home/fighter/Documents/ImageFusion/main/data/log/loginfo.log";
+    cout << "Image Fusion Initialize !" << endl;
 }
 
 ImageFusion::~ImageFusion() {
@@ -16,13 +17,37 @@ void ImageFusion::setLogPath(string logPath) {
     m_logPath = logPath;
 }
 
+void ImageFusion::updateStructInfo(FusionStruct srcInf, FusionInf &destInf) {
+    destInf.brcoorvalidLatitude = srcInf.brcoorvalid_latitude;
+    destInf.brcoorvalidLongitude = srcInf.brcoorvalid_longitude;
+    destInf.brcoorwholeLatitude = srcInf.brcoorwhole_latitude;
+    destInf.brcoorwholeLongitude = srcInf.brcoorwhole_longitude;
+
+    destInf.cnttimeuse = srcInf.cnttimeuse;
+    destInf.datumname = srcInf.datumname;
+
+    destInf.producetime = srcInf.producetime;
+    destInf.productFormat = srcInf.product_format;
+    destInf.projcentralmeridian = srcInf.projcentralmeridian;
+    destInf.projectioncode = srcInf.projectioncode;
+    destInf.projectiontype = srcInf.projectiontype;
+    destInf.projectionunits = srcInf.projectionunits;
+
+    destInf.resolution = srcInf.resolution;
+    destInf.status = srcInf.status;
+}
+
 ::RPCWiseFuse::FusionInf ImageFusion::fuseSyn(const DirArgs& mapArg, const Ice::Current &) {
     ::RPCWiseFuse::FusionInf obj;
     FusionArgs args;
     bool flag = checkFusionArgv(mapArg, m_logPath, args);
+    cout << "After Check Fusion Argv, the status is " << flag << endl;
     if(flag == false) {
         obj.status = ARGERROR;
     }
+    FusionStruct* test = NULL;
+    test = (FusionStruct*)fusionInterface((void*)(&args));
+    updateStructInfo(*test, obj);
     return obj;
 }
 
@@ -140,7 +165,7 @@ void Server::initRpc(int argc, char** argv, string conn) {
         ic = Ice::initialize(argc,argv);
         adapter = ic->createObjectAdapterWithEndpoints("ImageRpcAdapter",connParam);
         Ice::ObjectPtr object = new ImageFusion;
-        adapter->add(object,ic->stringToIdentity("ImageRpc"));
+        adapter->add(object,ic->stringToIdentity("WISEFUSION"));
         adapter->activate();
         ic->waitForShutdown();
     } catch (const Ice::Exception& e) {
@@ -170,6 +195,6 @@ void Server::close() {
 
 int main(int argc,char* argv[]) {
     Server obj_server;
-    obj_server.initRpc(argc, argv, "default -h 10.2.3.119 -p 9999");
+    obj_server.initRpc(argc, argv, "default -h 127.0.0.1 -p 9999");
     return 0;
 }

@@ -19,11 +19,11 @@
 #include <math.h>
 #include <time.h>
 #include <iostream>
+
 using namespace std;
 
 //待写入数据库的信息
-struct FusionInf{
-	
+typedef struct _FusionInf{
 	double	cnttimeuse;				//所用时间
 	string	producetime;			//产品生成时间
 	double	ulcoorvalid_longitude;	//有效融合区域左上角经度坐标
@@ -41,23 +41,25 @@ struct FusionInf{
 	string	projectioncode;			//投影编码
 	string	projectionunits;		//投影单位
 	float	projcentralmeridian;	//投影带中央经线 
-};
+    int status; //任务执行状态
+}FusionStruct;
 
 class PgInf{
 private:
-	FusionInf finf;
+    FusionStruct finf;
 public:
 	PgInf();
 	//返回写入数据库信息
-	FusionInf GetInf();
+    FusionStruct GetInf();
 	//记录算法所用时间
 	inline void SetCnttimeuse(double Cnttimeuse);
 	inline void SetProducetime(string Producetime);
+    inline void SetStatus(bool status);
 	//记录融合产品地理、分辨率等信息
 	int SetProductInf(string Outrl);
 	
 	//待写入数据库的融合产品相关信息
-	int ReadInfToDB(double Cnttimeuse,string OutUrl,string Producetime);
+    int ReadInfToDB(double Cnttimeuse,string OutUrl,string Producetime, bool status);
 
 	~PgInf();
 };

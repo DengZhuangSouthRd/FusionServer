@@ -219,7 +219,7 @@ int GDALDitherRGB2PCTInternal( GDALRasterBandH hRed,
 /**
  * Units in the Last Place. This specifies how big an error we are willing to
  * accept in terms of the value of the least significant digit of the floating
- * point number鈥檚 representation. MAX_ULPS can also be interpreted in terms of
+ * point number閳ユ獨 representation. MAX_ULPS can also be interpreted in terms of
  * how many representable floats we are willing to accept between A and B. 
  */
 #define MAX_ULPS 10

@@ -108,7 +108,9 @@ SOURCES += \
     main/src/algorithm/fusion/curvelet/fftw/config.c \
     main/src/algorithm/fusion/curvelet/fftw/malloc.cpp \
     main/src/utils/utils.cpp \
-    main/src/algorithm/fusion/Fusion.cpp
+    main/src/algorithm/fusion/Fusion.cpp \
+    main/src/algorithm/fusion/PgInf.cpp \
+    main/src/algorithm/fusion/GdalInf.cpp
 
 HEADERS += \
     main/Server.h \

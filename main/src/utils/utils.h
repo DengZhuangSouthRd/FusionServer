@@ -12,8 +12,10 @@
 #include <exception>
 
 #include "../algorithm/fusion/Fusion.h"
+#include "../rpc/wisefuseRpc.h"
 
 using namespace std;
+using namespace RPCWiseFuse;
 
 typedef struct _FusionArgs {
     string panurl;
@@ -47,8 +49,19 @@ typedef struct _ResultStatus {
     string desc;
 }ResultStatus;
 
+typedef struct _TaskStaticResult {
+    string task_id;
+    FusionArgs input;
+    FusionInf output;
+}TaskStaticResult;
+
 void checkFileInfo(string filePath, ResultStatus& status);
 void* fusionInterface(void* args);
+
+void deepCopyTaskInputParameter(const FusionArgs& src, FusionArgs& dest);
+void deepCopyTaskResult(const FusionInf &src, FusionInf &dest);
+void deepCopyTask2RpcResult(const FusionStruct& src, FusionInf& dest);
+
 
 #endif // UTILS_HPP
 

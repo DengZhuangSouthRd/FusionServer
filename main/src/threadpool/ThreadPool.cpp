@@ -1,11 +1,11 @@
 #include "ThreadPool.h"
 
-ThreadPool::ThreadPool() : m_pool_size(DEFAULT_POOL_SIZE) {
+ThreadPool::ThreadPool() : m_pool_size(DEFAULT_POOL_SIZE), m_task_size(DEFAULT_POOL_SIZE*1.5) {
     m_threads.clear();
     m_run_threads.clear();
 }
 
-ThreadPool::ThreadPool(int pool_size) : m_pool_size(pool_size) {
+ThreadPool::ThreadPool(int pool_size) : m_pool_size(pool_size), m_task_size(pool_size*1.5) {
     m_threads.clear();
     m_run_threads.clear();
 }
@@ -20,6 +20,11 @@ ThreadPool::~ThreadPool() {
 
 void ThreadPool::setPoolSize(const int pool_size) {
     m_pool_size = pool_size;
+    m_task_size = m_pool_size * 1.5;
+}
+
+void ThreadPool::setTaskUplimit(const int task_size) {
+    m_task_size = task_size;
 }
 
 // We can't pass a member function to pthread_create.
@@ -105,6 +110,22 @@ void* ThreadPool::execute_task(pthread_t thread_id) {
         m_task_mutex.unlock();
 
         task->run();
+        string tmp_id = task->getTaskID();
+        TaskStaticResult tmp_SaveTask;
+        bool flag = task->packTaskStaticStatus(tmp_SaveTask);
+        if(true == flag) {
+            m_finishMap_mutex.lock();
+                    m_finishMap[tmp_id] = tmp_SaveTask;
+            m_finishMap_mutex.unlock();
+        } else {
+            Log::Error("TaskID %s RunStatus Failed !", tmp_id.c_str());
+        }
+        m_taskMap_mutex.lock();
+            delete task;
+            m_taskMap[tmp_id] = NULL;
+            m_taskMap.erase(tmp_id);
+        m_taskMap_mutex.unlock();
+
         m_run_threads.erase(thread_id);
     }
     return NULL;
@@ -114,16 +135,28 @@ int ThreadPool::add_task(Task* task, const string &task_id) {
     m_task_mutex.lock();
     m_tasks.push_back(task);
     Log::Info("Now the task size is %d !", m_tasks.size());
-    taskMap[task_id] = task;
+    m_taskMap[task_id] = task;
     // wake up one thread that is waiting for a task to be available
     m_task_cond_var.signal();
     m_task_mutex.unlock();
     return 0;
 }
 
-bool ThreadPool::is_aready_In_Map(const string &task_id) {
-    if(taskMap.count(task_id) == 0)
+bool ThreadPool::fetchResultByTaskID(const string task_id, FusionInf &res) {
+    // first step find in m_finishMap, if not in this Map
+    // second step find in m_taskMap, search it process status
+
+    if(m_finishMap.count(task_id) != 0) {
+        deepCopyTaskResult(m_finishMap.at(task_id).output, res);
+        return true;
+    } else if(m_taskMap.count(task_id) != 0) {
+        Log::Info("Fetch task id %s not finished !", task_id.c_str());
         return false;
-    return true;
+    } else {
+        Log::Error("Fetch task_id %s have not been push to this pool !", task_id.c_str());
+        return false;
+    }
+    return false;
 }
+
 

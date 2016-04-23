@@ -20,28 +20,23 @@ ImageFusion::~ImageFusion() {
 
 }
 
-void ImageFusion::updateStructInfo(FusionStruct srcInf, FusionInf &destInf) {
-    destInf.brcoorvalidLatitude = srcInf.brcoorvalid_latitude;
-    destInf.brcoorvalidLongitude = srcInf.brcoorvalid_longitude;
-    destInf.brcoorwholeLatitude = srcInf.brcoorwhole_latitude;
-    destInf.brcoorwholeLongitude = srcInf.brcoorwhole_longitude;
+void ImageFusion::log_InputParameters(DirArgs mapArgs) {
+    string str = "";
+    for(DirArgs::iterator it=mapArgs.begin(); it!=mapArgs.end(); ++it) {
+        str += (it->first + "=" + it->second + "#");
+    }
+    Log::Info(str);
+}
 
-    destInf.cnttimeuse = srcInf.cnttimeuse;
-    destInf.datumname = srcInf.datumname;
-
-    destInf.producetime = srcInf.producetime;
-    destInf.productFormat = srcInf.product_format;
-    destInf.projcentralmeridian = srcInf.projcentralmeridian;
-    destInf.projectioncode = srcInf.projectioncode;
-    destInf.projectiontype = srcInf.projectiontype;
-    destInf.projectionunits = srcInf.projectionunits;
-
-    destInf.resolution = srcInf.resolution;
-    destInf.status = srcInf.status;
+void ImageFusion::log_OutputResult(const FusionInf &destInf) {
     string str = "brcoorvalidLatitude = " + to_string(destInf.brcoorvalidLatitude)
             + " brcoorvalidLongitude = " + to_string(destInf.brcoorvalidLongitude)
             + " brcoorwholeLatitude = " + to_string(destInf.brcoorwholeLatitude)
             + " brcoorwholeLongitude = " + to_string(destInf.brcoorwholeLongitude)
+            + " ulcoorvalidLatitude = " + to_string(destInf.ulcoorvalidLatitude)
+            + " ulcoorvalidLongitude = " + to_string(destInf.ulcoorvalidLongitude)
+            + " ulcoorwholeLatitude = " + to_string(destInf.ulcoorwholeLatitude)
+            + " ulcoorwholeLongitude = " + to_string(destInf.ulcoorwholeLongitude)
             + " cnttimeuse = " + to_string(destInf.cnttimeuse)
             + " datumname = " + destInf.datumname
             + " producetime = " + destInf.producetime
@@ -50,15 +45,8 @@ void ImageFusion::updateStructInfo(FusionStruct srcInf, FusionInf &destInf) {
             + " projectioncode = " + destInf.projectioncode
             + " projectiontype = " + destInf.projectiontype
             + " projectionunits = " + destInf.projectionunits
-            + " resolution = " + to_string(destInf.resolution);
-    Log::Info(str);
-}
-
-void ImageFusion::log_InputParameters(DirArgs mapArgs) {
-    string str = "";
-    for(DirArgs::iterator it=mapArgs.begin(); it!=mapArgs.end(); ++it) {
-        str += (it->first + "=" + it->second + "#");
-    }
+            + " resolution = " + to_string(destInf.resolution)
+            + " status = " + to_string(destInf.status);
     Log::Info(str);
 }
 
@@ -80,8 +68,9 @@ void ImageFusion::log_InputParameters(DirArgs mapArgs) {
         return obj;
     }
     test = (FusionStruct*)tmp;
-    updateStructInfo(*test, obj);
+    deepCopyTask2RpcResult(*test, obj);
     delete test;
+    log_OutputResult(obj);
     return obj;
 }
 
@@ -125,9 +114,18 @@ string ImageFusion::askProcess(const DirArgs& mapArg, const Ice::Current&) {
     log_InputParameters(mapArg);
     ::RPCWiseFuse::FusionInf obj;
     if(mapArg.count("id") == 0) {
-
+        obj.status = -1;
+        Log::Error("fetchFuseRes ## Input Parameter InValid !");
+        return obj;
     }
-    //string task_id = mapArg;
+    string task_id = mapArg.at("id");
+    bool flag = m_threadPool.fetchResultByTaskID(task_id, obj);
+    if(flag == false) {
+        obj.status = -1;
+        Log::Error("fetchFuseRes ## fetch task id %s result Failed !", task_id.c_str());
+    } else {
+        log_OutputResult(obj);
+    }
     return obj;
 }
 

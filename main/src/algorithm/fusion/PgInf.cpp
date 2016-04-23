@@ -32,12 +32,7 @@ PgInf::PgInf(){
     finf.projectioncode = "";		//投影编码
     finf.projectionunits = "";		//投影单位
     finf.projcentralmeridian =0;		//投影带中央经线
-    finf.status = 0; // 0 meas failed; 1 means True;
-}
-
-//返回写入数据库信息
-FusionStruct PgInf::GetInf(){
-    return this->finf;
+    finf.status = -1; // -1 meas failed; 1 means True;
 }
 
 void PgInf::DataDeepCopy(FusionStruct **dest) {
@@ -68,7 +63,9 @@ inline void PgInf::SetProducetime(string Producetime){
 }
 
 inline void PgInf::SetStatus(bool status) {
-    this->finf.status = (int)status;
+    if(status == false)
+        this->finf.status = -1;
+    this->finf.status = 1;
 }
 
 //记录融合产品地理、分辨率等信息

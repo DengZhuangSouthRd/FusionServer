@@ -48,9 +48,7 @@ class PgInf{
 private:
     FusionStruct finf;
 public:
-	PgInf();
-	//返回写入数据库信息
-    FusionStruct GetInf();
+    PgInf();
     void DataDeepCopy(FusionStruct** dest);
 
 	//记录算法所用时间

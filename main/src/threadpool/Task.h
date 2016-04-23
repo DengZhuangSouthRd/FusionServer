@@ -14,6 +14,9 @@
 
 using namespace std;
 
+//!!! Attention! This Task charge off the the memory management,
+//!!! to delete the all heap memory about the task
+
 class Task {
 public:
     Task(void* (*fn_ptr)(void*), void* arg);
@@ -27,7 +30,7 @@ public:
     const string getTaskID();
     pthread_t getThreadID();
     TASKSTATUS getTaskStatus();
-    void* getTaskResult();
+    bool packTaskStaticStatus(TaskStaticResult& res); // pack the task input and output parameters
 
 private:
     void* (*m_fn_ptr)(void*);

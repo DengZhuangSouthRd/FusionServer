@@ -4,7 +4,12 @@
 using namespace std;
 
 ImageFusion::ImageFusion() {
-    m_threadPool.setPoolSize(20);
+    m_threadPool.setPoolSize(10);
+    int ret = m_threadPool.initialize_threadpool();
+    if(ret == -1) {
+        Log::Error("Failed to initialize the Thread Pool !");
+        throw bad_alloc();
+    }
     m_logPath = "/home/fighter/Documents/ImageFusion/main/data/log/loginfo.log";
     Log::Initialise(m_logPath);
     Log::SetThreshold(Log::LOG_TYPE_INFO);
@@ -49,41 +54,75 @@ void ImageFusion::updateStructInfo(FusionStruct srcInf, FusionInf &destInf) {
     Log::Info(str);
 }
 
+void ImageFusion::log_InputParameters(DirArgs mapArgs) {
+    string str = "";
+    for(DirArgs::iterator it=mapArgs.begin(); it!=mapArgs.end(); ++it) {
+        str += (it->first + "=" + it->second + "#");
+    }
+    Log::Info(str);
+}
+
 ::RPCWiseFuse::FusionInf ImageFusion::fuseSyn(const DirArgs& mapArg, const Ice::Current &) {
     ::RPCWiseFuse::FusionInf obj;
     FusionArgs args;
+    log_InputParameters(mapArg);
     bool flag = checkFusionArgv(mapArg, m_logPath, args);
     if(flag == false) {
         obj.status = ARGERROR;
-        cerr << "Image Fusion Parameters Error !" << endl;
+        Log::Error("fuseSyn ## Image Fusion Parameters Error !");
         return obj;
     }
     FusionStruct* test = NULL;
     void* tmp = NULL;
     tmp = fusionInterface((void*)(&args));
     if(tmp == NULL) {
+        Log::Error("Fetch Fusion Result Struct Failed !");
         return obj;
     }
     test = (FusionStruct*)tmp;
     updateStructInfo(*test, obj);
-    free(test);
+    delete test;
     return obj;
 }
 
-int ImageFusion::fuseAsyn(const DirArgs& mapArg, const Ice::Current&) {
-    FusionArgs args;
-    bool flag = checkFusionArgv(mapArg, m_logPath, args);
+int ImageFusion::fuseAsyn(const DirArgs& mapArgs, const Ice::Current&) {
+    ::RPCWiseFuse::FusionInf obj;
+    FusionArgs* args = new(std::nothrow) FusionArgs;
+    if(args == NULL) {
+        Log::Error("fuseAysn ## new FusionArgs Failed !");
+        return -1;
+    }
+    log_InputParameters(mapArgs);
+    bool flag = checkFusionArgv(mapArgs, m_logPath, *args);
     if(flag == false) {
+        obj.status = ARGERROR;
+        delete args;
+        Log::Error("fuseAsyn ## Image Fusion Parameters Error !");
         return -1; // push task error
     }
-    return 0; // push task success
+    Task* task = new(std::nothrow) Task(&fusionInterface, (void*)args);
+    if(task == NULL) {
+        delete args;
+        Log::Error("fuseAsyc ## new Task Failed !");
+        return -1;
+    }
+    string task_id = mapArgs.at("id");
+    if(m_threadPool.add_task(task, task_id) != 0) {
+        Log::Error("fuseAsyn ## thread Pool add Task Failed !");
+        delete args;
+        delete task;
+        return -1; // Means For Add Task Failed !
+    }
+    return 0; // Means For Add Task Success !
 }
 
 string ImageFusion::askProcess(const DirArgs& mapArg, const Ice::Current&) {
+    log_InputParameters(mapArg);
     return "";
 }
 
 ::RPCWiseFuse::FusionInf ImageFusion::fetchFuseRes(const DirArgs& mapArg, const Ice::Current&) {
+    log_InputParameters(mapArg);
     ::RPCWiseFuse::FusionInf obj;
     if(mapArg.count("id") == 0) {
 
@@ -184,6 +223,9 @@ void Server::initRpc(int argc, char** argv, string conn) {
         status = 1;
     } catch (const char* msg) {
         cerr << msg << endl;
+        status = 1;
+    } catch (const exception& e) {
+        cerr << e.what();
         status = 1;
     }
 }

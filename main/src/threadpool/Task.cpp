@@ -12,7 +12,7 @@ Task::~Task() {
 
 void Task::run() {
     m_status = TASKRUNNING;
-    m_result = (*m_fn_ptr)((void*)(&m_arg));
+    m_result = (*m_fn_ptr)(m_arg);
     m_status = TASKCOMPELETE;
 }
 

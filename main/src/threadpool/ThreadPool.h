@@ -15,6 +15,8 @@
 #include "Mutex.h"
 #include "Task.h"
 
+#include "../utils/log.h"
+
 /*
  * This thread pool not manage the memory delete and free
  * Who Malloc and New, who should pay attention to the memory management !
@@ -34,16 +36,6 @@ public:
 
 public:
     void setPoolSize(const int pool_size);
-    void setLogOfstream(ofstream& out);
-    friend ostream& operator <<(ostream& out, string& info) {
-        if(&out == NULL) {
-            cout << info << endl;
-            return cout;
-        } else {
-            out << info << endl;
-            return out;
-        }
-    }
 
 public:
     int initialize_threadpool();

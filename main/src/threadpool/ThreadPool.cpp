@@ -1,19 +1,18 @@
 #include "ThreadPool.h"
 
 ThreadPool::ThreadPool() : m_pool_size(DEFAULT_POOL_SIZE) {
-    m_pOutLog = NULL;
     m_threads.clear();
     m_run_threads.clear();
 }
 
 ThreadPool::ThreadPool(int pool_size) : m_pool_size(pool_size) {
-    m_pOutLog = NULL;
     m_threads.clear();
     m_run_threads.clear();
 }
 
 ThreadPool::~ThreadPool() {
     if (m_pool_state != STOPPED) {
+        Log::Info("~ ThreadPool and Still Running !");
         cout << "~ ThreadPool and Still Running !" << endl;
         destroy_threadpool();
     }
@@ -21,10 +20,6 @@ ThreadPool::~ThreadPool() {
 
 void ThreadPool::setPoolSize(const int pool_size) {
     m_pool_size = pool_size;
-}
-
-void ThreadPool::setLogOfstream(ofstream &out) {
-    m_pOutLog = &out;
 }
 
 // We can't pass a member function to pthread_create.
@@ -47,7 +42,8 @@ int ThreadPool::initialize_threadpool() {
         pthread_t tid;
         ret = pthread_create(&tid, NULL, start_thread, (void*) this);
         if (ret != 0) {
-            *m_pOutLog << "pthrad_create() failed " << ret << endl;
+            Log::Error("pthread_create() failed %d !", ret);
+            cerr << "pthrad_create() failed " << ret << endl;
             return -1;
         }
         m_threads.push_back(tid);
@@ -59,7 +55,8 @@ int ThreadPool::destroy_threadpool() {
     m_task_mutex.lock();
     m_pool_state = STOPPED;
     m_task_mutex.unlock();
-    *m_pOutLog << "\nBroadcasting STOP signal to all threads..." << endl;
+    cout << "Broadcasting STOP signal to all threads..." << endl;
+    Log::Info("Broadcasting STOP signal to all threads...");
     m_task_cond_var.broadcast(); // notify all threads we are shttung down
 
     for(set<pthread_t>::iterator it=m_run_threads.begin(); it!=m_run_threads.end();++it) {
@@ -85,7 +82,6 @@ void* ThreadPool::execute_task(pthread_t thread_id) {
         // Try to pick a task
         m_task_mutex.lock();
         while((m_pool_state != STOPPED) && (m_tasks.empty())) {
-            //*m_pOutLog << "Wait for the condition mutex unlock !" << endl;
             m_task_cond_var.wait(m_task_mutex.get_mutex_ptr());
         }
 
@@ -95,14 +91,16 @@ void* ThreadPool::execute_task(pthread_t thread_id) {
             pthread_exit(NULL);
         }
 
-        *m_pOutLog << "Residue the task numebr " << m_tasks.size() << endl;
+        cout << "Residue the task numebr " << m_tasks.size() << endl;
+        Log::Info("Residue the task numebr %d !", m_tasks.size());
 
         task = m_tasks.front();
         m_tasks.pop_front();
         if(m_run_threads.count(thread_id) == 0) {
             m_run_threads.insert(thread_id);
         } else {
-            *m_pOutLog << "Thread id " << thread_id << " has already run !" << endl;
+            Log::Error("Thread id %d has already run !", thread_id);
+            cerr << "Thread id " << thread_id << " has already run !" << endl;
         }
         m_task_mutex.unlock();
 
@@ -115,7 +113,7 @@ void* ThreadPool::execute_task(pthread_t thread_id) {
 int ThreadPool::add_task(Task* task, const string &task_id) {
     m_task_mutex.lock();
     m_tasks.push_back(task);
-    *m_pOutLog << "Now The Task Size is " << m_tasks.size() << endl;
+    Log::Info("Now the task size is %d !", m_tasks.size());
     taskMap[task_id] = task;
     // wake up one thread that is waiting for a task to be available
     m_task_cond_var.signal();

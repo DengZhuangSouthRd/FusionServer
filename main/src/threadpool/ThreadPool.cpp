@@ -116,6 +116,7 @@ void* ThreadPool::execute_task(pthread_t thread_id) {
         if(true == flag) {
             m_finishMap_mutex.lock();
                     m_finishMap[tmp_id] = tmp_SaveTask;
+                    Log::Info("TaskID %s move to FinishMap!", tmp_id.c_str());
             m_finishMap_mutex.unlock();
         } else {
             Log::Error("TaskID %s RunStatus Failed !", tmp_id.c_str());
@@ -123,7 +124,9 @@ void* ThreadPool::execute_task(pthread_t thread_id) {
         m_taskMap_mutex.lock();
             delete task;
             m_taskMap[tmp_id] = NULL;
-            m_taskMap.erase(tmp_id);
+            auto it = m_taskMap.find(tmp_id);
+            m_taskMap.erase(it);
+            Log::Info("TaskID %s have removed from TaskMap !", tmp_id.c_str());
         m_taskMap_mutex.unlock();
 
         m_run_threads.erase(thread_id);
@@ -133,6 +136,7 @@ void* ThreadPool::execute_task(pthread_t thread_id) {
 
 int ThreadPool::add_task(Task* task, const string &task_id) {
     m_task_mutex.lock();
+    task->setTaskID(task_id);
     m_tasks.push_back(task);
     Log::Info("Now the task size is %d !", m_tasks.size());
     m_taskMap[task_id] = task;

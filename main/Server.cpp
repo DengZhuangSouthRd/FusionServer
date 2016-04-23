@@ -96,6 +96,7 @@ int ImageFusion::fuseAsyn(const DirArgs& mapArgs, const Ice::Current&) {
         return -1;
     }
     string task_id = mapArgs.at("id");
+    task->setTaskID(task_id);
     if(m_threadPool.add_task(task, task_id) != 0) {
         Log::Error("fuseAsyn ## thread Pool add Task Failed !");
         delete args;

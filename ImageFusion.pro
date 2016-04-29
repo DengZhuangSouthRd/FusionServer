@@ -6,8 +6,8 @@ CONFIG -= qt
 QMAKE_CXXFLAGS += -std=c++11
 
 LIBS += -lIce -lIceUtil -lpthread
+LIBS += -L/usr/local/lib -lproj -lgdal
 
-LIBS += -L/usr/local/lib -lgdal -lproj
 
 INCLUDEPATH += ./main/src/algorithm/fusion/gdal/include
 INCLUDEPATH += ./main/src/algorithm/fusion/proj/include

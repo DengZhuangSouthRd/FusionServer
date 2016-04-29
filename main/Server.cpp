@@ -247,6 +247,6 @@ void Server::close() {
 
 int main(int argc,char* argv[]) {
     Server obj_server;
-    obj_server.initRpc(argc, argv, "default -h 127.0.0.1 -p 9999");
+    obj_server.initRpc(argc, argv, "default -h 192.168.199.173 -p 9999");
     return 0;
 }

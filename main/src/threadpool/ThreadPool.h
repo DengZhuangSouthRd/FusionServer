@@ -48,6 +48,8 @@ public:
     int getPoolCapacity();
     int add_task(Task* task, const string& task_id);
     bool fetchResultByTaskID(const string task_id, FusionInf &res);
+    //fetch all task id and task result to serialize the completed task !
+    int serializeTaskResults();
 
 public:
     void* execute_task(pthread_t thread_id);
@@ -70,5 +72,6 @@ private:
     map<string, Task*> m_taskMap; // for <task_id, task*>
     map<string, TaskStaticResult> m_finishMap; // for <task_id, task_all_parameters>
     std::deque<Task*> m_tasks;
+    string m_serializePath;
 };
 

@@ -3,11 +3,13 @@
 ThreadPool::ThreadPool() : m_pool_size(DEFAULT_POOL_SIZE), m_task_size(DEFAULT_POOL_SIZE*1.5) {
     m_threads.clear();
     m_run_threads.clear();
+    m_serializePath = "/home/fighter/Documents/ImageFusion/main/data/serialize/task_backup.json";
 }
 
 ThreadPool::ThreadPool(int pool_size) : m_pool_size(pool_size), m_task_size(pool_size*1.5) {
     m_threads.clear();
     m_run_threads.clear();
+    m_serializePath = "/home/fighter/Documents/ImageFusion/main/data/serialize/task_backup.json";
 }
 
 ThreadPool::~ThreadPool() {
@@ -163,4 +165,8 @@ bool ThreadPool::fetchResultByTaskID(const string task_id, FusionInf &res) {
     return false;
 }
 
+//fetch all task id and task result to serialize the completed task !
+int ThreadPool::serializeTaskResults() {
+
+}
 

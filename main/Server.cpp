@@ -11,6 +11,7 @@ ImageFusion::ImageFusion() {
         throw bad_alloc();
     }
     m_logPath = "/home/fighter/Documents/ImageFusion/main/data/log/loginfo.log";
+
     Log::Initialise(m_logPath);
     Log::SetThreshold(Log::LOG_TYPE_INFO);
     PUSH_LOG_STACK;

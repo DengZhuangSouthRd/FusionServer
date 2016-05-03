@@ -255,12 +255,6 @@ int ThreadPool::serializeTaskResults() {
     Json::FastWriter writer;
     Json::Value root;
 
-    std::ofstream out;
-    out.open(m_serializePathBak.c_str(), std::ios_base::binary);
-    if(out.is_open() == false) {
-        throw runtime_error("Open Serialize File Error !");
-        cerr << "Open Seriazlize file Error !" << endl;
-    }
     for(map<string, TaskStaticResult>::iterator it=m_finishMap.begin(); it!=m_finishMap.end(); ++it) {
         string key = it->first;
         TaskStaticResult res = it->second;
@@ -299,7 +293,24 @@ int ThreadPool::serializeTaskResults() {
         root[key].append(outres);
     }
     std::string strRoot = writer.write(root);
+
+    std::ofstream out;
+    out.open(m_serializePathBak.c_str(), std::ios_base::binary);
+    if(out.is_open() == false) {
+        throw runtime_error("Open Serialize Bak File Error !");
+        cerr << "Open Seriazlize Bak file Error !" << endl;
+    }
     out << strRoot;
     out.close();
+
+
+    out.open(m_serializePath.c_str(), std::ios_base::binary);
+    if(out.is_open() == false) {
+        throw runtime_error("Open Serialize File Error !");
+        cerr << "Open Seriazlize file Error !" << endl;
+    }
+    out << strRoot;
+    out.close();
+
     return m_finishMap.size();
 }

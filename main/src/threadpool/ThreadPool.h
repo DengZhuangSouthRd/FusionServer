@@ -54,6 +54,7 @@ public:
     bool fetchResultByTaskID(const string task_id, FusionInf &res);
     // fetch all task id and task result to serialize the completed task !
     // return the number of serialized
+    int getSerializeTaskResults();
     int serializeTaskResults();
     bool isExistsFile(const string filePath);
 

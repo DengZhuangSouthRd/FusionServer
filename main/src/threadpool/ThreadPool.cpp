@@ -180,18 +180,79 @@ bool ThreadPool::isExistsFile(const string filePath) {
     return false;
 }
 
-//fetch all task id and task result to serialize the completed task !
-int ThreadPool::serializeTaskResults() {
-    //1. judge the file if exists
-    //2. read the json file extract the task id into the memory
-    //3. insert the new task info
-    //4. write to the json file
+// get the over task from the Json File
+int ThreadPool::getSerializeTaskResults() {
     Json::Reader reader;
     Json::Value root;
-    bool flag = reader.parse(m_serializePath.c_str(),root);
+    Json::Value::Members members;
+    std::ifstream in;
+    in.open(m_serializePath.c_str(), std::ios_base::binary);
+    if(in.is_open() == false) {
+        throw runtime_error("Open Serialize File Error !");
+        cerr << "Open Seriazlize file Error !" << endl;
+    }
+    bool flag = reader.parse(in,root, false);
+    if(flag == false) {
+        throw runtime_error("Parse Serialize Json File failed !");
+        cerr << "Parse Serialize Json File failed !" << endl;
+    }
+    members = root.getMemberNames();
+    for(Json::Value::Members::iterator it=members.begin(); it!=members.end(); ++it) {
+        std::string key = *it;
+        Json::Value node = root[key];
+        Json::Value inNode = node[0];
+        Json::Value outNode = node[1];
+        TaskStaticResult tmp;
+        tmp.task_id.assign(key);
+        tmp.input.panurl.assign(inNode["panurl"].asString());
+        tmp.input.outurl.assign(inNode["outurl"].asString());
+        tmp.input.msurl.assign(inNode["msurl"].asString());
+        tmp.input.logurl.assign(inNode["logurl"].asString());
+        tmp.input.idinter = inNode["idinter"].asInt();
+        tmp.input.idalg = inNode["idalg"].asInt();
+        tmp.input.band.push_back(inNode["band1"].asInt());
+        tmp.input.band.push_back(inNode["band2"].asInt());
+        tmp.input.band.push_back(inNode["band3"].asInt());
+
+        tmp.output.brcoorvalidLatitude = outNode["brcoorvalidLatitude"].asDouble();
+        tmp.output.brcoorvalidLongitude = outNode["brcoorvalidLongitude"].asDouble();
+        tmp.output.brcoorwholeLatitude = outNode["brcoorwholeLatitude"].asDouble();
+        tmp.output.brcoorwholeLongitude = outNode["brcoorwholeLongitude"].asDouble();
+        tmp.output.cnttimeuse = outNode["cnttimeuse"].asDouble();
+        tmp.output.datumname.assign(outNode["datumname"].asString());
+        tmp.output.producetime.assign(outNode["producetime"].asString());
+        tmp.output.productFormat.assign(outNode["productFormat"].asString());
+        tmp.output.projcentralmeridian = outNode["projcentralmeridian"].asFloat();
+        tmp.output.projectioncode.assign(outNode["projectioncode"].asString());
+        tmp.output.projectiontype.assign(outNode["projectiontype"].asString());
+        tmp.output.projectionunits.assign(outNode["projectionunits"].asString());
+        tmp.output.resolution = outNode["resolution"].asFloat();
+        tmp.output.status = outNode["status"].asInt();
+        tmp.output.ulcoorvalidLatitude = outNode["ulcoorvalidLatitude"].asDouble();
+        tmp.output.ulcoorvalidLongitude = outNode["ulcoorvalidLongitude"].asDouble();
+        tmp.output.ulcoorwholeLatitude = outNode["ulcoorwholeLatitude"].asDouble();
+        tmp.output.ulcoorwholeLongitude = outNode["ulcoorwholeLongitude"].asDouble();
+        m_finishMap[key] = tmp;
+    }
+    in.close();
+    return members.size();
+}
+
+//fetch all task id and task result to serialize the completed task !
+int ThreadPool::serializeTaskResults() {
+
+    Json::Reader reader;
+    Json::Value root;
+
+    std::ifstream in;
+    in.open(m_serializePath.c_str(), std::ios_base::binary);
+    if(in.is_open() == false) {
+        throw runtime_error("Open Serialize File Error !");
+        cerr << "Open Seriazlize file Error !" << endl;
+    }
+    bool flag = reader.parse(in,root, false);
     if(flag == false) {
         throw runtime_error("Parse Serialize Json File failed !");
         cerr << "Parse Serialize Json File failed !" << endl;
     }
 }
-

@@ -13,8 +13,10 @@
 
 ```bash
 {
-"task_id1" : {"input" : {}, "output" : {}},
-"task_id2" : {"input" : {}, "output" : {}},
-......
+    [
+	"task_id1" : {"input" : {}, "output" : {}},
+	"task_id2" : {"input" : {}, "output" : {}},
+	......
+    ]
 }
 ```

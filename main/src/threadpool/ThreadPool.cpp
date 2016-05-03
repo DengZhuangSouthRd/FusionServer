@@ -252,18 +252,54 @@ int ThreadPool::getSerializeTaskResults() {
 //fetch all task id and task result to serialize the completed task !
 int ThreadPool::serializeTaskResults() {
 
-    Json::Reader reader;
+    Json::FastWriter writer;
     Json::Value root;
 
-    std::ifstream in;
-    in.open(m_serializePath.c_str(), std::ios_base::binary);
-    if(in.is_open() == false) {
+    std::ofstream out;
+    out.open(m_serializePathBak.c_str(), std::ios_base::binary);
+    if(out.is_open() == false) {
         throw runtime_error("Open Serialize File Error !");
         cerr << "Open Seriazlize file Error !" << endl;
     }
-    bool flag = reader.parse(in,root, false);
-    if(flag == false) {
-        throw runtime_error("Parse Serialize Json File failed !");
-        cerr << "Parse Serialize Json File failed !" << endl;
+    for(map<string, TaskStaticResult>::iterator it=m_finishMap.begin(); it!=m_finishMap.end(); ++it) {
+        string key = it->first;
+        TaskStaticResult res = it->second;
+        Json::Value input;
+        input["panurl"] = res.input.panurl;
+        input["outurl"] = res.input.outurl;
+        input["msurl"] = res.input.msurl;
+        input["logurl"] = res.input.logurl;
+        input["idinter"] = res.input.idinter;
+        input["idalg"] = res.input.idalg;
+        input["band1"] = res.input.band[0];
+        input["band2"] = res.input.band[1];
+        input["band3"] = res.input.band[2];
+
+        Json::Value outres;
+        outres["brcoorvalidLatitude"] = res.output.brcoorvalidLatitude;
+        outres["brcoorvalidLongitude"] = res.output.brcoorvalidLongitude;
+        outres["brcoorwholeLatitude"] = res.output.brcoorwholeLatitude;
+        outres["brcoorwholeLongitude"] = res.output.brcoorwholeLongitude;
+        outres["cnttimeuse"] = res.output.cnttimeuse;
+        outres["datumname"] = res.output.datumname;
+        outres["producetime"] = res.output.producetime;
+        outres["productFormat"] = res.output.productFormat;
+        outres["projcentralmeridian"] = res.output.projcentralmeridian;
+        outres["projectioncode"] = res.output.projectioncode;
+        outres["projectiontype"] = res.output.projectiontype;
+        outres["projectionunits"] = res.output.projectionunits;
+        outres["resolution"] = res.output.resolution;
+        outres["status"] = res.output.status;
+        outres["ulcoorvalidLatitude"] = res.output.ulcoorvalidLatitude;
+        outres["ulcoorvalidLongitude"] = res.output.ulcoorvalidLongitude;
+        outres["ulcoorwholeLatitude"] = res.output.ulcoorwholeLatitude;
+        outres["ulcoorwholeLongitude"] = res.output.ulcoorwholeLongitude;
+
+        root[key].append(input);
+        root[key].append(outres);
     }
+    std::string strRoot = writer.write(root);
+    out << strRoot;
+    out.close();
+    return m_finishMap.size();
 }

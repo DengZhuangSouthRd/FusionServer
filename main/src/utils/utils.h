@@ -62,6 +62,8 @@ void deepCopyTaskInputParameter(const FusionArgs& src, FusionArgs& dest);
 void deepCopyTaskResult(const FusionInf &src, FusionInf &dest);
 void deepCopyTask2RpcResult(const FusionStruct& src, FusionInf& dest);
 
+void read_config(string fileName, map<string, string>& argvMap);
+void read_config_Json(string fileName, map<string, string>& argvMap);
 
 #endif // UTILS_HPP
 

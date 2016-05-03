@@ -14,7 +14,6 @@ INCLUDEPATH += ./main/src/algorithm/fusion/proj/include
 
 SOURCES += \
     main/Server.cpp \
-    main/src/utils/readconf.cpp \
     main/src/utils/log.cpp \
     main/src/rpc/wisefuseRpc.cpp \
     main/src/threadpool/ThreadPool.cpp \

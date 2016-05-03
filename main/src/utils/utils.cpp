@@ -98,3 +98,31 @@ void deepCopyTask2RpcResult(const FusionStruct &src, FusionInf &dest) {
 
     dest.status = src.status;
 }
+
+void read_config(string fileName, map<string, string>& argvMap) {
+     if(access(fileName.c_str(), 0) == -1) {
+         cerr << "PG DataBase Configure File Not Exists !" << endl;
+         exit(1);
+     }
+     ifstream in(fileName.c_str());
+     if(!in.is_open()) {
+         cerr << "PG DataBase Configure File Not Exists !" << endl;
+         exit(1);
+     }
+     while(!in.eof()) {
+         char buffer[512] = {'\0'};
+         in.getline(buffer, 511);
+         string info(buffer);
+         size_t pos = info.find(':');
+         if(pos == string::npos) {
+             return ;
+         }
+         string keyVal = info.substr(0, pos);
+         string valVal = info.substr(pos+1);
+         argvMap[keyVal] = valVal;
+     }
+ }
+
+void read_config_Json(string fileName, map<string, string> &argvMap) {
+
+}

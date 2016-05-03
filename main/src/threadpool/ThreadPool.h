@@ -18,16 +18,20 @@
 #include "../utils/log.h"
 #include "../utils/utils.h"
 
+#include "../utils/json/json.h"
+#include "../utils/json/json-forwards.h"
+
 /*
  * This thread pool not manage the memory delete and free
  * Who Malloc and New, who should pay attention to the memory management !
 */
 
-const int DEFAULT_POOL_SIZE = 10;
+const int DEFAULT_POOL_SIZE = 5;
 const int STARTED = 0;
 const int STOPPED = 1;
 
 using namespace std;
+using namespace Json;
 
 class ThreadPool {
 public:
@@ -48,8 +52,10 @@ public:
     int getPoolCapacity();
     int add_task(Task* task, const string& task_id);
     bool fetchResultByTaskID(const string task_id, FusionInf &res);
-    //fetch all task id and task result to serialize the completed task !
+    // fetch all task id and task result to serialize the completed task !
+    // return the number of serialized
     int serializeTaskResults();
+    bool isExistsFile(const string filePath);
 
 public:
     void* execute_task(pthread_t thread_id);

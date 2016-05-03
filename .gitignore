@@ -2,5 +2,5 @@ main/data/dict/*
 main/data/features/*
 main/conf/*
 main/data/*
-
+!main/data/README.md
 *~

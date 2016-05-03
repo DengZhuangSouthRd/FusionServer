@@ -4,12 +4,20 @@ ThreadPool::ThreadPool() : m_pool_size(DEFAULT_POOL_SIZE), m_task_size(DEFAULT_P
     m_threads.clear();
     m_run_threads.clear();
     m_serializePath = "/home/fighter/Documents/ImageFusion/main/data/serialize/task_backup.json";
+    if(isExistsFile(m_serializePath) == false) {
+        throw runtime_error("Serialized File Does Not Exists !");
+        cerr << "Serialized File Does Not Exists !" << endl;
+    }
 }
 
 ThreadPool::ThreadPool(int pool_size) : m_pool_size(pool_size), m_task_size(pool_size*1.5) {
     m_threads.clear();
     m_run_threads.clear();
     m_serializePath = "/home/fighter/Documents/ImageFusion/main/data/serialize/task_backup.json";
+    if(isExistsFile(m_serializePath) == false) {
+        throw runtime_error("Serialized File Does Not Exists !");
+        cerr << "Serialized File Does Not Exists !" << endl;
+    }
 }
 
 ThreadPool::~ThreadPool() {
@@ -165,8 +173,25 @@ bool ThreadPool::fetchResultByTaskID(const string task_id, FusionInf &res) {
     return false;
 }
 
+bool ThreadPool::isExistsFile(const string filePath) {
+    if(access(filePath.c_str(), 0) == 0) {
+        return true;
+    }
+    return false;
+}
+
 //fetch all task id and task result to serialize the completed task !
 int ThreadPool::serializeTaskResults() {
-
+    //1. judge the file if exists
+    //2. read the json file extract the task id into the memory
+    //3. insert the new task info
+    //4. write to the json file
+    Json::Reader reader;
+    Json::Value root;
+    bool flag = reader.parse(m_serializePath.c_str(),root);
+    if(flag == false) {
+        throw runtime_error("Parse Serialize Json File failed !");
+        cerr << "Parse Serialize Json File failed !" << endl;
+    }
 }
 

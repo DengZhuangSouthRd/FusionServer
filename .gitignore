@@ -3,5 +3,5 @@ main/data/features/*
 main/conf/*
 main/data/*
 !main/data/README.md
-!*.md
+!main/data/serialize/README.md
 *~

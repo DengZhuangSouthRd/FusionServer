@@ -3,20 +3,30 @@
 ThreadPool::ThreadPool() : m_pool_size(DEFAULT_POOL_SIZE), m_task_size(DEFAULT_POOL_SIZE*1.5) {
     m_threads.clear();
     m_run_threads.clear();
-    m_serializePath = "/home/fighter/Documents/ImageFusion/main/data/serialize/task_backup.json";
+    m_serializePath = "/home/fighter/Documents/ImageFusion/main/data/serialize/task.json";
+    m_serializePathBak = "/home/fighter/Documents/ImageFusion/main/data/serialize/task_backup.json";
     if(isExistsFile(m_serializePath) == false) {
         throw runtime_error("Serialized File Does Not Exists !");
         cerr << "Serialized File Does Not Exists !" << endl;
+    }
+    if(isExistsFile(m_serializePathBak) == false) {
+        throw runtime_error("Serialized Bak File Does Not Exists !");
+        cerr << "Serialized Bak File Does Not Exists !" << endl;
     }
 }
 
 ThreadPool::ThreadPool(int pool_size) : m_pool_size(pool_size), m_task_size(pool_size*1.5) {
     m_threads.clear();
     m_run_threads.clear();
-    m_serializePath = "/home/fighter/Documents/ImageFusion/main/data/serialize/task_backup.json";
+    m_serializePath = "/home/fighter/Documents/ImageFusion/main/data/serialize/task.json";
+    m_serializePathBak = "/home/fighter/Documents/ImageFusion/main/data/serialize/task_backup.json";
     if(isExistsFile(m_serializePath) == false) {
         throw runtime_error("Serialized File Does Not Exists !");
         cerr << "Serialized File Does Not Exists !" << endl;
+    }
+    if(isExistsFile(m_serializePathBak) == false) {
+        throw runtime_error("Serialized Bak File Does Not Exists !");
+        cerr << "Serialized Bak File Does Not Exists !" << endl;
     }
 }
 
@@ -202,6 +212,7 @@ int ThreadPool::getSerializeTaskResults() {
         Json::Value node = root[key];
         Json::Value inNode = node[0];
         Json::Value outNode = node[1];
+
         TaskStaticResult tmp;
         tmp.task_id.assign(key);
         tmp.input.panurl.assign(inNode["panurl"].asString());

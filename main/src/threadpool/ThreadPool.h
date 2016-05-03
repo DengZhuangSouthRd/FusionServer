@@ -80,5 +80,6 @@ private:
     map<string, TaskStaticResult> m_finishMap; // for <task_id, task_all_parameters>
     std::deque<Task*> m_tasks;
     string m_serializePath;
+    string m_serializePathBak;
 };
 

@@ -124,5 +124,29 @@ void read_config(string fileName, map<string, string>& argvMap) {
  }
 
 void read_config_Json(string fileName, map<string, string> &argvMap) {
-
+    Json::Reader reader;
+    Json::Value root;
+    ifstream in;
+    in.open(fileName.c_str(), std::ios_base::binary);
+    if(in.is_open() == false) {
+        throw runtime_error("Read Configure Json File Error !");
+        cerr << "Read Configure Json File Error !" << endl;
+    }
+    bool flag = reader.parse(in, root, false);
+    if(flag == false) {
+        throw runtime_error("Configure Json File Format Error !");
+        cerr << "Configure Json File Format Error !" << endl;
+    }
+    argvMap["LOGPATH"] = root.get("LOGPATH", "NULL").asString();
+    argvMap["SerializePath"] = root.get("SerializePath", "NULL").asString();
+    argvMap["SerializePathBak"] = root.get("SerializePathBak", "NULL").asString();
+    argvMap["SERVERIP"] = root.get("SERVERIP", "127.0.0.1").asString();
+    argvMap["PORT"] = root.get("PORT", "9999").asString();
+    argvMap["IDENTITY"] = root.get("IDENTITY", "NULL").asString();
+    for(map<string, string>::iterator it=argvMap.begin(); it!=argvMap.end(); it++) {
+        if(it->second == "NULL") {
+            cerr << it->first << " is " << it->second << endl;
+            throw runtime_error("Configure Json File Parameter Error !");
+        }
+    }
 }

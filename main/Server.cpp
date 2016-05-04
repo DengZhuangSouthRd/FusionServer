@@ -3,6 +3,8 @@
 
 using namespace std;
 
+map<string, string> g_ConfMap;
+
 ImageFusion::ImageFusion() {
     m_threadPool.setPoolSize(10);
     int ret = m_threadPool.initialize_threadpool();
@@ -10,7 +12,7 @@ ImageFusion::ImageFusion() {
         Log::Error("Failed to initialize the Thread Pool !");
         throw bad_alloc();
     }
-    m_logPath = "/home/fighter/Documents/ImageFusion/main/data/log/loginfo.log";
+    m_logPath = g_ConfMap["LOGPATH"];
 
     Log::Initialise(m_logPath);
     Log::SetThreshold(Log::LOG_TYPE_INFO);
@@ -215,7 +217,7 @@ void Server::initRpc(int argc, char** argv, string conn) {
         ic = Ice::initialize(argc,argv);
         adapter = ic->createObjectAdapterWithEndpoints("ImageRpcAdapter",connParam);
         Ice::ObjectPtr object = new ImageFusion;
-        adapter->add(object,ic->stringToIdentity("WISEFUSION"));
+        adapter->add(object,ic->stringToIdentity(g_ConfMap["IDENTITY"]));
         adapter->activate();
         ic->waitForShutdown();
     } catch (const Ice::Exception& e) {
@@ -247,7 +249,22 @@ void Server::close() {
 }
 
 int main(int argc,char* argv[]) {
+    if(argc != 2) {
+        cerr << "Argc and Argv Format Error !" << endl;
+        cerr << "Please Enter the configure.json file path !" << endl;
+        exit(1);
+    }
+    string configPath(argv[1]);
+    try {
+        read_config_Json(configPath, g_ConfMap);
+    } catch (runtime_error &err) {
+        cerr << err.what() << endl;
+        exit(1);
+    }
+
+    string cmd = "default -h " + g_ConfMap["SERVERIP"] + " -p " + g_ConfMap["PORT"];
     Server obj_server;
-    obj_server.initRpc(argc, argv, "default -h 192.168.199.173 -p 9999");
+    obj_server.initRpc(argc, argv, cmd);
+
     return 0;
 }

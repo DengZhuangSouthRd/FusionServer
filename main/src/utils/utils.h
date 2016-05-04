@@ -13,9 +13,12 @@
 
 #include "../algorithm/fusion/Fusion.h"
 #include "../rpc/wisefuseRpc.h"
+#include "json/json-forwards.h"
+#include "json/json.h"
 
 using namespace std;
 using namespace RPCWiseFuse;
+using namespace Json;
 
 typedef struct _FusionArgs {
     string panurl;

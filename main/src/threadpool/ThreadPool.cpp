@@ -199,6 +199,22 @@ bool ThreadPool::isExistsFile(const string filePath) {
     return false;
 }
 
+void ThreadPool::fillFinishTaskMap(const string &task_id, const FusionArgs &inParam, const FusionInf &outParam) {
+    if(m_finishMap.count(task_id) == 0) {
+        TaskStaticResult tmp;
+        tmp.task_id.assign(task_id);
+        deepCopyTaskInputParameter(inParam, tmp.input);
+        deepCopyTaskResult(outParam, tmp.output);
+        m_finishMap_mutex.lock();
+            m_finishMap[task_id] = tmp;
+            Log::Info("Finish Task size is %d !", m_finishMap.size());
+            if(m_finishMap.size() % 5 == 0) {
+                serializeTaskResults();
+            }
+        m_finishMap_mutex.unlock();
+    }
+}
+
 // get the over task from the Json File
 int ThreadPool::getSerializeTaskResults() {
     Json::Reader reader;

@@ -74,6 +74,7 @@ void ImageFusion::log_OutputResult(const FusionInf &destInf) {
     deepCopyTask2RpcResult(*test, obj);
     delete test;
     log_OutputResult(obj);
+    m_threadPool.fillFinishTaskMap(mapArg.at("id"), args, obj);
     return obj;
 }
 

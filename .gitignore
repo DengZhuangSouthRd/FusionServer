@@ -2,6 +2,7 @@ main/data/dict/*
 main/data/features/*
 main/conf/*
 main/data/*
+!main/conf/configure.json
 !main/data/README.md
-!main/data/serialize/README.md
+!main/data/serialize/*
 *~

@@ -15,6 +15,7 @@ ThreadPool::ThreadPool() : m_pool_size(DEFAULT_POOL_SIZE), m_task_size(DEFAULT_P
         throw runtime_error("Serialized Bak File Does Not Exists !");
         cerr << "Serialized Bak File Does Not Exists !" << endl;
     }
+    getSerializeTaskResults();
 }
 
 ThreadPool::ThreadPool(int pool_size) : m_pool_size(pool_size), m_task_size(pool_size*1.5) {
@@ -30,9 +31,11 @@ ThreadPool::ThreadPool(int pool_size) : m_pool_size(pool_size), m_task_size(pool
         throw runtime_error("Serialized Bak File Does Not Exists !");
         cerr << "Serialized Bak File Does Not Exists !" << endl;
     }
+    getSerializeTaskResults();
 }
 
 ThreadPool::~ThreadPool() {
+    serializeTaskResults();
     if (m_pool_state != STOPPED) {
         Log::Info("~ ThreadPool and Still Running !");
         cout << "~ ThreadPool and Still Running !" << endl;
@@ -139,6 +142,10 @@ void* ThreadPool::execute_task(pthread_t thread_id) {
             m_finishMap_mutex.lock();
                     m_finishMap[tmp_id] = tmp_SaveTask;
                     Log::Info("TaskID %s move to FinishMap!", tmp_id.c_str());
+                    Log::Info("Finish Task size is %d !", m_finishMap.size());
+                    if(m_finishMap.size() % 5 == 0) {
+                        serializeTaskResults();
+                    }
             m_finishMap_mutex.unlock();
         } else {
             Log::Error("TaskID %s RunStatus Failed !", tmp_id.c_str());
@@ -248,6 +255,7 @@ int ThreadPool::getSerializeTaskResults() {
         m_finishMap[key] = tmp;
     }
     in.close();
+    Log::Info("The Task Pool Have %d tasks !", members.size());
     return members.size();
 }
 

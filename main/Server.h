@@ -6,6 +6,9 @@
 #include <map>
 #include <vector>
 
+#include <signal.h>
+#include <stdio.h>
+
 #include <Ice/Ice.h>
 #include "./src/rpc/wisefuseRpc.h"
 #include "./src/utils/log.h"

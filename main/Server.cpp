@@ -249,11 +249,13 @@ void Server::close() {
 }
 
 int main(int argc,char* argv[]) {
+
     if(argc != 2) {
         cerr << "Argc and Argv Format Error !" << endl;
         cerr << "Please Enter the configure.json file path !" << endl;
         exit(1);
     }
+
     string configPath(argv[1]);
     try {
         read_config_Json(configPath, g_ConfMap);

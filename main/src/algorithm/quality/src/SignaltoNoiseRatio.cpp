@@ -8,20 +8,16 @@
 #include "../utils/qualityUtils.h"
 
 //SignaltoNoiseRatio-影像信噪比
-int32_t SignaltoNoiseRatio(char* filepath,char* logfilepath,double* result)
-{
+int32_t SignaltoNoiseRatio(char* filepath,char* logfilepath,double* result) {
     //定义数据集，打开文件
-    GDALDataset *poDataset;
+    GDALDataset *poDataset = NULL;
     GDALAllRegister();
     poDataset=(GDALDataset *)GDALOpen(filepath,GA_ReadOnly);
-    if( poDataset == NULL )
-    {
+    if( poDataset == NULL ) {
         printf("Image file open error!\n");
         WriteMsg(logfilepath,-1,"Image file open error!");
         return -1;
-    }
-    else
-    {
+    } else {
         printf("SignaltoNoiseRatio algorithm is executing!\n");
         WriteMsg(logfilepath,0,"SignaltoNoiseRatio algorithm is executing!");
     }
@@ -39,13 +35,8 @@ int32_t SignaltoNoiseRatio(char* filepath,char* logfilepath,double* result)
     double *snrresult=result;
     uint16_t *banddata=(uint16_t *)CPLMalloc(sizeof(uint16_t)*width*height);
 
-    //算法运行时间
-    //time_t starttime=0,endtime=0;
-    //time(&starttime);
-
     //loop for every bands
-    for(n=0;n<bandnum;n++)
-    {
+    for(n=0;n<bandnum;n++) {
         pband=poDataset->GetRasterBand(n+1);
         pband->RasterIO(GF_Read,0,0,width,height,banddata,width,height,GDT_UInt16,0,0);
 
@@ -53,14 +44,10 @@ int32_t SignaltoNoiseRatio(char* filepath,char* logfilepath,double* result)
         double imagemean=0.0;
         double imagestddev=0.0;
         int64_t validblks=0;
-        //double *pblkstddev=(double *)CPLMalloc(sizeof(double)*blkrows*blkcols);//用于存储各子块的标准差
-
 
         //统计各个子块的均值和标准差
-        for(i=0;i<blkrows;i++)
-        {
-            for(j=0;j<blkcols;j++)
-            {
+        for(i=0;i<blkrows;i++) {
+            for(j=0;j<blkcols;j++) {
                 //定义变量存储本子块的均值和标准差
                 double blkmean=0;
                 double blkstddev=0;
@@ -68,50 +55,43 @@ int32_t SignaltoNoiseRatio(char* filepath,char* logfilepath,double* result)
                 int32_t datamark=1;
                 int32_t tempdata;
                 //求取子块均值
-                for(s=0;s<blksize;s++)
-                {
-                    if(datamark==0)	{  break;}
-                    for(t=0;t<blksize;t++)
-                    {
+                for(s=0;s<blksize;s++) {
+                    if(datamark==0)
+                        break;
+                    for(t=0;t<blksize;t++) {
                         tempdata=*(banddata+(i*blksize+s)*width+j*blksize+t);
-                        if(tempdata==0){
+                        if(tempdata==0) {
                             datamark=0;
                             break;
-                        }
-                        else{
+                        } else {
                             blkmean+=1.0*tempdata/(blksize*blksize);
                         }
                     }
                 }
                 //子块无效，均值和标准差设为0
-                if(datamark==0){
+                if(datamark==0) {
                     blkmean=0.0;
                     blkstddev=0.0;
-                    //*(pblkstddev+i*blkcols+j)=0.0;
                     continue;
-                }
-                else{
+                } else {
                     imagemean+=blkmean;
                     validblks++;
                 }
                 //求取子块标准差
-                for(s=0;s<blksize;s++)
-                {
-                    for(t=0;t<blksize;t++)
-                    {
+                for(s=0;s<blksize;s++) {
+                    for(t=0;t<blksize;t++) {
                         tempdata=*(banddata+(i*blksize+s)*width+j*blksize+t);
                         blkstddev+=((tempdata-blkmean)*(tempdata-blkmean))/(blksize*blksize);
                     }
                 }
                 blkstddev=sqrt(blkstddev);
                 imagestddev += blkstddev;
-                //*(pblkstddev+i*blkcols+j)=blkstddev;
             }
         }
-        if(validblks==0){
+
+        if(validblks==0) {
             snrresult[n]=0;
-        }
-        else{
+        } else {
             //计算图像均值
             imagemean=imagemean/validblks;
 
@@ -121,12 +101,10 @@ int32_t SignaltoNoiseRatio(char* filepath,char* logfilepath,double* result)
             //计算图像信噪比
             if(imagemean==0 || imagestddev==0){
                 snrresult[n]=0;
-            }
-            else{
+            } else {
                 snrresult[n]=20*log10(imagemean/imagestddev);
             }
         }
-
 
         //关闭数据集
         GDALClose(pband);
@@ -138,8 +116,6 @@ int32_t SignaltoNoiseRatio(char* filepath,char* logfilepath,double* result)
         printf("SignaltoNoiseRatio algorithm is executing %d%%!\n",temp);
         WriteMsg(logfilepath,temp,"SignaltoNoiseRatio algorithm is executing!");
     }
-    //time(&endtime);
-    //printf("当前程序用时：%d\n",endtime-starttime);
 
     //释放内存，关闭数据集
     CPLFree(banddata);
@@ -149,7 +125,6 @@ int32_t SignaltoNoiseRatio(char* filepath,char* logfilepath,double* result)
     poDataset=NULL;
     return 1;
 }
-
 
 //主函数
 bool mainSignaltoNoiseRatio(char* parafilepath, char* logfilepath) {

@@ -8,20 +8,16 @@
 #include "../utils/qualityUtils.h"
 
 //Entropy-影像信息熵
-int32_t Entropy(char* filepath,char* logfilepath,double* result)
-{
+int32_t Entropy(char* filepath,char* logfilepath,double* result) {
 	//定义数据集，打开文件
 	GDALDataset *poDataset;
 	GDALAllRegister();
 	poDataset=(GDALDataset *)GDALOpen(filepath,GA_ReadOnly);
-	if( poDataset == NULL )
-    {
+    if( poDataset == NULL ) {
 		printf("Image file open error!\n");
 		WriteMsg(logfilepath,-1,"Image file open error!");
 		return -1; 
-    }
-	else
-	{
+    } else {
 		printf("Entropy algorithm is executing!\n");
 		WriteMsg(logfilepath,0,"Entropy algorithm is executing!");
 	}
@@ -36,14 +32,9 @@ int32_t Entropy(char* filepath,char* logfilepath,double* result)
 	double *entropyresult=result;
 	uint16_t *banddata;
 	banddata=(uint16_t *)CPLMalloc(sizeof(uint16_t)*width*height);
-	
-	//算法运行时间
-	//time_t starttime=0,endtime=0;
-	//time(&starttime);
 
 	//loop for every bands
-	for(n=0;n<bandnum;n++)
-	{
+    for(n=0;n<bandnum;n++) {
 		pband=poDataset->GetRasterBand(n+1);
 		pband->RasterIO(GF_Read,0,0,width,height,banddata,width,height,GDT_UInt16,0,0);
 
@@ -54,32 +45,26 @@ int32_t Entropy(char* filepath,char* logfilepath,double* result)
 		int32_t tempnum=0;
 		
 		//统计灰度概率
-		for(i=0;i<height;i++)
-		{
-			for(j=0;j<width;j++)
-			{
+        for(i=0;i<height;i++) {
+            for(j=0;j<width;j++) {
 				tempnum =banddata[i*width+j];
-				if(tempnum>0)
-				{
+                if(tempnum>0) {
 					histogram[tempnum-1]=histogram[tempnum-1]+1;
 					count++;
 				}
 			}
-
 		}
+
 		//计算信息熵
 		if (count>0) {
-			for(i=0;i<65535;i++)
-			{
-				if(histogram[i]>0)
-				{
+            for(i=0;i<65535;i++) {
+                if(histogram[i]>0) {
 					double tempratio=histogram[i]/(double)count;
 					sum=sum-tempratio*log(tempratio)/log(2.0);
 				}
 			}
 			entropyresult[n]=sum;
-		}
-		else {
+        } else {
 			entropyresult[n]=0;
 		}
 
@@ -92,8 +77,6 @@ int32_t Entropy(char* filepath,char* logfilepath,double* result)
 		printf("Entropy algorithm is executing %d%%!\n",temp);
 		WriteMsg(logfilepath,temp,"Entropy algorithm is executing!");
 	}
-	//time(&endtime);
-	//printf("当前程序用时：%d\n",endtime-starttime);
 
 	//释放内存，关闭数据集
 	CPLFree(banddata);

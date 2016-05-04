@@ -8,22 +8,16 @@
 #include "../utils/qualityUtils.h"
 
 //Mean
-int32_t Mean(char* filepath,char* logfilepath,double* result)
-{
-	
-	//char* dataPath="D:\CWorkSpace\testdata\testimage.tif";
+int32_t Mean(char* filepath,char* logfilepath,double* result) {
 	//定义数据集，打开文件
-	GDALDataset *poDataset;
+    GDALDataset *poDataset = NULL;
 	GDALAllRegister();
 	poDataset=(GDALDataset *)GDALOpen(filepath,GA_ReadOnly);
-	if( poDataset == NULL )
-    {
+    if( poDataset == NULL ) {
 		printf("Image file open error!\n");
 		WriteMsg(logfilepath,-1,"Image file open error!");
 		return -1; 
-    }
-	else
-	{
+    } else {
 		printf("Mean algorithm is executing!\n");
 		WriteMsg(logfilepath,0,"Mean algorithm is executing!");
 	}
@@ -38,33 +32,23 @@ int32_t Mean(char* filepath,char* logfilepath,double* result)
 	double *meanresult=result;
 	uint16_t *banddata;
 	banddata=(uint16_t *)CPLMalloc(sizeof(uint16_t)*width*height);
-	
-	//算法运行时间
-	//time_t starttime=0,endtime=0;
-	//time(&starttime);
 
-	for(n=0;n<bandnum;n++)
-	{
+    for(n=0;n<bandnum;n++) {
 		pband=poDataset->GetRasterBand(n+1);
 		pband->RasterIO(GF_Read,0,0,width,height,banddata,width,height,GDT_UInt16,0,0);
 		int64_t count=0;
 		uint64_t sum=0;
-		for(i=0;i<height;i++)
-		{
-			for(j=0;j<width;j++)
-			{
-				if(banddata[i*width+j]>0)
-				{
+        for(i=0;i<height;i++) {
+            for(j=0;j<width;j++) {
+                if(banddata[i*width+j]>0) {
 					sum=sum+banddata[i*width+j];
 					count++;
 				}
 			}
-
 		}
 		if (count==0) {
 			meanresult[n]=0;	
-		}
-		else {
+        } else {
 			meanresult[n]=sum/(1.0*count);
 		}
 
@@ -76,9 +60,7 @@ int32_t Mean(char* filepath,char* logfilepath,double* result)
 		temp = (temp>99) ? 99:temp;
 		printf("Mean algorithm is executing %d%%!\n",temp);
 		WriteMsg(logfilepath,temp,"Mean algorithm is executing!");
-	}
-	//time(&endtime);
-	//printf("当前程序用时：%d\n",endtime-starttime);
+    }
 
 	//释放内存，关闭数据集
 	CPLFree(banddata);

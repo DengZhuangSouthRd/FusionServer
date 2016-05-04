@@ -1,21 +1,13 @@
 #include "qualityUtils.h"
 
 //write status into log file
-bool WriteMsg(char* logfilepath,int32_t statusnum, char* statusmsg)
-{
-    FILE *LogFile;
-    LogFile=fopen(logfilepath,"wb");
-    if (LogFile != NULL) {
-        fprintf(LogFile,"%d\n%s\n",statusnum,statusmsg);
-        fclose(LogFile);
-        return false;
-    }
-    return true;
+void WriteMsg(char* ,int32_t statusnum, char* statusmsg) {
+    Log::Info("%d\t%s", statusnum, statusmsg);
 }
 
 bool read_ConfigureFile_Parameters(const char* parafilepath, ImageParameter& testparameter) {
-    FILE *fp1;
-    fp1=fopen(parafilepath,"rb");
+    FILE *fp1 = NULL;
+    fp1 = fopen(parafilepath,"rb");
     if(fp1 == NULL) {
         printf("Parafile is not exist!\n");
         return false;
@@ -25,8 +17,7 @@ bool read_ConfigureFile_Parameters(const char* parafilepath, ImageParameter& tes
     int32_t tempnum;
 
     //read 'filename' from parafile
-    if(fscanf(fp1,"%s",&filename)==-1)
-    {
+    if(fscanf(fp1,"%s",&filename)==-1) {
         printf("Parafile read error!\n");
         fclose(fp1);
         return false;
@@ -102,5 +93,5 @@ void* qualityInterface() {
     default:
         break;
     }
-    return 0;
+    return NULL;
 }

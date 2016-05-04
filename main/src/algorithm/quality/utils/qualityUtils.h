@@ -1,13 +1,13 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <gdal_priv.h>
 
 #include <iostream>
+#include "../../../utils/log.h"
 
 using namespace std;
 
@@ -32,7 +32,7 @@ typedef struct
 }ImageParameter;
 
 //write status into log file
-bool WriteMsg(char* logfilepath,int32_t statusnum, char* statusmsg);
+void WriteMsg(char*, int32_t statusnum, char* statusmsg);
 bool read_ConfigureFile_Parameters(const char* parafilepath, ImageParameter& testparameter);
 
 // algorithm class

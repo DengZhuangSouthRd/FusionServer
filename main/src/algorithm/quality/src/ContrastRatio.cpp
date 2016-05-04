@@ -9,8 +9,7 @@
 
 //GLCM-Gray level Co-occurrence Matrix-灰度共生矩阵函数
 //step为距离,orient为方向,gsp为灰度采样级数
-int32_t GLCM(uint16_t *banddata,int32_t width,int32_t height,int32_t step,int32_t orient,int32_t gsp,float* GLCMresult)
-{
+int32_t GLCM(uint16_t *banddata,int32_t width,int32_t height,int32_t step,int32_t orient,int32_t gsp,float* GLCMresult) {
 	//定义变量
 	int32_t i,j;
 	int32_t tempvalue;
@@ -19,24 +18,20 @@ int32_t GLCM(uint16_t *banddata,int32_t width,int32_t height,int32_t step,int32_
 	minvalue=65535;
 
 	//遍历数据集，寻找最大最小值
-	for(i=0;i<height;i++)
-	{
-		for(j=0;j<width;j++)
-		{
+    for(i=0;i<height;i++) {
+        for(j=0;j<width;j++) {
 			tempvalue=*(banddata+i*width+j);
-			if(tempvalue>0)
-			{
-				if(tempvalue>maxvalue){
+            if(tempvalue>0) {
+                if(tempvalue>maxvalue) {
 					maxvalue=tempvalue;
 				}
-				if(tempvalue<minvalue){
+                if(tempvalue<minvalue) {
 					minvalue=tempvalue;
 				}
 			}
 		}
-	}
-	//maxvalue=maxvalue-1;
-	//minvalue=minvalue+1;
+    }
+
 	//对比最大最小值，判断像素值是否有效
 	if(minvalue>=maxvalue){
 		return 0;
@@ -58,29 +53,26 @@ int32_t GLCM(uint16_t *banddata,int32_t width,int32_t height,int32_t step,int32_
 	
 	switch(orient){
 	case 0:	
-		for(i=0;i<height;i++)
-		{
-			for(j=0;j<width-step;j++)  
-			{
+        for(i=0;i<height;i++) {
+            for(j=0;j<width-step;j++) {
 				tempdata1=*(banddata+i*width+j);
 				tempdata2=*(banddata+i*width+j+step);
-				if(tempdata1<=0||tempdata2<=0)  continue;
+                if(tempdata1<=0||tempdata2<=0)
+                    continue;
 				di=(int32_t)((tempdata1-minvalue)/temprange);
 				dj=(int32_t)((tempdata2-minvalue)/temprange);
 				(*(tempcount+di*gsp+dj))++;
-				//*(GLCMresult+di*gsp+dj)=*(GLCMresult+di*gsp+dj)+1;
 				count++;
 			}
 		}
 		break;
 	case 45:
-		for(i=step;i<height;i++)
-		{
-			for(j=0;j<width-step;j++)
-			{
+        for(i=step;i<height;i++) {
+            for(j=0;j<width-step;j++) {
 				tempdata1=*(banddata+i*width+j);
 				tempdata2=*(banddata+(i-step)*width+j+step);
-				if(tempdata1<=0||tempdata2<=0)  continue;
+                if(tempdata1<=0||tempdata2<=0)
+                    continue;
 				di=(int32_t)((tempdata1-minvalue)/temprange);
 				dj=(int32_t)((tempdata2-minvalue)/temprange);
 				(*(tempcount+di*gsp+dj))++;
@@ -89,13 +81,12 @@ int32_t GLCM(uint16_t *banddata,int32_t width,int32_t height,int32_t step,int32_
 		}
 		break;
 	case 90:
-		for(i=step;i<height;i++)
-		{
-			for(j=0;j<width;j++)
-			{
+        for(i=step;i<height;i++) {
+            for(j=0;j<width;j++) {
 				tempdata1=*(banddata+i*width+j);
 				tempdata2=*(banddata+(i-step)*width+j);
-				if(tempdata1<=0||tempdata2<=0)  continue;
+                if(tempdata1<=0||tempdata2<=0)
+                    continue;
 				di=(int32_t)((tempdata1-minvalue)/temprange);
 				dj=(int32_t)((tempdata2-minvalue)/temprange);
 				(*(tempcount+di*gsp+dj))++;
@@ -104,13 +95,12 @@ int32_t GLCM(uint16_t *banddata,int32_t width,int32_t height,int32_t step,int32_
 		}
 		break;
 	case 135:
-		for(i=step;i<height;i++)
-		{
-			for(j=step;j<width;j++)
-			{
+        for(i=step;i<height;i++) {
+            for(j=step;j<width;j++) {
 				tempdata1=*(banddata+i*width+j);
 				tempdata2=*(banddata+(i-step)*width+j-step);
-				if(tempdata1<=0||tempdata2<=0)  continue;
+                if(tempdata1<=0||tempdata2<=0)
+                    continue;
 				di=(int32_t)((tempdata1-minvalue)/temprange);
 				dj=(int32_t)((tempdata2-minvalue)/temprange);
 				(*(tempcount+di*gsp+dj))++;
@@ -119,13 +109,12 @@ int32_t GLCM(uint16_t *banddata,int32_t width,int32_t height,int32_t step,int32_
 		}
 		break;
 	default:
-		for(i=0;i<height;i++)
-		{
-			for(j=0;j<width-step;j++)  
-			{
+        for(i=0;i<height;i++) {
+            for(j=0;j<width-step;j++) {
 				tempdata1=*(banddata+i*width+j);
 				tempdata2=*(banddata+i*width+j+step);
-				if(tempdata1<=0||tempdata2<=0)  continue;
+                if(tempdata1<=0||tempdata2<=0)
+                    continue;
 				di=(int32_t)((tempdata1-minvalue)/temprange);
 				dj=(int32_t)((tempdata2-minvalue)/temprange);
 				(*(tempcount+di*gsp+dj))++;
@@ -148,20 +137,16 @@ int32_t GLCM(uint16_t *banddata,int32_t width,int32_t height,int32_t step,int32_
 }
 
 //ContrastRatio-影像对比度
-int32_t ContrastRatio(char* filepath,char* logfilepath,double* result)
-{
+int32_t ContrastRatio(char* filepath,char* logfilepath,double* result) {
 	//定义数据集，打开文件
-	GDALDataset *poDataset;
+    GDALDataset *poDataset = NULL;
 	GDALAllRegister();
 	poDataset=(GDALDataset *)GDALOpen(filepath,GA_ReadOnly);
-	if( poDataset == NULL )
-    {
+    if( poDataset == NULL ) {
 		printf("Image file open error!\n");
 		WriteMsg(logfilepath,-1,"Image file open error!");
 		return -1; 
-    }
-	else
-	{
+    } else {
 		printf("ContrastRatio algorithm is executing!\n");
 		WriteMsg(logfilepath,0,"ContrastRatio algorithm is executing!");
 	}
@@ -176,14 +161,9 @@ int32_t ContrastRatio(char* filepath,char* logfilepath,double* result)
 	double *contrastresult=result;
 	uint16_t *banddata;
 	banddata=(uint16_t *)CPLMalloc(sizeof(uint16_t)*width*height);
-	
-	//算法运行时间
-	//time_t starttime=0,endtime=0;
-	//time(&starttime);
 
 	//loop for every bands
-	for(n=0;n<bandnum;n++)
-	{
+    for(n=0;n<bandnum;n++) {
 		pband=poDataset->GetRasterBand(n+1);
 		pband->RasterIO(GF_Read,0,0,width,height,banddata,width,height,GDT_UInt16,0,0);
 
@@ -208,17 +188,13 @@ int32_t ContrastRatio(char* filepath,char* logfilepath,double* result)
 		int32_t res=GLCM(banddata,width,height,step,orient,gsp,GLCMresult);
 		
 		//统计灰度共生矩阵的概率
-		for(i=0;i<gsp;i++)
-		{
-			for(j=0;j<gsp;j++)
-			{
+        for(i=0;i<gsp;i++) {
+            for(j=0;j<gsp;j++) {
 				tempnum=*(GLCMresult+i*gsp+j);
-				if(i!=j&&tempnum>0)
-				{
+                if(i!=j&&tempnum>0) {
 					sum=sum+(i-j)*(i-j)*tempnum;
 				}
 			}
-
 		}
 		//计算对比度
 		contrastresult[n]=sum;
@@ -235,8 +211,6 @@ int32_t ContrastRatio(char* filepath,char* logfilepath,double* result)
 		printf("ContrastRatio algorithm is executing %d%%!\n",temp);
 		WriteMsg(logfilepath,temp,"ContrastRatio algorithm is executing!");
 	}
-	//time(&endtime);
-	//printf("当前程序用时：%d\n",endtime-starttime);
 
 	//释放内存，关闭数据集
 	CPLFree(banddata);

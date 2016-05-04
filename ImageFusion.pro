@@ -110,7 +110,14 @@ SOURCES += \
     main/src/algorithm/fusion/Fusion.cpp \
     main/src/algorithm/fusion/PgInf.cpp \
     main/src/algorithm/fusion/GdalInf.cpp \
-    main/src/utils/jsoncpp.cpp
+    main/src/utils/jsoncpp.cpp \
+    main/src/algorithm/quality/src/Clarity.cpp \
+    main/src/algorithm/quality/src/ContrastRatio.cpp \
+    main/src/algorithm/quality/src/Entropy.cpp \
+    main/src/algorithm/quality/src/Mean.cpp \
+    main/src/algorithm/quality/src/SignaltoNoiseRatio.cpp \
+    main/src/algorithm/quality/src/Striperesidual.cpp \
+    main/src/algorithm/quality/utils/qualityutils.cpp
 
 HEADERS += \
     main/Server.h \
@@ -146,7 +153,8 @@ HEADERS += \
     main/src/algorithm/fusion/Fusion.h \
     main/src/utils/utils.h \
     main/src/utils/json/json-forwards.h \
-    main/src/utils/json/json.h
+    main/src/utils/json/json.h \
+    main/src/algorithm/quality/utils/qualityUtils.h
 
 DISTFILES +=
 

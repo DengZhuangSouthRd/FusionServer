@@ -70,7 +70,7 @@ void* qualityInterface() {
     char* parafilepath = "/home/fighter/Documents/Quality/data/para1.para";
     char* logfilepath = "/home/fighter/Documents/Quality/data/log.log";
     int algorithmClass = 1;
-    bool flag = false;
+    QualityRes flag;
     switch (algorithmClass) {
     case 1:
         flag = mainClarity(parafilepath, logfilepath);

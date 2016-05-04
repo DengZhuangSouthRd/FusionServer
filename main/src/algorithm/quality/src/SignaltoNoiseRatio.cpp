@@ -127,32 +127,28 @@ int32_t SignaltoNoiseRatio(char* filepath,char* logfilepath,double* result) {
 }
 
 //主函数
-bool mainSignaltoNoiseRatio(char* parafilepath, char* logfilepath) {
+QualityRes mainSignaltoNoiseRatio(char* parafilepath, char* logfilepath) {
     ImageParameter testparameter;
-
+    QualityRes m_qRes;
+    m_qRes.status = -1;
     bool flag = read_ConfigureFile_Parameters(parafilepath, testparameter);
-    if(flag == false) return false;
+    if(flag == false) return m_qRes;
 
-    double* result = (double*)malloc(sizeof(double)*testparameter.bandNum);
-    if(result == NULL) return false;
+    m_qRes.data = (double*)malloc(sizeof(double)*testparameter.bandNum);
+    m_qRes.length = testparameter.bandNum;
+    m_qRes.status = -1;
+    if(m_qRes.data == NULL) return m_qRes;
 
     int32_t res;
-    res = SignaltoNoiseRatio(const_cast<char*>(testparameter.filePath.c_str()), logfilepath, result);
+    res = SignaltoNoiseRatio(const_cast<char*>(testparameter.filePath.c_str()), logfilepath, m_qRes.data);
 
     if(res != 1) {
         printf("Algorithm executing error!\n");
         WriteMsg(logfilepath,-1,"Algorithm executing error!");
-        free(result);
-        return false;
+        free(m_qRes.data);
+        return m_qRes;
     }
 
-    FILE *fp2 = NULL;
-    fp2=fopen(logfilepath,"wb");
-    for(int i=0;i<testparameter.bandNum;i++) {
-        fprintf(fp2,"%.2f,",result[i]);
-    }
-    fclose(fp2);
-    free(result);
-
-    return true;
+    m_qRes.status = 1;
+    return m_qRes;
 }

@@ -22,8 +22,7 @@ typedef long int int64_t;
 //typedef unsigned long long uint64_t;
 
 //Image Parameters for Radiation quality Evaluation
-typedef struct
-{
+typedef struct _ImageParameter{
     string filePath;
     int32_t rowNum;
     int32_t columnNum;
@@ -31,17 +30,23 @@ typedef struct
     int32_t bitsPerPixel;//8、16、24
 }ImageParameter;
 
+typedef struct _QualityRes{
+    double * data;
+    int length;
+    int status;//fail means <0; success means >= 0;
+}QualityRes;
+
 //write status into log file
 void WriteMsg(char*, int32_t statusnum, char* statusmsg);
 bool read_ConfigureFile_Parameters(const char* parafilepath, ImageParameter& testparameter);
 
 // algorithm class
-bool mainClarity(char* parafilepath, char* logfilepath);
-bool mainContrastRatio(char* parafilepath, char* logfilepath);
-bool mainEntropy(char* parafilepath, char* logfilepath);
-bool mainMean(char* parafilepath, char* logfilepath);
-bool mainSignaltoNoiseRatio(char* parafilepath, char* logfilepath);
-bool mainStriperesidual(char* parafilepath, char* logfilepath);
+QualityRes mainClarity(char* parafilepath, char* logfilepath);
+QualityRes mainContrastRatio(char* parafilepath, char* logfilepath);
+QualityRes mainEntropy(char* parafilepath, char* logfilepath);
+QualityRes mainMean(char* parafilepath, char* logfilepath);
+QualityRes mainSignaltoNoiseRatio(char* parafilepath, char* logfilepath);
+QualityRes mainStriperesidual(char* parafilepath, char* logfilepath);
 
 //interface
 void *qualityInterface();

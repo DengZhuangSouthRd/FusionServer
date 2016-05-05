@@ -11,7 +11,7 @@ ImageQuality::~ImageQuality() {
 }
 
 bool ImageQuality::checkQualityArgv(const QualityInputStruct &inputArgs) {
-
+    
 }
 
 void ImageQuality::log_InputParameters(const QualityInputStruct &inputArgs) {

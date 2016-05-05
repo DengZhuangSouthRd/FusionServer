@@ -3,16 +3,13 @@
 extern map<string, string> g_ConfMap;
 
 ImageFusion::ImageFusion() {
-    m_threadPool.setPoolSize(10);
-    int ret = m_threadPool.initialize_threadpool();
-    if(ret == -1) {
-        Log::Error("Failed to initialize the Thread Pool !");
-        throw bad_alloc();
-    }
+    p_threadPool = NULL;
+    p_threadPool = ThreadPool::getSingleInstance();
 }
 
 ImageFusion::~ImageFusion() {
-
+    p_threadPool->revokeSingleInstance();
+    p_threadPool = NULL;
 }
 
 void ImageFusion::log_InputParameters(DirArgs mapArgs) {
@@ -66,7 +63,7 @@ void ImageFusion::log_OutputResult(const FusionInf &destInf) {
     deepCopyTask2RpcResult(*test, obj);
     delete test;
     log_OutputResult(obj);
-    m_threadPool.fillFinishTaskMap(mapArg.at("id"), args, obj);
+    p_threadPool->fillFinishTaskMap(mapArg.at("id"), args, obj);
     return obj;
 }
 
@@ -93,7 +90,7 @@ int ImageFusion::fuseAsyn(const DirArgs& mapArgs, const Ice::Current&) {
     }
     string task_id = mapArgs.at("id");
     task->setTaskID(task_id);
-    if(m_threadPool.add_task(task, task_id) != 0) {
+    if(p_threadPool->add_task(task, task_id) != 0) {
         Log::Error("fuseAsyn ## thread Pool add Task Failed !");
         delete args;
         delete task;
@@ -116,7 +113,7 @@ string ImageFusion::askProcess(const DirArgs& mapArg, const Ice::Current&) {
         return obj;
     }
     string task_id = mapArg.at("id");
-    bool flag = m_threadPool.fetchResultByTaskID(task_id, obj);
+    bool flag = p_threadPool->fetchResultByTaskID(task_id, obj);
     if(flag == false) {
         obj.status = -1;
         Log::Error("fetchFuseRes ## fetch task id %s result Failed !", task_id.c_str());

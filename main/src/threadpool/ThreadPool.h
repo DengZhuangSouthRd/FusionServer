@@ -34,10 +34,8 @@ using namespace std;
 using namespace Json;
 
 class ThreadPool {
-public:
-    ThreadPool();
-    ThreadPool(int pool_size);
-    ~ThreadPool();
+
+
 
 public:
     void setPoolSize(const int pool_size);
@@ -61,6 +59,17 @@ public:
 
 public:
     void* execute_task(pthread_t thread_id);
+
+public:
+    static ThreadPool* getSingleInstance();
+    static void revokeSingleInstance();
+
+private:
+    ThreadPool();
+    ~ThreadPool();
+
+private:
+    static ThreadPool* p_ThreadPool;
 
 private:
     int m_pool_size;

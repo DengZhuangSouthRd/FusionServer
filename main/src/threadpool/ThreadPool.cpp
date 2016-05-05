@@ -2,36 +2,40 @@
 
 extern map<string, string> g_ConfMap;
 
+ThreadPool* ThreadPool::p_ThreadPool = NULL;
+ThreadPool* ThreadPool::getSingleInstance() {
+    if(p_ThreadPool == NULL) {
+        p_ThreadPool = new(std::nothrow) ThreadPool();
+    }
+    return p_ThreadPool;
+}
+
+void ThreadPool::revokeSingleInstance() {
+    delete p_ThreadPool;
+    p_ThreadPool = NULL;
+}
+
 ThreadPool::ThreadPool() : m_pool_size(DEFAULT_POOL_SIZE), m_task_size(DEFAULT_POOL_SIZE*1.5) {
     m_threads.clear();
     m_run_threads.clear();
     m_serializePath = g_ConfMap["SerializePath"];
     m_serializePathBak = g_ConfMap["SerializePathBak"];
     if(isExistsFile(m_serializePath) == false) {
-        throw runtime_error("Serialized File Does Not Exists !");
         cerr << "Serialized File Does Not Exists !" << endl;
+        Log::Error("Serialized File Does Not Exists !");
+        throw runtime_error("Serialized File Does Not Exists !");
     }
     if(isExistsFile(m_serializePathBak) == false) {
-        throw runtime_error("Serialized Bak File Does Not Exists !");
         cerr << "Serialized Bak File Does Not Exists !" << endl;
+        Log::Error("Serialized Bak File Does Not Exists !");
+        throw runtime_error("Serialized Bak File Does Not Exists !");
     }
     getSerializeTaskResults();
-}
-
-ThreadPool::ThreadPool(int pool_size) : m_pool_size(pool_size), m_task_size(pool_size*1.5) {
-    m_threads.clear();
-    m_run_threads.clear();
-    m_serializePath = g_ConfMap["SerializePath"];
-    m_serializePathBak = g_ConfMap["SerializePathBak"];
-    if(isExistsFile(m_serializePath) == false) {
-        throw runtime_error("Serialized File Does Not Exists !");
-        cerr << "Serialized File Does Not Exists !" << endl;
+    if(initialize_threadpool() != 0) {
+        cerr << "Initialize ThreadPool failed !, Please Check and restart the Service !" << endl;
+        Log::Error("Failed to initialize the Thread Pool !");
+        throw runtime_error("Initialize ThreadPool failed !, Please Check and restart the Service !");
     }
-    if(isExistsFile(m_serializePathBak) == false) {
-        throw runtime_error("Serialized Bak File Does Not Exists !");
-        cerr << "Serialized Bak File Does Not Exists !" << endl;
-    }
-    getSerializeTaskResults();
 }
 
 ThreadPool::~ThreadPool() {
@@ -65,6 +69,7 @@ void* start_thread(void* arg) {
 }
 
 }
+
 int ThreadPool::initialize_threadpool() {
     m_pool_state = STARTED;
     int ret = -1;

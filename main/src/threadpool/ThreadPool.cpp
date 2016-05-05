@@ -2,11 +2,8 @@
 
 extern map<string, string> g_ConfMap;
 
-ThreadPool* ThreadPool::p_ThreadPool = NULL;
+ThreadPool* ThreadPool::p_ThreadPool = new ThreadPool();
 ThreadPool* ThreadPool::getSingleInstance() {
-    if(p_ThreadPool == NULL) {
-        p_ThreadPool = new(std::nothrow) ThreadPool();
-    }
     return p_ThreadPool;
 }
 

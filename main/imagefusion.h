@@ -11,6 +11,7 @@
 
 #include <Ice/Ice.h>
 #include "./src/rpc/wisefuseRpc.h"
+#include "./src/algorithm/fusion/utils/fusionutils.h"
 #include "./src/utils/log.h"
 #include "./src/utils/utils.h"
 #include "./src/threadpool/ThreadPool.h"

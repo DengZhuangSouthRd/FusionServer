@@ -1,5 +1,4 @@
-#include "Fusion.h"
-
+#include "./utils/fusionutils.h"
 
 FusionStruct* fusion(string PanUrl,string MsUrl,string OutUrl,string LogUrl,int idalg,int* band,int interpolation) {
     /*

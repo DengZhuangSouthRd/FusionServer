@@ -120,7 +120,8 @@ SOURCES += \
     main/src/algorithm/quality/utils/qualityutils.cpp \
     main/src/rpc/qualityjudgeRpc.cpp \
     main/imagefusion.cpp \
-    main/imagequality.cpp
+    main/imagequality.cpp \
+    main/src/algorithm/fusion/utils/fusionutils.cpp
 
 HEADERS += \
     main/Server.h \
@@ -153,14 +154,14 @@ HEADERS += \
     main/src/algorithm/fusion/curvelet/fftw/fftw.h \
     main/src/algorithm/fusion/curvelet/fftw/fftw-int.h \
     main/src/algorithm/fusion/curvelet/fftw/config.h \
-    main/src/algorithm/fusion/Fusion.h \
     main/src/utils/utils.h \
     main/src/utils/json/json-forwards.h \
     main/src/utils/json/json.h \
     main/src/algorithm/quality/utils/qualityUtils.h \
     main/src/rpc/qualityjudgeRpc.h \
     main/imagefusion.h \
-    main/imagequality.h
+    main/imagequality.h \
+    main/src/algorithm/fusion/utils/fusionutils.h
 
 DISTFILES +=
 

@@ -35,7 +35,7 @@ bool CurveletFusion::MeanStd_Curvelet_HIS_Fusion(const char* Input_PAN_FileName,
     GDALAllRegister();         //利用GDAL读取图片，先要进行注册
     CPLSetConfigOption("GDAL_FILENAME_IS_UTF8", "NO");   //设置支持中文路径
 
-    int i,j,p,q;
+    size_t i,j,p,q;
     Log(LogName,"01|01");//写入log日志
 
     //读取PAN影像信息
@@ -138,7 +138,7 @@ bool CurveletFusion::MeanStd_Curvelet_HIS_Fusion(const char* Input_PAN_FileName,
     Log(LogName,"01|03");//写入log日志
 
     //		int ROWS = MS_Bandcount;
-    int COLS = PAN_Width*PAN_Height;
+    size_t COLS = PAN_Width*PAN_Height;
 
     //对MS做HSI变换
     RGB2HSI(New_MSData, PAN_Height, PAN_Width, MS_Bandcount);
@@ -178,8 +178,7 @@ bool CurveletFusion::MeanStd_Curvelet_HIS_Fusion(const char* Input_PAN_FileName,
 
     vector< vector<CpxNumMat> > CPanMat;
     fdct_wrapping(PAN_Height, PAN_Width, nbscales, nbangles_coarse, ac, PanMat, CPanMat);
-    //释放内存
-    //PanMat.~NumMat();
+
     delete[] PanMat._data;
     PanMat._data=NULL;//clear(PanMat);
 
@@ -822,7 +821,8 @@ bool CurveletFusion::MeanStd_Curvelet_HCS_Fusion_New(const char* Input_PAN_FileN
     GDALAllRegister();         //利用GDAL读取图片，先要进行注册
     CPLSetConfigOption("GDAL_FILENAME_IS_UTF8", "NO");   //设置支持中文路径
 
-    int i,j,p,q;
+    size_t i,j;
+    int p,q;
     Log(LogName,"01|01");//写入log日志
 
     //读取PAN影像信息
@@ -1005,11 +1005,10 @@ bool CurveletFusion::MeanStd_Curvelet_HCS_Fusion_New(const char* Input_PAN_FileN
                 CPanMat[0][0](i,j)=cpx(x2*CPanMat[0][0](i,j).real()+x1*CIMat[0][0](i,j).real(),x2*CPanMat[0][0](i,j).imag()+x1*CIMat[0][0](i,j).imag());
             }
         }
-    for (i=1;i<CPanMat.size();i++)
-        for (j=0;j<CPanMat[i].size();j++)
-            for (p=0;p<CPanMat[i][j].m();p++)
-                for (q=0;q<CPanMat[i][j].n();q++){
-                    //CPanMat[i][j](p,q) = cpx(0.5*CPanMat[i][j](p,q).real()+0.5*CIMat[i][j](p,q).real(),0.5*CPanMat[i][j](p,q).imag()+0.5*CIMat[i][j](p,q).imag());
+    for(i=1;i<CPanMat.size();i++)
+        for(j=0;j<CPanMat[i].size();j++)
+            for(p=0;p<CPanMat[i][j].m();p++)
+                for (q=0;q<CPanMat[i][j].n();q++) {
                     CPanMat[i][j](p,q)=	abs(CPanMat[i][j](p,q)) > abs(CIMat[i][j](p,q))? CPanMat[i][j](p,q):CIMat[i][j](p,q);
                 }
     //释放内存

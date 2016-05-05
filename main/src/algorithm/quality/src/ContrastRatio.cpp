@@ -222,29 +222,15 @@ int32_t ContrastRatio(char* filepath,char* logfilepath,double* result) {
 }
 
 //主函数
-QualityRes mainContrastRatio(char* parafilepath, char* logfilepath) {
-
-    ImageParameter testparameter;
-    QualityRes m_qRes;
-    m_qRes.status = -1;
-    bool flag = read_ConfigureFile_Parameters(parafilepath, testparameter);
-    if(flag == false) return m_qRes;
-
-    m_qRes.data = (double*)malloc(sizeof(double)*testparameter.bandNum);
-    m_qRes.length = testparameter.bandNum;
-    m_qRes.status = -1;
-    if(m_qRes.data == NULL) return m_qRes;
-
-    int32_t res;
-    res = ContrastRatio(const_cast<char*>(testparameter.filePath.c_str()), logfilepath, m_qRes.data);
-
+bool mainContrastRatio(ImageParameter &testparameter, char* logfilepath, QualityRes &m_qRes) {
+    int32_t res = ContrastRatio(const_cast<char*>(testparameter.filePath.c_str()),logfilepath,m_qRes.data);
     if(res != 1) {
         printf("Algorithm executing error!\n");
         WriteMsg(logfilepath,-1,"Algorithm executing error!");
         free(m_qRes.data);
-        return m_qRes;
+        m_qRes.data = NULL;
+        return false;
     }
-
     m_qRes.status = 1;
-    return m_qRes;
+    return true;
 }

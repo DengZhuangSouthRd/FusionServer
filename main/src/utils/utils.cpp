@@ -42,6 +42,8 @@ void* fusionInterface(void * args) {
     return (void*)pObj;
 }
 
+
+
 void deepCopyTaskInputParameter(const FusionArgs &src, FusionArgs &dest) {
     dest.band.assign(src.band.begin(), src.band.end());
     dest.idalg = src.idalg;

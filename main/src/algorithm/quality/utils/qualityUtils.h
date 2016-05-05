@@ -8,8 +8,10 @@
 
 #include <iostream>
 #include "../../../utils/log.h"
+#include "../../../rpc/qualityjudgeRpc.h"
 
 using namespace std;
+using namespace RPCQualityJudge;
 
 //statement for integer data length.
 typedef signed char int8_t;
@@ -21,15 +23,6 @@ typedef unsigned int uint32_t;
 typedef long int int64_t;
 //typedef unsigned long long uint64_t;
 
-//Image Parameters for Radiation quality Evaluation
-typedef struct _ImageParameter{
-    string filePath;
-    int32_t rowNum;
-    int32_t columnNum;
-    int32_t bandNum;
-    int32_t bitsPerPixel;//8、16、24
-}ImageParameter;
-
 typedef struct _QualityRes{
     double * data;
     int length;
@@ -38,17 +31,16 @@ typedef struct _QualityRes{
 
 //write status into log file
 void WriteMsg(char*, int32_t statusnum, char* statusmsg);
-bool read_ConfigureFile_Parameters(const char* parafilepath, ImageParameter& testparameter);
 
 // algorithm class
-QualityRes mainClarity(char* parafilepath, char* logfilepath);
-QualityRes mainContrastRatio(char* parafilepath, char* logfilepath);
-QualityRes mainEntropy(char* parafilepath, char* logfilepath);
-QualityRes mainMean(char* parafilepath, char* logfilepath);
-QualityRes mainSignaltoNoiseRatio(char* parafilepath, char* logfilepath);
-QualityRes mainStriperesidual(char* parafilepath, char* logfilepath);
+bool mainClarity(ImageParameter &testparameter, char* logfilepath, QualityRes &m_qRes);
+bool mainContrastRatio(ImageParameter &testparameter, char* logfilepath, QualityRes &m_qRes);
+bool mainEntropy(ImageParameter &testparameter, char* logfilepath, QualityRes &m_qRes);
+bool mainMean(ImageParameter &testparameter, char* logfilepath, QualityRes &m_qRes);
+bool mainSignaltoNoiseRatio(ImageParameter &testparameter, char* logfilepath, QualityRes &m_qRes);
+bool mainStriperesidual(ImageParameter &testparameter, char* logfilepath, QualityRes &m_qRes);
 
 //interface
-void *qualityInterface();
+void *qualityInterface(void* args);
 
 #endif // UTILS_H

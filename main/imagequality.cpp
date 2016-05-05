@@ -59,7 +59,24 @@ void ImageQuality::log_OutputResult(const QualityInfo &outRes) {
 }
 
 QualityInfo ImageQuality::qualitySyn(const QualityInputStruct &inputArgs, const Ice::Current &) {
-
+    QualityInfo quaRes;
+    quaRes.stauts = -1;
+    bool flag = checkQualityArgv(inputArgs);
+    if(flag == false)
+        return quaRes;
+    QualityRes* tmp = NULL;
+    tmp = (QualityRes*)qualityInterface((void*)(&inputArgs));
+    if(tmp == NULL) {
+        return quaRes;
+    }
+    string task_id = inputArgs.id;
+    quaRes.stauts = 1;
+    quaRes.imgsquality[task_id] = vector<double>();
+    for(int i=0;i<tmp->length;i++) {
+        quaRes.imgsquality[task_id].push_back(tmp->data[i]);
+    }
+    revokeQualityRes(&tmp);
+    return quaRes;
 }
 
 int ImageQuality::qualityAsyn(const QualityInputStruct &inputArgs, const Ice::Current &) {

@@ -12,6 +12,7 @@
 #include "./src/rpc/qualityjudgeRpc.h"
 #include "./src/utils/log.h"
 #include "./src/threadpool/ThreadPool.h"
+#include "./src/algorithm/quality/utils/qualityUtils.h"
 
 using namespace std;
 using namespace RPCQualityJudge;

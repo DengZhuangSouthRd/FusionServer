@@ -31,6 +31,8 @@ typedef struct _QualityRes{
 
 //write status into log file
 void WriteMsg(char*, int32_t statusnum, char* statusmsg);
+bool createQualityRes(QualityRes& quaRes, int length);
+void revokeQualityRes(QualityRes** p_quaRes);
 
 // algorithm class
 bool mainClarity(ImageParameter &testparameter, char* logfilepath, QualityRes &m_qRes);
@@ -40,7 +42,7 @@ bool mainMean(ImageParameter &testparameter, char* logfilepath, QualityRes &m_qR
 bool mainSignaltoNoiseRatio(ImageParameter &testparameter, char* logfilepath, QualityRes &m_qRes);
 bool mainStriperesidual(ImageParameter &testparameter, char* logfilepath, QualityRes &m_qRes);
 
-//interface
+// interface
 void *qualityInterface(void* args);
 
 #endif // UTILS_H

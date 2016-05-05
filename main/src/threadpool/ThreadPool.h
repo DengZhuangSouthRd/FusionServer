@@ -34,32 +34,6 @@ using namespace std;
 using namespace Json;
 
 class ThreadPool {
-
-
-
-public:
-    void setPoolSize(const int pool_size);
-    void setTaskUplimit(const int task_size);
-
-public:
-    int initialize_threadpool();
-    int destroy_threadpool();
-
-public:
-    int runningNumbers();
-    int getPoolCapacity();
-    int add_task(Task* task, const string& task_id);
-    bool fetchResultByTaskID(const string task_id, FusionInf &res);
-    // fetch all task id and task result to serialize the completed task !
-    // return the number of serialized
-    void fillFinishTaskMap(const string& task_id, const FusionArgs& inParam, const FusionInf& outParam);
-    int getSerializeTaskResults();
-    int serializeTaskResults();
-    bool isExistsFile(const string filePath);
-
-public:
-    void* execute_task(pthread_t thread_id);
-
 public:
     static ThreadPool* getSingleInstance();
     static void revokeSingleInstance();
@@ -71,25 +45,36 @@ private:
 private:
     static ThreadPool* p_ThreadPool;
 
+public:
+    void setPoolSize(const int pool_size);
+
+public:
+    int initialize_threadpool();
+    int destroy_threadpool();
+
+    int runningNumbers();
+    int getPoolCapacity();
+    int add_task(Task* task, const string& task_id);
+    void* fetchResultByTaskID(const string task_id);
+
+    void* execute_task(pthread_t thread_id);
+
 private:
     int m_pool_size;
     int m_task_size;
     volatile int m_pool_state;
     ofstream *m_pOutLog;
 
-private:
     Mutex m_task_mutex;
     Mutex m_finishMap_mutex;
     Mutex m_taskMap_mutex;
     CondVar m_task_cond_var;
 
-private:
     std::vector<pthread_t> m_threads;
     std::set<pthread_t> m_run_threads;
+
     map<string, Task*> m_taskMap; // for <task_id, task*>
-    map<string, TaskStaticResult> m_finishMap; // for <task_id, task_all_parameters>
+    map<string, TaskPackStruct> m_finishMap; // for <task_id, task_all_parameters>
     std::deque<Task*> m_tasks;
-    string m_serializePath;
-    string m_serializePathBak;
 };
 

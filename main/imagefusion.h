@@ -18,6 +18,12 @@
 using namespace std;
 using namespace RPCWiseFuse;
 
+typedef struct _TaskStaticResult {
+    string task_id;
+    FusionArgs input;
+    FusionInf output;
+}TaskStaticResult;
+
 class ImageFusion : public WiseFusionInf {
 public:
     ImageFusion();
@@ -38,8 +44,19 @@ public:
     void log_InputParameters(DirArgs mapArgs);
     void log_OutputResult(const FusionInf& destInf);
 
+    int getSerializeTaskResults(string serializePath);
+    int serializeTaskResults(string serializePath, string serializePathBak);
+    void fillFinishTaskMap(const string& task_id, const FusionArgs& inParam, const FusionInf& outParam);
+    bool packTaskStaticStatus(TaskStaticResult &res, const string task_id, TaskPackStruct& tmp);
+
 private:
     ThreadPool* p_threadPool;
+
+    string m_serializePath;
+    string m_serializePathBak;
+
+    map<string, TaskStaticResult> m_finishMap; // for <task_id, task_all_parameters>
+    Mutex m_finishMap_mutex;
 };
 
 

@@ -30,7 +30,12 @@ public:
     const string getTaskID();
     pthread_t getThreadID();
     TASKSTATUS getTaskStatus();
-    bool packTaskStaticStatus(TaskStaticResult& res); // pack the task input and output parameters
+
+    /*
+     * pack the task input and output parameters
+     * only pack the void* input and void* output parameters
+    */
+    bool packTaskStaticStatus(TaskPackStruct& res);
 
 private:
     void* (*m_fn_ptr)(void*);

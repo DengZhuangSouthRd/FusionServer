@@ -1,9 +1,9 @@
 {
     "SERVERIP": "192.168.199.173",
     "PORT": "9999",
-    "IDENTITY": "WISEFUSION",
+    "FUSIONIDENTITY": "WISEFUSION",
     "LOGPATH": "main/data/log/loginfo.log",
-    "SerializePath" : "main/data/serialize/task.json",
-    "SerializePathBak" : "main/data/serialize/task_backup.json",
+    "FUSIONSerializePath" : "main/data/serialize/task.json",
+    "FUSIONSerializePathBak" : "main/data/serialize/task_backup.json",
     "version": "0.1"
 }

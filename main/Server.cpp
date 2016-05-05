@@ -21,7 +21,7 @@ void Server::initRpc(int argc, char** argv, string conn) {
         ic = Ice::initialize(argc,argv);
         adapter = ic->createObjectAdapterWithEndpoints("ImageRpcAdapter",connParam);
         Ice::ObjectPtr object = new ImageFusion();
-        adapter->add(object,ic->stringToIdentity(g_ConfMap["IDENTITY"]));
+        adapter->add(object,ic->stringToIdentity(g_ConfMap["FUSIONIDENTITY"]));
         adapter->activate();
         ic->waitForShutdown();
     } catch (const Ice::Exception& e) {

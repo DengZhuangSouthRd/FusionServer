@@ -3,6 +3,21 @@
 extern map<string, string> g_ConfMap;
 
 ImageFusion::ImageFusion() {
+
+    m_serializePath = g_ConfMap["FUSIONSerializePath"];
+    m_serializePathBak = g_ConfMap["FUSIONSerializePathBak"];
+
+    if(isExistsFile(m_serializePath) == false) {
+        cerr << "Serialized File Does Not Exists !" << endl;
+        Log::Error("Serialized File Does Not Exists !");
+        throw runtime_error("Serialized File Does Not Exists !");
+    }
+    if(isExistsFile(m_serializePathBak) == false) {
+        cerr << "Serialized Bak File Does Not Exists !" << endl;
+        Log::Error("Serialized Bak File Does Not Exists !");
+        throw runtime_error("Serialized Bak File Does Not Exists !");
+    }
+
     p_threadPool = NULL;
     p_threadPool = ThreadPool::getSingleInstance();
 }
@@ -42,6 +57,183 @@ void ImageFusion::log_OutputResult(const FusionInf &destInf) {
     Log::Info(str);
 }
 
+// get the over task from the Json File
+int ImageFusion::getSerializeTaskResults(string serializePath) {
+    Json::Reader reader;
+    Json::Value root;
+    Json::Value::Members members;
+    std::ifstream in;
+    in.open(serializePath.c_str(), std::ios_base::binary);
+    if(in.is_open() == false) {
+        throw runtime_error("Open Serialize File Error !");
+        cerr << "Open Seriazlize file Error !" << endl;
+    }
+    bool flag = reader.parse(in,root, false);
+    if(flag == false) {
+        throw runtime_error("Parse Serialize Json File failed !");
+        cerr << "Parse Serialize Json File failed !" << endl;
+    }
+    members = root.getMemberNames();
+    for(Json::Value::Members::iterator it=members.begin(); it!=members.end(); ++it) {
+        std::string key = *it;
+        Json::Value node = root[key];
+        Json::Value inNode = node[0];
+        Json::Value outNode = node[1];
+
+        TaskStaticResult tmp;
+        tmp.task_id.assign(key);
+        tmp.input.panurl.assign(inNode["panurl"].asString());
+        tmp.input.outurl.assign(inNode["outurl"].asString());
+        tmp.input.msurl.assign(inNode["msurl"].asString());
+        tmp.input.logurl.assign(inNode["logurl"].asString());
+        tmp.input.idinter = inNode["idinter"].asInt();
+        tmp.input.idalg = inNode["idalg"].asInt();
+        tmp.input.band.push_back(inNode["band1"].asInt());
+        tmp.input.band.push_back(inNode["band2"].asInt());
+        tmp.input.band.push_back(inNode["band3"].asInt());
+
+        tmp.output.brcoorvalidLatitude = outNode["brcoorvalidLatitude"].asDouble();
+        tmp.output.brcoorvalidLongitude = outNode["brcoorvalidLongitude"].asDouble();
+        tmp.output.brcoorwholeLatitude = outNode["brcoorwholeLatitude"].asDouble();
+        tmp.output.brcoorwholeLongitude = outNode["brcoorwholeLongitude"].asDouble();
+        tmp.output.cnttimeuse = outNode["cnttimeuse"].asDouble();
+        tmp.output.datumname.assign(outNode["datumname"].asString());
+        tmp.output.producetime.assign(outNode["producetime"].asString());
+        tmp.output.productFormat.assign(outNode["productFormat"].asString());
+        tmp.output.projcentralmeridian = outNode["projcentralmeridian"].asFloat();
+        tmp.output.projectioncode.assign(outNode["projectioncode"].asString());
+        tmp.output.projectiontype.assign(outNode["projectiontype"].asString());
+        tmp.output.projectionunits.assign(outNode["projectionunits"].asString());
+        tmp.output.resolution = outNode["resolution"].asFloat();
+        tmp.output.status = outNode["status"].asInt();
+        tmp.output.ulcoorvalidLatitude = outNode["ulcoorvalidLatitude"].asDouble();
+        tmp.output.ulcoorvalidLongitude = outNode["ulcoorvalidLongitude"].asDouble();
+        tmp.output.ulcoorwholeLatitude = outNode["ulcoorwholeLatitude"].asDouble();
+        tmp.output.ulcoorwholeLongitude = outNode["ulcoorwholeLongitude"].asDouble();
+        m_finishMap[key] = tmp;
+    }
+    in.close();
+    return members.size();
+}
+
+//fetch all task id and task result to serialize the completed task !
+int ImageFusion::serializeTaskResults(string serializePath, string serializePathBak) {
+
+    Json::FastWriter writer;
+    Json::Value root;
+
+    for(map<string, TaskStaticResult>::iterator it=m_finishMap.begin(); it!=m_finishMap.end(); ++it) {
+        string key = it->first;
+        TaskStaticResult res = it->second;
+        Json::Value input;
+        input["panurl"] = res.input.panurl;
+        input["outurl"] = res.input.outurl;
+        input["msurl"] = res.input.msurl;
+        input["logurl"] = res.input.logurl;
+        input["idinter"] = res.input.idinter;
+        input["idalg"] = res.input.idalg;
+        input["band1"] = res.input.band[0];
+        input["band2"] = res.input.band[1];
+        input["band3"] = res.input.band[2];
+
+        Json::Value outres;
+        outres["brcoorvalidLatitude"] = res.output.brcoorvalidLatitude;
+        outres["brcoorvalidLongitude"] = res.output.brcoorvalidLongitude;
+        outres["brcoorwholeLatitude"] = res.output.brcoorwholeLatitude;
+        outres["brcoorwholeLongitude"] = res.output.brcoorwholeLongitude;
+        outres["cnttimeuse"] = res.output.cnttimeuse;
+        outres["datumname"] = res.output.datumname;
+        outres["producetime"] = res.output.producetime;
+        outres["productFormat"] = res.output.productFormat;
+        outres["projcentralmeridian"] = res.output.projcentralmeridian;
+        outres["projectioncode"] = res.output.projectioncode;
+        outres["projectiontype"] = res.output.projectiontype;
+        outres["projectionunits"] = res.output.projectionunits;
+        outres["resolution"] = res.output.resolution;
+        outres["status"] = res.output.status;
+        outres["ulcoorvalidLatitude"] = res.output.ulcoorvalidLatitude;
+        outres["ulcoorvalidLongitude"] = res.output.ulcoorvalidLongitude;
+        outres["ulcoorwholeLatitude"] = res.output.ulcoorwholeLatitude;
+        outres["ulcoorwholeLongitude"] = res.output.ulcoorwholeLongitude;
+
+        root[key].append(input);
+        root[key].append(outres);
+    }
+    std::string strRoot = writer.write(root);
+
+    std::ofstream out;
+    out.open(serializePathBak.c_str(), std::ios_base::binary);
+    if(out.is_open() == false) {
+        throw runtime_error("Open Serialize Bak File Error !");
+        cerr << "Open Seriazlize Bak file Error !" << endl;
+    }
+    out << strRoot;
+    out.close();
+
+    out.open(serializePath.c_str(), std::ios_base::binary);
+    if(out.is_open() == false) {
+        throw runtime_error("Open Serialize File Error !");
+        cerr << "Open Seriazlize file Error !" << endl;
+    }
+    out << strRoot;
+    out.close();
+
+    return m_finishMap.size();
+}
+
+void ImageFusion::fillFinishTaskMap(const string &task_id, const FusionArgs &inParam, const FusionInf &outParam) {
+    if(m_finishMap.count(task_id) == 0) {
+        TaskStaticResult tmp;
+        tmp.task_id.assign(task_id);
+        deepCopyTaskInputParameter(inParam, tmp.input);
+        deepCopyTaskResult(outParam, tmp.output);
+        m_finishMap_mutex.lock();
+            m_finishMap[task_id] = tmp;
+            Log::Info("Finish Task size is %d !", m_finishMap.size());
+        m_finishMap_mutex.unlock();
+    }
+}
+
+bool ImageFusion::packTaskStaticStatus(TaskStaticResult &res, const string task_id, TaskPackStruct &tmp) {
+    FusionStruct* out_res = (FusionStruct*)tmp.output;
+    if(out_res->status <= 0) {
+        return false;
+    }
+
+    res.task_id.assign(task_id);
+
+    FusionArgs* param = (FusionArgs*) tmp.input;
+    res.input.band.assign(param->band.begin(), param->band.end());
+    res.input.idalg = param->idalg;
+    res.input.idinter = param->idinter;
+    res.input.logurl = param->logurl;
+    res.input.msurl = param->msurl;
+    res.input.outurl = param->outurl;
+    res.input.panurl = param->panurl;
+
+    res.output.brcoorvalidLatitude = out_res->brcoorvalid_latitude;
+    res.output.brcoorvalidLongitude = out_res->brcoorvalid_longitude;
+    res.output.brcoorwholeLatitude = out_res->brcoorwhole_latitude;
+    res.output.brcoorwholeLongitude = out_res->brcoorwhole_longitude;
+
+    res.output.cnttimeuse = out_res->cnttimeuse;
+    res.output.datumname.assign(out_res->datumname);
+    res.output.producetime.assign(out_res->producetime);
+    res.output.productFormat.assign(out_res->product_format);
+    res.output.projcentralmeridian = out_res->projcentralmeridian;
+    res.output.projectioncode.assign(out_res->projectioncode);
+    res.output.projectiontype.assign(out_res->projectiontype);
+    res.output.projectionunits.assign(out_res->projectionunits);
+    res.output.resolution = out_res->resolution;
+    res.output.status = out_res->status;
+    res.output.ulcoorvalidLatitude = out_res->ulcoorvalid_latitude;
+    res.output.ulcoorvalidLongitude = out_res->ulcoorvalid_longitude;
+    res.output.ulcoorwholeLatitude = out_res->ulcoorwhole_latitude;
+    res.output.ulcoorwholeLongitude = out_res->ulcoorwhole_longitude;
+
+    return true;
+}
+
 ::RPCWiseFuse::FusionInf ImageFusion::fuseSyn(const DirArgs& mapArg, const Ice::Current &) {
     ::RPCWiseFuse::FusionInf obj;
     FusionArgs args;
@@ -63,7 +255,7 @@ void ImageFusion::log_OutputResult(const FusionInf &destInf) {
     deepCopyTask2RpcResult(*test, obj);
     delete test;
     log_OutputResult(obj);
-    p_threadPool->fillFinishTaskMap(mapArg.at("id"), args, obj);
+    fillFinishTaskMap(mapArg.at("id"), args, obj);
     return obj;
 }
 
@@ -113,11 +305,13 @@ string ImageFusion::askProcess(const DirArgs& mapArg, const Ice::Current&) {
         return obj;
     }
     string task_id = mapArg.at("id");
-    bool flag = p_threadPool->fetchResultByTaskID(task_id, obj);
-    if(flag == false) {
+    FusionStruct* tmp = NULL;
+    tmp = (FusionStruct*)p_threadPool->fetchResultByTaskID(task_id);
+    if(tmp == NULL) {
         obj.status = -1;
         Log::Error("fetchFuseRes ## fetch task id %s result Failed !", task_id.c_str());
     } else {
+        deepCopyTask2RpcResult(*tmp, obj);
         log_OutputResult(obj);
     }
     return obj;

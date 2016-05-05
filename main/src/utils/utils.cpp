@@ -31,6 +31,13 @@ void checkFileInfo(string filePath, ResultStatus& status) {
     }
 }
 
+bool isExistsFile(string filePath) {
+    if(access(filePath.c_str(), 0) == 0) {
+        return true;
+    }
+    return false;
+}
+
 //FusionStruct fusion(string PanUrl,string MsUrl,string OutUrl,string LogUrl,int idalg,int* band,int interpolation);
 void* fusionInterface(void * args) {
     FusionArgs* param = (FusionArgs*) args;
@@ -41,8 +48,6 @@ void* fusionInterface(void * args) {
     pObj = fusion(param->panurl, param->msurl, param->outurl, param->logurl, param->idalg, band, param->idinter);
     return (void*)pObj;
 }
-
-
 
 void deepCopyTaskInputParameter(const FusionArgs &src, FusionArgs &dest) {
     dest.band.assign(src.band.begin(), src.band.end());
@@ -140,11 +145,11 @@ void read_config_Json(string fileName, map<string, string> &argvMap) {
         cerr << "Configure Json File Format Error !" << endl;
     }
     argvMap["LOGPATH"] = root.get("LOGPATH", "NULL").asString();
-    argvMap["SerializePath"] = root.get("SerializePath", "NULL").asString();
-    argvMap["SerializePathBak"] = root.get("SerializePathBak", "NULL").asString();
+    argvMap["FUSIONSerializePath"] = root.get("FUSIONSerializePath", "NULL").asString();
+    argvMap["FUSIONSerializePathBak"] = root.get("FUSIONSerializePathBak", "NULL").asString();
     argvMap["SERVERIP"] = root.get("SERVERIP", "127.0.0.1").asString();
     argvMap["PORT"] = root.get("PORT", "9999").asString();
-    argvMap["IDENTITY"] = root.get("IDENTITY", "NULL").asString();
+    argvMap["FUSIONIDENTITY"] = root.get("FUSIONIDENTITY", "NULL").asString();
     for(map<string, string>::iterator it=argvMap.begin(); it!=argvMap.end(); it++) {
         if(it->second == "NULL") {
             cerr << it->first << " is " << it->second << endl;

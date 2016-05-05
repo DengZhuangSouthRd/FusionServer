@@ -52,13 +52,14 @@ typedef struct _ResultStatus {
     string desc;
 }ResultStatus;
 
-typedef struct _TaskStaticResult {
-    string task_id;
-    FusionArgs input;
-    FusionInf output;
-}TaskStaticResult;
+typedef struct _TaskPackStruct {
+    void* input;
+    void* output;
+}TaskPackStruct;
 
 void checkFileInfo(string filePath, ResultStatus& status);
+bool isExistsFile(string filePath);
+
 void* fusionInterface(void* args);
 
 void deepCopyTaskInputParameter(const FusionArgs& src, FusionArgs& dest);
@@ -67,6 +68,7 @@ void deepCopyTask2RpcResult(const FusionStruct& src, FusionInf& dest);
 
 void read_config(string fileName, map<string, string>& argvMap);
 void read_config_Json(string fileName, map<string, string>& argvMap);
+
 
 #endif // UTILS_HPP
 

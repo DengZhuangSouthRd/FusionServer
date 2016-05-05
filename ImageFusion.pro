@@ -117,7 +117,8 @@ SOURCES += \
     main/src/algorithm/quality/src/Mean.cpp \
     main/src/algorithm/quality/src/SignaltoNoiseRatio.cpp \
     main/src/algorithm/quality/src/Striperesidual.cpp \
-    main/src/algorithm/quality/utils/qualityutils.cpp
+    main/src/algorithm/quality/utils/qualityutils.cpp \
+    main/src/rpc/qualityjudgeRpc.cpp
 
 HEADERS += \
     main/Server.h \
@@ -154,7 +155,8 @@ HEADERS += \
     main/src/utils/utils.h \
     main/src/utils/json/json-forwards.h \
     main/src/utils/json/json.h \
-    main/src/algorithm/quality/utils/qualityUtils.h
+    main/src/algorithm/quality/utils/qualityUtils.h \
+    main/src/rpc/qualityjudgeRpc.h
 
 DISTFILES +=
 

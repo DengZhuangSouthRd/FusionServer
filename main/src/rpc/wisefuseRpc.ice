@@ -24,7 +24,7 @@ module RPCWiseFuse {
         float	projcentralmeridian;	//投影带中央经线 
         int		status;					//任务执行状态	
     };
-
+    
     dictionary<string, string> DirArgs;
 
     interface WiseFusionInf {
@@ -56,4 +56,5 @@ module RPCWiseFuse {
         //k:id	v:		//任务唯一编号
         FusionInf fetchFuseRes(DirArgs mapArg);//取任务处理结果
     };
+
 };

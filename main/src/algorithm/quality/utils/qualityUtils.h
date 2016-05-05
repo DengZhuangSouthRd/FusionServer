@@ -52,4 +52,3 @@ QualityRes mainStriperesidual(char* parafilepath, char* logfilepath);
 void *qualityInterface();
 
 #endif // UTILS_H
-

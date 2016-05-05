@@ -123,11 +123,10 @@ void* ThreadPool::execute_task(pthread_t thread_id) {
         task->run();
         string tmp_id = task->getTaskID();
         TaskPackStruct tmp_SaveTask;
-        bool flag = task->packTaskStaticStatus(tmp_SaveTask);
-        if(true == flag) {
+        task->packTaskStaticStatus(tmp_SaveTask);
+        if(TASKCOMPELETE == task->getTaskStatus()) {
             m_finishMap_mutex.lock();
                     m_finishMap[tmp_id] = tmp_SaveTask;
-                    Log::Info("TaskID %s move to FinishMap!", tmp_id.c_str());
                     Log::Info("Finish Task size is %d !", m_finishMap.size());
             m_finishMap_mutex.unlock();
         } else {
@@ -136,8 +135,7 @@ void* ThreadPool::execute_task(pthread_t thread_id) {
         m_taskMap_mutex.lock();
             delete task;
             m_taskMap[tmp_id] = NULL;
-            auto it = m_taskMap.find(tmp_id);
-            m_taskMap.erase(it);
+            m_taskMap.erase(tmp_id);
             Log::Info("TaskID %s have removed from TaskMap !", tmp_id.c_str());
         m_taskMap_mutex.unlock();
 
@@ -158,19 +156,27 @@ int ThreadPool::add_task(Task* task, const string &task_id) {
     return 0;
 }
 
-void *ThreadPool::fetchResultByTaskID(const string task_id) {
+bool ThreadPool::fetchResultByTaskID(const string task_id, TaskPackStruct& res) {
     // first step find in m_finishMap, if not in this Map
+    // erase the finishMap[key] from the Map
     // second step find in m_taskMap, search it process status
 
     if(m_finishMap.count(task_id) != 0) {
-        return m_finishMap.at(task_id).output;
+        res.input = m_finishMap.at(task_id).input;
+        res.output = m_finishMap.at(task_id).output;
+
+        m_finishMap_mutex.lock();
+                m_finishMap.erase(task_id);
+        m_finishMap_mutex.unlock();
+
+        return true;
     } else if(m_taskMap.count(task_id) != 0) {
         Log::Info("Fetch task id %s not finished !", task_id.c_str());
-        return NULL;
+        return false;
     } else {
         Log::Error("Fetch task_id %s have not been push to this pool !", task_id.c_str());
-        return NULL;
+        return false;
     }
-    return NULL;
+    return false;
 }
 

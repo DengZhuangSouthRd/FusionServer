@@ -56,7 +56,6 @@ private:
     string m_serializePathBak;
 
     map<string, TaskStaticResult> m_finishMap; // for <task_id, task_all_parameters>
-    Mutex m_finishMap_mutex;
 };
 
 

@@ -8,14 +8,6 @@ Task::Task(void* (*fn_ptr)(void *), void* arg) {
 }
 
 Task::~Task() {
-    if(m_arg) {
-        m_arg = (FusionArgs*)m_arg;
-        delete m_arg;
-    }
-    if(m_result) {
-        m_result = (FusionStruct*)m_result;
-        delete m_result;
-    }
 }
 
 void Task::run() {
@@ -40,7 +32,7 @@ TASKSTATUS Task::getTaskStatus() {
     return m_status;
 }
 
-bool Task::packTaskStaticStatus(TaskPackStruct& res) {
+void Task::packTaskStaticStatus(TaskPackStruct& res) {
     res.input = m_arg;
     res.output = m_result;
 }

@@ -18,11 +18,14 @@ ImageFusion::ImageFusion() {
         throw runtime_error("Serialized Bak File Does Not Exists !");
     }
 
+    getSerializeTaskResults(m_serializePath);
+
     p_threadPool = NULL;
     p_threadPool = ThreadPool::getSingleInstance();
 }
 
 ImageFusion::~ImageFusion() {
+    serializeTaskResults(m_serializePath, m_serializePathBak);
     p_threadPool->revokeSingleInstance();
     p_threadPool = NULL;
 }
@@ -187,10 +190,8 @@ void ImageFusion::fillFinishTaskMap(const string &task_id, const FusionArgs &inP
         tmp.task_id.assign(task_id);
         deepCopyTaskInputParameter(inParam, tmp.input);
         deepCopyTaskResult(outParam, tmp.output);
-        m_finishMap_mutex.lock();
-            m_finishMap[task_id] = tmp;
-            Log::Info("Finish Task size is %d !", m_finishMap.size());
-        m_finishMap_mutex.unlock();
+        m_finishMap[task_id] = tmp;
+        Log::Info("Finish Task size is %d !", m_finishMap.size());
     }
 }
 
@@ -234,8 +235,14 @@ bool ImageFusion::packTaskStaticStatus(TaskStaticResult &res, const string task_
     return true;
 }
 
-::RPCWiseFuse::FusionInf ImageFusion::fuseSyn(const DirArgs& mapArg, const Ice::Current &) {
-    ::RPCWiseFuse::FusionInf obj;
+FusionInf ImageFusion::fuseSyn(const DirArgs& mapArg, const Ice::Current &) {
+
+    string task_id = mapArg.at("id");
+    if(m_finishMap.count(task_id) != 0) {
+        return m_finishMap[task_id].output;
+    }
+
+    FusionInf obj;
     FusionArgs args;
     log_InputParameters(mapArg);
     bool flag = checkFusionArgv(mapArg, args);
@@ -255,32 +262,38 @@ bool ImageFusion::packTaskStaticStatus(TaskStaticResult &res, const string task_
     deepCopyTask2RpcResult(*test, obj);
     delete test;
     log_OutputResult(obj);
-    fillFinishTaskMap(mapArg.at("id"), args, obj);
+    fillFinishTaskMap(task_id, args, obj);
     return obj;
 }
 
 int ImageFusion::fuseAsyn(const DirArgs& mapArgs, const Ice::Current&) {
-    ::RPCWiseFuse::FusionInf obj;
+
+    string task_id = mapArgs.at("id");
+    if(m_finishMap.count(task_id) != 0) {
+        return 1;
+    }
+
     FusionArgs* args = new(std::nothrow) FusionArgs;
     if(args == NULL) {
         Log::Error("fuseAysn ## new FusionArgs Failed !");
         return -1;
     }
+
     log_InputParameters(mapArgs);
     bool flag = checkFusionArgv(mapArgs, *args);
     if(flag == false) {
-        obj.status = ARGERROR;
         delete args;
         Log::Error("fuseAsyn ## Image Fusion Parameters Error !");
         return -1; // push task error
     }
+
     Task* task = new(std::nothrow) Task(&fusionInterface, (void*)args);
     if(task == NULL) {
         delete args;
         Log::Error("fuseAsyc ## new Task Failed !");
         return -1;
     }
-    string task_id = mapArgs.at("id");
+
     task->setTaskID(task_id);
     if(p_threadPool->add_task(task, task_id) != 0) {
         Log::Error("fuseAsyn ## thread Pool add Task Failed !");
@@ -288,7 +301,7 @@ int ImageFusion::fuseAsyn(const DirArgs& mapArgs, const Ice::Current&) {
         delete task;
         return -1; // Means For Add Task Failed !
     }
-    return 0; // Means For Add Task Success !
+    return 1; // Means For Add Task Success !
 }
 
 string ImageFusion::askProcess(const DirArgs& mapArg, const Ice::Current&) {
@@ -296,23 +309,30 @@ string ImageFusion::askProcess(const DirArgs& mapArg, const Ice::Current&) {
     return "";
 }
 
-::RPCWiseFuse::FusionInf ImageFusion::fetchFuseRes(const DirArgs& mapArg, const Ice::Current&) {
+FusionInf ImageFusion::fetchFuseRes(const DirArgs& mapArg, const Ice::Current&) {
     log_InputParameters(mapArg);
-    ::RPCWiseFuse::FusionInf obj;
+    FusionInf obj;
     if(mapArg.count("id") == 0) {
         obj.status = -1;
         Log::Error("fetchFuseRes ## Input Parameter InValid !");
         return obj;
     }
     string task_id = mapArg.at("id");
-    FusionStruct* tmp = NULL;
-    tmp = (FusionStruct*)p_threadPool->fetchResultByTaskID(task_id);
-    if(tmp == NULL) {
+    TaskPackStruct tmp;
+    bool flag = p_threadPool->fetchResultByTaskID(task_id, tmp);
+    if(flag == false) {
         obj.status = -1;
         Log::Error("fetchFuseRes ## fetch task id %s result Failed !", task_id.c_str());
     } else {
-        deepCopyTask2RpcResult(*tmp, obj);
+        deepCopyTask2RpcResult(*(FusionStruct*)(tmp.output), obj);
         log_OutputResult(obj);
+        TaskStaticResult res;
+        flag = packTaskStaticStatus(res, task_id, tmp);
+        delete (FusionArgs*)tmp.input;
+        delete (FusionStruct*)tmp.output;
+        if(flag == true) {
+            m_finishMap[task_id] = res;
+        }
     }
     return obj;
 }

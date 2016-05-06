@@ -42,7 +42,7 @@ public:
     bool packTaskStaticStatus(QualityTaskStaticResult &res, const string task_id, TaskPackStruct &tmp);
 
     int getSerializeTaskResults(string serializePath);
-    int serializeTaskResults(string serializePath, string serializePathBak);
+    void serializeTaskResults();
 
 private:
     ThreadPool* p_threadPool;

@@ -1,5 +1,7 @@
 #include "qualityUtils.h"
 
+extern ImageQuality* g_ImgQuality;
+
 //write status into log file
 void WriteMsg(char* ,int32_t statusnum, char* statusmsg) {
     Log::Info("%d\t%s", statusnum, statusmsg);
@@ -36,6 +38,26 @@ void deepCopyQualityRes2Info(const QualityRes &src, QualityInfo &dest) {
         tmp.push_back(src.data[i]);
     }
     dest.imgsquality[id] = tmp;
+}
+
+void utils_serialize_quality(int ) {
+    if(NULL != g_ImgQuality) {
+        g_ImgQuality->serializeTaskResults();
+    }
+}
+
+void serializeImageQualityOnTime(int seconds) {
+    struct itimerval tick;
+    memset(&tick, 0, sizeof(tick));
+    tick.it_interval.tv_sec = seconds;
+    tick.it_interval.tv_usec = 0;
+    tick.it_value.tv_sec = seconds;
+    tick.it_value.tv_usec = 0;
+    signal(SIGALRM, utils_serialize_quality);
+    if(setitimer(ITIMER_REAL, &tick, NULL) < 0) {
+        Log::Error("Set Timer to serialize ImageQuality Dict Failed !");
+        throw runtime_error("Set Timer to Serialize ImageQuality Dict Failed !");
+    }
 }
 
 void* qualityInterface(void *args) {

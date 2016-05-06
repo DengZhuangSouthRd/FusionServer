@@ -2,6 +2,7 @@
     "SERVERIP": "192.168.199.173",
     "PORT": "9999",
     "FUSIONIDENTITY": "WISEFUSION",
+    "SERIALIZETIME" : "10",
     "LOGPATH": "main/data/log/loginfo.log",
     "FUSIONSerializePath" : "main/data/serialize/fusiontask.json",
     "FUSIONSerializePathBak" : "main/data/serialize/fusiontask_backup.json",

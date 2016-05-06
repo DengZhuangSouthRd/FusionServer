@@ -4,11 +4,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <signal.h>
+#include <unistd.h>
+#include <sys/time.h>
+
 #include <gdal_priv.h>
 
 #include <iostream>
 #include "../../../utils/log.h"
 #include "../../../rpc/qualityjudgeRpc.h"
+#include "../../../../imagequality.h"
 
 using namespace std;
 using namespace RPCQualityJudge;
@@ -29,7 +34,7 @@ typedef struct _QualityRes{
     int status;//fail means <0; success means >= 0;
 }QualityRes;
 
-//write status into log file
+// write status into log file
 void WriteMsg(char*, int32_t statusnum, char* statusmsg);
 bool createQualityRes(QualityRes& quaRes, int length);
 void revokeQualityRes(QualityRes** p_quaRes);
@@ -45,5 +50,9 @@ bool mainStriperesidual(ImageParameter &testparameter, char* logfilepath, Qualit
 // interface
 void *qualityInterface(void* args);
 void deepCopyQualityRes2Info(const QualityRes& src, QualityInfo& dest);
+
+// set intertimer to serialize the ImageQuality Data !
+void utils_serialize_quality(int);
+void serializeImageQualityOnTime(int seconds);
 
 #endif // UTILS_H

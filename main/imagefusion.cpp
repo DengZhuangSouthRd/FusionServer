@@ -1,6 +1,7 @@
 #include "imagefusion.h"
 
 extern map<string, string> g_ConfMap;
+ImageFusion* g_ImgFusion = NULL;
 
 ImageFusion::ImageFusion() {
 
@@ -22,10 +23,13 @@ ImageFusion::ImageFusion() {
 
     p_threadPool = NULL;
     p_threadPool = ThreadPool::getSingleInstance();
+
+    g_ImgFusion = this;
+    serializeImageFusionOnTime(atoi(g_ConfMap["SERIALIZETIME"].c_str()));
 }
 
 ImageFusion::~ImageFusion() {
-    serializeTaskResults(m_serializePath, m_serializePathBak);
+    g_ImgFusion = NULL;
     p_threadPool->revokeSingleInstance();
     p_threadPool = NULL;
 }
@@ -120,7 +124,7 @@ int ImageFusion::getSerializeTaskResults(string serializePath) {
 }
 
 //fetch all task id and task result to serialize the completed task !
-int ImageFusion::serializeTaskResults(string serializePath, string serializePathBak) {
+void ImageFusion::serializeTaskResults() {
 
     Json::FastWriter writer;
     Json::Value root;
@@ -165,7 +169,7 @@ int ImageFusion::serializeTaskResults(string serializePath, string serializePath
     std::string strRoot = writer.write(root);
 
     std::ofstream out;
-    out.open(serializePathBak.c_str(), std::ios_base::binary);
+    out.open(m_serializePathBak.c_str(), std::ios_base::binary);
     if(out.is_open() == false) {
         throw runtime_error("Open Serialize Bak File Error !");
         cerr << "Open Seriazlize Bak file Error !" << endl;
@@ -173,15 +177,13 @@ int ImageFusion::serializeTaskResults(string serializePath, string serializePath
     out << strRoot;
     out.close();
 
-    out.open(serializePath.c_str(), std::ios_base::binary);
+    out.open(m_serializePath.c_str(), std::ios_base::binary);
     if(out.is_open() == false) {
         throw runtime_error("Open Serialize File Error !");
         cerr << "Open Seriazlize file Error !" << endl;
     }
     out << strRoot;
     out.close();
-
-    return m_finishMap.size();
 }
 
 void ImageFusion::fillFinishTaskMap(const string &task_id, const FusionArgs &inParam, const FusionInf &outParam) {

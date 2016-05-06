@@ -1,15 +1,20 @@
 #include "imagequality.h"
 
 extern map<string, string> g_ConfMap;
+ImageQuality* g_ImgQuality = NULL;
 
 ImageQuality::ImageQuality() {
     m_serializePath = g_ConfMap["QUALTYSerializePath"];
     m_serializePathBak = g_ConfMap["QUALTYSerializePathBak"];
+    getSerializeTaskResults(m_serializePath);
     p_threadPool = NULL;
     p_threadPool = ThreadPool::getSingleInstance();
+    g_ImgQuality = this;
+    serializeImageQualityOnTime(atoi(g_ConfMap["SERIALIZETIME"].c_str()));
 }
 
 ImageQuality::~ImageQuality() {
+    g_ImgQuality = NULL;
     p_threadPool->revokeSingleInstance();
     p_threadPool = NULL;
 }
@@ -265,7 +270,7 @@ int ImageQuality::getSerializeTaskResults(string serializePath) {
 }
 
 //fetch all task id and task result to serialize the completed task !
-int ImageQuality::serializeTaskResults(string serializePath, string serializePathBak) {
+void ImageQuality::serializeTaskResults() {
 
     Json::FastWriter writer;
     Json::Value root;
@@ -287,7 +292,6 @@ int ImageQuality::serializeTaskResults(string serializePath, string serializePat
             input[it->first] = tmp;
         }
 
-
         Json::Value outres;
         outres["status"] = res.output.status;
         for(DatasMap::iterator it=res.output.imgsquality.begin(); it!=res.output.imgsquality.end(); it++) {
@@ -304,7 +308,7 @@ int ImageQuality::serializeTaskResults(string serializePath, string serializePat
     std::string strRoot = writer.write(root);
 
     std::ofstream out;
-    out.open(serializePathBak.c_str(), std::ios_base::binary);
+    out.open(m_serializePathBak.c_str(), std::ios_base::binary);
     if(out.is_open() == false) {
         throw runtime_error("Open Serialize Bak File Error !");
         cerr << "Open Seriazlize Bak file Error !" << endl;
@@ -312,13 +316,11 @@ int ImageQuality::serializeTaskResults(string serializePath, string serializePat
     out << strRoot;
     out.close();
 
-    out.open(serializePath.c_str(), std::ios_base::binary);
+    out.open(m_serializePath.c_str(), std::ios_base::binary);
     if(out.is_open() == false) {
         throw runtime_error("Open Serialize File Error !");
         cerr << "Open Seriazlize file Error !" << endl;
     }
     out << strRoot;
     out.close();
-
-    return m_finishMap.size();
 }

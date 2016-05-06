@@ -6,9 +6,6 @@
 #include <map>
 #include <vector>
 
-#include <signal.h>
-#include <stdio.h>
-
 #include <Ice/Ice.h>
 #include "./src/rpc/wisefuseRpc.h"
 #include "./src/algorithm/fusion/utils/fusionutils.h"
@@ -46,7 +43,7 @@ public:
     void log_OutputResult(const FusionInf& destInf);
 
     int getSerializeTaskResults(string serializePath);
-    int serializeTaskResults(string serializePath, string serializePathBak);
+    void serializeTaskResults();
     void fillFinishTaskMap(const string& task_id, const FusionArgs& inParam, const FusionInf& outParam);
     bool packTaskStaticStatus(FusionTaskStaticResult &res, const string task_id, TaskPackStruct& tmp);
 
@@ -58,6 +55,5 @@ private:
 
     map<string, FusionTaskStaticResult> m_finishMap; // for <task_id, task_all_parameters>
 };
-
 
 #endif // IMAGEFUSION_H

@@ -1,15 +1,15 @@
 #ifndef FUSIONUTILS_H
 #define FUSIONUTILS_H
 
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <string>
 #include <map>
-#include <unistd.h>
 #include <vector>
+#include <string>
+#include <iostream>
 #include <exception>
+
+#include <signal.h>
+#include <unistd.h>
+#include <sys/time.h>
 #include <time.h>
 
 #include "../BroveyFusion.h"
@@ -45,7 +45,8 @@ void deepCopyTaskInputParameter(const FusionArgs& src, FusionArgs& dest);
 void deepCopyTaskResult(const FusionInf &src, FusionInf &dest);
 void deepCopyTask2RpcResult(const FusionStruct& src, FusionInf& dest);
 
-
-FusionStruct* fusion(string PanUrl,string MsUrl,string OutUrl,string LogUrl,int idalg,int* band,int interpolation);
+void utils_serialize_fusion(int);
+void serializeImageFusionOnTime(int seconds);
+FusionStruct* fusion(string PanUrl, string MsUrl, string OutUrl, string, int idalg, int* band, int interpolation);
 
 #endif // FUSIONUTILS_H

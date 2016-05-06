@@ -1,6 +1,9 @@
 #include "./utils/fusionutils.h"
 
-FusionStruct* fusion(string PanUrl,string MsUrl,string OutUrl,string LogUrl,int idalg,int* band,int interpolation) {
+
+
+
+FusionStruct* fusion(string PanUrl,string MsUrl,string OutUrl,string ,int idalg,int* band,int interpolation) {
     /*
     *融合接口：fusion
     *PanUrl            全色图像或SAR图像存放路径

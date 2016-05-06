@@ -1,4 +1,7 @@
 #include "fusionutils.h"
+#include "../../../../imagefusion.h"
+
+extern ImageFusion* g_ImgFusion;
 
 void* fusionInterface(void * args) {
     FusionArgs* param = (FusionArgs*) args;
@@ -65,4 +68,24 @@ void deepCopyTask2RpcResult(const FusionStruct &src, FusionInf &dest) {
     dest.resolution = src.resolution;
 
     dest.status = src.status;
+}
+
+void utils_serialize_fusion(int) {
+    if(g_ImgFusion != NULL) {
+        g_ImgFusion->serializeTaskResults();
+    }
+}
+
+void serializeImageFusionOnTime(int seconds) {
+    struct itimerval tick;
+    memset(&tick, 0, sizeof(tick));
+    tick.it_interval.tv_sec = seconds;
+    tick.it_interval.tv_usec = 0;
+    tick.it_value.tv_sec = seconds;
+    tick.it_value.tv_usec = 0;
+    signal(SIGALRM, utils_serialize_fusion);
+    if(setitimer(ITIMER_REAL, &tick, NULL) < 0) {
+        Log::Error("Set Timer to serialize ImageQuality Dict Failed !");
+        throw runtime_error("Set Timer to Serialize ImageQuality Dict Failed !");
+    }
 }

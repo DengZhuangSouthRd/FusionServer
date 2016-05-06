@@ -47,7 +47,7 @@ void ImageQuality::log_InputParameters(const QualityInputStruct &inputArgs) {
 
 void ImageQuality::log_OutputResult(const QualityInfo &outRes) {
     string str = "";
-    str += ("status="+to_string(outRes.stauts)+"#");
+    str += ("status="+to_string(outRes.status)+"#");
     for(DatasMap::const_iterator it=outRes.imgsquality.begin(); it!=outRes.imgsquality.end(); it++) {
         str += ("key="+it->first+"#");
         str += "bandValue=";
@@ -60,7 +60,7 @@ void ImageQuality::log_OutputResult(const QualityInfo &outRes) {
 
 QualityInfo ImageQuality::qualitySyn(const QualityInputStruct &inputArgs, const Ice::Current &) {
     QualityInfo quaRes;
-    quaRes.stauts = -1;
+    quaRes.status = -1;
     bool flag = checkQualityArgv(inputArgs);
     if(flag == false)
         return quaRes;
@@ -70,7 +70,7 @@ QualityInfo ImageQuality::qualitySyn(const QualityInputStruct &inputArgs, const 
         return quaRes;
     }
     string task_id = inputArgs.id;
-    quaRes.stauts = 1;
+    quaRes.status = 1;
     quaRes.imgsquality[task_id] = vector<double>();
     for(int i=0;i<tmp->length;i++) {
         quaRes.imgsquality[task_id].push_back(tmp->data[i]);
@@ -85,4 +85,48 @@ int ImageQuality::qualityAsyn(const QualityInputStruct &inputArgs, const Ice::Cu
 
 QualityInfo ImageQuality::fetchQualityRes(const QualityInputStruct &inputArgs, const Ice::Current &) {
 
+}
+
+void ImageQuality::fillFinishTaskMap(const string &task_id, const QualityInputStruct &inParam, const QualityInfo &outParam) {
+    if(m_finishMap.count(task_id) == 0) {
+        QualityTaskStaticResult tmp;
+        tmp.task_id.assign(task_id);
+        tmp.input = inParam;
+        tmp.output = outParam;
+        m_finishMap[task_id] = tmp;
+        Log::Info("Finish Task size is %d !", m_finishMap.size());
+    }
+}
+
+bool ImageQuality::packTaskStaticStatus(QualityTaskStaticResult &res, const string task_id, TaskPackStruct &tmp) {
+    QualityInfo* out_res = (QualityInfo*)tmp.output;
+    if(out_res->status <= 0) {
+        return false;
+    }
+
+    res.task_id.assign(task_id);
+
+    res.output.status = out_res->status;
+    for(DatasMap::iterator it=out_res->imgsquality.begin(); it!=out_res->imgsquality.end(); it++) {
+        DataArray tmp;
+        for(DataArray::iterator vit=it->second.begin(); vit!=it->second.end(); vit++) {
+            tmp.push_back(*vit);
+        }
+        res.output.imgsquality[it->first] = tmp;
+    }
+
+    QualityInputStruct* param = (QualityInputStruct*) tmp.input;
+    res.input.id.assign(param->id);
+    res.input.algorithmkind = param->algorithmkind;
+    for(QualityMapArgs::iterator it=param->inputMap.begin(); it!=param->inputMap.end(); it++) {
+        ImageParameter tmp;
+        tmp.filePath = it->second.filePath;
+        tmp.colNum = it->second.colNum;
+        tmp.rowNum = it->second.rowNum;
+        tmp.bandNum = it->second.bandNum;
+        tmp.bitsPerPixel = it->second.bitsPerPixel;
+        res.input.inputMap[it->first] = tmp;
+    }
+
+    return true;
 }

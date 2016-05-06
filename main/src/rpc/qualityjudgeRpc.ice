@@ -3,7 +3,7 @@ module RPCQualityJudge {
     sequence<double> DataArray;
     dictionary<string, DataArray> DatasMap;
     struct QualityInfo {
-        int stauts;
+        int status;
         DatasMap imgsquality;
     };
     

@@ -45,4 +45,5 @@ bool mainStriperesidual(ImageParameter &testparameter, char* logfilepath, Qualit
 // interface
 void *qualityInterface(void* args);
 
+
 #endif // UTILS_H

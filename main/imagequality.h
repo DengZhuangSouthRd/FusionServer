@@ -17,6 +17,12 @@
 using namespace std;
 using namespace RPCQualityJudge;
 
+typedef struct _QualityTaskStaticResult{
+    string task_id;
+    QualityInputStruct input;
+    QualityInfo output;
+}QualityTaskStaticResult;
+
 class ImageQuality : public QualityInf {
 public:
     ImageQuality() ;
@@ -32,8 +38,16 @@ public:
     void log_InputParameters(const ::RPCQualityJudge::QualityInputStruct& inputArgs);
     void log_OutputResult(const ::RPCQualityJudge::QualityInfo& outRes);
 
+    void fillFinishTaskMap(const string &task_id, const QualityInputStruct &inParam, const QualityInfo &outParam);
+    bool packTaskStaticStatus(QualityTaskStaticResult &res, const string task_id, TaskPackStruct &tmp);
+
 private:
     ThreadPool* p_threadPool;
+
+    string m_serializePath;
+    string m_serializePathBak;
+
+    map<string, QualityTaskStaticResult> m_finishMap; // for <task_id, task_all_parameters>
 };
 
 #endif // IMAGEQUALITY_H

@@ -85,7 +85,7 @@ typedef ::std::map< ::std::string, ::RPCQualityJudge::DataArray> DatasMap;
 
 struct QualityInfo
 {
-    ::Ice::Int stauts;
+    ::Ice::Int status;
     ::RPCQualityJudge::DatasMap imgsquality;
 };
 
@@ -219,7 +219,7 @@ struct StreamWriter< ::RPCQualityJudge::QualityInfo, S>
 {
     static void write(S* __os, const ::RPCQualityJudge::QualityInfo& v)
     {
-        __os->write(v.stauts);
+        __os->write(v.status);
         __os->write(v.imgsquality);
     }
 };
@@ -229,7 +229,7 @@ struct StreamReader< ::RPCQualityJudge::QualityInfo, S>
 {
     static void read(S* __is, ::RPCQualityJudge::QualityInfo& v)
     {
-        __is->read(v.stauts);
+        __is->read(v.status);
         __is->read(v.imgsquality);
     }
 };

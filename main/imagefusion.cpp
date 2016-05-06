@@ -83,7 +83,7 @@ int ImageFusion::getSerializeTaskResults(string serializePath) {
         Json::Value inNode = node[0];
         Json::Value outNode = node[1];
 
-        TaskStaticResult tmp;
+        FusionTaskStaticResult tmp;
         tmp.task_id.assign(key);
         tmp.input.panurl.assign(inNode["panurl"].asString());
         tmp.input.outurl.assign(inNode["outurl"].asString());
@@ -125,9 +125,9 @@ int ImageFusion::serializeTaskResults(string serializePath, string serializePath
     Json::FastWriter writer;
     Json::Value root;
 
-    for(map<string, TaskStaticResult>::iterator it=m_finishMap.begin(); it!=m_finishMap.end(); ++it) {
+    for(map<string, FusionTaskStaticResult>::iterator it=m_finishMap.begin(); it!=m_finishMap.end(); ++it) {
         string key = it->first;
-        TaskStaticResult res = it->second;
+        FusionTaskStaticResult res = it->second;
         Json::Value input;
         input["panurl"] = res.input.panurl;
         input["outurl"] = res.input.outurl;
@@ -186,7 +186,7 @@ int ImageFusion::serializeTaskResults(string serializePath, string serializePath
 
 void ImageFusion::fillFinishTaskMap(const string &task_id, const FusionArgs &inParam, const FusionInf &outParam) {
     if(m_finishMap.count(task_id) == 0) {
-        TaskStaticResult tmp;
+        FusionTaskStaticResult tmp;
         tmp.task_id.assign(task_id);
         deepCopyTaskInputParameter(inParam, tmp.input);
         deepCopyTaskResult(outParam, tmp.output);
@@ -195,7 +195,7 @@ void ImageFusion::fillFinishTaskMap(const string &task_id, const FusionArgs &inP
     }
 }
 
-bool ImageFusion::packTaskStaticStatus(TaskStaticResult &res, const string task_id, TaskPackStruct &tmp) {
+bool ImageFusion::packTaskStaticStatus(FusionTaskStaticResult &res, const string task_id, TaskPackStruct &tmp) {
     FusionStruct* out_res = (FusionStruct*)tmp.output;
     if(out_res->status <= 0) {
         return false;
@@ -326,7 +326,7 @@ FusionInf ImageFusion::fetchFuseRes(const DirArgs& mapArg, const Ice::Current&) 
     } else {
         deepCopyTask2RpcResult(*(FusionStruct*)(tmp.output), obj);
         log_OutputResult(obj);
-        TaskStaticResult res;
+        FusionTaskStaticResult res;
         flag = packTaskStaticStatus(res, task_id, tmp);
         delete (FusionArgs*)tmp.input;
         delete (FusionStruct*)tmp.output;

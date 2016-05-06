@@ -19,11 +19,11 @@
 using namespace std;
 using namespace RPCWiseFuse;
 
-typedef struct _TaskStaticResult {
+typedef struct _FusionTaskStaticResult {
     string task_id;
     FusionArgs input;
     FusionInf output;
-}TaskStaticResult;
+}FusionTaskStaticResult;
 
 class ImageFusion : public WiseFusionInf {
 public:
@@ -48,7 +48,7 @@ public:
     int getSerializeTaskResults(string serializePath);
     int serializeTaskResults(string serializePath, string serializePathBak);
     void fillFinishTaskMap(const string& task_id, const FusionArgs& inParam, const FusionInf& outParam);
-    bool packTaskStaticStatus(TaskStaticResult &res, const string task_id, TaskPackStruct& tmp);
+    bool packTaskStaticStatus(FusionTaskStaticResult &res, const string task_id, TaskPackStruct& tmp);
 
 private:
     ThreadPool* p_threadPool;
@@ -56,7 +56,7 @@ private:
     string m_serializePath;
     string m_serializePathBak;
 
-    map<string, TaskStaticResult> m_finishMap; // for <task_id, task_all_parameters>
+    map<string, FusionTaskStaticResult> m_finishMap; // for <task_id, task_all_parameters>
 };
 
 

@@ -44,6 +44,6 @@ bool mainStriperesidual(ImageParameter &testparameter, char* logfilepath, Qualit
 
 // interface
 void *qualityInterface(void* args);
-
+void deepCopyQualityRes2Info(const QualityRes& src, QualityInfo& dest);
 
 #endif // UTILS_H

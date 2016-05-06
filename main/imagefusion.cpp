@@ -318,6 +318,10 @@ FusionInf ImageFusion::fetchFuseRes(const DirArgs& mapArg, const Ice::Current&) 
         return obj;
     }
     string task_id = mapArg.at("id");
+    if(m_finishMap.count(task_id) != 0) {
+        return m_finishMap[task_id].output;
+    }
+
     TaskPackStruct tmp;
     bool flag = p_threadPool->fetchResultByTaskID(task_id, tmp);
     if(flag == false) {

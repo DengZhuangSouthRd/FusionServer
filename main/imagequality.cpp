@@ -59,6 +59,11 @@ void ImageQuality::log_OutputResult(const QualityInfo &outRes) {
 }
 
 QualityInfo ImageQuality::qualitySyn(const QualityInputStruct &inputArgs, const Ice::Current &) {
+    string task_id = inputArgs.id;
+    if(m_finishMap.count(task_id) != 0) {
+        return m_finishMap[task_id].output;
+    }
+
     QualityInfo quaRes;
     quaRes.status = -1;
     bool flag = checkQualityArgv(inputArgs);
@@ -69,22 +74,81 @@ QualityInfo ImageQuality::qualitySyn(const QualityInputStruct &inputArgs, const 
     if(tmp == NULL) {
         return quaRes;
     }
-    string task_id = inputArgs.id;
+
     quaRes.status = 1;
     quaRes.imgsquality[task_id] = vector<double>();
     for(int i=0;i<tmp->length;i++) {
         quaRes.imgsquality[task_id].push_back(tmp->data[i]);
     }
     revokeQualityRes(&tmp);
+    fillFinishTaskMap(task_id, inputArgs, quaRes);
     return quaRes;
 }
 
 int ImageQuality::qualityAsyn(const QualityInputStruct &inputArgs, const Ice::Current &) {
+    string task_id = inputArgs.id;
 
+    if(m_finishMap.count(task_id) != 0) {
+        return 1;
+    }
+
+    QualityInputStruct* args = new(std::nothrow) QualityInputStruct;
+    if(args == NULL) {
+        Log::Error("qualityAsyn ## new QualityInputStruct Failed !");
+        return -1;
+    }
+
+    log_InputParameters(inputArgs);
+    bool flag = checkQualityArgv(inputArgs);
+    if(flag == false) {
+        delete args;
+        Log::Error("qualityAsyn ## Image ImageQuality Parameters Error !");
+        return -1; // push task error
+    }
+
+    Task* task = new(std::nothrow) Task(&qualityInterface, (void*)args);
+    if(task == NULL) {
+        delete args;
+        Log::Error("qualityAsyn ## new Task Failed !");
+        return -1;
+    }
+
+    task->setTaskID(task_id);
+    if(p_threadPool->add_task(task, task_id) != 0) {
+        Log::Error("qualityAsyn ## thread Pool add Task Failed !");
+        delete args;
+        delete task;
+        return -1; // Means For Add Task Failed !
+    }
+    return 1; // Means For Add Task Success !
 }
 
 QualityInfo ImageQuality::fetchQualityRes(const QualityInputStruct &inputArgs, const Ice::Current &) {
+    log_InputParameters(inputArgs);
+    QualityInfo obj;
+    string task_id = inputArgs.id;
 
+    if(m_finishMap.count(task_id) != 0) {
+        return m_finishMap[task_id].output;
+    }
+
+    TaskPackStruct tmp;
+    bool flag = p_threadPool->fetchResultByTaskID(task_id, tmp);
+    if(flag == false) {
+        obj.status = -1;
+        Log::Error("fetchQualityRes ## fetch task id %s result Failed !", task_id.c_str());
+    } else {
+        deepCopyQualityRes2Info(*(QualityRes*)(tmp.output), obj);
+        log_OutputResult(obj);
+        QualityTaskStaticResult res;
+        flag = packTaskStaticStatus(res, task_id, tmp);
+        delete (QualityInputStruct*)tmp.input;
+        revokeQualityRes((QualityRes**)&(tmp.output));
+        if(flag == true) {
+            m_finishMap[task_id] = res;
+        }
+    }
+    return obj;
 }
 
 void ImageQuality::fillFinishTaskMap(const string &task_id, const QualityInputStruct &inParam, const QualityInfo &outParam) {

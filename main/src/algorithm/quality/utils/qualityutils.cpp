@@ -28,6 +28,16 @@ void revokeQualityRes(QualityRes **p_quaRes) {
     (*p_quaRes) = NULL;
 }
 
+void deepCopyQualityRes2Info(const QualityRes &src, QualityInfo &dest) {
+    dest.status = src.status;
+    string id = "first";
+    DataArray tmp;
+    for(int i=0; i<src.length; i++) {
+        tmp.push_back(src.data[i]);
+    }
+    dest.imgsquality[id] = tmp;
+}
+
 void* qualityInterface(void *args) {
     if(args == NULL) return NULL;
     QualityInputStruct * tmp = (QualityInputStruct*)args;

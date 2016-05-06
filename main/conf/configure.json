@@ -3,7 +3,9 @@
     "PORT": "9999",
     "FUSIONIDENTITY": "WISEFUSION",
     "LOGPATH": "main/data/log/loginfo.log",
-    "FUSIONSerializePath" : "main/data/serialize/task.json",
-    "FUSIONSerializePathBak" : "main/data/serialize/task_backup.json",
+    "FUSIONSerializePath" : "main/data/serialize/fusiontask.json",
+    "FUSIONSerializePathBak" : "main/data/serialize/fusiontask_backup.json",
+    "QUALTYSerializePath" : "main/data/serialize/qualitytask.json",
+    "QUALTYSerializePathBak" : "main/data/serialize/qualitytask_backup.json",
     "version": "0.1"
 }

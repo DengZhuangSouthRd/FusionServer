@@ -1,3 +1,6 @@
+/*
+ * explain about the QualityJudge Ment Server Interface
+*/
 module RPCQualityJudge {
 
     sequence<double> DataArray;

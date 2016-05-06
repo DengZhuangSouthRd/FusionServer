@@ -58,6 +58,8 @@ void read_config_Json(string fileName, map<string, string> &argvMap) {
     argvMap["SERVERIP"] = root.get("SERVERIP", "127.0.0.1").asString();
     argvMap["PORT"] = root.get("PORT", "9999").asString();
     argvMap["FUSIONIDENTITY"] = root.get("FUSIONIDENTITY", "NULL").asString();
+    argvMap["QUALTYSerializePath"] = root.get("QUALTYSerializePath", "NULL").asString();
+    argvMap["QUALTYSerializePathBak"] = root.get("QUALTYSerializePathBak", "NULL").asString();
     for(map<string, string>::iterator it=argvMap.begin(); it!=argvMap.end(); it++) {
         if(it->second == "NULL") {
             cerr << it->first << " is " << it->second << endl;

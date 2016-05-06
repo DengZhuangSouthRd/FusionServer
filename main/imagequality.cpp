@@ -1,6 +1,10 @@
 #include "imagequality.h"
 
+extern map<string, string> g_ConfMap;
+
 ImageQuality::ImageQuality() {
+    m_serializePath = g_ConfMap["QUALTYSerializePath"];
+    m_serializePathBak = g_ConfMap["QUALTYSerializePathBak"];
     p_threadPool = NULL;
     p_threadPool = ThreadPool::getSingleInstance();
 }
@@ -193,4 +197,128 @@ bool ImageQuality::packTaskStaticStatus(QualityTaskStaticResult &res, const stri
     }
 
     return true;
+}
+
+
+// get the over task from the Json File
+int ImageQuality::getSerializeTaskResults(string serializePath) {
+    Json::Reader reader;
+    Json::Value root;
+    Json::Value::Members members;
+    std::ifstream in;
+    in.open(serializePath.c_str(), std::ios_base::binary);
+    if(in.is_open() == false) {
+        throw runtime_error("Open Serialize File Error !");
+        cerr << "Open Seriazlize file Error !" << endl;
+    }
+    bool flag = reader.parse(in,root, false);
+    if(flag == false) {
+        throw runtime_error("Parse Serialize Json File failed !");
+        cerr << "Parse Serialize Json File failed !" << endl;
+    }
+    members = root.getMemberNames();
+    for(Json::Value::Members::iterator it=members.begin(); it!=members.end(); ++it) {
+        std::string key = *it;
+        Json::Value node = root[key];
+        Json::Value inNode = node[0];
+        Json::Value outNode = node[1];
+
+        QualityTaskStaticResult tmp;
+        tmp.task_id.assign(key);
+        tmp.input.id.assign(inNode.get("id", "NULL").asString());
+        tmp.input.algorithmkind = inNode.get("algorithmkind", 1).asInt();
+        QualityMapArgs inMap;
+        Json::Value::Members inNodeMembers = inNode.getMemberNames();
+        for(Json::Value::Members::iterator inIt=inNodeMembers.begin(); inIt!=inNodeMembers.end(); inIt++) {
+            std::string inKey = *inIt;
+            if(inKey == "id" || inKey == "algorithmkind")
+                continue;
+            ImageParameter a;
+            Json::Value imageArr = inNode[inKey][0];
+            a.filePath.assign(imageArr.get("filePath", "NULL").asString());
+            a.rowNum = imageArr.get("rowNum", 0).asInt();
+            a.colNum = imageArr.get("colNum", 0).asInt();
+            a.bandNum = imageArr.get("bandNum", 0).asInt();
+            a.bitsPerPixel = imageArr.get("bitsPerPixel", 0).asInt();
+            inMap[inKey] = a;
+        }
+        tmp.input.inputMap = inMap;
+
+        Json::Value::Members outNodeMembers = outNode.getMemberNames();
+        tmp.output.status = outNode.get("status", 0).asInt();
+        for(Json::Value::Members::iterator outIt=outNodeMembers.begin(); outIt!=outNodeMembers.end(); outIt++) {
+            std::string outKey = *outIt;
+            if(outKey == "status")
+                continue;
+            DataArray tmpArr;
+            Json::Value bandValueArr = outNode[outKey];
+            for(unsigned int i=0;i<bandValueArr.size();i++) {
+                tmpArr.push_back(bandValueArr[i].asDouble());
+            }
+            tmp.output.imgsquality[outKey] = tmpArr;
+        }
+
+        m_finishMap[key] = tmp;
+    }
+    in.close();
+    return members.size();
+}
+
+//fetch all task id and task result to serialize the completed task !
+int ImageQuality::serializeTaskResults(string serializePath, string serializePathBak) {
+
+    Json::FastWriter writer;
+    Json::Value root;
+
+    for(map<string, QualityTaskStaticResult>::iterator it=m_finishMap.begin(); it!=m_finishMap.end(); ++it) {
+        string key = it->first;
+        QualityTaskStaticResult res = it->second;
+
+        Json::Value input;
+        input["id"] = res.input.id;
+        input["algorithmkind"] = res.input.algorithmkind;
+        for(QualityMapArgs::iterator it=res.input.inputMap.begin(); it!=res.input.inputMap.end(); it++) {
+            Json::Value tmp;
+            tmp["filePath"] = it->second.filePath;
+            tmp["colNum"] = it->second.colNum;
+            tmp["rowNum"] = it->second.rowNum;
+            tmp["bandNum"] = it->second.bandNum;
+            tmp["bitsPerPixel"] = it->second.bitsPerPixel;
+            input[it->first] = tmp;
+        }
+
+
+        Json::Value outres;
+        outres["status"] = res.output.status;
+        for(DatasMap::iterator it=res.output.imgsquality.begin(); it!=res.output.imgsquality.end(); it++) {
+            Json::Value tmp;
+            for(DataArray::iterator vit=it->second.begin(); vit!=it->second.end(); vit++) {
+                tmp.append(*vit);
+            }
+            outres[it->first] = tmp;
+        }
+
+        root[key].append(input);
+        root[key].append(outres);
+    }
+    std::string strRoot = writer.write(root);
+
+    std::ofstream out;
+    out.open(serializePathBak.c_str(), std::ios_base::binary);
+    if(out.is_open() == false) {
+        throw runtime_error("Open Serialize Bak File Error !");
+        cerr << "Open Seriazlize Bak file Error !" << endl;
+    }
+    out << strRoot;
+    out.close();
+
+    out.open(serializePath.c_str(), std::ios_base::binary);
+    if(out.is_open() == false) {
+        throw runtime_error("Open Serialize File Error !");
+        cerr << "Open Seriazlize file Error !" << endl;
+    }
+    out << strRoot;
+    out.close();
+
+    return m_finishMap.size();
 }

@@ -11,3 +11,30 @@
     ......
 }
 ```
+
+- fusiontask.json
+
+```bash
+{
+    "task_id1" : [{input}, {output}],
+    ......
+}
+```
+- input struct
+```bash
+{
+    "id" : "sdfdsfds",
+    "algorithmkind" : 3,
+    "first" : [{"filePath":"/root/test.tif", "rowNum":10, "colNum": 10, "bandNum": 10, "bitsPerPixel": 8}],
+    ......
+}
+```
+
+- output struct 
+```bash
+{
+    "status" : 1,
+    "first" : [0.1, 2.3, 4.5, ..., 9.8],
+    ......
+}
+```

@@ -1,12 +1,25 @@
 {
     "SERVERIP": "192.168.199.173",
     "PORT": "9999",
-    "FUSIONIDENTITY": "WISEFUSION",
     "SERIALIZETIME" : "10",
     "LOGPATH": "main/data/log/loginfo.log",
-    "FUSIONSerializePath" : "main/data/serialize/fusiontask.json",
-    "FUSIONSerializePathBak" : "main/data/serialize/fusiontask_backup.json",
-    "QUALTYSerializePath" : "main/data/serialize/qualitytask.json",
-    "QUALTYSerializePathBak" : "main/data/serialize/qualitytask_backup.json",
+    "FUSION": {
+        "ISUSE": "TRUE",
+        "FUSIONIDENTITY": "WISEFUSION",
+        "FUSIONSerializePath" : "main/data/serialize/fusiontask.json",
+        "FUSIONSerializePathBak" : "main/data/serialize/fusiontask_backup.json"
+    },
+    "RETRIEVE": {
+        "ISUSE" : "TRUE",
+        "RETRIEVEIDENTITY" : "",
+        "RETRIEVESerializePath" : "main/data/serialize/retrievetask.json",
+        "RETRIEVESerializePathBak" : "main/data/serialize/retrievetask_backup.json"
+    },
+    "QUALITY" : {
+        "ISUSE" : "TRUE",
+        "QUALITYIDENTITY" : "",
+        "QUALTYSerializePath" : "main/data/serialize/qualitytask.json",
+        "QUALTYSerializePathBak" : "main/data/serialize/qualitytask_backup.json"
+    },
     "version": "0.1"
 }

@@ -406,5 +406,6 @@ HEADERS += \
     main/src/algorithm/retrieve/utils/retrieveutils.h
 
 DISTFILES += \
-    README.md
+    README.md \
+    main/conf/configure.json
 

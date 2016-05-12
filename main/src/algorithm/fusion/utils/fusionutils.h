@@ -21,7 +21,7 @@
 #include "../GramSchmidtFusion.h"
 #include "../PgInf.h"
 
-#include "../../../rpc/wisefuseRpc.h"
+#include "../../../rpc/fusion/wisefuseRpc.h"
 #include "../../../utils/json/json-forwards.h"
 #include "../../../utils/json/json.h"
 

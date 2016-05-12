@@ -15,7 +15,6 @@ INCLUDEPATH += ./main/src/algorithm/fusion/proj/include
 SOURCES += \
     main/Server.cpp \
     main/src/utils/log.cpp \
-    main/src/rpc/wisefuseRpc.cpp \
     main/src/threadpool/ThreadPool.cpp \
     main/src/threadpool/Task.cpp \
     main/src/threadpool/Mutex.cpp \
@@ -118,10 +117,12 @@ SOURCES += \
     main/src/algorithm/quality/src/SignaltoNoiseRatio.cpp \
     main/src/algorithm/quality/src/Striperesidual.cpp \
     main/src/algorithm/quality/utils/qualityutils.cpp \
-    main/src/rpc/qualityjudgeRpc.cpp \
     main/imagefusion.cpp \
     main/imagequality.cpp \
-    main/src/algorithm/fusion/utils/fusionutils.cpp
+    main/src/algorithm/fusion/utils/fusionutils.cpp \
+    main/src/rpc/fusion/wisefuseRpc.cpp \
+    main/src/rpc/quality/qualityjudgeRpc.cpp \
+    main/src/rpc/retrieve/ImageRpc.cpp
 
 HEADERS += \
     main/Server.h \
@@ -158,10 +159,12 @@ HEADERS += \
     main/src/utils/json/json-forwards.h \
     main/src/utils/json/json.h \
     main/src/algorithm/quality/utils/qualityUtils.h \
-    main/src/rpc/qualityjudgeRpc.h \
     main/imagefusion.h \
     main/imagequality.h \
-    main/src/algorithm/fusion/utils/fusionutils.h
+    main/src/algorithm/fusion/utils/fusionutils.h \
+    main/src/rpc/fusion/wisefuseRpc.h \
+    main/src/rpc/quality/qualityjudgeRpc.h \
+    main/src/rpc/retrieve/ImageRpc.h
 
 DISTFILES +=
 

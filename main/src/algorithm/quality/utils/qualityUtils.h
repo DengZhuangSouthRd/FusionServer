@@ -12,7 +12,7 @@
 
 #include <iostream>
 #include "../../../utils/log.h"
-#include "../../../rpc/qualityjudgeRpc.h"
+#include "../../../rpc/quality/qualityjudgeRpc.h"
 #include "../../../../imagequality.h"
 
 using namespace std;

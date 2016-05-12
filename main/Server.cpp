@@ -26,7 +26,7 @@ void Server::initRpc(int argc, char** argv, string conn) {
         }
 
         if(g_ConfMap.count("RETRIEVEISUSE") != 0 && g_ConfMap["RETRIEVEISUSE"] == "TRUE") {
-            Ice::ObjectPtr object = new ImageRpcI();
+            Ice::ObjectPtr object = new ImageRetrieve();
             adapter->add(object,ic->stringToIdentity(g_ConfMap["RETRIEVEIDENTITY"]));
         }
 

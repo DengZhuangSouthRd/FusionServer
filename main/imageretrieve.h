@@ -18,10 +18,10 @@
 using namespace std;
 using namespace RPCImgRecong;
 
-class ImageRpcI : public ImgRetrieval {
+class ImageRetrieve : public ImgRetrieval {
 public:
-    ImageRpcI();
-    ~ImageRpcI();
+    ImageRetrieve();
+    ~ImageRetrieve();
 
 public:
     // this should not working as async method

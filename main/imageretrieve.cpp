@@ -2,7 +2,7 @@
 
 extern map<string, string> g_ConfMap;
 
-ImageRpcI::ImageRpcI() {
+ImageRetrieve::ImageRetrieve() {
     p_pgdb = NULL;
 
     string str_pgConf = getPGConfInfo(g_ConfMap);
@@ -14,13 +14,13 @@ ImageRpcI::ImageRpcI() {
     }
 }
 
-ImageRpcI::~ImageRpcI() {
+ImageRetrieve::~ImageRetrieve() {
     if(p_pgdb != NULL) {
         delete p_pgdb;
     }
 }
 
-WordWiki ImageRpcI::wordGetKnowledge(const string& word, const Ice::Current &) {
+WordWiki ImageRetrieve::wordGetKnowledge(const string& word, const Ice::Current &) {
     WordWiki wiki;
     wiki.key = "sdfdsfd";
     wiki.abstr = "sdfds";
@@ -28,7 +28,7 @@ WordWiki ImageRpcI::wordGetKnowledge(const string& word, const Ice::Current &) {
     return wiki;
 }
 
-ListString ImageRpcI::wordSearch(const DictStr2Str& mapArg, const Ice::Current&) {
+ListString ImageRetrieve::wordSearch(const DictStr2Str& mapArg, const Ice::Current&) {
     ListString str;
     for(int i=1;i<10;++i) {
         str.push_back(to_string(i));
@@ -36,7 +36,7 @@ ListString ImageRpcI::wordSearch(const DictStr2Str& mapArg, const Ice::Current&)
     return str;
 }
 
-ImgRes ImageRpcI::wordSearchImg(const DictStr2Str& mapArg, const Ice::Current&) {
+ImgRes ImageRetrieve::wordSearchImg(const DictStr2Str& mapArg, const Ice::Current&) {
     ImgRes res;
     for(int i=0;i<10;++i) {
         res.imgRemote.push_back(to_string(i));
@@ -45,7 +45,7 @@ ImgRes ImageRpcI::wordSearchImg(const DictStr2Str& mapArg, const Ice::Current&) 
     return res;
 }
 
-ImgRes ImageRpcI::imgSearch(const DictStr2Str& mapArg, const Ice::Current&) {
+ImgRes ImageRetrieve::imgSearch(const DictStr2Str& mapArg, const Ice::Current&) {
     ImgRes res;
     for(int i=0;i<10;++i) {
         res.imgRemote.push_back(to_string(i));

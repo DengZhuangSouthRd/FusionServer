@@ -4,10 +4,6 @@ extern map<string, string> g_ConfMap;
 
 ImageRpcI::ImageRpcI() {
     p_pgdb = NULL;
-    m_logPath = g_ConfMap["LOGPATH"];
-    Log::Initialise(m_logPath);
-    Log::SetThreshold(Log::LOG_TYPE_INFO);
-    PUSH_LOG_STACK;
 
     string str_pgConf = getPGConfInfo(g_ConfMap);
     Log::Info("PGCONF=" + str_pgConf);

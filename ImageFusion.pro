@@ -405,5 +405,6 @@ HEADERS += \
     main/imagerpci.h \
     main/src/algorithm/retrieve/utils/retrieveutils.h
 
-DISTFILES +=
+DISTFILES += \
+    README.md
 

@@ -144,8 +144,8 @@ SOURCES += \
     main/src/algorithm/retrieve/ASIFT/numerics1.cpp \
     main/src/algorithm/retrieve/ASIFT/orsa.cpp \
     main/src/algorithm/retrieve/ASIFT/splines.cpp \
-    main/imagerpci.cpp \
-    main/src/algorithm/retrieve/utils/retrieveutils.cpp
+    main/src/algorithm/retrieve/utils/retrieveutils.cpp \
+    main/imageretrieve.cpp
 
 HEADERS += \
     main/Server.h \
@@ -402,8 +402,8 @@ HEADERS += \
     main/src/algorithm/retrieve/ASIFT/numerics1.h \
     main/src/algorithm/retrieve/ASIFT/orsa.h \
     main/src/algorithm/retrieve/ASIFT/splines.h \
-    main/imagerpci.h \
-    main/src/algorithm/retrieve/utils/retrieveutils.h
+    main/src/algorithm/retrieve/utils/retrieveutils.h \
+    main/imageretrieve.h
 
 DISTFILES += \
     README.md \

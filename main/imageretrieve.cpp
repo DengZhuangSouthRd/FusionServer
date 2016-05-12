@@ -1,4 +1,4 @@
-#include "imagerpci.h"
+#include "imageretrieve.h"
 
 extern map<string, string> g_ConfMap;
 

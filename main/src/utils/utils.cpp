@@ -52,15 +52,32 @@ void read_config_Json(string fileName, map<string, string> &argvMap) {
         throw runtime_error("Configure Json File Format Error !");
         cerr << "Configure Json File Format Error !" << endl;
     }
-    argvMap["LOGPATH"] = root.get("LOGPATH", "NULL").asString();
-    argvMap["FUSIONSerializePath"] = root.get("FUSIONSerializePath", "NULL").asString();
-    argvMap["FUSIONSerializePathBak"] = root.get("FUSIONSerializePathBak", "NULL").asString();
     argvMap["SERVERIP"] = root.get("SERVERIP", "127.0.0.1").asString();
     argvMap["PORT"] = root.get("PORT", "9999").asString();
-    argvMap["FUSIONIDENTITY"] = root.get("FUSIONIDENTITY", "NULL").asString();
-    argvMap["QUALTYSerializePath"] = root.get("QUALTYSerializePath", "NULL").asString();
-    argvMap["QUALTYSerializePathBak"] = root.get("QUALTYSerializePathBak", "NULL").asString();
     argvMap["SERIALIZETIME"] = root.get("SERIALIZETIME", "3600").asString();
+    argvMap["LOGPATH"] = root.get("LOGPATH", "NULL").asString();
+
+    if(root.get("FUSION","NULL").asString() != "NULL") {
+        argvMap["FUSIONISUSE"] = root["FUSION"].get("ISUSE", "FALSE").asString();
+        argvMap["FUSIONIDENTITY"] = root["FUSION"].get("FUSIONIDENTITY", "NULL").asString();
+        argvMap["FUSIONSerializePath"] = root["FUSION"].get("FUSIONSerializePath", "NULL").asString();
+        argvMap["FUSIONSerializePathBak"] = root["FUSION"].get("FUSIONSerializePathBak", "NULL").asString();
+    }
+
+    if(root.get("RETRIEVE","NULL").asString() != "NULL") {
+        argvMap["RETRIEVEISUSE"] = root["RETRIEVE"].get("ISUSE", "FALSE").asString();
+        argvMap["RETRIEVEIDENTITY"] = root["RETRIEVE"].get("FUSIONIDENTITY", "NULL").asString();
+        argvMap["RETRIEVESerializePath"] = root["RETRIEVE"].get("FUSIONSerializePath", "NULL").asString();
+        argvMap["RETRIEVESerializePathBak"] = root["RETRIEVE"].get("FUSIONSerializePathBak", "NULL").asString();
+    }
+
+    if(root.get("QUALITY","NULL").asString() != "NULL") {
+        argvMap["QUALITYISUSE"] = root["QUALITY"].get("ISUSE", "FALSE").asString();
+        argvMap["QUALITYIDENTITY"] = root["QUALITY"].get("QUALITYIDENTITY", "NULL").asString();
+        argvMap["QUALTYSerializePath"] = root["QUALITY"].get("QUALTYSerializePath", "NULL").asString();
+        argvMap["QUALTYSerializePathBak"] = root["QUALITY"].get("QUALTYSerializePathBak", "NULL").asString();
+    }
+
     for(map<string, string>::iterator it=argvMap.begin(); it!=argvMap.end(); it++) {
         if(it->second == "NULL") {
             cerr << it->first << " is " << it->second << endl;

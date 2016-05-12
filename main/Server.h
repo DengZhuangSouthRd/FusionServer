@@ -10,8 +10,11 @@
 #include <stdio.h>
 
 #include <Ice/Ice.h>
-#include "imagefusion.h"
 #include "./src/utils/log.h"
+
+#include "imagefusion.h"
+#include "imagequality.h"
+#include "imageretrieve.h"
 
 using namespace std;
 

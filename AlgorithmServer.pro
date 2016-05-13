@@ -201,7 +201,6 @@ HEADERS += \
     main/src/algorithm/retrieve/ASIFT/flimage.h \
     main/src/algorithm/retrieve/ASIFT/fproj.h \
     main/src/algorithm/retrieve/ASIFT/frot.h \
-    main/src/algorithm/retrieve/ASIFT/GdalIO.h \
     main/src/algorithm/retrieve/ASIFT/library.h \
     main/src/algorithm/retrieve/ASIFT/numerics1.h \
     main/src/algorithm/retrieve/ASIFT/orsa.h \
@@ -409,7 +408,8 @@ HEADERS += \
     main/src/algorithm/third_party/Eigen/src/StlSupport/StdVector.h \
     main/src/algorithm/third_party/Eigen/src/SVD/JacobiSVD.h \
     main/src/algorithm/third_party/Eigen/src/SVD/UpperBidiagonalization.h \
-    main/src/algorithm/retrieve/ASIFT/extract_feature.h
+    main/src/algorithm/retrieve/ASIFT/extract_feature.h \
+    main/src/algorithm/retrieve/ASIFT/gdalio.h
 
 DISTFILES += \
     README.md \

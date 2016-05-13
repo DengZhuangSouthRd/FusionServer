@@ -1,10 +1,6 @@
-#include <string>
-#include <fstream>
-#include <iostream>
+#include "extract_feature.h"
 
-#include <omp.h>
-
-#include "GdalIO.h"
+#include "gdalio.h"
 #include "demo_lib_sift.h"
 
 #include "library.h"
@@ -13,34 +9,22 @@
 #include "compute_asift_keypoints.h"
 #include "compute_asift_matches.h"
 
-#include "extract_feature.h"
-
 # define IM_X 160
 # define IM_Y 120
 
 using namespace std;
 
-void ASIFT_Ext_Features_Gdal(const string Output_FileName,string Input_FilePath) {
-    /*
-    *Input_FilePath     待提取特征的图片路径
-    *提取ASIFT特征 并保存到Output_FileName文件中
-    *每行记录一幅图片一个特征点的特征
-    *作者：YS
-    */
-
+bool ASIFT_Ext_Features_Gdal(const string Output_FileName, string Input_FilePath, vector<vector<double> > &feature_vec) {
     int i;
     float *GrayImg=NULL;  //存储灰度图像像素值
     float *Img = NULL;    //存储图像像素值
 
-    int height ;		  //存储图像高度
-    int width ;			  //存储图像宽度
-    int bandcount;        //存储图像波段数
-    float wS = IM_X;
-    float hS = IM_Y;
+    int height, width, bandcount;
+    float wS = IM_X, hS = IM_Y;
     int  flag_resize=0;   //是否resize
 
-    int flag = ReadImageToBuff(Input_FilePath.c_str(), &Img, height,width,bandcount);
-    if(flag != 0) {
+    int status = ReadImageToBuff(Input_FilePath.c_str(), &Img, height,width,bandcount);
+    if(status != 0) {
         throw runtime_error("ReadImageToBuff failed !");
     }
 
@@ -125,8 +109,8 @@ void ASIFT_Ext_Features_Gdal(const string Output_FileName,string Input_FilePath)
         float fproj_y3 = hS1;
 
         /* Anti-aliasing filtering along vertical direction */
-        if ( zoom1 > 1 )		//缩小图像
-        {
+        //缩小图像
+        if ( zoom1 > 1 ) {
             float sigma_aa = InitSigma_aa * zoom1 / 2;
             GaussianBlur1D(ipixels,width,height,sigma_aa,1);
             GaussianBlur1D(ipixels,width,height,sigma_aa,0);
@@ -166,22 +150,27 @@ void ASIFT_Ext_Features_Gdal(const string Output_FileName,string Input_FilePath)
     }
 
     /*将特征写入文件*/
-    int tt,rr,ii;
+    int tt,rr;
     for (tt = 0; tt < (int) keys.size(); tt++) {
         for (rr = 0; rr < (int) keys[tt].size(); rr++) {
             keypointslist::iterator ptr = keys[tt][rr].begin();
-            for(i=0; i < (int) keys[tt][rr].size(); i++, ptr++) {
-                for (ii = 0; ii < (int) VecLength-1 ; ii++) {
-                    fout << ptr->vec[ii] << ',';
-                }
-                fout << ptr->vec[VecLength];
+            for(; ptr!=keys[tt][rr].end(); ptr++) {
+
+                vector<double> tmp;
+                tmp.resize(VecLength);
+                tmp.assign(ptr->vec, ptr->vec+VecLength);
+                feature_vec.push_back(tmp);
+
+                for (i = 0; i < (int) VecLength-1 ; i++)
+                    fout << ptr->vec[i] << ',';
+                fout << ptr->vec[VecLength-1];
                 fout << endl;
             }
         }
     }
-    keys.clear();
 
-    cout<<"extract done."<<endl;
     fout.close();
+    keys.clear();
+    return true;
 }
 

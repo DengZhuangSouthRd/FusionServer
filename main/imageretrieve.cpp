@@ -32,10 +32,10 @@ WordWiki ImageRetrieve::wordGetKnowledge(const string& word, const Ice::Current 
 
 WordRes ImageRetrieve::wordSearch(const DictStr2Str& mapArg, const Ice::Current&) {
     log_InputParameters(mapArg);
-    ListString str;
-    for(int i=1;i<10;++i) {
-        str.push_back(to_string(i));
-    }
+    WordRes res;
+    res.status = -1;
+    log_OutputResult((void*)(&res), TypeWordRes);
+    return res;
 }
 
 ImgRes ImageRetrieve::wordSearchImg(const DictStr2Str& mapArg, const Ice::Current&) {

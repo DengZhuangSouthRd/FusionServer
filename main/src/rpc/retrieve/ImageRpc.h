@@ -168,6 +168,12 @@ struct ImgRes
     ::RPCImgRecong::ListString imgPic;
 };
 
+struct WordRes
+{
+    ::Ice::Int status;
+    ::RPCImgRecong::ListString keyWords;
+};
+
 }
 
 namespace Ice
@@ -229,6 +235,34 @@ struct StreamReader< ::RPCImgRecong::ImgRes, S>
         __is->read(v.status);
         __is->read(v.imgRemote);
         __is->read(v.imgPic);
+    }
+};
+
+template<>
+struct StreamableTraits< ::RPCImgRecong::WordRes>
+{
+    static const StreamHelperCategory helper = StreamHelperCategoryStruct;
+    static const int minWireSize = 5;
+    static const bool fixedLength = false;
+};
+
+template<class S>
+struct StreamWriter< ::RPCImgRecong::WordRes, S>
+{
+    static void write(S* __os, const ::RPCImgRecong::WordRes& v)
+    {
+        __os->write(v.status);
+        __os->write(v.keyWords);
+    }
+};
+
+template<class S>
+struct StreamReader< ::RPCImgRecong::WordRes, S>
+{
+    static void read(S* __is, ::RPCImgRecong::WordRes& v)
+    {
+        __is->read(v.status);
+        __is->read(v.keyWords);
     }
 };
 
@@ -374,17 +408,17 @@ private:
     
 public:
 
-    ::RPCImgRecong::ListString wordSearch(const ::RPCImgRecong::DictStr2Str& mapArg)
+    ::RPCImgRecong::WordRes wordSearch(const ::RPCImgRecong::DictStr2Str& mapArg)
     {
         return wordSearch(mapArg, 0);
     }
-    ::RPCImgRecong::ListString wordSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context& __ctx)
+    ::RPCImgRecong::WordRes wordSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context& __ctx)
     {
         return wordSearch(mapArg, &__ctx);
     }
 #ifdef ICE_CPP11
     ::Ice::AsyncResultPtr
-    begin_wordSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const ::IceInternal::Function<void (const ::RPCImgRecong::ListString&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    begin_wordSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const ::IceInternal::Function<void (const ::RPCImgRecong::WordRes&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
     {
         return __begin_wordSearch(mapArg, 0, __response, __exception, __sent);
     }
@@ -394,7 +428,7 @@ public:
         return begin_wordSearch(mapArg, 0, ::Ice::newCallback(__completed, __sent), 0);
     }
     ::Ice::AsyncResultPtr
-    begin_wordSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::RPCImgRecong::ListString&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    begin_wordSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::RPCImgRecong::WordRes&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
     {
         return __begin_wordSearch(mapArg, &__ctx, __response, __exception, __sent);
     }
@@ -406,13 +440,13 @@ public:
     
 private:
 
-    ::Ice::AsyncResultPtr __begin_wordSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (const ::RPCImgRecong::ListString&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent)
+    ::Ice::AsyncResultPtr __begin_wordSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (const ::RPCImgRecong::WordRes&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent)
     {
         class Cpp11CB : public ::IceInternal::Cpp11FnCallbackNC
         {
         public:
 
-            Cpp11CB(const ::std::function<void (const ::RPCImgRecong::ListString&)>& responseFunc, const ::std::function<void (const ::Ice::Exception&)>& exceptionFunc, const ::std::function<void (bool)>& sentFunc) :
+            Cpp11CB(const ::std::function<void (const ::RPCImgRecong::WordRes&)>& responseFunc, const ::std::function<void (const ::Ice::Exception&)>& exceptionFunc, const ::std::function<void (bool)>& sentFunc) :
                 ::IceInternal::Cpp11FnCallbackNC(exceptionFunc, sentFunc),
                 _response(responseFunc)
             {
@@ -422,7 +456,7 @@ private:
             virtual void __completed(const ::Ice::AsyncResultPtr& __result) const
             {
                 ::RPCImgRecong::ImgRetrievalPrx __proxy = ::RPCImgRecong::ImgRetrievalPrx::uncheckedCast(__result->getProxy());
-                ::RPCImgRecong::ListString __ret;
+                ::RPCImgRecong::WordRes __ret;
                 try
                 {
                     __ret = __proxy->end_wordSearch(__result);
@@ -440,7 +474,7 @@ private:
         
         private:
             
-            ::std::function<void (const ::RPCImgRecong::ListString&)> _response;
+            ::std::function<void (const ::RPCImgRecong::WordRes&)> _response;
         };
         return begin_wordSearch(mapArg, __ctx, new Cpp11CB(__response, __exception, __sent));
     }
@@ -478,11 +512,11 @@ public:
         return begin_wordSearch(mapArg, &__ctx, __del, __cookie);
     }
 
-    ::RPCImgRecong::ListString end_wordSearch(const ::Ice::AsyncResultPtr&);
+    ::RPCImgRecong::WordRes end_wordSearch(const ::Ice::AsyncResultPtr&);
     
 private:
 
-    ::RPCImgRecong::ListString wordSearch(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Context*);
+    ::RPCImgRecong::WordRes wordSearch(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Context*);
     ::Ice::AsyncResultPtr begin_wordSearch(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
     
 public:
@@ -838,7 +872,7 @@ public:
 
     virtual ::RPCImgRecong::WordWiki wordGetKnowledge(const ::std::string&, const ::Ice::Context*, ::IceInternal::InvocationObserver&) = 0;
 
-    virtual ::RPCImgRecong::ListString wordSearch(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Context*, ::IceInternal::InvocationObserver&) = 0;
+    virtual ::RPCImgRecong::WordRes wordSearch(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Context*, ::IceInternal::InvocationObserver&) = 0;
 
     virtual ::RPCImgRecong::ImgRes wordSearchImg(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Context*, ::IceInternal::InvocationObserver&) = 0;
 
@@ -862,7 +896,7 @@ public:
 
     virtual ::RPCImgRecong::WordWiki wordGetKnowledge(const ::std::string&, const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 
-    virtual ::RPCImgRecong::ListString wordSearch(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Context*, ::IceInternal::InvocationObserver&);
+    virtual ::RPCImgRecong::WordRes wordSearch(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 
     virtual ::RPCImgRecong::ImgRes wordSearchImg(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 
@@ -886,7 +920,7 @@ public:
 
     virtual ::RPCImgRecong::WordWiki wordGetKnowledge(const ::std::string&, const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 
-    virtual ::RPCImgRecong::ListString wordSearch(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Context*, ::IceInternal::InvocationObserver&);
+    virtual ::RPCImgRecong::WordRes wordSearch(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 
     virtual ::RPCImgRecong::ImgRes wordSearchImg(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 
@@ -915,7 +949,7 @@ public:
     virtual ::RPCImgRecong::WordWiki wordGetKnowledge(const ::std::string&, const ::Ice::Current& = ::Ice::Current()) = 0;
     ::Ice::DispatchStatus ___wordGetKnowledge(::IceInternal::Incoming&, const ::Ice::Current&);
 
-    virtual ::RPCImgRecong::ListString wordSearch(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Current& = ::Ice::Current()) = 0;
+    virtual ::RPCImgRecong::WordRes wordSearch(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Current& = ::Ice::Current()) = 0;
     ::Ice::DispatchStatus ___wordSearch(::IceInternal::Incoming&, const ::Ice::Current&);
 
     virtual ::RPCImgRecong::ImgRes wordSearchImg(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Current& = ::Ice::Current()) = 0;
@@ -1059,7 +1093,7 @@ public:
 
     typedef void (T::*Exception)(const ::Ice::Exception&);
     typedef void (T::*Sent)(bool);
-    typedef void (T::*Response)(const ::RPCImgRecong::ListString&);
+    typedef void (T::*Response)(const ::RPCImgRecong::WordRes&);
 
     CallbackNC_ImgRetrieval_wordSearch(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
         : ::IceInternal::TwowayCallbackNC<T>(obj, cb != 0, excb, sentcb), response(cb)
@@ -1069,7 +1103,7 @@ public:
     virtual void __completed(const ::Ice::AsyncResultPtr& __result) const
     {
         ::RPCImgRecong::ImgRetrievalPrx __proxy = ::RPCImgRecong::ImgRetrievalPrx::uncheckedCast(__result->getProxy());
-        ::RPCImgRecong::ListString __ret;
+        ::RPCImgRecong::WordRes __ret;
         try
         {
             __ret = __proxy->end_wordSearch(__result);
@@ -1089,13 +1123,13 @@ public:
 };
 
 template<class T> Callback_ImgRetrieval_wordSearchPtr
-newCallback_ImgRetrieval_wordSearch(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RPCImgRecong::ListString&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+newCallback_ImgRetrieval_wordSearch(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RPCImgRecong::WordRes&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
 {
     return new CallbackNC_ImgRetrieval_wordSearch<T>(instance, cb, excb, sentcb);
 }
 
 template<class T> Callback_ImgRetrieval_wordSearchPtr
-newCallback_ImgRetrieval_wordSearch(T* instance, void (T::*cb)(const ::RPCImgRecong::ListString&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+newCallback_ImgRetrieval_wordSearch(T* instance, void (T::*cb)(const ::RPCImgRecong::WordRes&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
 {
     return new CallbackNC_ImgRetrieval_wordSearch<T>(instance, cb, excb, sentcb);
 }
@@ -1109,7 +1143,7 @@ public:
 
     typedef void (T::*Exception)(const ::Ice::Exception& , const CT&);
     typedef void (T::*Sent)(bool , const CT&);
-    typedef void (T::*Response)(const ::RPCImgRecong::ListString&, const CT&);
+    typedef void (T::*Response)(const ::RPCImgRecong::WordRes&, const CT&);
 
     Callback_ImgRetrieval_wordSearch(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
         : ::IceInternal::TwowayCallback<T, CT>(obj, cb != 0, excb, sentcb), response(cb)
@@ -1119,7 +1153,7 @@ public:
     virtual void __completed(const ::Ice::AsyncResultPtr& __result) const
     {
         ::RPCImgRecong::ImgRetrievalPrx __proxy = ::RPCImgRecong::ImgRetrievalPrx::uncheckedCast(__result->getProxy());
-        ::RPCImgRecong::ListString __ret;
+        ::RPCImgRecong::WordRes __ret;
         try
         {
             __ret = __proxy->end_wordSearch(__result);
@@ -1139,13 +1173,13 @@ public:
 };
 
 template<class T, typename CT> Callback_ImgRetrieval_wordSearchPtr
-newCallback_ImgRetrieval_wordSearch(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RPCImgRecong::ListString&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+newCallback_ImgRetrieval_wordSearch(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RPCImgRecong::WordRes&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
 {
     return new Callback_ImgRetrieval_wordSearch<T, CT>(instance, cb, excb, sentcb);
 }
 
 template<class T, typename CT> Callback_ImgRetrieval_wordSearchPtr
-newCallback_ImgRetrieval_wordSearch(T* instance, void (T::*cb)(const ::RPCImgRecong::ListString&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+newCallback_ImgRetrieval_wordSearch(T* instance, void (T::*cb)(const ::RPCImgRecong::WordRes&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
 {
     return new Callback_ImgRetrieval_wordSearch<T, CT>(instance, cb, excb, sentcb);
 }

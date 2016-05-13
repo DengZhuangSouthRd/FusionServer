@@ -13,14 +13,18 @@ module RPCImgRecong {
     dictionary<string, string> DictStr2Str;
 
     struct ImgRes {
-	int status;
+	    int status;
         ListString imgRemote;
         ListString imgPic;
+    };
+    struct WordRes {
+	    int status;
+        ListString keyWords;
     };
     
     interface ImgRetrieval {
         WordWiki wordGetKnowledge(string word); // 通过图像的名字，得到图像的知识库信息
-        ListString wordSearch(DictStr2Str mapArg); // 通过单词搜索得到单词对象列表
+        WordRes wordSearch(DictStr2Str mapArg); // 通过单词搜索得到单词对象列表
         ImgRes wordSearchImg(DictStr2Str mapArg); //通过单词搜索得到图像地址列表
         ImgRes imgSearch(DictStr2Str mapArg); //通过图像搜索得到图像地址列表
     };

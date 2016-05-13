@@ -26,12 +26,22 @@ public:
 public:
     // 这个方法不用实现，我只需要将接口写在这里就好
     virtual WordWiki wordGetKnowledge(const string& word, const Ice::Current& );
+
     // this should not working as async method
-    virtual ListString wordSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const Ice::Current& );
+    // 通过单词搜索得到单词对象列表
+    virtual WordRes wordSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const Ice::Current& );
+
     // this should not working as async method
+    // 通过单词搜索得到图像地址列表
     virtual ImgRes wordSearchImg(const ::RPCImgRecong::DictStr2Str& mapArg, const Ice::Current& );
+
     // this should working as async method, through the thread working
+    // 通过图像搜索得到图像地址列表
     virtual ImgRes imgSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const Ice::Current& );
+
+public:
+    void log_InputParameters(const ::RPCImgRecong::DictStr2Str& inputArgs);
+    void log_OutputResult(void* outputRes, const string typeKind);
 
 private:
     PGDB* p_pgdb;

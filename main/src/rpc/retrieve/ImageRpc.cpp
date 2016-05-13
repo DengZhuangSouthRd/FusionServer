@@ -148,7 +148,7 @@ IceProxy::RPCImgRecong::ImgRetrieval::end_wordGetKnowledge(const ::Ice::AsyncRes
     }
 }
 
-::RPCImgRecong::ListString
+::RPCImgRecong::WordRes
 IceProxy::RPCImgRecong::ImgRetrieval::wordSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __ctx)
 {
     ::IceInternal::InvocationObserver __observer(this, __RPCImgRecong__ImgRetrieval__wordSearch_name, __ctx);
@@ -194,11 +194,11 @@ IceProxy::RPCImgRecong::ImgRetrieval::begin_wordSearch(const ::RPCImgRecong::Dic
     return __result;
 }
 
-::RPCImgRecong::ListString
+::RPCImgRecong::WordRes
 IceProxy::RPCImgRecong::ImgRetrieval::end_wordSearch(const ::Ice::AsyncResultPtr& __result)
 {
     ::Ice::AsyncResult::__check(__result, this, __RPCImgRecong__ImgRetrieval__wordSearch_name);
-    ::RPCImgRecong::ListString __ret;
+    ::RPCImgRecong::WordRes __ret;
     bool __ok = __result->__wait();
     try
     {
@@ -444,7 +444,7 @@ IceDelegateM::RPCImgRecong::ImgRetrieval::wordGetKnowledge(const ::std::string& 
     }
 }
 
-::RPCImgRecong::ListString
+::RPCImgRecong::WordRes
 IceDelegateM::RPCImgRecong::ImgRetrieval::wordSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
 {
     ::IceInternal::Outgoing __og(__handler.get(), __RPCImgRecong__ImgRetrieval__wordSearch_name, ::Ice::Normal, __context, __observer);
@@ -459,7 +459,7 @@ IceDelegateM::RPCImgRecong::ImgRetrieval::wordSearch(const ::RPCImgRecong::DictS
         __og.abort(__ex);
     }
     bool __ok = __og.invoke();
-    ::RPCImgRecong::ListString __ret;
+    ::RPCImgRecong::WordRes __ret;
     try
     {
         if(!__ok)
@@ -635,14 +635,14 @@ IceDelegateD::RPCImgRecong::ImgRetrieval::wordGetKnowledge(const ::std::string& 
     return __result;
 }
 
-::RPCImgRecong::ListString
+::RPCImgRecong::WordRes
 IceDelegateD::RPCImgRecong::ImgRetrieval::wordSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
 {
     class _DirectI : public ::IceInternal::Direct
     {
     public:
 
-        _DirectI(::RPCImgRecong::ListString& __result, const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Current& __current) : 
+        _DirectI(::RPCImgRecong::WordRes& __result, const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Current& __current) : 
             ::IceInternal::Direct(__current),
             _result(__result),
             _m_mapArg(__p_mapArg)
@@ -663,13 +663,13 @@ IceDelegateD::RPCImgRecong::ImgRetrieval::wordSearch(const ::RPCImgRecong::DictS
         
     private:
         
-        ::RPCImgRecong::ListString& _result;
+        ::RPCImgRecong::WordRes& _result;
         const ::RPCImgRecong::DictStr2Str& _m_mapArg;
     };
     
     ::Ice::Current __current;
     __initCurrent(__current, __RPCImgRecong__ImgRetrieval__wordSearch_name, ::Ice::Normal, __context);
-    ::RPCImgRecong::ListString __result;
+    ::RPCImgRecong::WordRes __result;
     try
     {
         _DirectI __direct(__result, mapArg, __current);
@@ -898,7 +898,7 @@ RPCImgRecong::ImgRetrieval::___wordSearch(::IceInternal::Incoming& __inS, const 
     ::RPCImgRecong::DictStr2Str mapArg;
     __is->read(mapArg);
     __inS.endReadParams();
-    ::RPCImgRecong::ListString __ret = wordSearch(mapArg, __current);
+    ::RPCImgRecong::WordRes __ret = wordSearch(mapArg, __current);
     ::IceInternal::BasicStream* __os = __inS.__startWriteParams(::Ice::DefaultFormat);
     __os->write(__ret);
     __inS.__endWriteParams(true);

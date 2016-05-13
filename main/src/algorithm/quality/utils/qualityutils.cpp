@@ -3,7 +3,7 @@
 extern ImageQuality* g_ImgQuality;
 
 //write status into log file
-void WriteMsg(char* ,int32_t statusnum, char* statusmsg) {
+void WriteMsg(char* , int32_t statusnum, const char* statusmsg) {
     Log::Info("%d\t%s", statusnum, statusmsg);
 }
 

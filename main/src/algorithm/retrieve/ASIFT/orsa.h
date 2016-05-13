@@ -26,12 +26,12 @@
 
 #include "libNumerics/numerics.h"
 #include "libMatch/match.h"
-#include "third_party/Eigen/Cholesky"
-#include "third_party/Eigen/Core"
-#include "third_party/Eigen/Eigenvalues"
-#include "third_party/Eigen/LU"
-#include "third_party/Eigen/QR"
-#include "third_party/Eigen/SVD"
+#include "../../third_party/Eigen/Cholesky"
+#include "../../third_party/Eigen/Core"
+#include "../../third_party/Eigen/Eigenvalues"
+#include "../../third_party/Eigen/LU"
+#include "../../third_party/Eigen/QR"
+#include "../../third_party/Eigen/SVD"
 
 /*-------------------- GENERAL PURPOSE ROUTINES --------------------*/
 

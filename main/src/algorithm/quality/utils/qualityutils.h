@@ -35,7 +35,7 @@ typedef struct _QualityRes{
 }QualityRes;
 
 // write status into log file
-void WriteMsg(char*, int32_t statusnum, char* statusmsg);
+void WriteMsg(char*, int32_t statusnum, const char* statusmsg);
 bool createQualityRes(QualityRes& quaRes, int length);
 void revokeQualityRes(QualityRes** p_quaRes);
 

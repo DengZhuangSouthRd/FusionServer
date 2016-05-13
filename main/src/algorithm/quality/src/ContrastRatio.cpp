@@ -185,7 +185,7 @@ int32_t ContrastRatio(char* filepath,char* logfilepath,double* result) {
 		}
 
 		//调用函数，生成灰度共生矩阵
-		int32_t res=GLCM(banddata,width,height,step,orient,gsp,GLCMresult);
+        GLCM(banddata,width,height,step,orient,gsp,GLCMresult);
 		
 		//统计灰度共生矩阵的概率
         for(i=0;i<gsp;i++) {

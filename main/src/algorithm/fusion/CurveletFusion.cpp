@@ -170,7 +170,6 @@ bool CurveletFusion::MeanStd_Curvelet_HIS_Fusion(const char* Input_PAN_FileName,
     for(i=0; i<PAN_Height; i++)
         for(j=0; j<PAN_Width; j++){
             PanMat(i,j)= cpx(DATA2D(PANData, i, j, PAN_Width),0);
-            //IMat(i,j) = cpx(DATA2D(I->imgdata, i, j, PANData->width),0);
         }
     //释放内存
     PANInf->ClearImageData();

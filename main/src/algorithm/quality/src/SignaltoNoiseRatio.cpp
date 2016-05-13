@@ -5,7 +5,7 @@
 //Date:2015-11-17
 */
 
-#include "../utils/qualityUtils.h"
+#include "../utils/qualityutils.h"
 
 //SignaltoNoiseRatio-影像信噪比
 int32_t SignaltoNoiseRatio(char* filepath,char* logfilepath,double* result) {

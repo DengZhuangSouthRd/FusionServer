@@ -5,7 +5,7 @@
 //Date:2015-11-17
 */
 
-#include "../utils/qualityUtils.h"
+#include "../utils/qualityutils.h"
 
 //Clarity-影像清晰度（点锐度算法）
 int32_t Clarity(char* filepath,char* logfilepath,double* result) {

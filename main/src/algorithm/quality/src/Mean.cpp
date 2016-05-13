@@ -5,7 +5,7 @@
 //Date:2015-9-24
 */
 
-#include "../utils/qualityUtils.h"
+#include "../utils/qualityutils.h"
 
 //Mean
 int32_t Mean(char* filepath,char* logfilepath,double* result) {

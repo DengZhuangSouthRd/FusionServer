@@ -5,7 +5,7 @@
 //Date:2015-11-17
 */
 
-#include "../utils/qualityUtils.h"
+#include "../utils/qualityutils.h"
 
 //Striperesidual-条纹残余量 -改进后
 int32_t Striperesidual(char* filepath,char* logfilepath,double* result) {

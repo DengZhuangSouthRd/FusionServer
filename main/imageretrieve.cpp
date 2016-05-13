@@ -66,7 +66,17 @@ ImgRes ImageRetrieve::imgSearchSync(const DictStr2Str& mapArg, const Ice::Curren
 }
 
 int ImageRetrieve::imgSearchAsync(const DictStr2Str &mapArg, const Ice::Current &) {
-    return 0;
+    log_InputParameters(mapArg);
+    if(mapArg.count("id") == 0 || mapArg.count("imgurl") == 0) {
+        Log::Error("In imgSearch, inputArgMap illegal !");
+        return -1;
+    }
+    if(access(mapArg.at("imgurl").c_str(), 0) != 0) {
+        Log::Error("In imgSearch, Input Retrieve Image Not Exists !");
+        return -1;
+    }
+    Log::Info("Task push Successful !");
+    return 1;
 }
 
 ImgRes ImageRetrieve::fetchImgSearchResult(const DictStr2Str &mapArg, const Ice::Current &) {

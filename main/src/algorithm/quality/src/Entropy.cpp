@@ -5,7 +5,7 @@
 //Date:2015-11-17
 */
 
-#include "../utils/qualityUtils.h"
+#include "../utils/qualityutils.h"
 
 //Entropy-影像信息熵
 int32_t Entropy(char* filepath,char* logfilepath,double* result) {

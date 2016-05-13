@@ -5,7 +5,7 @@
 //Date:2015-11-17
 */
 
-#include "../utils/qualityUtils.h"
+#include "../utils/qualityutils.h"
 
 //GLCM-Gray level Co-occurrence Matrix-灰度共生矩阵函数
 //step为距离,orient为方向,gsp为灰度采样级数

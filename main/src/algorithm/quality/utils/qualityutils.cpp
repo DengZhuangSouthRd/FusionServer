@@ -1,4 +1,4 @@
-#include "qualityUtils.h"
+#include "qualityutils.h"
 
 extern ImageQuality* g_ImgQuality;
 

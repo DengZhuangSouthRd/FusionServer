@@ -14,6 +14,7 @@
 #include "./src/utils/log.h"
 #include "./src/threadpool/ThreadPool.h"
 #include "./src/algorithm/retrieve/utils/retrieveutils.h"
+#include "./src/algorithm/retrieve/utils/pgdb.h"
 
 using namespace std;
 using namespace RPCImgRecong;

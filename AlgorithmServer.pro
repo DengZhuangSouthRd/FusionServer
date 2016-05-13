@@ -145,7 +145,9 @@ SOURCES += \
     main/src/algorithm/retrieve/ASIFT/orsa.cpp \
     main/src/algorithm/retrieve/ASIFT/splines.cpp \
     main/src/algorithm/retrieve/utils/retrieveutils.cpp \
-    main/imageretrieve.cpp
+    main/imageretrieve.cpp \
+    main/src/algorithm/retrieve/utils/pgdb.cpp \
+    main/src/algorithm/retrieve/utils/myredis.cpp
 
 HEADERS += \
     main/Server.h \
@@ -181,7 +183,6 @@ HEADERS += \
     main/src/utils/utils.h \
     main/src/utils/json/json-forwards.h \
     main/src/utils/json/json.h \
-    main/src/algorithm/quality/utils/qualityUtils.h \
     main/imagefusion.h \
     main/imagequality.h \
     main/src/algorithm/fusion/utils/fusionutils.h \
@@ -403,7 +404,10 @@ HEADERS += \
     main/src/algorithm/retrieve/ASIFT/orsa.h \
     main/src/algorithm/retrieve/ASIFT/splines.h \
     main/src/algorithm/retrieve/utils/retrieveutils.h \
-    main/imageretrieve.h
+    main/imageretrieve.h \
+    main/src/algorithm/quality/utils/qualityutils.h \
+    main/src/algorithm/retrieve/utils/pgdb.h \
+    main/src/algorithm/retrieve/utils/myredis.h
 
 DISTFILES += \
     README.md \

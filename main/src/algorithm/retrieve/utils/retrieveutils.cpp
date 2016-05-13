@@ -128,6 +128,6 @@ bool MyRedis::is_Working() {
 
 string getPGConfInfo(const map<string, string> &argvMap) {
     string str = "";
-    str = "dbname=" + argvMap.at("PG_NAME") + " user=" + argvMap.at("PG_USER") + " password=" + argvMap.at("PG_PASSWD") + " host=" + argvMap.at("PG_HOST") + " port=" + argvMap.at("PG_PORT");
+    str = "dbname=" + argvMap.at("RETRIEVEPG_NAME") + " user=" + argvMap.at("RETRIEVEPG_USER") + " password=" + argvMap.at("RETRIEVEPG_PASSWD") + " host=" + argvMap.at("RETRIEVEPG_HOST") + " port=" + argvMap.at("RETRIEVEPG_PORT");
     return str;
 }

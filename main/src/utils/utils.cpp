@@ -67,6 +67,17 @@ void read_config_Json(string fileName, map<string, string> &argvMap) {
     if(root.get("RETRIEVE","NULL").asString() != "NULL") {
         argvMap["RETRIEVEISUSE"] = root["RETRIEVE"].get("ISUSE", "FALSE").asString();
         argvMap["RETRIEVEIDENTITY"] = root["RETRIEVE"].get("FUSIONIDENTITY", "NULL").asString();
+        argvMap["RETRIEVEPG_NAME"] = root["RETRIEVE"].get("RETRIEVEPG_NAME", "NULL").asString();
+
+        argvMap["RETRIEVEPG_HOST"] = root["RETRIEVE"].get("RETRIEVEPG_HOST", "NULL").asString();
+        argvMap["RETRIEVEPG_PORT"] = root["RETRIEVE"].get("RETRIEVEPG_PORT", "NULL").asString();
+        argvMap["RETRIEVEPG_USER"] = root["RETRIEVE"].get("RETRIEVEPG_USER", "NULL").asString();
+        argvMap["RETRIEVEPG_PASSWD"] = root["RETRIEVE"].get("RETRIEVEPG_PASSWD", "NULL").asString();
+
+        argvMap["RETRIEVEREDIS_HOST"] = root["RETRIEVE"].get("RETRIEVEREDIS_HOST", "NULL").asString();
+        argvMap["RETRIEVEREDIS_PORT"] = root["RETRIEVE"].get("RETRIEVEREDIS_PORT", "NULL").asString();
+        argvMap["RETRIEVEREDIS_PASSWD"] = root["RETRIEVE"].get("RETRIEVEREDIS_PASSWD", "NULL").asString();
+
         argvMap["RETRIEVESerializePath"] = root["RETRIEVE"].get("FUSIONSerializePath", "NULL").asString();
         argvMap["RETRIEVESerializePathBak"] = root["RETRIEVE"].get("FUSIONSerializePathBak", "NULL").asString();
     }

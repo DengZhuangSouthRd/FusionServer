@@ -12,6 +12,14 @@
     "RETRIEVE": {
         "ISUSE" : "TRUE",
         "RETRIEVEIDENTITY" : "WISERETRIEVE",
+        "RETRIEVEPG_NAME" : "testdb",
+        "RETRIEVEPG_HOST" : "10.2.3.119",
+        "RETRIEVEPG_PORT": "5432",
+        "RETRIEVEPG_USER": "postgres",
+        "RETRIEVEPG_PASSWD": "csuduc",
+        "RETRIEVEREDIS_HOST": "10.2.3.119",
+        "RETRIEVEREDIS_PORT": "6379",
+        "RETRIEVEREDIS_PASSWD": "csuduc",
         "RETRIEVESerializePath" : "main/data/serialize/retrievetask.json",
         "RETRIEVESerializePathBak" : "main/data/serialize/retrievetask_backup.json"
     },

@@ -24,7 +24,7 @@ public:
     ~ImageRetrieve();
 
 public:
-    // this should not working as async method
+    // 这个方法不用实现，我只需要将接口写在这里就好
     virtual WordWiki wordGetKnowledge(const string& word, const Ice::Current& );
     // this should not working as async method
     virtual ListString wordSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const Ice::Current& );

@@ -22,9 +22,9 @@ ImageRetrieve::~ImageRetrieve() {
 
 WordWiki ImageRetrieve::wordGetKnowledge(const string& word, const Ice::Current &) {
     WordWiki wiki;
-    wiki.key = "sdfdsfd";
-    wiki.abstr = "sdfds";
-    wiki.descr = "sdfds";
+    wiki.key = "";
+    wiki.abstr = "";
+    wiki.descr = "";
     return wiki;
 }
 

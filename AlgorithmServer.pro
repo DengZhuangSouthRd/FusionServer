@@ -407,7 +407,10 @@ HEADERS += \
     main/imageretrieve.h \
     main/src/algorithm/quality/utils/qualityutils.h \
     main/src/algorithm/retrieve/utils/pgdb.h \
-    main/src/algorithm/retrieve/utils/myredis.h
+    main/src/algorithm/retrieve/utils/myredis.h \
+    main/src/algorithm/retrieve/detect/ReadCsvFile.h \
+    main/src/algorithm/retrieve/detect/SR.h \
+    main/src/algorithm/retrieve/detect/Vec.h
 
 DISTFILES += \
     README.md \

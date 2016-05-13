@@ -9,5 +9,6 @@
 using namespace std;
 
 string getPGConfInfo(const map<string, string>& argvMap);
+void* retrieveInterface(void* args);
 
 #endif // RETRIEVEUTILS_H

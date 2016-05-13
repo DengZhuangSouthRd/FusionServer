@@ -49,15 +49,28 @@ ImgRes ImageRetrieve::wordSearchImg(const DictStr2Str& mapArg, const Ice::Curren
     return res;
 }
 
-ImgRes ImageRetrieve::imgSearch(const DictStr2Str& mapArg, const Ice::Current&) {
+ImgRes ImageRetrieve::imgSearchSync(const DictStr2Str& mapArg, const Ice::Current&) {
     log_InputParameters(mapArg);
     ImgRes res;
-    for(int i=0;i<10;++i) {
-        res.imgRemote.push_back(to_string(i));
-        res.imgPic.push_back(to_string(i));
+    res.status = -1;
+    if(mapArg.count("id") == 0 || mapArg.count("imgurl") == 0) {
+        Log::Error("In imgSearch, inputArgMap illegal !");
+        return res;
+    }
+    if(access(mapArg.at("imgurl").c_str(), 0) != 0) {
+        Log::Error("In imgSearch, Input Retrieve Image Not Exists !");
+        return res;
     }
     log_OutputResult((void*)(&res), TypeImgRes);
     return res;
+}
+
+int ImageRetrieve::imgSearchAsync(const DictStr2Str &mapArg, const Ice::Current &) {
+    return 0;
+}
+
+ImgRes ImageRetrieve::fetchImgSearchResult(const DictStr2Str &mapArg, const Ice::Current &) {
+
 }
 
 void ImageRetrieve::log_InputParameters(const DictStr2Str &inputArgs) {

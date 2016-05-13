@@ -46,7 +46,11 @@ const ::std::string __RPCImgRecong__ImgRetrieval__wordSearch_name = "wordSearch"
 
 const ::std::string __RPCImgRecong__ImgRetrieval__wordSearchImg_name = "wordSearchImg";
 
-const ::std::string __RPCImgRecong__ImgRetrieval__imgSearch_name = "imgSearch";
+const ::std::string __RPCImgRecong__ImgRetrieval__imgSearchAsync_name = "imgSearchAsync";
+
+const ::std::string __RPCImgRecong__ImgRetrieval__fetchImgSearchResult_name = "fetchImgSearchResult";
+
+const ::std::string __RPCImgRecong__ImgRetrieval__imgSearchSync_name = "imgSearchSync";
 
 }
 
@@ -302,20 +306,20 @@ IceProxy::RPCImgRecong::ImgRetrieval::end_wordSearchImg(const ::Ice::AsyncResult
     }
 }
 
-::RPCImgRecong::ImgRes
-IceProxy::RPCImgRecong::ImgRetrieval::imgSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __ctx)
+::Ice::Int
+IceProxy::RPCImgRecong::ImgRetrieval::imgSearchAsync(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __ctx)
 {
-    ::IceInternal::InvocationObserver __observer(this, __RPCImgRecong__ImgRetrieval__imgSearch_name, __ctx);
+    ::IceInternal::InvocationObserver __observer(this, __RPCImgRecong__ImgRetrieval__imgSearchAsync_name, __ctx);
     int __cnt = 0;
     while(true)
     {
         ::IceInternal::Handle< ::IceDelegate::Ice::Object> __delBase;
         try
         {
-            __checkTwowayOnly(__RPCImgRecong__ImgRetrieval__imgSearch_name);
+            __checkTwowayOnly(__RPCImgRecong__ImgRetrieval__imgSearchAsync_name);
             __delBase = __getDelegate(false);
             ::IceDelegate::RPCImgRecong::ImgRetrieval* __del = dynamic_cast< ::IceDelegate::RPCImgRecong::ImgRetrieval*>(__delBase.get());
-            return __del->imgSearch(mapArg, __ctx, __observer);
+            return __del->imgSearchAsync(mapArg, __ctx, __observer);
         }
         catch(const ::IceInternal::LocalExceptionWrapper& __ex)
         {
@@ -329,13 +333,90 @@ IceProxy::RPCImgRecong::ImgRetrieval::imgSearch(const ::RPCImgRecong::DictStr2St
 }
 
 ::Ice::AsyncResultPtr
-IceProxy::RPCImgRecong::ImgRetrieval::begin_imgSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+IceProxy::RPCImgRecong::ImgRetrieval::begin_imgSearchAsync(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
 {
-    __checkAsyncTwowayOnly(__RPCImgRecong__ImgRetrieval__imgSearch_name);
-    ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __RPCImgRecong__ImgRetrieval__imgSearch_name, __del, __cookie);
+    __checkAsyncTwowayOnly(__RPCImgRecong__ImgRetrieval__imgSearchAsync_name);
+    ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __RPCImgRecong__ImgRetrieval__imgSearchAsync_name, __del, __cookie);
     try
     {
-        __result->__prepare(__RPCImgRecong__ImgRetrieval__imgSearch_name, ::Ice::Normal, __ctx);
+        __result->__prepare(__RPCImgRecong__ImgRetrieval__imgSearchAsync_name, ::Ice::Normal, __ctx);
+        ::IceInternal::BasicStream* __os = __result->__startWriteParams(::Ice::DefaultFormat);
+        __os->write(mapArg);
+        __result->__endWriteParams();
+        __result->__send(true);
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        __result->__exceptionAsync(__ex);
+    }
+    return __result;
+}
+
+::Ice::Int
+IceProxy::RPCImgRecong::ImgRetrieval::end_imgSearchAsync(const ::Ice::AsyncResultPtr& __result)
+{
+    ::Ice::AsyncResult::__check(__result, this, __RPCImgRecong__ImgRetrieval__imgSearchAsync_name);
+    ::Ice::Int __ret;
+    bool __ok = __result->__wait();
+    try
+    {
+        if(!__ok)
+        {
+            try
+            {
+                __result->__throwUserException();
+            }
+            catch(const ::Ice::UserException& __ex)
+            {
+                throw ::Ice::UnknownUserException(__FILE__, __LINE__, __ex.ice_name());
+            }
+        }
+        ::IceInternal::BasicStream* __is = __result->__startReadParams();
+        __is->read(__ret);
+        __result->__endReadParams();
+        return __ret;
+    }
+    catch(const ::Ice::LocalException& ex)
+    {
+        __result->__getObserver().failed(ex.ice_name());
+        throw;
+    }
+}
+
+::RPCImgRecong::ImgRes
+IceProxy::RPCImgRecong::ImgRetrieval::fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __ctx)
+{
+    ::IceInternal::InvocationObserver __observer(this, __RPCImgRecong__ImgRetrieval__fetchImgSearchResult_name, __ctx);
+    int __cnt = 0;
+    while(true)
+    {
+        ::IceInternal::Handle< ::IceDelegate::Ice::Object> __delBase;
+        try
+        {
+            __checkTwowayOnly(__RPCImgRecong__ImgRetrieval__fetchImgSearchResult_name);
+            __delBase = __getDelegate(false);
+            ::IceDelegate::RPCImgRecong::ImgRetrieval* __del = dynamic_cast< ::IceDelegate::RPCImgRecong::ImgRetrieval*>(__delBase.get());
+            return __del->fetchImgSearchResult(mapArg, __ctx, __observer);
+        }
+        catch(const ::IceInternal::LocalExceptionWrapper& __ex)
+        {
+            __handleExceptionWrapper(__delBase, __ex, __observer);
+        }
+        catch(const ::Ice::LocalException& __ex)
+        {
+            __handleException(__delBase, __ex, true, __cnt, __observer);
+        }
+    }
+}
+
+::Ice::AsyncResultPtr
+IceProxy::RPCImgRecong::ImgRetrieval::begin_fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+{
+    __checkAsyncTwowayOnly(__RPCImgRecong__ImgRetrieval__fetchImgSearchResult_name);
+    ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __RPCImgRecong__ImgRetrieval__fetchImgSearchResult_name, __del, __cookie);
+    try
+    {
+        __result->__prepare(__RPCImgRecong__ImgRetrieval__fetchImgSearchResult_name, ::Ice::Normal, __ctx);
         ::IceInternal::BasicStream* __os = __result->__startWriteParams(::Ice::DefaultFormat);
         __os->write(mapArg);
         __result->__endWriteParams();
@@ -349,9 +430,86 @@ IceProxy::RPCImgRecong::ImgRetrieval::begin_imgSearch(const ::RPCImgRecong::Dict
 }
 
 ::RPCImgRecong::ImgRes
-IceProxy::RPCImgRecong::ImgRetrieval::end_imgSearch(const ::Ice::AsyncResultPtr& __result)
+IceProxy::RPCImgRecong::ImgRetrieval::end_fetchImgSearchResult(const ::Ice::AsyncResultPtr& __result)
 {
-    ::Ice::AsyncResult::__check(__result, this, __RPCImgRecong__ImgRetrieval__imgSearch_name);
+    ::Ice::AsyncResult::__check(__result, this, __RPCImgRecong__ImgRetrieval__fetchImgSearchResult_name);
+    ::RPCImgRecong::ImgRes __ret;
+    bool __ok = __result->__wait();
+    try
+    {
+        if(!__ok)
+        {
+            try
+            {
+                __result->__throwUserException();
+            }
+            catch(const ::Ice::UserException& __ex)
+            {
+                throw ::Ice::UnknownUserException(__FILE__, __LINE__, __ex.ice_name());
+            }
+        }
+        ::IceInternal::BasicStream* __is = __result->__startReadParams();
+        __is->read(__ret);
+        __result->__endReadParams();
+        return __ret;
+    }
+    catch(const ::Ice::LocalException& ex)
+    {
+        __result->__getObserver().failed(ex.ice_name());
+        throw;
+    }
+}
+
+::RPCImgRecong::ImgRes
+IceProxy::RPCImgRecong::ImgRetrieval::imgSearchSync(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __ctx)
+{
+    ::IceInternal::InvocationObserver __observer(this, __RPCImgRecong__ImgRetrieval__imgSearchSync_name, __ctx);
+    int __cnt = 0;
+    while(true)
+    {
+        ::IceInternal::Handle< ::IceDelegate::Ice::Object> __delBase;
+        try
+        {
+            __checkTwowayOnly(__RPCImgRecong__ImgRetrieval__imgSearchSync_name);
+            __delBase = __getDelegate(false);
+            ::IceDelegate::RPCImgRecong::ImgRetrieval* __del = dynamic_cast< ::IceDelegate::RPCImgRecong::ImgRetrieval*>(__delBase.get());
+            return __del->imgSearchSync(mapArg, __ctx, __observer);
+        }
+        catch(const ::IceInternal::LocalExceptionWrapper& __ex)
+        {
+            __handleExceptionWrapper(__delBase, __ex, __observer);
+        }
+        catch(const ::Ice::LocalException& __ex)
+        {
+            __handleException(__delBase, __ex, true, __cnt, __observer);
+        }
+    }
+}
+
+::Ice::AsyncResultPtr
+IceProxy::RPCImgRecong::ImgRetrieval::begin_imgSearchSync(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+{
+    __checkAsyncTwowayOnly(__RPCImgRecong__ImgRetrieval__imgSearchSync_name);
+    ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __RPCImgRecong__ImgRetrieval__imgSearchSync_name, __del, __cookie);
+    try
+    {
+        __result->__prepare(__RPCImgRecong__ImgRetrieval__imgSearchSync_name, ::Ice::Normal, __ctx);
+        ::IceInternal::BasicStream* __os = __result->__startWriteParams(::Ice::DefaultFormat);
+        __os->write(mapArg);
+        __result->__endWriteParams();
+        __result->__send(true);
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        __result->__exceptionAsync(__ex);
+    }
+    return __result;
+}
+
+::RPCImgRecong::ImgRes
+IceProxy::RPCImgRecong::ImgRetrieval::end_imgSearchSync(const ::Ice::AsyncResultPtr& __result)
+{
+    ::Ice::AsyncResult::__check(__result, this, __RPCImgRecong__ImgRetrieval__imgSearchSync_name);
     ::RPCImgRecong::ImgRes __ret;
     bool __ok = __result->__wait();
     try
@@ -526,10 +684,92 @@ IceDelegateM::RPCImgRecong::ImgRetrieval::wordSearchImg(const ::RPCImgRecong::Di
     }
 }
 
-::RPCImgRecong::ImgRes
-IceDelegateM::RPCImgRecong::ImgRetrieval::imgSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
+::Ice::Int
+IceDelegateM::RPCImgRecong::ImgRetrieval::imgSearchAsync(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
 {
-    ::IceInternal::Outgoing __og(__handler.get(), __RPCImgRecong__ImgRetrieval__imgSearch_name, ::Ice::Normal, __context, __observer);
+    ::IceInternal::Outgoing __og(__handler.get(), __RPCImgRecong__ImgRetrieval__imgSearchAsync_name, ::Ice::Normal, __context, __observer);
+    try
+    {
+        ::IceInternal::BasicStream* __os = __og.startWriteParams(::Ice::DefaultFormat);
+        __os->write(mapArg);
+        __og.endWriteParams();
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        __og.abort(__ex);
+    }
+    bool __ok = __og.invoke();
+    ::Ice::Int __ret;
+    try
+    {
+        if(!__ok)
+        {
+            try
+            {
+                __og.throwUserException();
+            }
+            catch(const ::Ice::UserException& __ex)
+            {
+                ::Ice::UnknownUserException __uue(__FILE__, __LINE__, __ex.ice_name());
+                throw __uue;
+            }
+        }
+        ::IceInternal::BasicStream* __is = __og.startReadParams();
+        __is->read(__ret);
+        __og.endReadParams();
+        return __ret;
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        throw ::IceInternal::LocalExceptionWrapper(__ex, false);
+    }
+}
+
+::RPCImgRecong::ImgRes
+IceDelegateM::RPCImgRecong::ImgRetrieval::fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
+{
+    ::IceInternal::Outgoing __og(__handler.get(), __RPCImgRecong__ImgRetrieval__fetchImgSearchResult_name, ::Ice::Normal, __context, __observer);
+    try
+    {
+        ::IceInternal::BasicStream* __os = __og.startWriteParams(::Ice::DefaultFormat);
+        __os->write(mapArg);
+        __og.endWriteParams();
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        __og.abort(__ex);
+    }
+    bool __ok = __og.invoke();
+    ::RPCImgRecong::ImgRes __ret;
+    try
+    {
+        if(!__ok)
+        {
+            try
+            {
+                __og.throwUserException();
+            }
+            catch(const ::Ice::UserException& __ex)
+            {
+                ::Ice::UnknownUserException __uue(__FILE__, __LINE__, __ex.ice_name());
+                throw __uue;
+            }
+        }
+        ::IceInternal::BasicStream* __is = __og.startReadParams();
+        __is->read(__ret);
+        __og.endReadParams();
+        return __ret;
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        throw ::IceInternal::LocalExceptionWrapper(__ex, false);
+    }
+}
+
+::RPCImgRecong::ImgRes
+IceDelegateM::RPCImgRecong::ImgRetrieval::imgSearchSync(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
+{
+    ::IceInternal::Outgoing __og(__handler.get(), __RPCImgRecong__ImgRetrieval__imgSearchSync_name, ::Ice::Normal, __context, __observer);
     try
     {
         ::IceInternal::BasicStream* __os = __og.startWriteParams(::Ice::DefaultFormat);
@@ -771,8 +1011,76 @@ IceDelegateD::RPCImgRecong::ImgRetrieval::wordSearchImg(const ::RPCImgRecong::Di
     return __result;
 }
 
+::Ice::Int
+IceDelegateD::RPCImgRecong::ImgRetrieval::imgSearchAsync(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
+{
+    class _DirectI : public ::IceInternal::Direct
+    {
+    public:
+
+        _DirectI(::Ice::Int& __result, const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Current& __current) : 
+            ::IceInternal::Direct(__current),
+            _result(__result),
+            _m_mapArg(__p_mapArg)
+        {
+        }
+        
+        virtual ::Ice::DispatchStatus
+        run(::Ice::Object* object)
+        {
+            ::RPCImgRecong::ImgRetrieval* servant = dynamic_cast< ::RPCImgRecong::ImgRetrieval*>(object);
+            if(!servant)
+            {
+                throw ::Ice::OperationNotExistException(__FILE__, __LINE__, _current.id, _current.facet, _current.operation);
+            }
+            _result = servant->imgSearchAsync(_m_mapArg, _current);
+            return ::Ice::DispatchOK;
+        }
+        
+    private:
+        
+        ::Ice::Int& _result;
+        const ::RPCImgRecong::DictStr2Str& _m_mapArg;
+    };
+    
+    ::Ice::Current __current;
+    __initCurrent(__current, __RPCImgRecong__ImgRetrieval__imgSearchAsync_name, ::Ice::Normal, __context);
+    ::Ice::Int __result;
+    try
+    {
+        _DirectI __direct(__result, mapArg, __current);
+        try
+        {
+            __direct.getServant()->__collocDispatch(__direct);
+        }
+        catch(...)
+        {
+            __direct.destroy();
+            throw;
+        }
+        __direct.destroy();
+    }
+    catch(const ::Ice::SystemException&)
+    {
+        throw;
+    }
+    catch(const ::IceInternal::LocalExceptionWrapper&)
+    {
+        throw;
+    }
+    catch(const ::std::exception& __ex)
+    {
+        ::IceInternal::LocalExceptionWrapper::throwWrapper(__ex);
+    }
+    catch(...)
+    {
+        throw ::IceInternal::LocalExceptionWrapper(::Ice::UnknownException(__FILE__, __LINE__, "unknown c++ exception"), false);
+    }
+    return __result;
+}
+
 ::RPCImgRecong::ImgRes
-IceDelegateD::RPCImgRecong::ImgRetrieval::imgSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
+IceDelegateD::RPCImgRecong::ImgRetrieval::fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
 {
     class _DirectI : public ::IceInternal::Direct
     {
@@ -793,7 +1101,7 @@ IceDelegateD::RPCImgRecong::ImgRetrieval::imgSearch(const ::RPCImgRecong::DictSt
             {
                 throw ::Ice::OperationNotExistException(__FILE__, __LINE__, _current.id, _current.facet, _current.operation);
             }
-            _result = servant->imgSearch(_m_mapArg, _current);
+            _result = servant->fetchImgSearchResult(_m_mapArg, _current);
             return ::Ice::DispatchOK;
         }
         
@@ -804,7 +1112,75 @@ IceDelegateD::RPCImgRecong::ImgRetrieval::imgSearch(const ::RPCImgRecong::DictSt
     };
     
     ::Ice::Current __current;
-    __initCurrent(__current, __RPCImgRecong__ImgRetrieval__imgSearch_name, ::Ice::Normal, __context);
+    __initCurrent(__current, __RPCImgRecong__ImgRetrieval__fetchImgSearchResult_name, ::Ice::Normal, __context);
+    ::RPCImgRecong::ImgRes __result;
+    try
+    {
+        _DirectI __direct(__result, mapArg, __current);
+        try
+        {
+            __direct.getServant()->__collocDispatch(__direct);
+        }
+        catch(...)
+        {
+            __direct.destroy();
+            throw;
+        }
+        __direct.destroy();
+    }
+    catch(const ::Ice::SystemException&)
+    {
+        throw;
+    }
+    catch(const ::IceInternal::LocalExceptionWrapper&)
+    {
+        throw;
+    }
+    catch(const ::std::exception& __ex)
+    {
+        ::IceInternal::LocalExceptionWrapper::throwWrapper(__ex);
+    }
+    catch(...)
+    {
+        throw ::IceInternal::LocalExceptionWrapper(::Ice::UnknownException(__FILE__, __LINE__, "unknown c++ exception"), false);
+    }
+    return __result;
+}
+
+::RPCImgRecong::ImgRes
+IceDelegateD::RPCImgRecong::ImgRetrieval::imgSearchSync(const ::RPCImgRecong::DictStr2Str& mapArg, const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
+{
+    class _DirectI : public ::IceInternal::Direct
+    {
+    public:
+
+        _DirectI(::RPCImgRecong::ImgRes& __result, const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Current& __current) : 
+            ::IceInternal::Direct(__current),
+            _result(__result),
+            _m_mapArg(__p_mapArg)
+        {
+        }
+        
+        virtual ::Ice::DispatchStatus
+        run(::Ice::Object* object)
+        {
+            ::RPCImgRecong::ImgRetrieval* servant = dynamic_cast< ::RPCImgRecong::ImgRetrieval*>(object);
+            if(!servant)
+            {
+                throw ::Ice::OperationNotExistException(__FILE__, __LINE__, _current.id, _current.facet, _current.operation);
+            }
+            _result = servant->imgSearchSync(_m_mapArg, _current);
+            return ::Ice::DispatchOK;
+        }
+        
+    private:
+        
+        ::RPCImgRecong::ImgRes& _result;
+        const ::RPCImgRecong::DictStr2Str& _m_mapArg;
+    };
+    
+    ::Ice::Current __current;
+    __initCurrent(__current, __RPCImgRecong__ImgRetrieval__imgSearchSync_name, ::Ice::Normal, __context);
     ::RPCImgRecong::ImgRes __result;
     try
     {
@@ -921,14 +1297,44 @@ RPCImgRecong::ImgRetrieval::___wordSearchImg(::IceInternal::Incoming& __inS, con
 }
 
 ::Ice::DispatchStatus
-RPCImgRecong::ImgRetrieval::___imgSearch(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
+RPCImgRecong::ImgRetrieval::___imgSearchAsync(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
 {
     __checkMode(::Ice::Normal, __current.mode);
     ::IceInternal::BasicStream* __is = __inS.startReadParams();
     ::RPCImgRecong::DictStr2Str mapArg;
     __is->read(mapArg);
     __inS.endReadParams();
-    ::RPCImgRecong::ImgRes __ret = imgSearch(mapArg, __current);
+    ::Ice::Int __ret = imgSearchAsync(mapArg, __current);
+    ::IceInternal::BasicStream* __os = __inS.__startWriteParams(::Ice::DefaultFormat);
+    __os->write(__ret);
+    __inS.__endWriteParams(true);
+    return ::Ice::DispatchOK;
+}
+
+::Ice::DispatchStatus
+RPCImgRecong::ImgRetrieval::___fetchImgSearchResult(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
+{
+    __checkMode(::Ice::Normal, __current.mode);
+    ::IceInternal::BasicStream* __is = __inS.startReadParams();
+    ::RPCImgRecong::DictStr2Str mapArg;
+    __is->read(mapArg);
+    __inS.endReadParams();
+    ::RPCImgRecong::ImgRes __ret = fetchImgSearchResult(mapArg, __current);
+    ::IceInternal::BasicStream* __os = __inS.__startWriteParams(::Ice::DefaultFormat);
+    __os->write(__ret);
+    __inS.__endWriteParams(true);
+    return ::Ice::DispatchOK;
+}
+
+::Ice::DispatchStatus
+RPCImgRecong::ImgRetrieval::___imgSearchSync(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
+{
+    __checkMode(::Ice::Normal, __current.mode);
+    ::IceInternal::BasicStream* __is = __inS.startReadParams();
+    ::RPCImgRecong::DictStr2Str mapArg;
+    __is->read(mapArg);
+    __inS.endReadParams();
+    ::RPCImgRecong::ImgRes __ret = imgSearchSync(mapArg, __current);
     ::IceInternal::BasicStream* __os = __inS.__startWriteParams(::Ice::DefaultFormat);
     __os->write(__ret);
     __inS.__endWriteParams(true);
@@ -939,11 +1345,13 @@ namespace
 {
 const ::std::string __RPCImgRecong__ImgRetrieval_all[] =
 {
+    "fetchImgSearchResult",
     "ice_id",
     "ice_ids",
     "ice_isA",
     "ice_ping",
-    "imgSearch",
+    "imgSearchAsync",
+    "imgSearchSync",
     "wordGetKnowledge",
     "wordSearch",
     "wordSearchImg"
@@ -954,7 +1362,7 @@ const ::std::string __RPCImgRecong__ImgRetrieval_all[] =
 ::Ice::DispatchStatus
 RPCImgRecong::ImgRetrieval::__dispatch(::IceInternal::Incoming& in, const ::Ice::Current& current)
 {
-    ::std::pair< const ::std::string*, const ::std::string*> r = ::std::equal_range(__RPCImgRecong__ImgRetrieval_all, __RPCImgRecong__ImgRetrieval_all + 8, current.operation);
+    ::std::pair< const ::std::string*, const ::std::string*> r = ::std::equal_range(__RPCImgRecong__ImgRetrieval_all, __RPCImgRecong__ImgRetrieval_all + 10, current.operation);
     if(r.first == r.second)
     {
         throw ::Ice::OperationNotExistException(__FILE__, __LINE__, current.id, current.facet, current.operation);
@@ -964,33 +1372,41 @@ RPCImgRecong::ImgRetrieval::__dispatch(::IceInternal::Incoming& in, const ::Ice:
     {
         case 0:
         {
-            return ___ice_id(in, current);
+            return ___fetchImgSearchResult(in, current);
         }
         case 1:
         {
-            return ___ice_ids(in, current);
+            return ___ice_id(in, current);
         }
         case 2:
         {
-            return ___ice_isA(in, current);
+            return ___ice_ids(in, current);
         }
         case 3:
         {
-            return ___ice_ping(in, current);
+            return ___ice_isA(in, current);
         }
         case 4:
         {
-            return ___imgSearch(in, current);
+            return ___ice_ping(in, current);
         }
         case 5:
         {
-            return ___wordGetKnowledge(in, current);
+            return ___imgSearchAsync(in, current);
         }
         case 6:
         {
-            return ___wordSearch(in, current);
+            return ___imgSearchSync(in, current);
         }
         case 7:
+        {
+            return ___wordGetKnowledge(in, current);
+        }
+        case 8:
+        {
+            return ___wordSearch(in, current);
+        }
+        case 9:
         {
             return ___wordSearchImg(in, current);
         }

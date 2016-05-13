@@ -1,8 +1,5 @@
 #include "./utils/fusionutils.h"
 
-
-
-
 FusionStruct* fusion(string PanUrl,string MsUrl,string OutUrl,string ,int idalg,int* band,int interpolation) {
     /*
     *融合接口：fusion

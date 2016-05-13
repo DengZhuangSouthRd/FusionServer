@@ -42,8 +42,12 @@ public:
     virtual ImgRes wordSearchImg(const ::RPCImgRecong::DictStr2Str& mapArg, const Ice::Current& );
 
     // this should working as async method, through the thread working
-    // 通过图像搜索得到图像地址列表
-    virtual ImgRes imgSearch(const ::RPCImgRecong::DictStr2Str& mapArg, const Ice::Current& );
+    // 通过图像搜索得到图像地址列表,同步
+    virtual ImgRes imgSearchSync(const ::RPCImgRecong::DictStr2Str& mapArg, const Ice::Current& );
+
+    // 异步提交任务
+    virtual int imgSearchAsync(const ::RPCImgRecong::DictStr2Str& mapArg, const Ice::Current& );
+    virtual ImgRes fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str& mapArg, const Ice::Current& );
 
 public:
     void log_InputParameters(const ::RPCImgRecong::DictStr2Str& inputArgs);

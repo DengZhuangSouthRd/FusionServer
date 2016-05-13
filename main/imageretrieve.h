@@ -18,6 +18,12 @@
 using namespace std;
 using namespace RPCImgRecong;
 
+enum TypeKind {
+    TypeWordWiki,
+    TypeWordRes,
+    TypeImgRes
+};
+
 class ImageRetrieve : public ImgRetrieval {
 public:
     ImageRetrieve();
@@ -41,7 +47,7 @@ public:
 
 public:
     void log_InputParameters(const ::RPCImgRecong::DictStr2Str& inputArgs);
-    void log_OutputResult(void* outputRes, const string typeKind);
+    void log_OutputResult(void* outputRes, TypeKind paramType);
 
 private:
     PGDB* p_pgdb;

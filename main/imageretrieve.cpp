@@ -21,14 +21,17 @@ ImageRetrieve::~ImageRetrieve() {
 }
 
 WordWiki ImageRetrieve::wordGetKnowledge(const string& word, const Ice::Current &) {
+    Log::Info("wordGetKnowledge#InputWord=" + word);
     WordWiki wiki;
     wiki.key = "";
     wiki.abstr = "";
     wiki.descr = "";
+    log_OutputResult((void*)(&wiki), TypeWordWiki);
     return wiki;
 }
 
 WordRes ImageRetrieve::wordSearch(const DictStr2Str& mapArg, const Ice::Current&) {
+    log_InputParameters(mapArg);
     ListString str;
     for(int i=1;i<10;++i) {
         str.push_back(to_string(i));
@@ -36,23 +39,26 @@ WordRes ImageRetrieve::wordSearch(const DictStr2Str& mapArg, const Ice::Current&
 }
 
 ImgRes ImageRetrieve::wordSearchImg(const DictStr2Str& mapArg, const Ice::Current&) {
+    log_InputParameters(mapArg);
     ImgRes res;
     for(int i=0;i<10;++i) {
         res.imgRemote.push_back(to_string(i));
         res.imgPic.push_back(to_string(i));
     }
+    log_OutputResult((void*)(&res), TypeImgRes);
     return res;
 }
 
 ImgRes ImageRetrieve::imgSearch(const DictStr2Str& mapArg, const Ice::Current&) {
+    log_InputParameters(mapArg);
     ImgRes res;
     for(int i=0;i<10;++i) {
         res.imgRemote.push_back(to_string(i));
         res.imgPic.push_back(to_string(i));
     }
+    log_OutputResult((void*)(&res), TypeImgRes);
     return res;
 }
-
 
 void ImageRetrieve::log_InputParameters(const DictStr2Str &inputArgs) {
     string str = "";
@@ -62,14 +68,41 @@ void ImageRetrieve::log_InputParameters(const DictStr2Str &inputArgs) {
     Log::Info(str);
 }
 
-void ImageRetrieve::log_OutputResult(void *outputRes, const string typeKind) {
+void ImageRetrieve::log_OutputResult(void *outputRes, TypeKind paramType) {
     string str = "";
-    if(typeKind == "WordWiki") {
+    switch (paramType) {
+    case TypeWordWiki:
+    {
         WordWiki tmp = *(WordWiki*)outputRes;
         str = "abst=" + tmp.abstr + "#descr=" + tmp.descr + "#key=" + tmp.key;
     }
-    if(typeKind == "WordRes") {
+        break;
+    case TypeWordRes:
+    {
         WordRes tmp = *(WordRes*)outputRes;
-
+        str += ("status=" + tmp.status);
+        for(ListString::iterator it=tmp.keyWords.begin(); it!=tmp.keyWords.end(); it++) {
+            str += ("#" + *it);
+        }
     }
+        break;
+    case TypeImgRes:
+    {
+        ImgRes tmp = *(ImgRes*)outputRes;
+        str += ("status=" + tmp.status);
+        str += "#photoinfo: ";
+        for(ListString::iterator it=tmp.imgPic.begin(); it!=tmp.imgPic.end(); it++) {
+            str += (*it + "#");
+        }
+        str += "remoteinfo: ";
+        for(ListString::iterator it=tmp.imgRemote.begin(); it!=tmp.imgRemote.end(); it++) {
+            str += (*it + "#");
+        }
+    }
+        break;
+    default:
+        str = "No Such Type !";
+        break;
+    }
+    Log::Info(str);
 }

@@ -132,7 +132,6 @@ SOURCES += \
     main/src/algorithm/retrieve/ASIFT/libNumerics/vector.cpp \
     main/src/algorithm/retrieve/ASIFT/compute_asift_keypoints.cpp \
     main/src/algorithm/retrieve/ASIFT/compute_asift_matches.cpp \
-    main/src/algorithm/retrieve/ASIFT/demo_ASIFT.cpp \
     main/src/algorithm/retrieve/ASIFT/demo_lib_sift.cpp \
     main/src/algorithm/retrieve/ASIFT/domain.cpp \
     main/src/algorithm/retrieve/ASIFT/filter.cpp \
@@ -146,7 +145,8 @@ SOURCES += \
     main/src/algorithm/retrieve/utils/retrieveutils.cpp \
     main/imageretrieve.cpp \
     main/src/algorithm/retrieve/utils/pgdb.cpp \
-    main/src/algorithm/retrieve/utils/myredis.cpp
+    main/src/algorithm/retrieve/utils/myredis.cpp \
+    main/src/algorithm/retrieve/ASIFT/extract_feature.cpp
 
 HEADERS += \
     main/Server.h \
@@ -193,7 +193,6 @@ HEADERS += \
     main/src/algorithm/retrieve/ASIFT/libNumerics/matrix.h \
     main/src/algorithm/retrieve/ASIFT/libNumerics/numerics.h \
     main/src/algorithm/retrieve/ASIFT/libNumerics/rodrigues.h \
-    main/src/algorithm/retrieve/ASIFT/ASIFT_Extraction.h \
     main/src/algorithm/retrieve/ASIFT/compute_asift_keypoints.h \
     main/src/algorithm/retrieve/ASIFT/compute_asift_matches.h \
     main/src/algorithm/retrieve/ASIFT/demo_lib_sift.h \
@@ -409,7 +408,8 @@ HEADERS += \
     main/src/algorithm/third_party/Eigen/src/StlSupport/StdList.h \
     main/src/algorithm/third_party/Eigen/src/StlSupport/StdVector.h \
     main/src/algorithm/third_party/Eigen/src/SVD/JacobiSVD.h \
-    main/src/algorithm/third_party/Eigen/src/SVD/UpperBidiagonalization.h
+    main/src/algorithm/third_party/Eigen/src/SVD/UpperBidiagonalization.h \
+    main/src/algorithm/retrieve/ASIFT/extract_feature.h
 
 DISTFILES += \
     README.md \

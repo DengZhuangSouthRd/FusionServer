@@ -15,9 +15,7 @@
 
 using namespace std;
 
-//Gdal读取图像
-int ReadImageToBuff(const char* InputFileName, float *&pImageBuf, int &height,int &width,int &bandcount) throw()
-{
+int ReadImageToBuff(const char* InputFileName, float **pImageBuf, int &height,int &width,int &bandcount) {
 
     /*
     * @brief    ReadImageToBuff.
@@ -30,7 +28,6 @@ int ReadImageToBuff(const char* InputFileName, float *&pImageBuf, int &height,in
     * @return   -1  内存分配失败
     * @return   -2  读取数据失败
     */
-
 
     GDALAllRegister();         //利用GDAL读取图片，先要进行注册
     CPLSetConfigOption("GDAL_FILENAME_IS_UTF8", "NO");   //设置支持中文路径
@@ -47,22 +44,19 @@ int ReadImageToBuff(const char* InputFileName, float *&pImageBuf, int &height,in
     height = ReadDataSet->GetRasterYSize();
     bandcount = ReadDataSet->GetRasterCount();
 
-    pImageBuf = NULL;
-    pImageBuf = new(std::nothrow) float[width*height*bandcount];
-    if (NULL == pImageBuf)
-    {
-        printf("Memory Error.\n");
-        printf("file：%s line：%d time：%s %s\n",__FILE__,__LINE__,__DATE__,__TIME__);
-        delete ReadDataSet; ReadDataSet = NULL;
+    *pImageBuf = NULL;
+    *pImageBuf = new(std::nothrow) float[width*height*bandcount];
+    if (NULL == *pImageBuf) {
+        cerr << "Memory Error !" << " file: " << __FILE__ << "line: " << __LINE__ << "Time: " << __TIME__ << endl;
+        delete ReadDataSet;
+        ReadDataSet = NULL;
         return -1;
     }
 
-    if (ReadDataSet->RasterIO(GF_Read, 0, 0, width, height, pImageBuf, width, height, GDT_Float32, bandcount, NULL, 0, 0, 0) == CE_Failure)
-    {
-        printf("Read Error.\n");
-        printf("file：%s line：%d time：%s %s\n",__FILE__,__LINE__,__DATE__,__TIME__);
+    if (ReadDataSet->RasterIO(GF_Read, 0, 0, width, height, *pImageBuf, width, height, GDT_Float32, bandcount, NULL, 0, 0, 0) == CE_Failure) {
+        cerr << "Memory Error !" << " file: " << __FILE__ << "line: " << __LINE__ << "Time: " << __TIME__ << endl;
         delete ReadDataSet; ReadDataSet = NULL;
-        delete[] pImageBuf; pImageBuf = NULL;
+        delete[] *pImageBuf; *pImageBuf = NULL;
         return -2;
     }
     delete ReadDataSet; ReadDataSet = NULL;
@@ -71,15 +65,13 @@ int ReadImageToBuff(const char* InputFileName, float *&pImageBuf, int &height,in
 
 //彩色图转灰度图
 float* Gdal_rgb2gray(float *rgb,int height,int width,int bandcount){
-    if (bandcount !=3)
-    {
+    if (bandcount !=3) {
         cerr<<"This is not RGB image."<<endl;
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
 
     }
-    int i;
     float *gray=new float[height*width];
-    for (i=0;i<height*width;i++)
+    for (int i=0;i<height*width;i++)
         gray[i]=DATA2D(rgb,0,i,height*width)*0.299+DATA2D(rgb,1,i,height*width)*0.587+DATA2D(rgb,2,i,height*width)*0.114;
     return gray;
 }

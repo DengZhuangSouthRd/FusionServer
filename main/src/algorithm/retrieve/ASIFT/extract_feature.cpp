@@ -1,15 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <vector>
-using namespace std;
+#include <string>
+#include <fstream>
+#include <iostream>
 
-//#define  _OPENMP  //定义OpenMP
-
-#ifdef _OPENMP
 #include <omp.h>
-#endif
 
 #include "GdalIO.h"
 #include "demo_lib_sift.h"
@@ -20,13 +13,10 @@ using namespace std;
 #include "compute_asift_keypoints.h"
 #include "compute_asift_matches.h"
 
+#include "extract_feature.h"
+
 # define IM_X 160
 # define IM_Y 120
-
-
-#include <string>
-#include <fstream>
-#include <iostream>
 
 using namespace std;
 
@@ -38,7 +28,7 @@ void ASIFT_Ext_Features_Gdal(const string Output_FileName,string Input_FilePath)
     *作者：YS
     */
 
-    int i,j;
+    int i;
     float *GrayImg=NULL;  //存储灰度图像像素值
     float *Img = NULL;    //存储图像像素值
 
@@ -49,29 +39,22 @@ void ASIFT_Ext_Features_Gdal(const string Output_FileName,string Input_FilePath)
     float hS = IM_Y;
     int  flag_resize=0;   //是否resize
 
-
-    //将特征保存文件
-    ofstream fout(Output_FileName.c_str());  //c_str() 将string转换成char*
-    if (!fout)
-    {
-        cerr << "Output File Name Error!" << endl;
-        exit(1);
+    int flag = ReadImageToBuff(Input_FilePath.c_str(), &Img, height,width,bandcount);
+    if(flag != 0) {
+        throw runtime_error("ReadImageToBuff failed !");
     }
 
-    cout<<"Extract Features From: "<<Input_FilePath<<endl;
-
-    cout<<"Processing. "<<endl;
-
-    /*读取灰度图*/
-    ReadImageToBuff(Input_FilePath.c_str(), Img, height,width,bandcount);
-
-    GrayImg = new float[height*width];
+    GrayImg = new(std::nothrow) float[height*width];
     if (NULL == GrayImg) {
         cerr<<"Memory Error."<<endl;
-        exit(1);
+        if(Img != NULL) {
+            delete[] Img;
+            Img=NULL;
+        }
+        throw runtime_error("ImageRetrieve Memort Error !");
     }
+
     if (bandcount==3) {
-        //Gdal_rgb2gray(Img,height,width,bandcount);
         for(i=0;i<height*width;i++) {
             GrayImg[i] = 0.212671 * Img[i] + 0.715160 * Img[i+height*width] + 0.072169 * Img[i+height*width*2];
         }
@@ -81,25 +64,32 @@ void ASIFT_Ext_Features_Gdal(const string Output_FileName,string Input_FilePath)
         }
     } else {
         cerr<<"Image Band Error."<<endl;
-        exit(1);
+        delete[] GrayImg;
+        GrayImg = NULL;
+        if(Img != NULL) {
+            delete[] Img;
+            Img=NULL;
+        }
+        throw runtime_error("ImageRetrieve Image Band Error !");
     }
 
     //释放内存
-    delete[] Img;Img=NULL;
-    /*图像归一化*/
-    //Normalize(GrayImg, width, height);
+    if(Img != NULL) {
+        delete[] Img;
+        Img=NULL;
+    }
 
     vector<float> ipixels(GrayImg, GrayImg + width * height);
     //释放内存
-    delete [] GrayImg;GrayImg=NULL;
+    delete [] GrayImg;
+    GrayImg=NULL;
 
     float zoom1=0;
     int wS1=0, hS1=0;
     vector<float> ipixels1_zoom;
-    if (flag_resize != 0)
-    {
-        cout << "WARNING: The input images are resized to " << wS << "x" << hS << " for ASIFT. " << endl
-             << "         But the results will be normalized to the original image size." << endl << endl;
+    if (flag_resize != 0) {
+        cerr << "WARNING: The input images are resized to " << wS << "x" << hS << " for ASIFT. " << endl;
+        cerr << "But the results will be normalized to the original image size." << endl;
 
         float InitSigma_aa = 1.6;
 
@@ -147,52 +137,41 @@ void ASIFT_Ext_Features_Gdal(const string Output_FileName,string Input_FilePath)
         fproj (ipixels, ipixels1_zoom, width, height, &fproj_sx, &fproj_sy, &fproj_bg, &fproj_o, &fproj_p,
                &fproj_i , fproj_x1 , fproj_y1 , fproj_x2 , fproj_y2 , fproj_x3 , fproj_y3, fproj_x4, fproj_y4);
 
-    }
-    else
-    {
+    } else {
         ipixels1_zoom.resize(width*height);
         ipixels1_zoom = ipixels;
         wS1 = width;
         hS1 = height;
         zoom1 = 1;
-
     }
-    //释放内存
     ipixels.clear();
 
     /*特征提取*/
-    // Compute ASIFT keypoints
-    // number N of tilts to simulate t = 1, \sqrt{2}, (\sqrt{2})^2, ..., {\sqrt{2}}^(N-1)
-
     int num_of_tilts = 7;
-    //	int num_of_tilts1 = 1;
-    //	int num_of_tilts2 = 1;
     int verb = 0;
+
     // Define the SIFT parameters
     siftPar siftparameters;
     default_sift_parameters(siftparameters);
 
     vector< vector< keypointslist > > keys;
 
-    int num_keys=0;
-    num_keys = compute_asift_keypoints(ipixels1_zoom, wS1, hS1, num_of_tilts, verb, keys, siftparameters);
-    //释放内存
+    compute_asift_keypoints(ipixels1_zoom, wS1, hS1, num_of_tilts, verb, keys, siftparameters);
     ipixels1_zoom.clear();
 
-    /*将特征写入文件*/
+    ofstream fout(Output_FileName.c_str());
+    if (!fout) {
+        cerr << "Output File Name Error!" << endl;
+        throw runtime_error("ImageRetrieve OutPut Feature File Error !");
+    }
 
+    /*将特征写入文件*/
     int tt,rr,ii;
-    for (tt = 0; tt < (int) keys.size(); tt++)
-    {
-        for (rr = 0; rr < (int) keys[tt].size(); rr++)
-        {
+    for (tt = 0; tt < (int) keys.size(); tt++) {
+        for (rr = 0; rr < (int) keys[tt].size(); rr++) {
             keypointslist::iterator ptr = keys[tt][rr].begin();
-            for(i=0; i < (int) keys[tt][rr].size(); i++, ptr++)
-            {
-                //fout << zoom1*ptr->x << "  " << zoom1*ptr->y << "  " << zoom1*ptr->scale << "  " << ptr->angle;
-                //fout << type[m]; //图像类别
-                for (ii = 0; ii < (int) VecLength-1 ; ii++)
-                {
+            for(i=0; i < (int) keys[tt][rr].size(); i++, ptr++) {
+                for (ii = 0; ii < (int) VecLength-1 ; ii++) {
                     fout << ptr->vec[ii] << ',';
                 }
                 fout << ptr->vec[VecLength];
@@ -200,13 +179,9 @@ void ASIFT_Ext_Features_Gdal(const string Output_FileName,string Input_FilePath)
             }
         }
     }
-    //fout<<endl;
-
-    //释放内存
     keys.clear();
 
     cout<<"extract done."<<endl;
     fout.close();
-
 }
 

@@ -45,8 +45,8 @@
 #include "frot.h"
 #include "fproj.h"
 #include <vector>
-using namespace std;
 
+using namespace std;
 
 int compute_asift_keypoints(vector<float>& image, int width, int height, int num_of_tilts, int verb, vector< vector< keypointslist > >& keys_all, siftPar &siftparameters);
 

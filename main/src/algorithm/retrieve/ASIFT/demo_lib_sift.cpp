@@ -36,7 +36,6 @@
 
 #define ABS(x)    (((x) > 0) ? (x) : (-(x)))
 
-
 void default_sift_parameters(siftPar &par)
 {
 	par.OctaveMax=100000;
@@ -71,8 +70,6 @@ void default_sift_parameters(siftPar &par)
 /// SIFT Keypoint detection 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
 void OctaveKeypoints(flimage & image, float octSize, keypointslist& keys,siftPar &par);
@@ -140,28 +137,12 @@ void compute_sift_keypoints(float *input, keypointslist& keypoints, int width, i
 
 	/// Make zoom of image if necessary
 	float octSize = 1.0;
-	if (par.DoubleImSize){
-
-		//printf("... compute_sift_keypoints :: applying zoom\n");
-//		image.create(2*width, 2*height);
-//		apply_zoom(input,image.getPlane(),2.0,par.order,width,height);
-//		octSize *= 0.5;
-		
+    if (par.DoubleImSize) {
 		printf("Doulbe image size not allowed. Guoshen Yu\n");
 		exit(-1);
-		
-
-		
-	} else
-	{
-
+    } else {
 		image.create(width,height,input);
 	}
-
-// 	 printf("Using initial Dog value: %f\n", par.PeakThresh);
-//    	 printf("Double image size: %d\n", par.DoubleImSize);
-//    	 printf("Interpolation order: %d\n", par.order);
-
 
 	/// Apply initial smoothing to input image to raise its smoothing to par.InitSigma.  
 	/// We assume image from camera has smoothing of sigma = 0.5, which becomes sigma = 1.0 if image has been doubled. 
@@ -209,16 +190,8 @@ void compute_sift_keypoints(float *input, keypointslist& keypoints, int width, i
 		octSize *= 2.0;
 
 		OctaveCounter++;
-
 	}
-
-
-/*	printf("sift::  %d keypoints\n", keypoints.size());
-	printf("sift::  plus non correctly localized: %d \n", 	par.noncorrectlylocalized);*/
-	
 }
-
-
 
 /////////////////////////////////////////////////
 /// EXTREMA DETECTION IN ONE SCALE-SPACE OCTAVE:
@@ -1114,15 +1087,11 @@ float DistSquared_short(keypoint_short &k1,keypoint_short &k2, float tdist, sift
    closest and next to closest keypoints in klist, while bestindex is the index
    of the closest keypoint.
 */
-float CheckForMatch(
-	 keypoint& key, keypointslist& klist, int& min,siftPar &par)
-{	
-	int	nexttomin = -1;
+float CheckForMatch(keypoint& key, keypointslist& klist, int& min,siftPar &par) {
 	float	dsq, distsq1, distsq2;
 	distsq1 = distsq2 = 1000000000000.0f;
-
-	for (int j=0; j< (int) klist.size(); j++){
-	
+    int nexttomin = 0;
+    for (int j=0; j< (int) klist.size(); j++) {
 		dsq = DistSquared(key, klist[j], distsq2,par);
 		
 		if (dsq < distsq1) {
@@ -1176,44 +1145,35 @@ void compute_sift_matches(
 		
 	// write the keypoint descriptors in char
 	keypointslist_short keys1_short(keys1.size());
-	for (int i=0; i< (int) keys1.size(); i++)
-	{
+    for (int i=0; i< (int) keys1.size(); i++) {
 		keys1_short[i].x = keys1[i].x;
 		keys1_short[i].y = keys1[i].y;
 		keys1_short[i].scale = keys1[i].scale;
 		keys1_short[i].angle = keys1[i].angle;
 		
-		for (int k=0; k < VecLength; k++)
-		{
+        for (int k=0; k < VecLength; k++) {
 			keys1_short[i].vec[k] = (unsigned short) (keys1[i].vec[k]);
 		}
 
 	}
 	
 	keypointslist_short keys2_short(keys2.size());
-	for (int i=0; i< (int) keys2.size(); i++)
-	{
+    for (int i=0; i< (int) keys2.size(); i++) {
 		keys2_short[i].x = keys2[i].x;
 		keys2_short[i].y = keys2[i].y;
 		keys2_short[i].scale = keys2[i].scale;
 		keys2_short[i].angle = keys2[i].angle;
 		
-		for (int k=0; k < VecLength; k++)
-		{
+        for (int k=0; k < VecLength; k++) {
 			keys2_short[i].vec[k] = (unsigned short) (keys2[i].vec[k]);
 		}
-		
 	}
 	
 	for (int i=0; i< (int) keys1.size(); i++) {
-
-	//	sqratio = CheckForMatch(keys1[i], keys2, imatch,par);
 		
 		sqratio = CheckForMatch_short(keys1_short[i], keys2_short, imatch,par);
 
-
 		if (sqratio< sqminratio)
 			matchings.push_back( matching(keys1[i],keys2[imatch] ));
-	//		 matchings.push_back( matching_char(keys1_char[i],keys2_char[imatch] ));
 	}
 }

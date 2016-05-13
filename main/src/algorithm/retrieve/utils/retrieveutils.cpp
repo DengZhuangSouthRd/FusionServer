@@ -7,6 +7,7 @@ string getPGConfInfo(const map<string, string> &argvMap) {
 }
 
 void* retrieveInterface(void *args) {
-    string imgurl = *(string*)args;
-    cout << imgurl << endl;
+    InputInterface* inputArgs= (InputInterface*)args;
+    cout << inputArgs->imgurl << "; " << inputArgs->saveurl << endl;
+    ASIFT_Ext_Features_Gdal(inputArgs->saveurl, inputArgs->imgurl);
 }

@@ -57,14 +57,14 @@ void read_config_Json(string fileName, map<string, string> &argvMap) {
     argvMap["SERIALIZETIME"] = root.get("SERIALIZETIME", "3600").asString();
     argvMap["LOGPATH"] = root.get("LOGPATH", "NULL").asString();
 
-    if(root.get("FUSION","NULL").asString() != "NULL") {
+    if(root.isMember("FUSION") == true) {
         argvMap["FUSIONISUSE"] = root["FUSION"].get("ISUSE", "FALSE").asString();
         argvMap["FUSIONIDENTITY"] = root["FUSION"].get("FUSIONIDENTITY", "NULL").asString();
         argvMap["FUSIONSerializePath"] = root["FUSION"].get("FUSIONSerializePath", "NULL").asString();
         argvMap["FUSIONSerializePathBak"] = root["FUSION"].get("FUSIONSerializePathBak", "NULL").asString();
     }
 
-    if(root.get("RETRIEVE","NULL").asString() != "NULL") {
+    if(root.isMember("RETRIEVE") == true) {
         argvMap["RETRIEVEISUSE"] = root["RETRIEVE"].get("ISUSE", "FALSE").asString();
         argvMap["RETRIEVEIDENTITY"] = root["RETRIEVE"].get("FUSIONIDENTITY", "NULL").asString();
         argvMap["RETRIEVEPG_NAME"] = root["RETRIEVE"].get("RETRIEVEPG_NAME", "NULL").asString();
@@ -82,7 +82,7 @@ void read_config_Json(string fileName, map<string, string> &argvMap) {
         argvMap["RETRIEVESerializePathBak"] = root["RETRIEVE"].get("FUSIONSerializePathBak", "NULL").asString();
     }
 
-    if(root.get("QUALITY","NULL").asString() != "NULL") {
+    if(root.isMember("QUALITY") == true) {
         argvMap["QUALITYISUSE"] = root["QUALITY"].get("ISUSE", "FALSE").asString();
         argvMap["QUALITYIDENTITY"] = root["QUALITY"].get("QUALITYIDENTITY", "NULL").asString();
         argvMap["QUALTYSerializePath"] = root["QUALITY"].get("QUALTYSerializePath", "NULL").asString();

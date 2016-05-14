@@ -10,7 +10,7 @@
         "FUSIONSerializePathBak" : "main/data/serialize/fusiontask_backup.json"
     },
     "RETRIEVE": {
-        "ISUSE" : "TRUE",
+        "ISUSE" : "FALSE",
         "RETRIEVEIDENTITY" : "WISERETRIEVE",
         "RETRIEVEPG_NAME" : "testdb",
         "RETRIEVEPG_HOST" : "10.2.3.119",

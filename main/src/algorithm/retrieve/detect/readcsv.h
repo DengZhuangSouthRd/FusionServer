@@ -12,7 +12,6 @@
 using namespace std;
 
 #define MAX_LINE_SIZE 100000
-#define _CRT_SECURE_NO_WARNINGS
 
 template<class DataType>
 class ReadCsvFile{
@@ -28,7 +27,7 @@ private:
 //按行读取数据
 template<class DataType>
 int ReadCsvFile<DataType>::ReadCsv(const string CsvFilePath, vector<vector<DataType>> &data) {
-	FILE* fcsv;
+    FILE* fcsv = NULL;
 	char strline[MAX_LINE_SIZE];
 	int row;
     if (fopen_s(&fcsv, CsvFilePath.c_str(), "r") != 0) {

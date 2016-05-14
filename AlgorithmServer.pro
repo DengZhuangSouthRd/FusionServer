@@ -210,9 +210,6 @@ HEADERS += \
     main/src/algorithm/quality/utils/qualityutils.h \
     main/src/algorithm/retrieve/utils/pgdb.h \
     main/src/algorithm/retrieve/utils/myredis.h \
-    main/src/algorithm/retrieve/detect/ReadCsvFile.h \
-    main/src/algorithm/retrieve/detect/SR.h \
-    main/src/algorithm/retrieve/detect/Vec.h \
     main/src/algorithm/third_party/Eigen/src/Cholesky/LDLT.h \
     main/src/algorithm/third_party/Eigen/src/Cholesky/LLT.h \
     main/src/algorithm/third_party/Eigen/src/Core/arch/AltiVec/Complex.h \
@@ -409,7 +406,10 @@ HEADERS += \
     main/src/algorithm/third_party/Eigen/src/SVD/JacobiSVD.h \
     main/src/algorithm/third_party/Eigen/src/SVD/UpperBidiagonalization.h \
     main/src/algorithm/retrieve/ASIFT/extract_feature.h \
-    main/src/algorithm/retrieve/ASIFT/gdalio.h
+    main/src/algorithm/retrieve/ASIFT/gdalio.h \
+    main/src/algorithm/retrieve/detect/readcsv.h \
+    main/src/algorithm/retrieve/detect/sr.h \
+    main/src/algorithm/retrieve/detect/basicoperator.h
 
 DISTFILES += \
     README.md \

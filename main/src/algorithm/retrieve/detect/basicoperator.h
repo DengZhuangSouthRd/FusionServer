@@ -2,20 +2,12 @@
 #include <vector>
 #include <algorithm>
 #include <string>
+
 using namespace std;
 
 //数组与数乘法
 template<class DataType>
 vector<DataType> operator*(vector<DataType> vec, DataType data) {
-	/*operator*			数组与数相乘
-	*vec				数组（N）
-	*data				数
-	*return：vector<DataType>（N）
-	*author:ys
-	*date:2016.05.05
-	*/
-
-
 	int len = vec.size();
     if (!len) {
 		cerr << "operator*:eeror." << endl;

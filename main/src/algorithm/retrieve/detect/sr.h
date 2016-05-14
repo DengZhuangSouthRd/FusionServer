@@ -6,9 +6,9 @@
 #include <algorithm>
 #include <string>
 
-#include "../ASIFT/third_party/Eigen/Dense"
-#include "ReadCsvFile.h"
-#include "Vec.h"
+#include "../../third_party/Eigen/Dense"
+#include "readcsv.h"
+#include "basicoperator.h"
 
 using namespace std;
 using namespace Eigen;
@@ -17,11 +17,16 @@ template<class DataType>
 class SR {
 
 public:
+    static SR* p_SingleSR;
+    static SR* getSingleInstance();
+
+private:
 	SR();
+	SR(vector<string> DicFilePath);
     ~SR();
 
-	SR(vector<string> DicFilePath);
-
+public:
+    void setDictFilePaths(vector<string> DictFilePath);
 	//加载字典 第0类字典对应DicFilePath[0]
 	void LoadDic(vector<string> DicFilePath);
 
@@ -54,6 +59,14 @@ private:
 };
 
 template<class DataType>
+SR* SR<DataType>::p_SingleSR = new (std::nothrow) SR<double>();
+
+template<class DataType>
+SR* SR<DataType>::getSingleInstance() {
+    return p_SingleSR;
+}
+
+template<class DataType>
 SR<DataType>::SR() {
 	this->classnum = 0;
 	dicclassnum.clear();
@@ -62,6 +75,11 @@ SR<DataType>::SR() {
 template<class DataType>
 SR<DataType>::SR(vector<string> DicFilePath) {
 	this->LoadDic(DicFilePath);
+}
+
+template<class DataType>
+void SR<DataType>::setDictFilePaths(vector<string> DictFilePath) {
+    this->LoadDic(DictFilePath);
 }
 
 //稀疏表示分类（一组特征）
@@ -254,7 +272,7 @@ void SR<DataType>::LoadDic(vector<string> DicFilePath){
 	int num;
     for (i = 0; i < this->classnum; i++) {
 		num = readcsv.ReadCsv(DicFilePath[i], this->dic);
-		cout << "the cols of class " << i << " are: " << num << endl;
+        //cout << "the cols of class " << i << " are: " << num << endl;
 		dicclassnum.push_back(num);
 	}
 }

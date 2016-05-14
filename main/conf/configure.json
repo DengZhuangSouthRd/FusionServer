@@ -1,8 +1,8 @@
 {
     "SERVERIP": "192.168.199.173",
     "PORT": "9999",
-    "SERIALIZETIME" : "10",
-    "LOGPATH": "main/data/log/loginfo.log",
+    "SERIALIZETIME" : "600",
+    "LOGPATH": "/home/fighter/Documents/AlgorithmServer/main/data/log/loginfo.log",
     "FUSION": {
         "ISUSE": "TRUE",
         "FUSIONIDENTITY": "WISEFUSION",

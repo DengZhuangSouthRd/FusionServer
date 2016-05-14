@@ -413,5 +413,6 @@ HEADERS += \
 
 DISTFILES += \
     README.md \
-    main/conf/configure.json
+    main/conf/configure.json \
+    main/conf/configure_duc.json
 

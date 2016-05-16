@@ -1,9 +1,5 @@
-main/data/dict/*
-main/data/features/*
-main/conf/*
-main/data/*
-!main/conf/configure.json
-!main/cong/configure_server.json
-!main/data/README.md
-!main/data/serialize/*
+data/dict/*
+data/features/*
+data/*
+!data/README.md
 *~

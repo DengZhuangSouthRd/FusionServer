@@ -8,6 +8,21 @@ ImageFusion::ImageFusion() {
     m_serializePath = g_ConfMap["FUSIONSerializePath"];
     m_serializePathBak = g_ConfMap["FUSIONSerializePathBak"];
 
+    m_fusionalg["Brovey_1_0"]=1;
+    m_fusionalg["HIS_1_0"]=2;
+    m_fusionalg["PCA_1_0"]=3;
+    m_fusionalg["DWT and HIS_1_0"]=4;
+    m_fusionalg["Curvelet and HIS_1_0"]=5;
+    m_fusionalg["Curvelet and HCS_1_0"]=8;
+    m_fusionalg["GramSchmidt_1_0"]=6;
+    m_fusionalg["HCS_1_0"]=7;
+    m_fusionalg["Curvelet and HCS_1_1"]=10;
+    m_fusionalg["Curvelet and GramSchmidt_1_0"]=9;
+
+    m_interalg["Nearest_1_0"]=1;
+    m_interalg["Linear_1_0"]=2;
+    m_interalg["CubicConv_1_0"]=3;
+
     if(isExistsFile(m_serializePath) == false) {
         cerr << "Serialized File Does Not Exists !" << endl;
         Log::Error("Serialized File Does Not Exists !");
@@ -237,6 +252,17 @@ bool ImageFusion::packTaskStaticStatus(FusionTaskStaticResult &res, const string
     return true;
 }
 
+bool ImageFusion::geneThumbImg(const string& inPath, const string& outPath, const string& bandlist, const Ice::Current&) {
+    vector<string> tmp = split(bandlist, '|');
+    bool flag = false;
+    if(tmp.size() == 1) {
+        flag = CreateSquareThumb(inPath, outPath, stoi(tmp[0]));
+    } else if(tmp.size() == 3) {
+        flag = CreateSquareThumb(inPath, outPath, stoi(tmp[0]), stoi(tmp[1]), stoi(tmp[2]));
+    }
+    return flag;
+}
+
 FusionInf ImageFusion::fuseSyn(const DirArgs& mapArg, const Ice::Current &) {
 
     string task_id = mapArg.at("id");
@@ -349,14 +375,26 @@ bool ImageFusion::checkFusionArgv(DirArgs mapArgs, FusionArgs &args) {
         return false;
     }
 
-    if(mapArgs.count("panurl") == 0 || mapArgs.count("msurl") == 0 || mapArgs.count("outurl") == 0 || mapArgs.count("idalg") == 0 || mapArgs.count("idinter") == 0) {
+    if(mapArgs.count("panurl") == 0 || mapArgs.count("msurl") == 0 || mapArgs.count("outurl") == 0
+       || mapArgs.count("algname") == 0 || mapArgs.count("intername") == 0) {
         cerr << "Arg Map Configure Error !" << endl;
         return false;
     }
-
-    if(mapArgs.count("band1") == 0 || mapArgs.count("band2") == 0 || mapArgs.count("band3") == 0) {
+    int band[3] = {0,0,0};
+    if(mapArgs.count("band") == 0) {
         cerr << "Arg Map Configure Bands Error !" << endl;
         return false;
+    } else {
+        string bandlist = mapArgs["band"];
+        vector<string> tmp = split(bandlist, '|');
+        if(tmp.size() != 3) {
+            cerr << "Arg Map input bandlist error !" << endl;
+            return false;
+        } else {
+            band[0] = stoi(tmp[0]);
+            band[1] = stoi(tmp[1]);
+            band[2] = stoi(tmp[2]);
+        }
     }
 
     ResultStatus status;
@@ -373,29 +411,23 @@ bool ImageFusion::checkFusionArgv(DirArgs mapArgs, FusionArgs &args) {
     }
 
     int idalg, interpolation;
-    int band[3] = {0,0,0};
+
     try {
         //FusionMethod
-        idalg = stoi(mapArgs["idalg"]);
+        idalg = m_fusionalg[mapArgs["algname"]];
         if(idalg<1 || idalg>10)
-            throw "Fusion Method does not exist";
-
-        //Bandlist
-        band[0] = stoi(mapArgs["band1"]);
-        band[1] = stoi(mapArgs["band2"]);
-        band[2] = stoi(mapArgs["band3"]);
+            throw runtime_error("Fusion Method does not exist");
 
         //InterpolationMethod
-        interpolation = stoi(mapArgs["idinter"]);
+        interpolation = m_interalg[mapArgs["intername"]];
 
-        if(interpolation<1 || interpolation>5)
-            throw "Interpolation Method does not exist";
+        if(interpolation<1 || interpolation>3)
+            throw runtime_error("Interpolation Method does not exist");
 
         //compare the Fusion Args
         args.panurl = mapArgs["panurl"];
         args.msurl = mapArgs["msurl"];
         args.outurl = mapArgs["outurl"];
-        //args.logurl = logPath;
         args.idalg = idalg;
         args.idinter = interpolation;
         args.band.assign(band, band+3);

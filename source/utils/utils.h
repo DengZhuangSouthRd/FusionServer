@@ -47,6 +47,8 @@ bool isExistsFile(string filePath);
 
 void read_config_Json(string fileName, map<string, string>& argvMap);
 
+std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems);
+std::vector<std::string> split(const std::string &s, char delim);
 
 #endif // UTILS_HPP
 

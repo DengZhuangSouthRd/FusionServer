@@ -8,6 +8,7 @@
 
 #include <Ice/Ice.h>
 #include "rpc/fusion/wisefuseRpc.h"
+#include "algorithm/thumb/imagethumb.h"
 #include "algorithm/fusion/utils/fusionutils.h"
 #include "utils/log.h"
 #include "utils/utils.h"
@@ -28,6 +29,7 @@ public:
     ~ImageFusion();
 
 public:
+    virtual bool geneThumbImg(const string& inPath, const string& outPath, const string& bandlist, const Ice::Current&);
     //提交同步任务， 一直等待结果
     virtual ::RPCWiseFuse::FusionInf fuseSyn(const ::RPCWiseFuse::DirArgs& mapArgs, const Ice::Current& );
     //提交异步任务
@@ -54,6 +56,8 @@ private:
     string m_serializePathBak;
 
     map<string, FusionTaskStaticResult> m_finishMap; // for <task_id, task_all_parameters>
+    map<string,int> m_fusionalg;
+    map<string,int> m_interalg;
 };
 
 #endif // IMAGEFUSION_H

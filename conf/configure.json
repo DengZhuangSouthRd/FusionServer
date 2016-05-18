@@ -1,5 +1,5 @@
 {
-    "SERVERIP": "192.168.199.173",
+    "SERVERIP": "192.168.199.133",
     "PORT": "9999",
     "SERIALIZETIME" : "600",
     "LOGPATH": "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/AlgorithmServer/data/log/loginfo.log",

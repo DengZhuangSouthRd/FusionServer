@@ -43,6 +43,8 @@
 namespace
 {
 
+const ::std::string __RPCWiseFuse__WiseFusionInf__geneThumbImg_name = "geneThumbImg";
+
 const ::std::string __RPCWiseFuse__WiseFusionInf__fuseSyn_name = "fuseSyn";
 
 const ::std::string __RPCWiseFuse__WiseFusionInf__fuseAsyn_name = "fuseAsyn";
@@ -72,6 +74,129 @@ void
         v = new ::IceProxy::RPCWiseFuse::WiseFusionInf;
         v->__copyFrom(proxy);
     }
+}
+
+bool
+IceProxy::RPCWiseFuse::WiseFusionInf::geneThumbImg(const ::std::string& __p_inPath, const ::std::string& __p_outPath, const ::std::string& __p_bandlist, const ::Ice::Context* __ctx)
+{
+    __checkTwowayOnly(__RPCWiseFuse__WiseFusionInf__geneThumbImg_name);
+    ::IceInternal::Outgoing __og(this, __RPCWiseFuse__WiseFusionInf__geneThumbImg_name, ::Ice::Normal, __ctx);
+    try
+    {
+        ::IceInternal::BasicStream* __os = __og.startWriteParams(::Ice::DefaultFormat);
+        __os->write(__p_inPath);
+        __os->write(__p_outPath);
+        __os->write(__p_bandlist);
+        __og.endWriteParams();
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        __og.abort(__ex);
+    }
+    if(!__og.invoke())
+    {
+        try
+        {
+            __og.throwUserException();
+        }
+        catch(const ::Ice::UserException& __ex)
+        {
+            ::Ice::UnknownUserException __uue(__FILE__, __LINE__, __ex.ice_name());
+            throw __uue;
+        }
+    }
+    bool __ret;
+    ::IceInternal::BasicStream* __is = __og.startReadParams();
+    __is->read(__ret);
+    __og.endReadParams();
+    return __ret;
+}
+
+::Ice::AsyncResultPtr
+IceProxy::RPCWiseFuse::WiseFusionInf::begin_geneThumbImg(const ::std::string& __p_inPath, const ::std::string& __p_outPath, const ::std::string& __p_bandlist, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+{
+    __checkAsyncTwowayOnly(__RPCWiseFuse__WiseFusionInf__geneThumbImg_name);
+    ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __RPCWiseFuse__WiseFusionInf__geneThumbImg_name, __del, __cookie);
+    try
+    {
+        __result->prepare(__RPCWiseFuse__WiseFusionInf__geneThumbImg_name, ::Ice::Normal, __ctx);
+        ::IceInternal::BasicStream* __os = __result->startWriteParams(::Ice::DefaultFormat);
+        __os->write(__p_inPath);
+        __os->write(__p_outPath);
+        __os->write(__p_bandlist);
+        __result->endWriteParams();
+        __result->invoke();
+    }
+    catch(const ::Ice::Exception& __ex)
+    {
+        __result->abort(__ex);
+    }
+    return __result;
+}
+
+#ifdef ICE_CPP11
+
+::Ice::AsyncResultPtr
+IceProxy::RPCWiseFuse::WiseFusionInf::__begin_geneThumbImg(const ::std::string& __p_inPath, const ::std::string& __p_outPath, const ::std::string& __p_bandlist, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (bool)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent)
+{
+    class Cpp11CB : public ::IceInternal::Cpp11FnCallbackNC
+    {
+    public:
+
+        Cpp11CB(const ::std::function<void (bool)>& responseFunc, const ::std::function<void (const ::Ice::Exception&)>& exceptionFunc, const ::std::function<void (bool)>& sentFunc) :
+            ::IceInternal::Cpp11FnCallbackNC(exceptionFunc, sentFunc),
+            _response(responseFunc)
+        {
+            CallbackBase::checkCallback(true, responseFunc || exceptionFunc != nullptr);
+        }
+
+        virtual void completed(const ::Ice::AsyncResultPtr& __result) const
+        {
+            ::RPCWiseFuse::WiseFusionInfPrx __proxy = ::RPCWiseFuse::WiseFusionInfPrx::uncheckedCast(__result->getProxy());
+            bool __ret;
+            try
+            {
+                __ret = __proxy->end_geneThumbImg(__result);
+            }
+            catch(const ::Ice::Exception& ex)
+            {
+                Cpp11FnCallbackNC::exception(__result, ex);
+                return;
+            }
+            if(_response != nullptr)
+            {
+                _response(__ret);
+            }
+        }
+    
+    private:
+        
+        ::std::function<void (bool)> _response;
+    };
+    return begin_geneThumbImg(__p_inPath, __p_outPath, __p_bandlist, __ctx, new Cpp11CB(__response, __exception, __sent));
+}
+#endif
+
+bool
+IceProxy::RPCWiseFuse::WiseFusionInf::end_geneThumbImg(const ::Ice::AsyncResultPtr& __result)
+{
+    ::Ice::AsyncResult::__check(__result, this, __RPCWiseFuse__WiseFusionInf__geneThumbImg_name);
+    bool __ret;
+    if(!__result->__wait())
+    {
+        try
+        {
+            __result->__throwUserException();
+        }
+        catch(const ::Ice::UserException& __ex)
+        {
+            throw ::Ice::UnknownUserException(__FILE__, __LINE__, __ex.ice_name());
+        }
+    }
+    ::IceInternal::BasicStream* __is = __result->__startReadParams();
+    __is->read(__ret);
+    __result->__endReadParams();
+    return __ret;
 }
 
 ::RPCWiseFuse::FusionInf
@@ -604,6 +729,25 @@ RPCWiseFuse::WiseFusionInf::ice_staticId()
 }
 
 ::Ice::DispatchStatus
+RPCWiseFuse::WiseFusionInf::___geneThumbImg(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
+{
+    __checkMode(::Ice::Normal, __current.mode);
+    ::IceInternal::BasicStream* __is = __inS.startReadParams();
+    ::std::string __p_inPath;
+    ::std::string __p_outPath;
+    ::std::string __p_bandlist;
+    __is->read(__p_inPath);
+    __is->read(__p_outPath);
+    __is->read(__p_bandlist);
+    __inS.endReadParams();
+    bool __ret = geneThumbImg(__p_inPath, __p_outPath, __p_bandlist, __current);
+    ::IceInternal::BasicStream* __os = __inS.__startWriteParams(::Ice::DefaultFormat);
+    __os->write(__ret);
+    __inS.__endWriteParams(true);
+    return ::Ice::DispatchOK;
+}
+
+::Ice::DispatchStatus
 RPCWiseFuse::WiseFusionInf::___fuseSyn(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
 {
     __checkMode(::Ice::Normal, __current.mode);
@@ -671,6 +815,7 @@ const ::std::string __RPCWiseFuse__WiseFusionInf_all[] =
     "fetchFuseRes",
     "fuseAsyn",
     "fuseSyn",
+    "geneThumbImg",
     "ice_id",
     "ice_ids",
     "ice_isA",
@@ -682,7 +827,7 @@ const ::std::string __RPCWiseFuse__WiseFusionInf_all[] =
 ::Ice::DispatchStatus
 RPCWiseFuse::WiseFusionInf::__dispatch(::IceInternal::Incoming& in, const ::Ice::Current& current)
 {
-    ::std::pair< const ::std::string*, const ::std::string*> r = ::std::equal_range(__RPCWiseFuse__WiseFusionInf_all, __RPCWiseFuse__WiseFusionInf_all + 8, current.operation);
+    ::std::pair< const ::std::string*, const ::std::string*> r = ::std::equal_range(__RPCWiseFuse__WiseFusionInf_all, __RPCWiseFuse__WiseFusionInf_all + 9, current.operation);
     if(r.first == r.second)
     {
         throw ::Ice::OperationNotExistException(__FILE__, __LINE__, current.id, current.facet, current.operation);
@@ -708,17 +853,21 @@ RPCWiseFuse::WiseFusionInf::__dispatch(::IceInternal::Incoming& in, const ::Ice:
         }
         case 4:
         {
-            return ___ice_id(in, current);
+            return ___geneThumbImg(in, current);
         }
         case 5:
         {
-            return ___ice_ids(in, current);
+            return ___ice_id(in, current);
         }
         case 6:
         {
-            return ___ice_isA(in, current);
+            return ___ice_ids(in, current);
         }
         case 7:
+        {
+            return ___ice_isA(in, current);
+        }
+        case 8:
         {
             return ___ice_ping(in, current);
         }

@@ -169,6 +169,9 @@ struct StreamReader< ::RPCWiseFuse::FusionInf, S>
 namespace RPCWiseFuse
 {
 
+class Callback_WiseFusionInf_geneThumbImg_Base : virtual public ::IceInternal::CallbackBase { };
+typedef ::IceUtil::Handle< Callback_WiseFusionInf_geneThumbImg_Base> Callback_WiseFusionInf_geneThumbImgPtr;
+
 class Callback_WiseFusionInf_fuseSyn_Base : virtual public ::IceInternal::CallbackBase { };
 typedef ::IceUtil::Handle< Callback_WiseFusionInf_fuseSyn_Base> Callback_WiseFusionInf_fuseSynPtr;
 
@@ -191,6 +194,82 @@ namespace RPCWiseFuse
 
 class WiseFusionInf : virtual public ::IceProxy::Ice::Object
 {
+public:
+
+    bool geneThumbImg(const ::std::string& __p_inPath, const ::std::string& __p_outPath, const ::std::string& __p_bandlist)
+    {
+        return geneThumbImg(__p_inPath, __p_outPath, __p_bandlist, 0);
+    }
+    bool geneThumbImg(const ::std::string& __p_inPath, const ::std::string& __p_outPath, const ::std::string& __p_bandlist, const ::Ice::Context& __ctx)
+    {
+        return geneThumbImg(__p_inPath, __p_outPath, __p_bandlist, &__ctx);
+    }
+#ifdef ICE_CPP11
+    ::Ice::AsyncResultPtr
+    begin_geneThumbImg(const ::std::string& __p_inPath, const ::std::string& __p_outPath, const ::std::string& __p_bandlist, const ::IceInternal::Function<void (bool)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    {
+        return __begin_geneThumbImg(__p_inPath, __p_outPath, __p_bandlist, 0, __response, __exception, __sent);
+    }
+    ::Ice::AsyncResultPtr
+    begin_geneThumbImg(const ::std::string& __p_inPath, const ::std::string& __p_outPath, const ::std::string& __p_bandlist, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    {
+        return begin_geneThumbImg(__p_inPath, __p_outPath, __p_bandlist, 0, ::Ice::newCallback(__completed, __sent), 0);
+    }
+    ::Ice::AsyncResultPtr
+    begin_geneThumbImg(const ::std::string& __p_inPath, const ::std::string& __p_outPath, const ::std::string& __p_bandlist, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (bool)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    {
+        return __begin_geneThumbImg(__p_inPath, __p_outPath, __p_bandlist, &__ctx, __response, __exception, __sent);
+    }
+    ::Ice::AsyncResultPtr
+    begin_geneThumbImg(const ::std::string& __p_inPath, const ::std::string& __p_outPath, const ::std::string& __p_bandlist, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    {
+        return begin_geneThumbImg(__p_inPath, __p_outPath, __p_bandlist, &__ctx, ::Ice::newCallback(__completed, __sent));
+    }
+    
+private:
+
+    ::Ice::AsyncResultPtr __begin_geneThumbImg(const ::std::string& __p_inPath, const ::std::string& __p_outPath, const ::std::string& __p_bandlist, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (bool)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent);
+    
+public:
+#endif
+
+    ::Ice::AsyncResultPtr begin_geneThumbImg(const ::std::string& __p_inPath, const ::std::string& __p_outPath, const ::std::string& __p_bandlist)
+    {
+        return begin_geneThumbImg(__p_inPath, __p_outPath, __p_bandlist, 0, ::IceInternal::__dummyCallback, 0);
+    }
+
+    ::Ice::AsyncResultPtr begin_geneThumbImg(const ::std::string& __p_inPath, const ::std::string& __p_outPath, const ::std::string& __p_bandlist, const ::Ice::Context& __ctx)
+    {
+        return begin_geneThumbImg(__p_inPath, __p_outPath, __p_bandlist, &__ctx, ::IceInternal::__dummyCallback, 0);
+    }
+
+    ::Ice::AsyncResultPtr begin_geneThumbImg(const ::std::string& __p_inPath, const ::std::string& __p_outPath, const ::std::string& __p_bandlist, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_geneThumbImg(__p_inPath, __p_outPath, __p_bandlist, 0, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_geneThumbImg(const ::std::string& __p_inPath, const ::std::string& __p_outPath, const ::std::string& __p_bandlist, const ::Ice::Context& __ctx, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_geneThumbImg(__p_inPath, __p_outPath, __p_bandlist, &__ctx, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_geneThumbImg(const ::std::string& __p_inPath, const ::std::string& __p_outPath, const ::std::string& __p_bandlist, const ::RPCWiseFuse::Callback_WiseFusionInf_geneThumbImgPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_geneThumbImg(__p_inPath, __p_outPath, __p_bandlist, 0, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_geneThumbImg(const ::std::string& __p_inPath, const ::std::string& __p_outPath, const ::std::string& __p_bandlist, const ::Ice::Context& __ctx, const ::RPCWiseFuse::Callback_WiseFusionInf_geneThumbImgPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_geneThumbImg(__p_inPath, __p_outPath, __p_bandlist, &__ctx, __del, __cookie);
+    }
+
+    bool end_geneThumbImg(const ::Ice::AsyncResultPtr&);
+    
+private:
+
+    bool geneThumbImg(const ::std::string&, const ::std::string&, const ::std::string&, const ::Ice::Context*);
+    ::Ice::AsyncResultPtr begin_geneThumbImg(const ::std::string&, const ::std::string&, const ::std::string&, const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
+    
 public:
 
     ::RPCWiseFuse::FusionInf fuseSyn(const ::RPCWiseFuse::DirArgs& __p_mapArgs)
@@ -627,6 +706,9 @@ public:
     virtual const ::std::string& ice_id(const ::Ice::Current& = ::Ice::Current()) const;
     static const ::std::string& ice_staticId();
 
+    virtual bool geneThumbImg(const ::std::string&, const ::std::string&, const ::std::string&, const ::Ice::Current& = ::Ice::Current()) = 0;
+    ::Ice::DispatchStatus ___geneThumbImg(::IceInternal::Incoming&, const ::Ice::Current&);
+
     virtual ::RPCWiseFuse::FusionInf fuseSyn(const ::RPCWiseFuse::DirArgs&, const ::Ice::Current& = ::Ice::Current()) = 0;
     ::Ice::DispatchStatus ___fuseSyn(::IceInternal::Incoming&, const ::Ice::Current&);
 
@@ -662,6 +744,110 @@ inline bool operator<(const WiseFusionInf& l, const WiseFusionInf& r)
 
 namespace RPCWiseFuse
 {
+
+template<class T>
+class CallbackNC_WiseFusionInf_geneThumbImg : public Callback_WiseFusionInf_geneThumbImg_Base, public ::IceInternal::TwowayCallbackNC<T>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception&);
+    typedef void (T::*Sent)(bool);
+    typedef void (T::*Response)(bool);
+
+    CallbackNC_WiseFusionInf_geneThumbImg(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::TwowayCallbackNC<T>(obj, cb != 0, excb, sentcb), _response(cb)
+    {
+    }
+
+    virtual void completed(const ::Ice::AsyncResultPtr& __result) const
+    {
+        ::RPCWiseFuse::WiseFusionInfPrx __proxy = ::RPCWiseFuse::WiseFusionInfPrx::uncheckedCast(__result->getProxy());
+        bool __ret;
+        try
+        {
+            __ret = __proxy->end_geneThumbImg(__result);
+        }
+        catch(const ::Ice::Exception& ex)
+        {
+            ::IceInternal::CallbackNC<T>::exception(__result, ex);
+            return;
+        }
+        if(_response)
+        {
+            (::IceInternal::CallbackNC<T>::_callback.get()->*_response)(__ret);
+        }
+    }
+
+    private:
+
+    Response _response;
+};
+
+template<class T> Callback_WiseFusionInf_geneThumbImgPtr
+newCallback_WiseFusionInf_geneThumbImg(const IceUtil::Handle<T>& instance, void (T::*cb)(bool), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_WiseFusionInf_geneThumbImg<T>(instance, cb, excb, sentcb);
+}
+
+template<class T> Callback_WiseFusionInf_geneThumbImgPtr
+newCallback_WiseFusionInf_geneThumbImg(T* instance, void (T::*cb)(bool), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_WiseFusionInf_geneThumbImg<T>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT>
+class Callback_WiseFusionInf_geneThumbImg : public Callback_WiseFusionInf_geneThumbImg_Base, public ::IceInternal::TwowayCallback<T, CT>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception& , const CT&);
+    typedef void (T::*Sent)(bool , const CT&);
+    typedef void (T::*Response)(bool, const CT&);
+
+    Callback_WiseFusionInf_geneThumbImg(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::TwowayCallback<T, CT>(obj, cb != 0, excb, sentcb), _response(cb)
+    {
+    }
+
+    virtual void completed(const ::Ice::AsyncResultPtr& __result) const
+    {
+        ::RPCWiseFuse::WiseFusionInfPrx __proxy = ::RPCWiseFuse::WiseFusionInfPrx::uncheckedCast(__result->getProxy());
+        bool __ret;
+        try
+        {
+            __ret = __proxy->end_geneThumbImg(__result);
+        }
+        catch(const ::Ice::Exception& ex)
+        {
+            ::IceInternal::Callback<T, CT>::exception(__result, ex);
+            return;
+        }
+        if(_response)
+        {
+            (::IceInternal::Callback<T, CT>::_callback.get()->*_response)(__ret, CT::dynamicCast(__result->getCookie()));
+        }
+    }
+
+    private:
+
+    Response _response;
+};
+
+template<class T, typename CT> Callback_WiseFusionInf_geneThumbImgPtr
+newCallback_WiseFusionInf_geneThumbImg(const IceUtil::Handle<T>& instance, void (T::*cb)(bool, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_WiseFusionInf_geneThumbImg<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT> Callback_WiseFusionInf_geneThumbImgPtr
+newCallback_WiseFusionInf_geneThumbImg(T* instance, void (T::*cb)(bool, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_WiseFusionInf_geneThumbImg<T, CT>(instance, cb, excb, sentcb);
+}
 
 template<class T>
 class CallbackNC_WiseFusionInf_fuseSyn : public Callback_WiseFusionInf_fuseSyn_Base, public ::IceInternal::TwowayCallbackNC<T>

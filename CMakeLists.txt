@@ -28,6 +28,8 @@ set(SOURCE_FILES source/imagefusion.cpp
         source/rpc/fusion/wisefuseRpc.h
         source/rpc/quality/qualityjudgeRpc.cpp
         source/rpc/quality/qualityjudgeRpc.h
+        source/algorithm/thumb/imagethumb.cpp
+        source/algorithm/thumb/imagethumb.h
         source/algorithm/quality/utils/qualityutils.cpp
         source/algorithm/quality/utils/qualityutils.h
         source/algorithm/quality/src/clarity.cpp
@@ -152,7 +154,8 @@ set(SOURCE_FILES source/imagefusion.cpp
         source/algorithm/fusion/curvelet/fftw/timer.cpp
         source/algorithm/fusion/curvelet/fftw/twiddle.cpp
         source/algorithm/fusion/curvelet/fftw/wisdom.cpp
-        source/algorithm/fusion/curvelet/fftw/wisdomio.cpp)
+        source/algorithm/fusion/curvelet/fftw/wisdomio.cpp
+        )
 
 add_executable(AlgorithmServer ${SOURCE_FILES})
 target_link_libraries(AlgorithmServer Ice IceUtil gdal proj pthread)

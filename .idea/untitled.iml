@@ -6,6 +6,8 @@
       <sourceFolder url="file://$MODULE_DIR$/source/server.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/imagefusion.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/imagefusion.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/thumb/imagethumb.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/thumb/imagethumb.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/HCS.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/PCA.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/HCS.h" isTestSource="false" />
@@ -14,13 +16,13 @@
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/GramSchmidtFusion.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/HSI.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/Tools.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/PgInf.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/HSIFusion.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/HSI.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/CurveletFusion.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fdct_wrapping_param.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/offmat.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fdct_wrapping.hpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fni_9.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fftwnd.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fn_10.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/ftw_32.cpp" isTestSource="false" />
@@ -35,10 +37,11 @@
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/ftw_7.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/rader.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fni_16.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fftw_int.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fn_13.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/ftwi_9.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fni_14.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fn_13.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fni_9.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fftw_int.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/ftw_3.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fn_64.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fn_9.cpp" isTestSource="false" />
@@ -54,10 +57,11 @@
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/ftw_8.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/putils.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fni_1.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/config.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fn_1.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fn_14.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fni_12.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/config.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/ftw_4.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fni_13.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fftw.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/ftw_10.cpp" isTestSource="false" />
@@ -85,7 +89,6 @@
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/executor.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/ftwi_3.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fni_3.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/ftw_4.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fni_64.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/ftw_16.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fn_16.cpp" isTestSource="false" />
@@ -107,7 +110,6 @@
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/GdalInf.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/WT.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/BroveyFusion.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/PgInf.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/PCAFusion.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/PgInf.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/DWTFusion.cpp" isTestSource="false" />

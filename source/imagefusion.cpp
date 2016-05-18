@@ -431,7 +431,6 @@ bool ImageFusion::checkFusionArgv(DirArgs mapArgs, FusionArgs &args) {
         args.idalg = idalg;
         args.idinter = interpolation;
         args.band.assign(band, band+3);
-
     } catch (exception& e) {
         cerr << e.what() << endl;
         return false;

@@ -34,8 +34,8 @@ typedef struct _FusionArgs {
     string msurl;
     string outurl;
     string logurl;
-    int idalg;
     vector<int> band;
+    int idalg;
     int idinter;
 }FusionArgs;
 

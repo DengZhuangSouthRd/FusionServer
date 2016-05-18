@@ -61,10 +61,18 @@ void serializeImageQualityOnTime(int seconds) {
 }
 
 void* qualityInterface(void *args) {
+    map<string,int> m_evaluatealg;
+    m_evaluatealg["Clarity_1_0"]=1;
+    m_evaluatealg["ContrastRatio_1_0"]=2;
+    m_evaluatealg["Entropy_1_0"]=3;
+    m_evaluatealg["Mean_1_0"]=4;
+    m_evaluatealg["SignaltoNoiseRatio_1_0"]=5;
+    m_evaluatealg["Striperesidual_1_0"]=6;
+
     if(args == NULL) return NULL;
     QualityInputStruct * tmp = (QualityInputStruct*)args;
 
-    int algorithmClass = tmp->algorithmkind;
+    int algorithmClass = m_evaluatealg[tmp->algorithmkind];
     char* logfilepath = NULL;
     ImageParameter testparameter;
     if(tmp->inputMap.size() == 1) {

@@ -6,6 +6,9 @@ ImageQuality* g_ImgQuality = NULL;
 ImageQuality::ImageQuality() {
     m_serializePath = g_ConfMap["QUALTYSerializePath"];
     m_serializePathBak = g_ConfMap["QUALTYSerializePathBak"];
+
+
+
     getSerializeTaskResults(m_serializePath);
     p_threadPool = NULL;
     p_threadPool = ThreadPool::getSingleInstance();
@@ -45,7 +48,7 @@ bool ImageQuality::checkQualityArgv(const QualityInputStruct &inputArgs) {
 void ImageQuality::log_InputParameters(const QualityInputStruct &inputArgs) {
     string str = "";
     str += ("task_id="+inputArgs.id+"#");
-    str += ("algorithmkind="+to_string(inputArgs.algorithmkind)+"#");
+    str += ("algorithmkind="+inputArgs.algorithmkind+"#");
     for(QualityMapArgs::const_iterator it=inputArgs.inputMap.begin(); it!=inputArgs.inputMap.end(); it++) {
         str += (it->first+"$"+"filePath="+it->second.filePath+"#rowNum="+to_string(it->second.rowNum)+"#colNum="+to_string(it->second.colNum));
         str += ("#bandNum="+to_string(it->second.bandNum));

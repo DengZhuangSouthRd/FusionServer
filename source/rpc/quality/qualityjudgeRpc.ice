@@ -22,7 +22,7 @@ module RPCQualityJudge {
     
     struct QualityInputStruct {
         string id; // task id
-        int algorithmkind; // quality algorithm class
+        string algorithmkind; // quality algorithm class
         QualityMapArgs inputMap; // wait for judge parameters 
     };
 

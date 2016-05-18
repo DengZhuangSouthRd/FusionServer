@@ -195,7 +195,7 @@ typedef ::std::map< ::std::string, ::RPCQualityJudge::ImageParameter> QualityMap
 struct QualityInputStruct
 {
     ::std::string id;
-    ::Ice::Int algorithmkind;
+    ::std::string algorithmkind;
     ::RPCQualityJudge::QualityMapArgs inputMap;
 };
 
@@ -269,7 +269,7 @@ template<>
 struct StreamableTraits< ::RPCQualityJudge::QualityInputStruct>
 {
     static const StreamHelperCategory helper = StreamHelperCategoryStruct;
-    static const int minWireSize = 6;
+    static const int minWireSize = 3;
     static const bool fixedLength = false;
 };
 

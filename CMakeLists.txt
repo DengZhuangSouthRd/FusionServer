@@ -4,7 +4,8 @@ project(AlgorithmServer)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 include_directories("/usr/local/include")
-link_directories("/usr/local/lib")
+LINK_DIRECTORIES("/usr/local/lib")
+
 set(SOURCE_FILES source/imagefusion.cpp
         source/imagefusion.h
         source/imagequality.cpp

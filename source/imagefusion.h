@@ -17,6 +17,8 @@
 using namespace std;
 using namespace RPCWiseFuse;
 
+#define NOTSERIALIZE
+
 typedef struct _FusionTaskStaticResult {
     string task_id;
     FusionArgs input;

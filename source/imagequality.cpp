@@ -7,13 +7,14 @@ ImageQuality::ImageQuality() {
     m_serializePath = g_ConfMap["QUALTYSerializePath"];
     m_serializePathBak = g_ConfMap["QUALTYSerializePathBak"];
 
-
-
+#ifdef SERIALIZE
     getSerializeTaskResults(m_serializePath);
-    p_threadPool = NULL;
-    p_threadPool = ThreadPool::getSingleInstance();
     g_ImgQuality = this;
     serializeImageQualityOnTime(atoi(g_ConfMap["SERIALIZETIME"].c_str()));
+#endif
+
+    p_threadPool = NULL;
+    p_threadPool = ThreadPool::getSingleInstance();
 }
 
 ImageQuality::~ImageQuality() {

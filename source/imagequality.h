@@ -17,6 +17,8 @@
 using namespace std;
 using namespace RPCQualityJudge;
 
+#define  NOTSERIALIZE
+
 typedef struct _QualityTaskStaticResult{
     string task_id;
     QualityInputStruct input;

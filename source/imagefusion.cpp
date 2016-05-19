@@ -34,13 +34,14 @@ ImageFusion::ImageFusion() {
         throw runtime_error("Serialized Bak File Does Not Exists !");
     }
 
+#ifdef  SERIALIZE
     getSerializeTaskResults(m_serializePath);
+    g_ImgFusion = this;
+    serializeImageFusionOnTime(atoi(g_ConfMap["SERIALIZETIME"].c_str()));
+#endif
 
     p_threadPool = NULL;
     p_threadPool = ThreadPool::getSingleInstance();
-
-    g_ImgFusion = this;
-    serializeImageFusionOnTime(atoi(g_ConfMap["SERIALIZETIME"].c_str()));
 }
 
 ImageFusion::~ImageFusion() {

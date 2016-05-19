@@ -15,14 +15,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e31ccc9-ad64-4f0e-bad5-b95dae613dcf" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/fusion/utils/fusionutils.h" afterPath="$PROJECT_DIR$/source/algorithm/fusion/utils/fusionutils.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/imagefusion.cpp" afterPath="$PROJECT_DIR$/source/imagefusion.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/imagefusion.h" afterPath="$PROJECT_DIR$/source/imagefusion.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/imagequality.cpp" afterPath="$PROJECT_DIR$/source/imagequality.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.h" afterPath="$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.ice" afterPath="$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.ice" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/imagequality.h" afterPath="$PROJECT_DIR$/source/imagequality.h" />
     </list>
     <ignored path="untitled.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -49,21 +46,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="imagethumb.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="imagethumb.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/algorithm/thumb/imagethumb.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2562">
-              <caret line="183" column="68" selection-start-line="183" selection-start-column="68" selection-end-line="183" selection-end-column="68" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fusionutils.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/fusion/utils/fusionutils.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="38" column="15" selection-start-line="38" selection-start-column="15" selection-end-line="38" selection-end-column="15" />
+            <state relative-caret-position="2220">
+              <caret line="148" column="27" selection-start-line="148" selection-start-column="27" selection-end-line="148" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -72,8 +59,18 @@
       <file leaf-file-name="qualityutils.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="64" column="30" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="30" />
+            <state relative-caret-position="900">
+              <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="server.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/server.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -82,18 +79,8 @@
       <file leaf-file-name="qualityutils.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-223">
+            <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="qualityjudgeRpc.ice" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.ice">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -102,11 +89,10 @@
       <file leaf-file-name="imagefusion.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/imagefusion.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+            <state relative-caret-position="240">
+              <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
               <folding>
                 <element signature="e#45#64#0" expanded="true" />
-                <marker date="1463550670000" expanded="true" signature="569:1968" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -115,8 +101,8 @@
       <file leaf-file-name="imagequality.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/imagequality.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+            <state relative-caret-position="105">
+              <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -125,9 +111,11 @@
       <file leaf-file-name="imagequality.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/imagequality.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="210">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding>
+                <marker date="1463623837000" expanded="true" signature="130:500" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -135,32 +123,20 @@
       <file leaf-file-name="qualityjudgeRpc.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
+            <state relative-caret-position="2910">
               <caret line="194" column="7" selection-start-line="194" selection-start-column="7" selection-end-line="194" selection-end-column="7" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="imagefusion.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="imagefusion.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/source/imagefusion.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3628">
-              <caret line="432" column="39" selection-start-line="432" selection-start-column="39" selection-end-line="432" selection-end-column="39" />
+            <state relative-caret-position="406">
+              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
               <folding>
-                <marker date="1463570889000" expanded="true" signature="125:1447" placeholder="{...}" />
-                <marker date="1463570889000" expanded="true" signature="1477:1571" placeholder="{...}" />
-                <marker date="1463570889000" expanded="true" signature="1628:1804" placeholder="{...}" />
-                <marker date="1463570889000" expanded="true" signature="1867:3155" placeholder="{...}" />
-                <marker date="1463570889000" expanded="true" signature="3260:6147" placeholder="{...}" />
-                <marker date="1463570889000" expanded="true" signature="6260:8786" placeholder="{...}" />
-                <marker date="1463570889000" expanded="true" signature="8901:9234" placeholder="{...}" />
-                <marker date="1463570889000" expanded="true" signature="9347:10982" placeholder="{...}" />
-                <marker date="1463570889000" expanded="true" signature="11496:12275" placeholder="{...}" />
-                <marker date="1463570889000" expanded="true" signature="12348:13346" placeholder="{...}" />
-                <marker date="1463570889000" expanded="true" signature="13423:13474" placeholder="{...}" />
-                <marker date="1463570889000" expanded="true" signature="13556:14502" placeholder="{...}" />
-                <marker date="1463570889000" expanded="true" signature="14573:16651" placeholder="{...}" />
+                <element signature="e#1245#1384#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -211,20 +187,20 @@
         <option value="$PROJECT_DIR$/source/algorithm/imagethumb.h" />
         <option value="$PROJECT_DIR$/source/algorithm/imagethumb.cpp" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/source/algorithm/thumb/imagethumb.h" />
         <option value="$PROJECT_DIR$/source/utils/utils.cpp" />
         <option value="$PROJECT_DIR$/source/utils/utils.h" />
         <option value="$PROJECT_DIR$/source/algorithm/fusion/HCS.cpp" />
-        <option value="$PROJECT_DIR$/source/imagefusion.h" />
         <option value="$PROJECT_DIR$/source/algorithm/thumb/imagethumb.cpp" />
         <option value="$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.ice" />
         <option value="$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.h" />
         <option value="$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.cpp" />
-        <option value="$PROJECT_DIR$/source/imagequality.h" />
-        <option value="$PROJECT_DIR$/source/imagequality.cpp" />
         <option value="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp" />
         <option value="$PROJECT_DIR$/source/algorithm/fusion/utils/fusionutils.h" />
+        <option value="$PROJECT_DIR$/source/algorithm/thumb/imagethumb.h" />
         <option value="$PROJECT_DIR$/source/imagefusion.cpp" />
+        <option value="$PROJECT_DIR$/source/imagequality.cpp" />
+        <option value="$PROJECT_DIR$/source/imagequality.h" />
+        <option value="$PROJECT_DIR$/source/imagefusion.h" />
       </list>
     </option>
   </component>
@@ -620,7 +596,7 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2359375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32934928" sideWeight="0.496875" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23240373" sideWeight="0.496875" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934928" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934928" sideWeight="0.503125" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -821,7 +797,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -829,47 +804,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
           <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
-          <folding>
-            <marker date="1463536615000" expanded="true" signature="507:781" placeholder="..." />
-            <marker date="1463536615000" expanded="true" signature="1772:1975" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="2164:3103" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="3399:4113" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="4529:5823" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="5931:6462" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="6607:7488" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="7720:8351" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="8796:9967" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="9323:9859" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="10185:10731" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="10863:11732" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="11965:12599" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="12958:14236" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="14346:14879" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="15016:15892" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="16127:16767" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="17138:18443" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="18558:19096" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="19245:20135" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="20371:21016" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="21465:22641" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="21992:22533" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="22868:23419" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="23495:23555" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="23642:23675" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="23990:24102" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="24199:24320" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="24407:24458" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="24524:24719" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="24852:25430" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="25558:26014" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="26143:26586" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="26717:27165" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="27298:27756" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="28105:29372" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="29459:29542" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="29622:29679" placeholder="{...}" />
-            <marker date="1463536615000" expanded="true" signature="29761:29943" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -877,13 +811,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="14" column="21" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/server.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="51" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="51" />
         </state>
       </provider>
     </entry>
@@ -921,7 +848,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="560">
           <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -929,7 +855,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1288">
           <caret line="92" column="1" selection-start-line="92" selection-start-column="1" selection-end-line="92" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -937,19 +862,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="700">
           <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="24" />
-          <folding>
-            <element signature="e#37#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/thumb/imagethumb.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="14" column="22" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="22" />
-          <folding>
-            <element signature="e#111#133#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -957,7 +869,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1092">
           <caret line="78" column="21" selection-start-line="78" selection-start-column="21" selection-end-line="78" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -965,134 +876,106 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="277">
           <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
-          <folding>
-            <marker date="1463569760000" expanded="true" signature="511:789" placeholder="..." />
-            <marker date="1463569760000" expanded="true" signature="1641:1845" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="2017:2914" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="3167:3812" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="4284:5478" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="4817:5364" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="5711:6267" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="6420:7299" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="7553:8201" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="8581:9869" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="9983:10520" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="10697:11604" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="11862:12522" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="12999:14198" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="13532:14084" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="14441:15002" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="15079:15140" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="15228:15258" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="15581:15695" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="15793:15916" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="16004:16056" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="16123:16320" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="16452:16938" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="17071:17538" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="17675:18166" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="18488:19599" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="19687:19770" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="19851:19908" placeholder="{...}" />
-            <marker date="1463569760000" expanded="true" signature="19991:20175" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.ice">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
+        <state relative-caret-position="345">
           <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/imagefusion.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
-          <folding>
-            <element signature="e#45#64#0" expanded="true" />
-            <marker date="1463550670000" expanded="true" signature="569:1968" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
+        <state relative-caret-position="2910">
           <caret line="194" column="7" selection-start-line="194" selection-start-column="7" selection-end-line="194" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/imagequality.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/imagequality.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/fusion/utils/fusionutils.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="38" column="15" selection-start-line="38" selection-start-column="15" selection-end-line="38" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/imagefusion.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3628">
-          <caret line="432" column="39" selection-start-line="432" selection-start-column="39" selection-end-line="432" selection-end-column="39" />
-          <folding>
-            <marker date="1463570889000" expanded="true" signature="125:1447" placeholder="{...}" />
-            <marker date="1463570889000" expanded="true" signature="1477:1571" placeholder="{...}" />
-            <marker date="1463570889000" expanded="true" signature="1628:1804" placeholder="{...}" />
-            <marker date="1463570889000" expanded="true" signature="1867:3155" placeholder="{...}" />
-            <marker date="1463570889000" expanded="true" signature="3260:6147" placeholder="{...}" />
-            <marker date="1463570889000" expanded="true" signature="6260:8786" placeholder="{...}" />
-            <marker date="1463570889000" expanded="true" signature="8901:9234" placeholder="{...}" />
-            <marker date="1463570889000" expanded="true" signature="9347:10982" placeholder="{...}" />
-            <marker date="1463570889000" expanded="true" signature="11496:12275" placeholder="{...}" />
-            <marker date="1463570889000" expanded="true" signature="12348:13346" placeholder="{...}" />
-            <marker date="1463570889000" expanded="true" signature="13423:13474" placeholder="{...}" />
-            <marker date="1463570889000" expanded="true" signature="13556:14502" placeholder="{...}" />
-            <marker date="1463570889000" expanded="true" signature="14573:16651" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-223">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="64" column="30" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/source/algorithm/thumb/imagethumb.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2562">
-          <caret line="183" column="68" selection-start-line="183" selection-start-column="68" selection-end-line="183" selection-end-column="68" />
+        <state relative-caret-position="2220">
+          <caret line="148" column="27" selection-start-line="148" selection-start-column="27" selection-end-line="148" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/thumb/imagethumb.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/fusion/utils/fusionutils.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="38" column="15" selection-start-line="38" selection-start-column="15" selection-end-line="38" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/server.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/imagequality.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <marker date="1463623837000" expanded="true" signature="130:500" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/imagequality.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/imagefusion.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+          <folding>
+            <element signature="e#45#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/imagefusion.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding>
+            <element signature="e#1245#1384#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -111,3 +111,33 @@ std::vector<std::string> split(const std::string &s, char delim) {
     split(s, delim, elems);
     return elems;
 }
+
+bool createFolder(string path) {
+    if(access(path.c_str(), 0) != 0) {
+        if (!mkdir(path.c_str(), 0775)) {
+            return true;
+        } else {
+            cerr << "createFolder " << path << "failed" << endl;
+        }
+    }
+    return true;
+}
+
+bool checkFilePath(string paths) {
+    string tmp;
+    size_t end_pos = paths.rfind('/');
+    tmp = paths.substr(0, end_pos);
+    paths = tmp;
+    size_t pos = paths.find('/');
+
+    while(pos = paths.find("/", pos+1), pos != string::npos) {
+        tmp = (paths.substr(0, pos));
+        if(!createFolder(tmp)) {
+            return false;
+        }
+    }
+    if(!createFolder(paths)) {
+        return false;
+    }
+    return true;
+}

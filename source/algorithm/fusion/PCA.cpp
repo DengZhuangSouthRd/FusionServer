@@ -395,15 +395,8 @@ int PCA::PCAReproject(float * signal, int row, int col, float * mean, float * PC
             newdata[y*col + x] = newdata[y*col + x] + mean[y];
 
         }
-    //for (y = 0; y < row; y++) /* subtract mean */
-    //	for (x = 0; x < col; x++)
-    //	{
-    //		newdata[y*col + x] = newdata[y*col + x] + mean[y];
-    //	}
-
     return 1;
 }
-
 
 int PCA::PCAProject(float * data, int row, int col, float * mean, float * PC, float * V)
 {

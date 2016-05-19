@@ -172,13 +172,10 @@ int GdalInf::ReadImageInf(const char* InputFileName)
 	this->Datatype = GDALGetDataTypeName(ReadDataSet->GetRasterBand(1)->GetRasterDataType()); //获取图像数据类型
 	if (ReadDataSet->GetGeoTransform(this->adfGeoTransform) == CE_None){ //获取图像地理信息
         this->SpatialSolution = fabs(adfGeoTransform[1]); //空间分辨率
-		
 	}
 	else{
 		this->SpatialSolution = 0; //空间分辨率
-
 	}
-
 
 	GDALClose(ReadDataSet); ReadDataSet = NULL;
 	return 0;

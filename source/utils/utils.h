@@ -9,6 +9,9 @@
 #include <vector>
 #include <exception>
 
+#include <dirent.h>
+#include <sys/stat.h>
+
 #include "json/json-forwards.h"
 #include "json/json.h"
 
@@ -49,6 +52,9 @@ void read_config_Json(string fileName, map<string, string>& argvMap);
 
 std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems);
 std::vector<std::string> split(const std::string &s, char delim);
+
+bool createFolder(string path);
+bool checkFilePath(string paths);
 
 #endif // UTILS_HPP
 

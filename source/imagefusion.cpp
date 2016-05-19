@@ -373,23 +373,27 @@ FusionInf ImageFusion::fetchFuseRes(const DirArgs& mapArg, const Ice::Current&) 
 bool ImageFusion::checkFusionArgv(DirArgs mapArgs, FusionArgs &args) {
     if(mapArgs.count("id") == 0) {
         cerr << "Arg Map Configure Task ID Error !" << endl;
+        Log::Error("Arg Map Configure Task ID Error !" );
         return false;
     }
 
     if(mapArgs.count("panurl") == 0 || mapArgs.count("msurl") == 0 || mapArgs.count("outurl") == 0
        || mapArgs.count("algname") == 0 || mapArgs.count("intername") == 0) {
         cerr << "Arg Map Configure Error !" << endl;
+        Log::Error("Arg Map Configure Error !");
         return false;
     }
     int band[3] = {0,0,0};
     if(mapArgs.count("band") == 0) {
         cerr << "Arg Map Configure Bands Error !" << endl;
+        Log::Error("Arg Map Configure Bands Error !");
         return false;
     } else {
         string bandlist = mapArgs["band"];
         vector<string> tmp = split(bandlist, '|');
         if(tmp.size() != 3) {
             cerr << "Arg Map input bandlist error !" << endl;
+            Log::Error("Arg Map input bandlist error !");
             return false;
         } else {
             band[0] = stoi(tmp[0]);
@@ -402,14 +406,18 @@ bool ImageFusion::checkFusionArgv(DirArgs mapArgs, FusionArgs &args) {
     checkFileInfo(mapArgs["panurl"], status);
     if(status.stauts != 0) {
         cerr << status.desc << endl;
+        Log::Error(status.desc);
         return false;
     }
 
     checkFileInfo(mapArgs["msurl"], status);
     if(status.stauts != 0) {
         cerr << status.desc << endl;
+        Log::Error(status.desc);
         return false;
     }
+
+    checkFilePath(mapArgs["outurl"]);
 
     int idalg, interpolation;
 

@@ -60,15 +60,20 @@ void Server::close() {
     }
 }
 
-int main(int argc,char* argv[]) {
+#define REALRUN
 
+int main(int argc,char* argv[]) {
+#ifdef REALRUN
     if(argc != 2) {
         cerr << "Argc and Argv Format Error !" << endl;
         cerr << "Please Enter the configure.json file path !" << endl;
         exit(1);
     }
-
     string configPath(argv[1]);
+#else
+    string configPath = "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/AlgorithmServer/conf/configure.json";
+#endif
+
     try {
         read_config_Json(configPath, g_ConfMap);
     } catch (runtime_error &err) {

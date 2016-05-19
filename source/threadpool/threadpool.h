@@ -12,8 +12,8 @@
 #include <map>
 #include <set>
 
-#include "Mutex.h"
-#include "Task.h"
+#include "mutex.h"
+#include "task.h"
 
 #include "../utils/log.h"
 #include "../utils/utils.h"

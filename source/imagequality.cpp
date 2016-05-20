@@ -3,6 +3,8 @@
 extern map<string, string> g_ConfMap;
 ImageQuality* g_ImgQuality = NULL;
 
+#define  NOTSERIALIZE
+
 ImageQuality::ImageQuality() {
     m_serializePath = g_ConfMap["QUALTYSerializePath"];
     m_serializePathBak = g_ConfMap["QUALTYSerializePathBak"];
@@ -26,18 +28,6 @@ ImageQuality::~ImageQuality() {
 bool ImageQuality::checkQualityArgv(const QualityInputStruct &inputArgs) {
     // main to change the filePath is Right !
     for(QualityMapArgs::const_iterator it=inputArgs.inputMap.begin(); it!=inputArgs.inputMap.end(); it++) {
-        if(!(it->second.bitsPerPixel == 8 || it->second.bitsPerPixel == 16 || it->second.bitsPerPixel == 24)) {
-            Log::Error("BitsPerPixel Value not in 8, 16, 24 ! Please Check !");
-            return false;
-        }
-        if(it->second.bandNum <= 0) {
-            Log::Error("BandNum Value <= 0 ! Please Check !");
-            return false;
-        }
-        if(it->second.colNum <= 0 || it->second.rowNum <= 0) {
-            Log::Error("ColNum <=0 Or RowNum <= 0 !");
-            return false;
-        }
         if(access(it->second.filePath.c_str(), 0) != 0) {
             Log::Error("FilePath Not Exists ! Please Check !");
             return false;
@@ -82,18 +72,16 @@ QualityInfo ImageQuality::qualitySyn(const QualityInputStruct &inputArgs, const 
     bool flag = checkQualityArgv(inputArgs);
     if(flag == false)
         return quaRes;
-    QualityRes* tmp = NULL;
-    tmp = (QualityRes*)qualityInterface((void*)(&inputArgs));
+    QualityResMap* tmp = NULL;
+    tmp = (QualityResMap*)qualityInterface((void*)(&inputArgs));
     if(tmp == NULL) {
         return quaRes;
     }
 
     quaRes.status = 1;
-    quaRes.imgsquality[task_id] = vector<double>();
-    for(int i=0;i<tmp->length;i++) {
-        quaRes.imgsquality[task_id].push_back(tmp->data[i]);
+    for(map<string, double>::iterator it=tmp->res.begin(); it!=tmp->res.end(); it++) {
+        quaRes.imgsquality[it->first] = vector<double>(1, it->second);
     }
-    revokeQualityRes(&tmp);
     fillFinishTaskMap(task_id, inputArgs, quaRes);
     return quaRes;
 }
@@ -151,12 +139,16 @@ QualityInfo ImageQuality::fetchQualityRes(const QualityInputStruct &inputArgs, c
         obj.status = -1;
         Log::Error("fetchQualityRes ## fetch task id %s result Failed !", task_id.c_str());
     } else {
-        deepCopyQualityRes2Info(*(QualityRes*)(tmp.output), obj);
+        QualityResMap* t = (QualityResMap*)tmp.output;
+        if(t != NULL) {
+            obj.status = t->status;
+            for(map<string, double>::iterator it=t->res.begin(); it!=t->res.end(); it++) {
+                obj.imgsquality[it->first] = vector<double>(1, it->second);
+            }
+        }
         log_OutputResult(obj);
         QualityTaskStaticResult res;
         flag = packTaskStaticStatus(res, task_id, tmp);
-        delete (QualityInputStruct*)tmp.input;
-        revokeQualityRes((QualityRes**)&(tmp.output));
         if(flag == true) {
             m_finishMap[task_id] = res;
         }
@@ -176,7 +168,7 @@ void ImageQuality::fillFinishTaskMap(const string &task_id, const QualityInputSt
 }
 
 bool ImageQuality::packTaskStaticStatus(QualityTaskStaticResult &res, const string task_id, TaskPackStruct &tmp) {
-    QualityInfo* out_res = (QualityInfo*)tmp.output;
+    QualityResMap* out_res = (QualityResMap*)tmp.output;
     if(out_res->status <= 0) {
         return false;
     }
@@ -184,13 +176,10 @@ bool ImageQuality::packTaskStaticStatus(QualityTaskStaticResult &res, const stri
     res.task_id.assign(task_id);
 
     res.output.status = out_res->status;
-    for(DatasMap::iterator it=out_res->imgsquality.begin(); it!=out_res->imgsquality.end(); it++) {
-        DataArray tmp;
-        for(DataArray::iterator vit=it->second.begin(); vit!=it->second.end(); vit++) {
-            tmp.push_back(*vit);
-        }
-        res.output.imgsquality[it->first] = tmp;
+    for(map<string, double>::iterator it=out_res->res.begin(); it!=out_res->res.end(); it++) {
+        res.output.imgsquality[it->first] = vector<double >(1, it->second);
     }
+    delete out_res;
 
     QualityInputStruct* param = (QualityInputStruct*) tmp.input;
     res.input.id.assign(param->id);
@@ -204,10 +193,10 @@ bool ImageQuality::packTaskStaticStatus(QualityTaskStaticResult &res, const stri
         tmp.bitsPerPixel = it->second.bitsPerPixel;
         res.input.inputMap[it->first] = tmp;
     }
+    delete param;
 
     return true;
 }
-
 
 // get the over task from the Json File
 int ImageQuality::getSerializeTaskResults(string serializePath) {

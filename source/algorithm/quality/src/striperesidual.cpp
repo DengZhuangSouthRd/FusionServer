@@ -8,7 +8,7 @@
 #include "../utils/qualityutils.h"
 
 //Striperesidual-条纹残余量 -改进后
-int32_t Striperesidual(char* filepath,char* logfilepath,double* result) {
+int32_t Striperesidual(char* filepath,char* logfilepath,double& result) {
     GDALDataset *poDataset = NULL;
     GDALAllRegister();
     poDataset=(GDALDataset *)GDALOpen(filepath,GA_ReadOnly);
@@ -28,7 +28,10 @@ int32_t Striperesidual(char* filepath,char* logfilepath,double* result) {
     width=poDataset->GetRasterXSize();
     height=poDataset->GetRasterYSize();
     GDALRasterBand *pband;
-    double *striperesult=result;
+    double *striperesult=(double*)malloc(sizeof(double)*bandnum);
+    if(striperesult == NULL) {
+        return -1;
+    }
     uint16_t *banddata=(uint16_t *)CPLMalloc(sizeof(uint16_t)*width*height);
 
     //设置图像参数
@@ -95,18 +98,23 @@ int32_t Striperesidual(char* filepath,char* logfilepath,double* result) {
 
     GDALClose(poDataset);
     poDataset=NULL;
+
+    result = 0;
+    for(int i=0;i<bandnum;i++) {
+        result += striperesult[i];
+    }
+    result /= bandnum;
+
     return 1;
 }
 
-bool mainStriperesidual(ImageParameter &testparameter, char* logfilepath, QualityRes &m_qRes) {
-    int32_t res = Striperesidual(const_cast<char*>(testparameter.filePath.c_str()),logfilepath,m_qRes.data);
+bool mainStriperesidual(ImageParameter &testparameter, char* logfilepath, double &m_qRes) {
+    m_qRes = 0;
+    int32_t res = Striperesidual(const_cast<char*>(testparameter.filePath.c_str()),logfilepath, m_qRes);
     if(res != 1) {
         printf("Algorithm executing error!\n");
         WriteMsg(logfilepath,-1,"Algorithm executing error!");
-        free(m_qRes.data);
-        m_qRes.data = NULL;
         return false;
     }
-    m_qRes.status = 1;
     return true;
 }

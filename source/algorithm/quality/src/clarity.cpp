@@ -8,11 +8,11 @@
 #include "../utils/qualityutils.h"
 
 //Clarity-影像清晰度（点锐度算法）
-int32_t Clarity(char* filepath,char* logfilepath,double* result) {
-	GDALDataset *poDataset;
+int32_t Clarity(char* filepath,char* logfilepath,double& result) {
+	GDALDataset *poDataset = NULL;
 	GDALAllRegister();
 	poDataset=(GDALDataset *)GDALOpen(filepath,GA_ReadOnly);
-    if( poDataset == NULL ) {
+    if(poDataset == NULL) {
 		printf("Image file open error!\n");
 		WriteMsg(logfilepath,-1,"Image file open error!");
 		return -1; 
@@ -27,8 +27,11 @@ int32_t Clarity(char* filepath,char* logfilepath,double* result) {
 	bandnum=poDataset->GetRasterCount(); 
 	width=poDataset->GetRasterXSize();
 	height=poDataset->GetRasterYSize();
-	GDALRasterBand *pband;
-	double *clarityresult=result;
+	GDALRasterBand *pband = NULL;
+	double *clarityresult = (double*)malloc(sizeof(double) * bandnum);
+	if(clarityresult == NULL) {
+		return -1;
+	}
 	uint16_t *banddata=(uint16_t *)CPLMalloc(sizeof(uint16_t)*width*height);
 
     for(n=0;n<bandnum;n++) {
@@ -72,18 +75,22 @@ int32_t Clarity(char* filepath,char* logfilepath,double* result) {
 
 	GDALClose(poDataset);
 	poDataset=NULL;
+
+    result = 0;
+    for(int i=0;i<bandnum;i++) {
+        result += clarityresult[i];
+    }
+    result /= bandnum;
 	return 1;
 }
 
-bool mainClarity(ImageParameter& testparameter, char* logfilepath, QualityRes& m_qRes) {
-    int32_t res = Clarity(const_cast<char*>(testparameter.filePath.c_str()),logfilepath,m_qRes.data);
+bool mainClarity(ImageParameter& testparameter, char* logfilepath, double & m_qRes) {
+    m_qRes = 0;
+    int32_t res = Clarity(const_cast<char*>(testparameter.filePath.c_str()),logfilepath, m_qRes);
 	if(res != 1) {
 		printf("Algorithm executing error!\n");
 		WriteMsg(logfilepath,-1,"Algorithm executing error!");
-        free(m_qRes.data);
-        m_qRes.data = NULL;
         return false;
 	}
-    m_qRes.status = 1;
     return true;
 }

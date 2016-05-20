@@ -8,7 +8,7 @@
 #include "../utils/qualityutils.h"
 
 //Mean
-int32_t Mean(char* filepath,char* logfilepath,double* result) {
+int32_t Mean(char* filepath,char* logfilepath,double& result) {
 	//定义数据集，打开文件
     GDALDataset *poDataset = NULL;
 	GDALAllRegister();
@@ -29,7 +29,10 @@ int32_t Mean(char* filepath,char* logfilepath,double* result) {
 	width=poDataset->GetRasterXSize();
 	height=poDataset->GetRasterYSize();
 	GDALRasterBand *pband;
-	double *meanresult=result;
+	double *meanresult=(double*)malloc(sizeof(double)*bandnum);
+	if(meanresult == NULL) {
+		return -1;
+	}
 	uint16_t *banddata;
 	banddata=(uint16_t *)CPLMalloc(sizeof(uint16_t)*width*height);
 
@@ -68,19 +71,24 @@ int32_t Mean(char* filepath,char* logfilepath,double* result) {
 
 	GDALClose(poDataset);
 	poDataset=NULL;
+
+    result = 0;
+    for(int i=0;i<bandnum;i++) {
+        result += meanresult[i];
+    }
+    result /= bandnum;
+
 	return 1;
 }
 
 //主函数
-bool mainMean(ImageParameter &testparameter, char* logfilepath, QualityRes &m_qRes) {
-    int32_t res = Mean(const_cast<char*>(testparameter.filePath.c_str()),logfilepath,m_qRes.data);
+bool mainMean(ImageParameter &testparameter, char* logfilepath, double &m_qRes) {
+    m_qRes = 0;
+    int32_t res = Mean(const_cast<char*>(testparameter.filePath.c_str()),logfilepath, m_qRes);
     if(res != 1) {
         printf("Algorithm executing error!\n");
         WriteMsg(logfilepath,-1,"Algorithm executing error!");
-        free(m_qRes.data);
-        m_qRes.data = NULL;
         return false;
     }
-    m_qRes.status = 1;
     return true;
 }

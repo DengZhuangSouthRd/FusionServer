@@ -254,6 +254,7 @@ bool ImageFusion::packTaskStaticStatus(FusionTaskStaticResult &res, const string
 }
 
 bool ImageFusion::geneThumbImg(const string& inPath, const string& outPath, const string& bandlist, const Ice::Current&) {
+    checkFilePath(string(outPath.c_str()));
     vector<string> tmp = split(bandlist, '|');
     bool flag = false;
     if(tmp.size() == 1) {

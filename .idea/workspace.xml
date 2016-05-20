@@ -15,14 +15,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e31ccc9-ad64-4f0e-bad5-b95dae613dcf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/conf/rpcrun.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/fusion/GdalInf.cpp" afterPath="$PROJECT_DIR$/source/algorithm/fusion/GdalInf.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/fusion/PCA.cpp" afterPath="$PROJECT_DIR$/source/algorithm/fusion/PCA.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/clarity.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/clarity.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/contrastRatio.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/contrastRatio.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/entropy.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/entropy.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/mean.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/mean.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/signaltoNoiseRatio.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/signaltoNoiseRatio.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/striperesidual.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/striperesidual.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.h" afterPath="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/imagefusion.cpp" afterPath="$PROJECT_DIR$/source/imagefusion.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/server.cpp" afterPath="$PROJECT_DIR$/source/server.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/utils/utils.cpp" afterPath="$PROJECT_DIR$/source/utils/utils.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/utils/utils.h" afterPath="$PROJECT_DIR$/source/utils/utils.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/imagequality.cpp" afterPath="$PROJECT_DIR$/source/imagequality.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/imagequality.h" afterPath="$PROJECT_DIR$/source/imagequality.h" />
     </list>
     <ignored path="untitled.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,67 +52,27 @@
     <favorites_list name="untitled" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="server.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/server.cpp">
+    <leaf>
+      <file leaf-file-name="imagequality.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/imagequality.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="62" column="14" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="14" />
+            <state relative-caret-position="345">
+              <caret line="23" column="14" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
               <folding>
-                <element signature="e#1844#1951#0" expanded="true" />
+                <element signature="e#46#65#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rpcrun.sh" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/conf/rpcrun.sh">
+      <file leaf-file-name="imagequality.cpp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/source/imagequality.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="server.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/server.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="70">
-              <caret line="14" column="21" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PCA.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/fusion/PCA.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6000">
-              <caret line="400" column="0" selection-start-line="400" selection-start-column="0" selection-end-line="400" selection-end-column="0" />
+            <state relative-caret-position="2310">
+              <caret line="154" column="4" selection-start-line="154" selection-start-column="4" selection-end-line="154" selection-end-column="4" />
               <folding>
-                <element signature="e#0#19#0" expanded="true" />
+                <element signature="e#295#436#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BroveyFusion.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/fusion/BroveyFusion.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1365">
-              <caret line="91" column="22" selection-start-line="91" selection-start-column="22" selection-end-line="91" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GdalInf.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/fusion/GdalInf.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3750">
-              <caret line="250" column="0" selection-start-line="250" selection-start-column="0" selection-end-line="250" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -116,42 +80,80 @@
       <file leaf-file-name="utils.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/utils/utils.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-85">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state relative-caret-position="355">
+              <caret line="45" column="1" selection-start-line="45" selection-start-column="1" selection-end-line="45" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="utils.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/utils/utils.cpp">
+      <file leaf-file-name="qualityjudgeRpc.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+            <state relative-caret-position="168">
+              <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="imagefusion.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/imagefusion.h">
+      <file leaf-file-name="qualityutils.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="44" column="16" selection-start-line="44" selection-start-column="16" selection-end-line="44" selection-end-column="16" />
-              <folding>
-                <element signature="e#45#64#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="130">
+              <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="imagefusion.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/imagefusion.cpp">
+      <file leaf-file-name="signaltoNoiseRatio.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/signaltoNoiseRatio.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="419" column="11" selection-start-line="419" selection-start-column="11" selection-end-line="419" selection-end-column="11" />
+            <state relative-caret-position="340">
+              <caret line="141" column="14" selection-start-line="141" selection-start-column="14" selection-end-line="141" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mean.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/mean.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="85" column="14" selection-start-line="85" selection-start-column="14" selection-end-line="85" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="striperesidual.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/striperesidual.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="111" column="14" selection-start-line="111" selection-start-column="14" selection-end-line="111" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="entropy.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/entropy.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="265">
+              <caret line="96" column="11" selection-start-line="96" selection-start-column="11" selection-end-line="96" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="qualityutils.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="175">
+              <caret line="34" column="26" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
               <folding>
-                <element signature="e#1245#1384#0" expanded="true" />
+                <element signature="e#33#51#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -165,13 +167,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/source/algorithm/fusion/curvelet/fftw/ftw_9.cpp" />
-        <option value="$PROJECT_DIR$/source/algorithm/fusion/curvelet/fftw/ftwi_10.cpp" />
-        <option value="$PROJECT_DIR$/source/algorithm/fusion/curvelet/fftw/ftwi_2.cpp" />
-        <option value="$PROJECT_DIR$/source/algorithm/fusion/curvelet/fftw/ftwi_16.cpp" />
-        <option value="$PROJECT_DIR$/source/algorithm/fusion/curvelet/fftw/ftwi_3.cpp" />
-        <option value="$PROJECT_DIR$/source/algorithm/fusion/curvelet/fftw/ftwi_32.cpp" />
-        <option value="$PROJECT_DIR$/source/algorithm/fusion/curvelet/fftw/ftwi_5.cpp" />
         <option value="$PROJECT_DIR$/source/algorithm/fusion/curvelet/fftw/ftwi_4.cpp" />
         <option value="$PROJECT_DIR$/source/algorithm/fusion/curvelet/fftw/ftwi_6.cpp" />
         <option value="$PROJECT_DIR$/source/algorithm/fusion/curvelet/fftw/ftwi_64.cpp" />
@@ -199,11 +194,8 @@
         <option value="$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.ice" />
         <option value="$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.h" />
         <option value="$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.cpp" />
-        <option value="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp" />
         <option value="$PROJECT_DIR$/source/algorithm/fusion/utils/fusionutils.h" />
         <option value="$PROJECT_DIR$/source/algorithm/thumb/imagethumb.h" />
-        <option value="$PROJECT_DIR$/source/imagequality.cpp" />
-        <option value="$PROJECT_DIR$/source/imagequality.h" />
         <option value="$PROJECT_DIR$/source/threadpool/threadpool.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/conf/configure_duc.json" />
@@ -212,10 +204,20 @@
         <option value="$PROJECT_DIR$/source/algorithm/fusion/GdalInf.cpp" />
         <option value="$PROJECT_DIR$/source/utils/utils.h" />
         <option value="$PROJECT_DIR$/source/imagefusion.h" />
-        <option value="$PROJECT_DIR$/source/imagefusion.cpp" />
         <option value="$PROJECT_DIR$/source/utils/utils.cpp" />
         <option value="$PROJECT_DIR$/source/server.cpp" />
         <option value="$PROJECT_DIR$/conf/rpcrun.sh" />
+        <option value="$PROJECT_DIR$/source/imagefusion.cpp" />
+        <option value="$PROJECT_DIR$/source/algorithm/quality/src/clarity.cpp" />
+        <option value="$PROJECT_DIR$/source/algorithm/quality/src/contrastRatio.cpp" />
+        <option value="$PROJECT_DIR$/source/algorithm/quality/src/entropy.cpp" />
+        <option value="$PROJECT_DIR$/source/algorithm/quality/src/mean.cpp" />
+        <option value="$PROJECT_DIR$/source/algorithm/quality/src/signaltoNoiseRatio.cpp" />
+        <option value="$PROJECT_DIR$/source/algorithm/quality/src/striperesidual.cpp" />
+        <option value="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp" />
+        <option value="$PROJECT_DIR$/source/imagequality.h" />
+        <option value="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.h" />
+        <option value="$PROJECT_DIR$/source/imagequality.cpp" />
       </list>
     </option>
   </component>
@@ -300,6 +302,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="algorithm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AlgorithmServer" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AlgorithmServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="algorithm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="quality" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="utils" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -318,33 +346,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="rpc" />
+              <option name="myItemId" value="algorithm" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="quality" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AlgorithmServer" />
-              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AlgorithmServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rpc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fusion" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -573,6 +579,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="5e31ccc9-ad64-4f0e-bad5-b95dae613dcf" name="Default" comment="" />
@@ -610,6 +619,14 @@
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.sh" />
   </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
@@ -620,41 +637,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/source/algorithm/fusion/curvelet/fftw/ftwi_7.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/fusion/curvelet/fftw/malloc.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/fusion/curvelet/fftw/ftwi_9.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/fusion/curvelet/fftw/planner.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/fusion/curvelet/fftw/generic.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/algorithm/fusion/curvelet/fftw/putils.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -777,13 +759,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/clarity.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1092">
-          <caret line="78" column="21" selection-start-line="78" selection-start-column="21" selection-end-line="78" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="277">
@@ -795,13 +770,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2910">
-          <caret line="194" column="7" selection-start-line="194" selection-start-column="7" selection-end-line="194" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -826,22 +794,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/imagequality.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1620">
-          <caret line="108" column="32" selection-start-line="108" selection-start-column="15" selection-end-line="108" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/threadpool/threadpool.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -853,14 +805,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -878,29 +822,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/imagequality.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="19" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/conf/configure.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="40" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/server.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="14" column="21" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/server.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="62" column="14" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="14" />
+          <folding>
+            <element signature="e#1844#1951#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/source/algorithm/fusion/PCA.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6000">
+        <state relative-caret-position="270">
           <caret line="400" column="0" selection-start-line="400" selection-start-column="0" selection-end-line="400" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -908,33 +857,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1365">
           <caret line="91" column="22" selection-start-line="91" selection-start-column="22" selection-end-line="91" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/source/algorithm/fusion/GdalInf.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3750">
+        <state relative-caret-position="351">
           <caret line="250" column="0" selection-start-line="250" selection-start-column="0" selection-end-line="250" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/utils/utils.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-85">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/imagefusion.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="419" column="11" selection-start-line="419" selection-start-column="11" selection-end-line="419" selection-end-column="11" />
-          <folding>
-            <element signature="e#1245#1384#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -946,39 +875,133 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/imagefusion.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="44" column="16" selection-start-line="44" selection-start-column="16" selection-end-line="44" selection-end-column="16" />
-          <folding>
-            <element signature="e#45#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/server.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="14" column="21" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/server.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="62" column="14" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="14" />
-          <folding>
-            <element signature="e#1844#1951#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/conf/rpcrun.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/imagefusion.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="33" column="23" selection-start-line="33" selection-start-column="23" selection-end-line="33" selection-end-column="23" />
+          <folding>
+            <element signature="e#45#64#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/imagefusion.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="266" column="0" selection-start-line="266" selection-start-column="0" selection-end-line="266" selection-end-column="0" />
+          <folding>
+            <element signature="e#1245#1384#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/clarity.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="87" column="14" selection-start-line="87" selection-start-column="14" selection-end-line="87" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/contrastRatio.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="235" column="14" selection-start-line="235" selection-start-column="14" selection-end-line="235" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/entropy.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="96" column="11" selection-start-line="96" selection-start-column="11" selection-end-line="96" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/mean.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="85" column="14" selection-start-line="85" selection-start-column="14" selection-end-line="85" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/signaltoNoiseRatio.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="141" column="14" selection-start-line="141" selection-start-column="14" selection-end-line="141" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/striperesidual.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="111" column="14" selection-start-line="111" selection-start-column="14" selection-end-line="111" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/imagequality.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="14" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
+          <folding>
+            <element signature="e#46#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/utils/utils.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="45" column="1" selection-start-line="45" selection-start-column="1" selection-end-line="45" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="34" column="26" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+          <folding>
+            <element signature="e#33#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/imagequality.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2310">
+          <caret line="154" column="4" selection-start-line="154" selection-start-column="4" selection-end-line="154" selection-end-column="4" />
+          <folding>
+            <element signature="e#295#436#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

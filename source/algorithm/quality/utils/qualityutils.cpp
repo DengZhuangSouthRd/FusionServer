@@ -42,9 +42,14 @@ void* qualityInterface(void *args) {
     inputParamSize = tmp->inputMap.size();
     char* logfilepath = NULL;
     ImageParameter testparameter;
+    vector<string> inputPathVec;
     if(tmp->inputMap.size() == 1) {
         for(QualityMapArgs::iterator it=tmp->inputMap.begin(); it!=tmp->inputMap.end(); it++) {
             testparameter = it->second;
+        }
+    } else if(tmp->inputMap.size() == 2) {
+        for(QualityMapArgs::iterator it=tmp->inputMap.begin(); it!=tmp->inputMap.end(); it++) {
+            inputPathVec.push_back(it->second.filePath);
         }
     }
     QualityResMap* p_resMap = new(std::nothrow) QualityResMap;
@@ -66,6 +71,13 @@ void* qualityInterface(void *args) {
         p_resMap->res["SignaltoNoiseRatio_1_0"] = qualityRes;
         flag = mainStriperesidual(testparameter, logfilepath, qualityRes);
         p_resMap->res["Striperesidual_1_0"] = qualityRes;
+    } else if(inputParamSize == 2) {
+        flag = mainCrossEntropy(inputPathVec[0], inputPathVec[1], logfilepath, qualityRes);
+        //p_resMap->res["Clarity_1_0"] = qualityRes;
+        flag = mainMutualInformation(inputPathVec[0], inputPathVec[1], logfilepath, qualityRes);
+        //p_resMap->res["Clarity_1_0"] = qualityRes;
+        flag = mainSpectralAngleMatrix(inputPathVec[0], inputPathVec[1], logfilepath, qualityRes);
+        //p_resMap->res["Clarity_1_0"] = qualityRes;
     }
     return p_resMap;
 }

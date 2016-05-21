@@ -102,7 +102,6 @@ bool mainEntropy(ImageParameter &testparameter, char* logfilepath, double &m_qRe
     m_qRes = 0;
     int32_t res = Entropy(const_cast<char*>(testparameter.filePath.c_str()), logfilepath, m_qRes);
     if(res != 1) {
-        printf("Algorithm executing error!\n");
         WriteMsg(logfilepath,-1,"Algorithm executing error!");
         return false;
     }

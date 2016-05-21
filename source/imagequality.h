@@ -32,7 +32,7 @@ public:
 public:
     virtual QualityInfo qualitySyn(const ::RPCQualityJudge::QualityInputStruct& inputArgs, const Ice::Current& );
     virtual int qualityAsyn(const ::RPCQualityJudge::QualityInputStruct& inputArgs, const Ice::Current& );
-    virtual QualityInfo fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct& inputArgs, const Ice::Current& );
+    virtual QualityInfo fetchQualityRes(const string& inputArgs, const Ice::Current& );
 
 public:
     bool checkQualityArgv(const ::RPCQualityJudge::QualityInputStruct& inputArgs);

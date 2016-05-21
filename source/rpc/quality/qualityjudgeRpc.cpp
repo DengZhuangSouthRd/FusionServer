@@ -311,7 +311,7 @@ IceProxy::RPCQualityJudge::QualityInf::end_qualityAsyn(const ::Ice::AsyncResultP
 }
 
 ::RPCQualityJudge::QualityInfo
-IceProxy::RPCQualityJudge::QualityInf::fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct& __p_inputArgs, const ::Ice::Context* __ctx)
+IceProxy::RPCQualityJudge::QualityInf::fetchQualityRes(const ::std::string& __p_inputArgs, const ::Ice::Context* __ctx)
 {
     __checkTwowayOnly(__RPCQualityJudge__QualityInf__fetchQualityRes_name);
     ::IceInternal::Outgoing __og(this, __RPCQualityJudge__QualityInf__fetchQualityRes_name, ::Ice::Normal, __ctx);
@@ -345,7 +345,7 @@ IceProxy::RPCQualityJudge::QualityInf::fetchQualityRes(const ::RPCQualityJudge::
 }
 
 ::Ice::AsyncResultPtr
-IceProxy::RPCQualityJudge::QualityInf::begin_fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct& __p_inputArgs, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+IceProxy::RPCQualityJudge::QualityInf::begin_fetchQualityRes(const ::std::string& __p_inputArgs, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
 {
     __checkAsyncTwowayOnly(__RPCQualityJudge__QualityInf__fetchQualityRes_name);
     ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __RPCQualityJudge__QualityInf__fetchQualityRes_name, __del, __cookie);
@@ -367,7 +367,7 @@ IceProxy::RPCQualityJudge::QualityInf::begin_fetchQualityRes(const ::RPCQualityJ
 #ifdef ICE_CPP11
 
 ::Ice::AsyncResultPtr
-IceProxy::RPCQualityJudge::QualityInf::__begin_fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct& __p_inputArgs, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (const ::RPCQualityJudge::QualityInfo&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent)
+IceProxy::RPCQualityJudge::QualityInf::__begin_fetchQualityRes(const ::std::string& __p_inputArgs, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (const ::RPCQualityJudge::QualityInfo&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent)
 {
     class Cpp11CB : public ::IceInternal::Cpp11FnCallbackNC
     {
@@ -517,7 +517,7 @@ RPCQualityJudge::QualityInf::___fetchQualityRes(::IceInternal::Incoming& __inS, 
 {
     __checkMode(::Ice::Normal, __current.mode);
     ::IceInternal::BasicStream* __is = __inS.startReadParams();
-    ::RPCQualityJudge::QualityInputStruct __p_inputArgs;
+    ::std::string __p_inputArgs;
     __is->read(__p_inputArgs);
     __inS.endReadParams();
     ::RPCQualityJudge::QualityInfo __ret = fetchQualityRes(__p_inputArgs, __current);

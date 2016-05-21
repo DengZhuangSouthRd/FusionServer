@@ -3,8 +3,6 @@
 extern map<string, string> g_ConfMap;
 ImageQuality* g_ImgQuality = NULL;
 
-#define  NOTSERIALIZE
-
 ImageQuality::ImageQuality() {
     m_serializePath = g_ConfMap["QUALTYSerializePath"];
     m_serializePathBak = g_ConfMap["QUALTYSerializePathBak"];
@@ -124,10 +122,9 @@ int ImageQuality::qualityAsyn(const QualityInputStruct &inputArgs, const Ice::Cu
     return 1; // Means For Add Task Success !
 }
 
-QualityInfo ImageQuality::fetchQualityRes(const QualityInputStruct &inputArgs, const Ice::Current &) {
-    log_InputParameters(inputArgs);
+QualityInfo ImageQuality::fetchQualityRes(const string &inputArgs, const Ice::Current &) {
     QualityInfo obj;
-    string task_id = inputArgs.id;
+    string task_id = inputArgs;
 
     if(m_finishMap.count(task_id) != 0) {
         return m_finishMap[task_id].output;

@@ -473,69 +473,69 @@ private:
     
 public:
 
-    ::RPCQualityJudge::QualityInfo fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct& __p_inputArgs)
+    ::RPCQualityJudge::QualityInfo fetchQualityRes(const ::std::string& __p_inputArgs)
     {
         return fetchQualityRes(__p_inputArgs, 0);
     }
-    ::RPCQualityJudge::QualityInfo fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct& __p_inputArgs, const ::Ice::Context& __ctx)
+    ::RPCQualityJudge::QualityInfo fetchQualityRes(const ::std::string& __p_inputArgs, const ::Ice::Context& __ctx)
     {
         return fetchQualityRes(__p_inputArgs, &__ctx);
     }
 #ifdef ICE_CPP11
     ::Ice::AsyncResultPtr
-    begin_fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct& __p_inputArgs, const ::IceInternal::Function<void (const ::RPCQualityJudge::QualityInfo&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    begin_fetchQualityRes(const ::std::string& __p_inputArgs, const ::IceInternal::Function<void (const ::RPCQualityJudge::QualityInfo&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
     {
         return __begin_fetchQualityRes(__p_inputArgs, 0, __response, __exception, __sent);
     }
     ::Ice::AsyncResultPtr
-    begin_fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct& __p_inputArgs, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    begin_fetchQualityRes(const ::std::string& __p_inputArgs, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
     {
         return begin_fetchQualityRes(__p_inputArgs, 0, ::Ice::newCallback(__completed, __sent), 0);
     }
     ::Ice::AsyncResultPtr
-    begin_fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct& __p_inputArgs, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::RPCQualityJudge::QualityInfo&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    begin_fetchQualityRes(const ::std::string& __p_inputArgs, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::RPCQualityJudge::QualityInfo&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
     {
         return __begin_fetchQualityRes(__p_inputArgs, &__ctx, __response, __exception, __sent);
     }
     ::Ice::AsyncResultPtr
-    begin_fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct& __p_inputArgs, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    begin_fetchQualityRes(const ::std::string& __p_inputArgs, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
     {
         return begin_fetchQualityRes(__p_inputArgs, &__ctx, ::Ice::newCallback(__completed, __sent));
     }
     
 private:
 
-    ::Ice::AsyncResultPtr __begin_fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct& __p_inputArgs, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (const ::RPCQualityJudge::QualityInfo&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent);
+    ::Ice::AsyncResultPtr __begin_fetchQualityRes(const ::std::string& __p_inputArgs, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (const ::RPCQualityJudge::QualityInfo&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent);
     
 public:
 #endif
 
-    ::Ice::AsyncResultPtr begin_fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct& __p_inputArgs)
+    ::Ice::AsyncResultPtr begin_fetchQualityRes(const ::std::string& __p_inputArgs)
     {
         return begin_fetchQualityRes(__p_inputArgs, 0, ::IceInternal::__dummyCallback, 0);
     }
 
-    ::Ice::AsyncResultPtr begin_fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct& __p_inputArgs, const ::Ice::Context& __ctx)
+    ::Ice::AsyncResultPtr begin_fetchQualityRes(const ::std::string& __p_inputArgs, const ::Ice::Context& __ctx)
     {
         return begin_fetchQualityRes(__p_inputArgs, &__ctx, ::IceInternal::__dummyCallback, 0);
     }
 
-    ::Ice::AsyncResultPtr begin_fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct& __p_inputArgs, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_fetchQualityRes(const ::std::string& __p_inputArgs, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
         return begin_fetchQualityRes(__p_inputArgs, 0, __del, __cookie);
     }
 
-    ::Ice::AsyncResultPtr begin_fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct& __p_inputArgs, const ::Ice::Context& __ctx, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_fetchQualityRes(const ::std::string& __p_inputArgs, const ::Ice::Context& __ctx, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
         return begin_fetchQualityRes(__p_inputArgs, &__ctx, __del, __cookie);
     }
 
-    ::Ice::AsyncResultPtr begin_fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct& __p_inputArgs, const ::RPCQualityJudge::Callback_QualityInf_fetchQualityResPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_fetchQualityRes(const ::std::string& __p_inputArgs, const ::RPCQualityJudge::Callback_QualityInf_fetchQualityResPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
         return begin_fetchQualityRes(__p_inputArgs, 0, __del, __cookie);
     }
 
-    ::Ice::AsyncResultPtr begin_fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct& __p_inputArgs, const ::Ice::Context& __ctx, const ::RPCQualityJudge::Callback_QualityInf_fetchQualityResPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_fetchQualityRes(const ::std::string& __p_inputArgs, const ::Ice::Context& __ctx, const ::RPCQualityJudge::Callback_QualityInf_fetchQualityResPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
         return begin_fetchQualityRes(__p_inputArgs, &__ctx, __del, __cookie);
     }
@@ -544,8 +544,8 @@ public:
     
 private:
 
-    ::RPCQualityJudge::QualityInfo fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct&, const ::Ice::Context*);
-    ::Ice::AsyncResultPtr begin_fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct&, const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
+    ::RPCQualityJudge::QualityInfo fetchQualityRes(const ::std::string&, const ::Ice::Context*);
+    ::Ice::AsyncResultPtr begin_fetchQualityRes(const ::std::string&, const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
     
 public:
     
@@ -685,7 +685,7 @@ public:
     virtual ::Ice::Int qualityAsyn(const ::RPCQualityJudge::QualityInputStruct&, const ::Ice::Current& = ::Ice::Current()) = 0;
     ::Ice::DispatchStatus ___qualityAsyn(::IceInternal::Incoming&, const ::Ice::Current&);
 
-    virtual ::RPCQualityJudge::QualityInfo fetchQualityRes(const ::RPCQualityJudge::QualityInputStruct&, const ::Ice::Current& = ::Ice::Current()) = 0;
+    virtual ::RPCQualityJudge::QualityInfo fetchQualityRes(const ::std::string&, const ::Ice::Current& = ::Ice::Current()) = 0;
     ::Ice::DispatchStatus ___fetchQualityRes(::IceInternal::Incoming&, const ::Ice::Current&);
 
     virtual ::Ice::DispatchStatus __dispatch(::IceInternal::Incoming&, const ::Ice::Current&);

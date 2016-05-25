@@ -41,6 +41,9 @@ void* qualityInterface(void *args) {
     evaluatealg["SpectralAngleMatrix_1_0"]=9;
     evaluatealg["StructureSimilarity_1_0"]=10;
 
+    evaluatealg["DynamicRange_1_0"] = 11;
+    evaluatealg["Variance_1_0"] = 12;
+
     if(args == NULL) return NULL;
     QualityInputStruct * tmp = (QualityInputStruct*)args;
     int inputParamSize = 1;
@@ -76,6 +79,11 @@ void* qualityInterface(void *args) {
         p_resMap->res["SignaltoNoiseRatio_1_0"] = qualityRes;
         flag = mainStriperesidual(testparameter, logfilepath, qualityRes);
         p_resMap->res["Striperesidual_1_0"] = qualityRes;
+
+        flag = mainDynamicRange(testparameter, logfilepath, qualityRes);
+        p_resMap->res["DynamicRange_1_0"] = qualityRes;
+        flag = mainVariance(testparameter, logfilepath, qualityRes);
+        p_resMap->res["Variance_1_0"] = qualityRes;
     } else if(inputParamSize == 2) {
         flag = mainCrossEntropy(inputPathVec[0], inputPathVec[1], logfilepath, qualityRes);
         p_resMap->res["CrossEntropy_1_0"] = qualityRes;

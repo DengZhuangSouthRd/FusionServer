@@ -20,7 +20,7 @@
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/HSI.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/CurveletFusion.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fdct_wrapping_param.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/offmat.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/nummat.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fdct_wrapping.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fftwnd.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fftw/fn_10.cpp" isTestSource="false" />
@@ -101,7 +101,7 @@
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fdct_wrapping_inline.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/offvec.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fdct_wrapping_inc.hpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/nummat.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/offmat.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/fdct_wrapping.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/numvec.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/curvelet/ifdct_wrapping.cpp" isTestSource="false" />
@@ -124,6 +124,7 @@
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/PCAFusion.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/DWTFusion.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/PCA.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/dynamicrange.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/structuresimilarity.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/mutualinformation.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/entropy.cpp" isTestSource="false" />
@@ -132,6 +133,7 @@
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/signaltoNoiseRatio.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/spectralanglematrix.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/clarity.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/variance.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/contrastRatio.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/crossEntropy.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/utils/qualityutils.h" isTestSource="false" />
@@ -142,11 +144,11 @@
       <sourceFolder url="file://$MODULE_DIR$/source/rpc/quality/qualityjudgeRpc.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/imagequality.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/threadpool/mutex.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/threadpool/task.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/threadpool/task.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/threadpool/threadpool.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/threadpool/task.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/threadpool/mutex.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/threadpool/threadpool.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/threadpool/task.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/server.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/utils/jsoncpp.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/utils/log.h" isTestSource="false" />

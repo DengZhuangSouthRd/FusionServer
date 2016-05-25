@@ -15,25 +15,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e31ccc9-ad64-4f0e-bad5-b95dae613dcf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/clarity.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/clarity.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/contrastRatio.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/contrastRatio.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/crossEntropy.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/crossEntropy.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/dynamicrange.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/dynamicrange.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/entropy.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/entropy.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/mean.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/mean.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/mutualinformation.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/mutualinformation.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/signaltoNoiseRatio.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/signaltoNoiseRatio.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/spectralanglematrix.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/spectralanglematrix.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/striperesidual.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/striperesidual.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/structuresimilarity.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/structuresimilarity.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/variance.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/variance.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.h" afterPath="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/imagequality.cpp" afterPath="$PROJECT_DIR$/source/imagequality.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/imagequality.h" afterPath="$PROJECT_DIR$/source/imagequality.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.h" afterPath="$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.ice" afterPath="$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.ice" />
     </list>
     <ignored path="untitled.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,110 +41,7 @@
     <favorites_list name="untitled" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="imagequality.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/imagequality.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="spectralanglematrix.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/spectralanglematrix.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-647">
-              <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="imagequality.cpp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/source/imagequality.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" column="63" selection-start-line="31" selection-start-column="63" selection-end-line="31" selection-end-column="63" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mutualinformation.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/mutualinformation.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
-              <caret line="143" column="5" selection-start-line="143" selection-start-column="5" selection-end-line="143" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="structuresimilarity.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/structuresimilarity.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="138" column="5" selection-start-line="138" selection-start-column="5" selection-end-line="138" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="qualityjudgeRpc.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="436" column="53" selection-start-line="436" selection-start-column="53" selection-end-line="436" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="qualityjudgeRpc.ice" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.ice">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="qualityutils.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="qualityutils.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="36" column="30" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
-              <folding>
-                <element signature="e#33#51#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="crossEntropy.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/crossEntropy.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="131" column="95" selection-start-line="131" selection-start-column="95" selection-end-line="131" selection-end-column="95" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -219,8 +98,8 @@
         <option value="$PROJECT_DIR$/source/algorithm/quality/src/crossEntropy.cpp" />
         <option value="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.h" />
         <option value="$PROJECT_DIR$/source/imagequality.h" />
-        <option value="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp" />
         <option value="$PROJECT_DIR$/source/imagequality.cpp" />
+        <option value="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp" />
       </list>
     </option>
   </component>
@@ -305,11 +184,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="rpc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quality" />
+              <option name="myItemId" value="utils" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -627,9 +502,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2359375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2359375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18857902" sideWeight="0.496875" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934928" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -738,13 +613,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/utils/utils.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/conf/rpcrun.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -759,13 +627,6 @@
           <folding>
             <element signature="e#45#64#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/utils/utils.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="45" column="1" selection-start-line="45" selection-start-column="1" selection-end-line="45" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -989,18 +850,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.h">
+    <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="436" column="53" selection-start-line="436" selection-start-column="53" selection-end-line="436" selection-end-column="53" />
+        <state relative-caret-position="553">
+          <caret line="718" column="0" selection-start-line="718" selection-start-column="0" selection-end-line="718" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.ice">
+    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+        <state relative-caret-position="238">
+          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="56" column="17" selection-start-line="56" selection-start-column="17" selection-end-line="56" selection-end-column="17" />
+          <folding>
+            <element signature="e#33#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/utils/utils.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="53" column="28" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/utils/utils.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="109" column="26" selection-start-line="109" selection-start-column="26" selection-end-line="109" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -1013,6 +900,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.ice">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/rpc/quality/qualityjudgeRpc.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="436" column="53" selection-start-line="436" selection-start-column="53" selection-end-line="436" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/mutualinformation.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="358">
@@ -1021,20 +924,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.h">
+    <entry file="file://$PROJECT_DIR$/source/imagequality.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="36" column="30" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
-          <folding>
-            <element signature="e#33#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="718" column="0" selection-start-line="718" selection-start-column="0" selection-end-line="718" selection-end-column="0" />
+        <state relative-caret-position="-225">
+          <caret line="31" column="63" selection-start-line="31" selection-start-column="63" selection-end-line="31" selection-end-column="63" />
           <folding />
         </state>
       </provider>
@@ -1043,22 +936,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="313">
           <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/imagequality.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="63" selection-start-line="31" selection-start-column="63" selection-end-line="31" selection-end-column="63" />
           <folding />
         </state>
       </provider>

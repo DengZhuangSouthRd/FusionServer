@@ -36,6 +36,11 @@ void* qualityInterface(void *args) {
     evaluatealg["SignaltoNoiseRatio_1_0"]=5;
     evaluatealg["Striperesidual_1_0"]=6;
 
+    evaluatealg["CrossEntropy_1_0"]=7;
+    evaluatealg["MutualInformation_1_0"]=8;
+    evaluatealg["SpectralAngleMatrix_1_0"]=9;
+    evaluatealg["StructureSimilarity_1_0"]=10;
+
     if(args == NULL) return NULL;
     QualityInputStruct * tmp = (QualityInputStruct*)args;
     int inputParamSize = 1;
@@ -73,11 +78,13 @@ void* qualityInterface(void *args) {
         p_resMap->res["Striperesidual_1_0"] = qualityRes;
     } else if(inputParamSize == 2) {
         flag = mainCrossEntropy(inputPathVec[0], inputPathVec[1], logfilepath, qualityRes);
-        //p_resMap->res["Clarity_1_0"] = qualityRes;
+        p_resMap->res["CrossEntropy_1_0"] = qualityRes;
         flag = mainMutualInformation(inputPathVec[0], inputPathVec[1], logfilepath, qualityRes);
-        //p_resMap->res["Clarity_1_0"] = qualityRes;
+        p_resMap->res["MutualInformation_1_0"] = qualityRes;
         flag = mainSpectralAngleMatrix(inputPathVec[0], inputPathVec[1], logfilepath, qualityRes);
-        //p_resMap->res["Clarity_1_0"] = qualityRes;
+        p_resMap->res["SpectralAngleMatrix_1_0"] = qualityRes;
+        flag = mainStructureSimilarity(inputPathVec[0], inputPathVec[1], logfilepath, qualityRes);
+        p_resMap->res["StructureSimilarity_1_0"] = qualityRes;
     }
     return p_resMap;
 }

@@ -156,7 +156,7 @@ set(SOURCE_FILES source/imagefusion.cpp
         source/algorithm/fusion/curvelet/fftw/twiddle.cpp
         source/algorithm/fusion/curvelet/fftw/wisdom.cpp
         source/algorithm/fusion/curvelet/fftw/wisdomio.cpp
-        source/algorithm/quality/src/crossEntropy.cpp source/algorithm/quality/src/mutualinformation.cpp source/algorithm/quality/src/spectralanglematrix.cpp)
+        source/algorithm/quality/src/crossEntropy.cpp source/algorithm/quality/src/mutualinformation.cpp source/algorithm/quality/src/spectralanglematrix.cpp source/algorithm/quality/src/structuresimilarity.cpp)
 
 add_executable(AlgorithmServer ${SOURCE_FILES})
 target_link_libraries(AlgorithmServer Ice IceUtil gdal proj pthread)

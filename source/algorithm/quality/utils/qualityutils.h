@@ -45,6 +45,7 @@ bool mainStriperesidual(ImageParameter &testparameter, char* logfilepath, double
 bool mainCrossEntropy(string filepath1, string filepath2, char* logfilepath, double &m_qRes);
 bool mainMutualInformation(string filePath1, string filePath3, char* logfile, double& m_qRes);
 bool mainSpectralAngleMatrix(string filepath2, string filepath3, char* logfile, double& m_qRes);
+bool mainStructureSimilarity(string filepath1, string filepath3, char* logfile, double& m_qRes);
 // interface
 void *qualityInterface(void* args);
 

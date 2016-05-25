@@ -1,16 +1,3 @@
-/********************************************************************
-    created:	2015/12/17
-    created:	17:12:2015   10:59
-    filename: 	D:\code\vs2010\C\Fusion\BroveyFusion.cpp
-    file path:	D:\code\vs2010\C\Fusion
-    file base:	BroveyFusion
-    file ext:	cpp
-    author:		YS
-
-    purpose:		BroveyFusion类实现
-                    Brovey融合算法
-                    实现分块处理
-*********************************************************************/
 #include "BroveyFusion.h"
 
 //通过Brovey算法实现PAN影像与MS影像融合

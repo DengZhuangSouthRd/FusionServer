@@ -124,6 +124,7 @@
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/PCAFusion.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/DWTFusion.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/PCA.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/structuresimilarity.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/mutualinformation.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/entropy.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/striperesidual.cpp" isTestSource="false" />

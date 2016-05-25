@@ -1,8 +1,6 @@
 /********************************************************************
     created:	2015/12/17
     created:	17:12:2015   15:16
-    filename: 	D:\code\vs2010\C\Fusion\HSI.h
-    file path:	D:\code\vs2010\C\Fusion
     file base:	HSI
     file ext:	h
     author:		YS
@@ -25,10 +23,10 @@ using namespace std;
 class HSI{
 public:
     //将RGB图像转换到HSI空间 MS_RGB_Mat各行依次为R、G、B
-    void RGB2HSI(float *MS_RGB_Mat,int height,int width,int bandcount);
+    bool RGB2HSI(float *MS_RGB_Mat,int height,int width,int bandcount);
 
     //将HSI图像转换到RGB空间 MS_HSI_Mat各行依次为H、S、I
-    void HSI2RGB(float *MS_HSI_Mat, int height, int width, int bandcount);
+    bool HSI2RGB(float *MS_HSI_Mat, int height, int width, int bandcount);
 };
 
 

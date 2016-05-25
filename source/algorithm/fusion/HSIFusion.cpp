@@ -16,7 +16,6 @@ bool HSIFusion::MeanStd_HSI_Fusion(const char* Input_PAN_FileName, const char* I
      *日期：2016.2.28
      */
 
-
     GDALAllRegister();         //利用GDAL读取图片，先要进行注册
     CPLSetConfigOption("GDAL_FILENAME_IS_UTF8", "NO");   //设置支持中文路径
 
@@ -68,8 +67,7 @@ bool HSIFusion::MeanStd_HSI_Fusion(const char* Input_PAN_FileName, const char* I
         delete PANInf;
         delete MSInf;
         return false;
-    }
-    else if(MS_Bandcount > 3) {
+    } else if(MS_Bandcount > 3) {
         MS_Bandcount = 3;
         MSInf->SetBandCount(MS_Bandcount);
     }
@@ -103,8 +101,6 @@ bool HSIFusion::MeanStd_HSI_Fusion(const char* Input_PAN_FileName, const char* I
         delete MSInf;
         return false;
     }
-    //插值
-    //插值方法：Nearest/Linear/CubicConv
 
     Interpolation(MSData, MS_Height,MS_Width ,MS_Bandcount, New_MSData, PAN_Height, PAN_Width, InterpolationMethod);
 
@@ -125,23 +121,21 @@ bool HSIFusion::MeanStd_HSI_Fusion(const char* Input_PAN_FileName, const char* I
 
     Log(LogName,"01|03");//写入log日志
 
-    //		int ROWS = MS_Bandcount;
     int COLS = PAN_Width*PAN_Height;
 
     //对MS做HSI变换
-    RGB2HSI(New_MSData, PAN_Height, PAN_Width, MS_Bandcount);
+    if(RGB2HSI(New_MSData, PAN_Height, PAN_Width, MS_Bandcount) == false) {
+        return false;
+    }
 
     //对PAN影像灰度拉伸
 
     float mean,s;//均值 标准差
-
     MeanStd(PANData,PAN_Height, PAN_Width,s,mean);
-
     for (i = 0; i < COLS; i++)
         PANData[i] = (PANData[i]-mean)/(s);
 
     MeanStd(New_MSData+2*COLS,PAN_Height, PAN_Width,s,mean);
-
     for (i = 0; i < COLS; i++)
         PANData[i] = PANData[i]*(s)+mean;
 
@@ -153,7 +147,9 @@ bool HSIFusion::MeanStd_HSI_Fusion(const char* Input_PAN_FileName, const char* I
     PANInf->ClearImageData();
 
     //将MS从HSI变换到RGB空间
-    HSI2RGB(New_MSData, PAN_Height, PAN_Width, MS_Bandcount);
+    if(HSI2RGB(New_MSData, PAN_Height, PAN_Width, MS_Bandcount)) {
+        return false;
+    }
 
     //GDAL写文件
     Log(LogName,"01|04");//写入log日志

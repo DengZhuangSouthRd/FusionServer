@@ -1,6 +1,6 @@
 #include "../utils/qualityutils.h"
 
-int32_t MutualInformation(char* filepath1,char* filepath3,char* logfilepath,double& MutualInformation) {
+int32_t MutualInformation(char* filepath1, char* filepath3, char* logfilepath, vector<double>& MutualInformation) {
 
     GDALDataset *poDataset1,*poDataset3;
     GDALAllRegister();
@@ -43,9 +43,6 @@ int32_t MutualInformation(char* filepath1,char* filepath3,char* logfilepath,doub
     banddata1=(uint16_t *)CPLMalloc(sizeof(uint16_t)*width1*height1);
     banddata3=(uint16_t *)CPLMalloc(sizeof(uint16_t)*width3*height3);
 
-    time_t starttime=0,endtime=0;
-    time(&starttime);
-
     pband=poDataset1->GetRasterBand(1);
     pband->RasterIO(GF_Read,0,0,width1,height1,banddata1,width1,height1,GDT_UInt16,0,0);
     GDALClose(pband);
@@ -78,7 +75,6 @@ int32_t MutualInformation(char* filepath1,char* filepath3,char* logfilepath,doub
         }
     }
 
-    MutualInformation=0.0;
     for(n=0;n<bandnum3;n++) {
         pband=poDataset3->GetRasterBand(n+1);
         pband->RasterIO(GF_Read,0,0,width3,height3,banddata3,width3,height3,GDT_UInt16,0,0);
@@ -127,12 +123,11 @@ int32_t MutualInformation(char* filepath1,char* filepath3,char* logfilepath,doub
         GDALClose(pband);
         pband=NULL;
 
-        MutualInformation += (sum/bandnum3);
+        MutualInformation.push_back(sum);
         int32_t temp = (int)(100.0*(n+1)/bandnum3);
         temp = (temp>99) ? 99:temp;
         WriteMsg(logfilepath,temp,"MutualInformation algorithm is executing!");
     }
-    time(&endtime);
 
     CPLFree(banddata1);
     banddata1=NULL;
@@ -146,8 +141,8 @@ int32_t MutualInformation(char* filepath1,char* filepath3,char* logfilepath,doub
     return 1;
 }
 
-bool mainMutualInformation(string filePath1, string filePath3, char* logfile, double& m_qRes) {
-    m_qRes = 0;
+bool mainMutualInformation(string filePath1, string filePath3, char* logfile, vector<double>& m_qRes) {
+    m_qRes.clear();
     int32_t res = MutualInformation(const_cast<char*>(filePath1.c_str()), const_cast<char*>(filePath3.c_str()), logfile, m_qRes);
     if(res != 1) {
         WriteMsg(logfile,-1,"Algorithm mainMutualInformation executing error!");

@@ -137,7 +137,7 @@ int32_t GLCM(uint16_t *banddata,int32_t width,int32_t height,int32_t step,int32_
 }
 
 //ContrastRatio-影像对比度
-int32_t ContrastRatio(char* filepath,char* logfilepath,double& result) {
+int32_t ContrastRatio(char* filepath,char* logfilepath, vector<double>& contrastresult) {
 	//定义数据集，打开文件
     GDALDataset *poDataset = NULL;
 	GDALAllRegister();
@@ -158,10 +158,6 @@ int32_t ContrastRatio(char* filepath,char* logfilepath,double& result) {
 	width=poDataset->GetRasterXSize();
 	height=poDataset->GetRasterYSize();
 	GDALRasterBand *pband;
-	double *contrastresult=(double*)malloc(sizeof(double)*bandnum);
-	if(contrastresult == NULL) {
-		return -1;
-	}
 	uint16_t *banddata;
 	banddata=(uint16_t *)CPLMalloc(sizeof(uint16_t)*width*height);
 
@@ -200,7 +196,7 @@ int32_t ContrastRatio(char* filepath,char* logfilepath,double& result) {
 			}
 		}
 		//计算对比度
-		contrastresult[n]=sum;
+		contrastresult.push_back(sum);
 		//释放内存
 		CPLFree(GLCMresult);
 		GLCMresult=NULL;
@@ -211,7 +207,6 @@ int32_t ContrastRatio(char* filepath,char* logfilepath,double& result) {
 		//Writing the process and status of this Algorithm.
 		int32_t temp = (int32_t)(100.0*(n+1)/bandnum);
 		temp = (temp>99) ? 99:temp;
-		printf("ContrastRatio algorithm is executing %d%%!\n",temp);
 		WriteMsg(logfilepath,temp,"ContrastRatio algorithm is executing!");
 	}
 
@@ -222,19 +217,13 @@ int32_t ContrastRatio(char* filepath,char* logfilepath,double& result) {
 	GDALClose(poDataset);
 	poDataset=NULL;
 
-    result = 0;
-    for(int i=0;i<bandnum;i++) {
-        result += contrastresult[i];
-    }
-    result /= bandnum;
-
 	return 1;
 }
 
 //主函数
-bool mainContrastRatio(ImageParameter &testparameter, char* logfilepath, double &m_qRes) {
-    m_qRes = 0;
-    int32_t res = ContrastRatio(const_cast<char*>(testparameter.filePath.c_str()),logfilepath, m_qRes);
+bool mainContrastRatio(string& filepath, char* logfilepath, vector<double>& m_qRes) {
+    m_qRes.clear();
+    int32_t res = ContrastRatio(const_cast<char*>(filepath.c_str()),logfilepath, m_qRes);
     if(res != 1) {
         printf("Algorithm executing error!\n");
         WriteMsg(logfilepath,-1,"Algorithm executing error!");

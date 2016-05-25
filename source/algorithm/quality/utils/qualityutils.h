@@ -12,6 +12,8 @@
 
 #include <iostream>
 #include <map>
+#include <vector>
+
 #include "../../../utils/log.h"
 #include "../../../rpc/quality/qualityjudgeRpc.h"
 #include "../../../imagequality.h"
@@ -32,23 +34,24 @@ void WriteMsg(char*, int32_t statusnum, const char* statusmsg);
 
 typedef struct _QualityResMap{
     int status;
-    map<string, double> res;
+    map<string, vector<double>> res;
 }QualityResMap;
 
 // algorithm class
-bool mainClarity(ImageParameter &testparameter, char* logfilepath, double &m_qRes);
-bool mainContrastRatio(ImageParameter &testparameter, char* logfilepath, double &m_qRes);
-bool mainEntropy(ImageParameter &testparameter, char* logfilepath, double &m_qRes);
-bool mainMean(ImageParameter &testparameter, char* logfilepath, double &m_qRes);
-bool mainSignaltoNoiseRatio(ImageParameter &testparameter, char* logfilepath, double &m_qRes);
-bool mainStriperesidual(ImageParameter &testparameter, char* logfilepath, double &m_qRes);
-bool mainDynamicRange(ImageParameter& testparameter, char* logfilepath, double & m_qRes);
-bool mainVariance(ImageParameter& testparameter, char* logfilepath, double & m_qRes);
+bool mainClarity(string& filepath, char* logfilepath, vector<double> &m_qRes);
+bool mainContrastRatio(string& filepath, char* logfilepath, vector<double> &m_qRes);
+bool mainEntropy(string& filepath, char* logfilepath, vector<double> &m_qRes);
+bool mainMean(string& filepath, char* logfilepath, vector<double> &m_qRes);
+bool mainSignaltoNoiseRatio(string& filepath, char* logfilepath, vector<double> &m_qRes);
+bool mainStriperesidual(string& filepath, char* logfilepath, vector<double> &m_qRes);
+bool mainDynamicRange(string& filepath, char* logfilepath, vector<double> & m_qRes);
+bool mainVariance(string& filepath, char* logfilepath, vector<double> & m_qRes);
 
-bool mainCrossEntropy(string filepath1, string filepath2, char* logfilepath, double &m_qRes);
-bool mainMutualInformation(string filePath1, string filePath3, char* logfile, double& m_qRes);
-bool mainSpectralAngleMatrix(string filepath2, string filepath3, char* logfile, double& m_qRes);
-bool mainStructureSimilarity(string filepath1, string filepath3, char* logfile, double& m_qRes);
+bool mainCrossEntropy(string filepath1, string filepath3, char* logfilepath, vector<double> &m_qRes);
+bool mainMutualInformation(string filePath1, string filePath3, char* logfile, vector<double>& m_qRes);
+bool mainStructureSimilarity(string filepath1, string filepath3, char* logfile, vector<double>& m_qRes);
+
+bool mainSpectralAngleMatrix(string filepath2, string filepath3, char* logfile, vector<int> bandlist, vector<double>& m_qRes);
 
 // interface
 void *qualityInterface(void* args);

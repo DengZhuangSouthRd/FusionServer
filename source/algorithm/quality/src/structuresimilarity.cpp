@@ -1,6 +1,6 @@
 #include "../utils/qualityutils.h"
 
-int32_t StructureSimilarity(char* filepath1,char* filepath3,char* logfilepath,double& StructureSimilarityresult) {
+int32_t StructureSimilarity(char* filepath1, char* filepath3, char* logfilepath, vector<double>& StructureSimilarityresult) {
 	GDALDataset *poDataset1,*poDataset3;
 	GDALAllRegister();
 	poDataset1=(GDALDataset *)GDALOpen(filepath1,GA_ReadOnly);
@@ -37,9 +37,6 @@ int32_t StructureSimilarity(char* filepath1,char* filepath3,char* logfilepath,do
 	banddata1=(uint16_t *)CPLMalloc(sizeof(uint16_t)*width*height);
 	banddata3=(uint16_t *)CPLMalloc(sizeof(uint16_t)*width*height);
 
-	time_t starttime=0,endtime=0;
-	time(&starttime);
-
 	pband=poDataset1->GetRasterBand(1);
 	pband->RasterIO(GF_Read,0,0,width,height,banddata1,width,height,GDT_UInt16,0,0);
 	GDALClose(pband);
@@ -72,7 +69,6 @@ int32_t StructureSimilarity(char* filepath1,char* filepath3,char* logfilepath,do
 	}
 	variance1=variance1/count1;
 
-	StructureSimilarityresult=0.0;
 	for(n=0;n<bandnum;n++) {
 		pband=poDataset3->GetRasterBand(n+1);
 		pband->RasterIO(GF_Read,0,0,width,height,banddata3,width,height,GDT_UInt16,0,0);
@@ -121,13 +117,12 @@ int32_t StructureSimilarity(char* filepath1,char* filepath3,char* logfilepath,do
 		double tempdbl2=variance1+variance3+0.000001;
 		double tempdbl3=mean1*mean1+mean3*mean3+0.000001;
 
-		StructureSimilarityresult +=fabs((tempdbl1/(tempdbl2*tempdbl3))/bandnum);
+		StructureSimilarityresult.push_back(fabs((tempdbl1/(tempdbl2*tempdbl3))));
 		//Writing the process and status of this Algorithm.
 		int32_t temp = (int)(100.0*(n+1)/bandnum);
 		temp = (temp>99) ? 99:temp;
 		WriteMsg(logfilepath,temp,"StructureSimilarity algorithm is executing!");
 	}
-	time(&endtime);
 
 	CPLFree(banddata1);
 	banddata1=NULL;
@@ -141,8 +136,8 @@ int32_t StructureSimilarity(char* filepath1,char* filepath3,char* logfilepath,do
 	return 1;
 }
 
-bool mainStructureSimilarity(string filepath1, string filepath3, char* logfile, double& m_qRes) {
-    m_qRes = 0;
+bool mainStructureSimilarity(string filepath1, string filepath3, char* logfile, vector<double>& m_qRes) {
+    m_qRes.clear();
     int32_t res = StructureSimilarity(const_cast<char*>(filepath1.c_str()), const_cast<char*>(filepath3.c_str()), logfile, m_qRes);
     if(res != 1) {
         printf("Algorithm executing error!\n");

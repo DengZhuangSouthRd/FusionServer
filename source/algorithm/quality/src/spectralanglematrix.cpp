@@ -1,14 +1,12 @@
 #include "../utils/qualityutils.h"
 
-int32_t SpectralAngleMatrix(char* filepath2,char* filepath3,char* logfilepath,double& SpectralAngleMatrix) {
-
+int32_t SpectralAngleMatrix(char* filepath2,char* filepath3,char* logfilepath, vector<int> bandlist, vector<double>& SpectralAngleMatrix) {
     GDALDataset *poDataset2,*poDataset3;
     GDALAllRegister();
     poDataset2=(GDALDataset *)GDALOpen(filepath2,GA_ReadOnly);
     poDataset3=(GDALDataset *)GDALOpen(filepath3,GA_ReadOnly);
     if( (poDataset2 == NULL) || (poDataset3 == NULL)  ) {
         WriteMsg(logfilepath,-1,"Image file open error!");
-
         GDALClose(poDataset2);
         poDataset2=NULL;
         GDALClose(poDataset3);
@@ -30,8 +28,7 @@ int32_t SpectralAngleMatrix(char* filepath2,char* filepath3,char* logfilepath,do
     width3=poDataset3->GetRasterXSize();
     height3=poDataset3->GetRasterYSize();
 
-    if((bandnum2 != bandnum3) || (width2 != width3) || (height2!=height3)) {
-        WriteMsg(logfilepath,-1,"The size of input Images are not match!");
+    if(bandlist.size() != bandnum3 || width2 != width3 || height2 != height3) {
         GDALClose(poDataset2);
         poDataset2=NULL;
         GDALClose(poDataset3);
@@ -48,11 +45,8 @@ int32_t SpectralAngleMatrix(char* filepath2,char* filepath3,char* logfilepath,do
     tempdata2=(float *)CPLMalloc(sizeof(float)*width3*height3);
     tempdata3=(float *)CPLMalloc(sizeof(float)*width3*height3);
 
-    time_t starttime=0,endtime=0;
-    time(&starttime);
-
     for(n=0;n<bandnum3;n++) {
-        pband=poDataset2->GetRasterBand(n+1);
+        pband=poDataset2->GetRasterBand(bandlist[n]);
         pband->RasterIO(GF_Read,0,0,width2,height2,banddata2,width2,height2,GDT_UInt16,0,0);
         GDALClose(pband);
         pband=NULL;
@@ -112,9 +106,7 @@ int32_t SpectralAngleMatrix(char* filepath2,char* filepath3,char* logfilepath,do
         }
     }
     sum = sum/count;
-    SpectralAngleMatrix=sum;
-
-    time(&endtime);
+    SpectralAngleMatrix.push_back(sum);
 
     CPLFree(tempdata1);
     tempdata1=NULL;
@@ -130,9 +122,9 @@ int32_t SpectralAngleMatrix(char* filepath2,char* filepath3,char* logfilepath,do
     return 1;
 }
 
-bool mainSpectralAngleMatrix(string filepath2, string filepath3, char* logfile, double& m_qRes) {
-    m_qRes = 0;
-    int32_t res = SpectralAngleMatrix(const_cast<char*>(filepath2.c_str()), const_cast<char*>(filepath3.c_str()), logfile, m_qRes);
+bool mainSpectralAngleMatrix(string filepath2, string filepath3, char* logfile, vector<int> bandlist, vector<double>& m_qRes) {
+    m_qRes.clear();
+    int32_t res = SpectralAngleMatrix(const_cast<char*>(filepath2.c_str()), const_cast<char*>(filepath3.c_str()), logfile, bandlist, m_qRes);
     if(res != 1) {
         WriteMsg(logfile,-1,"Algorithm mainSpectralAngleMatrix executing error!");
         return false;

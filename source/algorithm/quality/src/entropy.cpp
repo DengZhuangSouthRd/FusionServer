@@ -8,7 +8,7 @@
 #include "../utils/qualityutils.h"
 
 //Entropy-影像信息熵
-int32_t Entropy(char* filepath,char* logfilepath,double& result) {
+int32_t Entropy(char* filepath,char* logfilepath, vector<double>& entropyresult) {
 	//定义数据集，打开文件
 	GDALDataset *poDataset;
 	GDALAllRegister();
@@ -29,10 +29,6 @@ int32_t Entropy(char* filepath,char* logfilepath,double& result) {
 	width=poDataset->GetRasterXSize();
 	height=poDataset->GetRasterYSize();
 	GDALRasterBand *pband;
-	double *entropyresult=(double*)malloc(sizeof(double_t)*bandnum);
-	if(entropyresult == NULL) {
-		return -1;
-	}
 	uint16_t *banddata;
 	banddata=(uint16_t *)CPLMalloc(sizeof(uint16_t)*width*height);
 
@@ -66,9 +62,9 @@ int32_t Entropy(char* filepath,char* logfilepath,double& result) {
 					sum=sum-tempratio*log(tempratio)/log(2.0);
 				}
 			}
-			entropyresult[n]=sum;
+			entropyresult.push_back(sum);
         } else {
-			entropyresult[n]=0;
+			entropyresult.push_back(0);
 		}
 
 		GDALClose(pband);
@@ -88,19 +84,13 @@ int32_t Entropy(char* filepath,char* logfilepath,double& result) {
 	GDALClose(poDataset);
 	poDataset=NULL;
 
-    result = 0;
-    for(int i=0;i<bandnum;i++) {
-        result += entropyresult[i];
-    }
-    result /= bandnum;
-
 	return 1;
 }
 
 //主函数
-bool mainEntropy(ImageParameter &testparameter, char* logfilepath, double &m_qRes) {
-    m_qRes = 0;
-    int32_t res = Entropy(const_cast<char*>(testparameter.filePath.c_str()), logfilepath, m_qRes);
+bool mainEntropy(string& filepath, char* logfilepath, vector<double>& m_qRes) {
+    m_qRes.clear();
+    int32_t res = Entropy(const_cast<char*>(filepath.c_str()), logfilepath, m_qRes);
     if(res != 1) {
         WriteMsg(logfilepath,-1,"Algorithm executing error!");
         return false;

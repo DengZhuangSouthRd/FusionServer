@@ -1,6 +1,6 @@
 #include "../utils/qualityutils.h"
 
-int32_t CrossEntropy(char* filepath1,char* filepath2,char* logfilepath,double& CrossEntropyresult) {
+int32_t CrossEntropy(char* filepath1,char* filepath2,char* logfilepath, vector<double>& CrossEntropyresult) {
 	GDALDataset *poDataset1,*poDataset2;
 	GDALAllRegister();
 	poDataset1=(GDALDataset *)GDALOpen(filepath1,GA_ReadOnly);
@@ -70,7 +70,6 @@ int32_t CrossEntropy(char* filepath1,char* filepath2,char* logfilepath,double& C
 		}
 	}
 
-	CrossEntropyresult=0.0;
 	for(n=0;n<bandnum;n++) {
 		pband=poDataset2->GetRasterBand(n+1);
 		pband->RasterIO(GF_Read,0,0,width,height,banddata2,width,height,GDT_UInt16,0,0);
@@ -108,7 +107,7 @@ int32_t CrossEntropy(char* filepath1,char* filepath2,char* logfilepath,double& C
 		GDALClose(pband);
 		pband=NULL;
 
-		CrossEntropyresult += sum/bandnum;
+		CrossEntropyresult.push_back(sum);
 		int32_t temp = (int)(100.0*(n+1)/bandnum);
 		temp = (temp>99) ? 99:temp;
 		WriteMsg(logfilepath,temp,"CrossEntropy algorithm is executing!");
@@ -128,9 +127,9 @@ int32_t CrossEntropy(char* filepath1,char* filepath2,char* logfilepath,double& C
 }
 
 // filePath1 and filePath3 and logfilePath and res
-bool mainCrossEntropy(string filepath1, string filepath2, char* logfilepath, double &m_qRes) {
-    m_qRes = 0;
-    int32_t res = CrossEntropy(const_cast<char*>(filepath1.c_str()), const_cast<char*>(filepath2.c_str()), logfilepath, m_qRes);
+bool mainCrossEntropy(string filepath1, string filepath3, char* logfilepath, vector<double>& m_qRes) {
+    m_qRes.clear();
+    int32_t res = CrossEntropy(const_cast<char*>(filepath1.c_str()), const_cast<char*>(filepath3.c_str()), logfilepath, m_qRes);
     if(res != 1) {
         WriteMsg(logfilepath,-1,"Algorithm mainCrossEntropy executing error!");
         return false;

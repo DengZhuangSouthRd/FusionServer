@@ -8,7 +8,7 @@
 #include "../utils/qualityutils.h"
 
 //Mean
-int32_t Mean(char* filepath1,char* logfilepath,double& meanresult) {
+int32_t Mean(char* filepath1,char* logfilepath, vector<double>& meanresult) {
 	GDALDataset *poDataset;
 	GDALAllRegister();
 	poDataset=(GDALDataset *)GDALOpen(filepath1,GA_ReadOnly);
@@ -28,10 +28,6 @@ int32_t Mean(char* filepath1,char* logfilepath,double& meanresult) {
 	uint16_t *banddata;
 	banddata=(uint16_t *)CPLMalloc(sizeof(uint16_t)*width*height);
 
-	time_t starttime=0,endtime=0;
-	time(&starttime);
-
-	meanresult=0.0;
 	for(n=0;n<bandnum;n++) {
 		pband=poDataset->GetRasterBand(n+1);
 		pband->RasterIO(GF_Read,0,0,width,height,banddata,width,height,GDT_UInt16,0,0);
@@ -46,7 +42,7 @@ int32_t Mean(char* filepath1,char* logfilepath,double& meanresult) {
 			}
 		}
 		if (count!=0) {
-			meanresult+=(1.0*sum/count)/bandnum;
+			meanresult.push_back(1.0*sum/count);
 		}
 
 		GDALClose(pband);
@@ -56,7 +52,6 @@ int32_t Mean(char* filepath1,char* logfilepath,double& meanresult) {
 		temp = (temp>99) ? 99:temp;
 		WriteMsg(logfilepath,temp,"Mean algorithm is executing!");
 	}
-	time(&endtime);
 
 	CPLFree(banddata);
 	banddata=NULL;
@@ -67,9 +62,9 @@ int32_t Mean(char* filepath1,char* logfilepath,double& meanresult) {
 }
 
 //主函数
-bool mainMean(ImageParameter &testparameter, char* logfilepath, double &m_qRes) {
-    m_qRes = 0;
-    int32_t res = Mean(const_cast<char*>(testparameter.filePath.c_str()),logfilepath, m_qRes);
+bool mainMean(string& filepath, char* logfilepath, vector<double>& m_qRes) {
+    m_qRes.clear();
+    int32_t res = Mean(const_cast<char*>(filepath.c_str()),logfilepath, m_qRes);
     if(res != 1) {
         printf("Algorithm executing error!\n");
         WriteMsg(logfilepath,-1,"Algorithm executing error!");

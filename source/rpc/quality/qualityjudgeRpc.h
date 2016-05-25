@@ -89,10 +89,7 @@ struct QualityInfo
 struct ImageParameter
 {
     ::std::string filePath;
-    ::Ice::Int rowNum;
-    ::Ice::Int colNum;
-    ::Ice::Int bandNum;
-    ::Ice::Int bitsPerPixel;
+    ::std::string bandIdList;
 
     bool operator==(const ImageParameter& __rhs) const
     {
@@ -104,19 +101,7 @@ struct ImageParameter
         {
             return false;
         }
-        if(rowNum != __rhs.rowNum)
-        {
-            return false;
-        }
-        if(colNum != __rhs.colNum)
-        {
-            return false;
-        }
-        if(bandNum != __rhs.bandNum)
-        {
-            return false;
-        }
-        if(bitsPerPixel != __rhs.bitsPerPixel)
+        if(bandIdList != __rhs.bandIdList)
         {
             return false;
         }
@@ -137,35 +122,11 @@ struct ImageParameter
         {
             return false;
         }
-        if(rowNum < __rhs.rowNum)
+        if(bandIdList < __rhs.bandIdList)
         {
             return true;
         }
-        else if(__rhs.rowNum < rowNum)
-        {
-            return false;
-        }
-        if(colNum < __rhs.colNum)
-        {
-            return true;
-        }
-        else if(__rhs.colNum < colNum)
-        {
-            return false;
-        }
-        if(bandNum < __rhs.bandNum)
-        {
-            return true;
-        }
-        else if(__rhs.bandNum < bandNum)
-        {
-            return false;
-        }
-        if(bitsPerPixel < __rhs.bitsPerPixel)
-        {
-            return true;
-        }
-        else if(__rhs.bitsPerPixel < bitsPerPixel)
+        else if(__rhs.bandIdList < bandIdList)
         {
             return false;
         }
@@ -235,7 +196,7 @@ template<>
 struct StreamableTraits< ::RPCQualityJudge::ImageParameter>
 {
     static const StreamHelperCategory helper = StreamHelperCategoryStruct;
-    static const int minWireSize = 17;
+    static const int minWireSize = 2;
     static const bool fixedLength = false;
 };
 
@@ -245,10 +206,7 @@ struct StreamWriter< ::RPCQualityJudge::ImageParameter, S>
     static void write(S* __os, const ::RPCQualityJudge::ImageParameter& v)
     {
         __os->write(v.filePath);
-        __os->write(v.rowNum);
-        __os->write(v.colNum);
-        __os->write(v.bandNum);
-        __os->write(v.bitsPerPixel);
+        __os->write(v.bandIdList);
     }
 };
 
@@ -258,10 +216,7 @@ struct StreamReader< ::RPCQualityJudge::ImageParameter, S>
     static void read(S* __is, ::RPCQualityJudge::ImageParameter& v)
     {
         __is->read(v.filePath);
-        __is->read(v.rowNum);
-        __is->read(v.colNum);
-        __is->read(v.bandNum);
-        __is->read(v.bitsPerPixel);
+        __is->read(v.bandIdList);
     }
 };
 

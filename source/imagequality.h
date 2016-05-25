@@ -42,9 +42,6 @@ public:
     void fillFinishTaskMap(const string &task_id, const QualityInputStruct &inParam, const QualityInfo &outParam);
     bool packTaskStaticStatus(QualityTaskStaticResult &res, const string task_id, TaskPackStruct &tmp);
 
-    int getSerializeTaskResults(string serializePath);
-    void serializeTaskResults();
-
 private:
     ThreadPool* p_threadPool;
 

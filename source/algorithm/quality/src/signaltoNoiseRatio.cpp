@@ -8,7 +8,7 @@
 #include "../utils/qualityutils.h"
 
 //SignaltoNoiseRatio-影像信噪比
-int32_t SignaltoNoiseRatio(char* filepath,char* logfilepath,double& result) {
+int32_t SignaltoNoiseRatio(char* filepath,char* logfilepath, vector<double>& snrresult) {
     //定义数据集，打开文件
     GDALDataset *poDataset = NULL;
     GDALAllRegister();
@@ -32,10 +32,6 @@ int32_t SignaltoNoiseRatio(char* filepath,char* logfilepath,double& result) {
     int16_t blkcols=width/blksize;
     int16_t blkrows=height/blksize;
     GDALRasterBand *pband;
-    double *snrresult=(double*)malloc(sizeof(double)*bandnum);
-    if(snrresult == NULL) {
-        return -1;
-    }
     uint16_t *banddata=(uint16_t *)CPLMalloc(sizeof(uint16_t)*width*height);
 
     //loop for every bands
@@ -93,7 +89,7 @@ int32_t SignaltoNoiseRatio(char* filepath,char* logfilepath,double& result) {
         }
 
         if(validblks==0) {
-            snrresult[n]=0;
+            snrresult.push_back(0);
         } else {
             //计算图像均值
             imagemean=imagemean/validblks;
@@ -103,9 +99,9 @@ int32_t SignaltoNoiseRatio(char* filepath,char* logfilepath,double& result) {
 
             //计算图像信噪比
             if(imagemean==0 || imagestddev==0){
-                snrresult[n]=0;
+                snrresult.push_back(0);
             } else {
-                snrresult[n]=20*log10(imagemean/imagestddev);
+                snrresult.push_back(20*log10(imagemean/imagestddev));
             }
         }
 
@@ -127,20 +123,13 @@ int32_t SignaltoNoiseRatio(char* filepath,char* logfilepath,double& result) {
     GDALClose(poDataset);
     poDataset=NULL;
 
-    result = 0;
-    for(int i=0;i<bandnum;i++) {
-        result += snrresult[i];
-    }
-    result /= bandnum;
-
     return 1;
 }
 
-
 //主函数
-bool mainSignaltoNoiseRatio(ImageParameter &testparameter, char* logfilepath, double &m_qRes) {
-    m_qRes = 0;
-    int32_t res = SignaltoNoiseRatio(const_cast<char*>(testparameter.filePath.c_str()),logfilepath, m_qRes);
+bool mainSignaltoNoiseRatio(string& filepath, char* logfilepath, vector<double> &m_qRes) {
+    m_qRes.clear();
+    int32_t res = SignaltoNoiseRatio(const_cast<char*>(filepath.c_str()),logfilepath, m_qRes);
     if(res != 1) {
         printf("Algorithm executing error!\n");
         WriteMsg(logfilepath,-1,"Algorithm executing error!");

@@ -1,16 +1,12 @@
 #include "qualityutils.h"
 
-extern ImageQuality* g_ImgQuality;
-
 //write status into log file
 void WriteMsg(char* , int32_t statusnum, const char* statusmsg) {
     Log::Info("%d\t%s", statusnum, statusmsg);
 }
 
 void utils_serialize_quality(int ) {
-    if(NULL != g_ImgQuality) {
-        g_ImgQuality->serializeTaskResults();
-    }
+;
 }
 
 void serializeImageQualityOnTime(int seconds) {
@@ -48,12 +44,17 @@ void* qualityInterface(void *args) {
     QualityInputStruct * tmp = (QualityInputStruct*)args;
     int inputParamSize = 1;
     inputParamSize = tmp->inputMap.size();
-    char* logfilepath = NULL;
-    ImageParameter testparameter;
+
     vector<string> inputPathVec;
+    vector<int> bandlist;
+    inputPathVec.resize(3);
+    inputPathVec[0] = tmp->inputMap["f1"].filePath;
+    inputPathVec[1] = tmp->inputMap["f2"].filePath;
+    inputPathVec[2] = tmp->inputMap["f3"].filePath;
+
     if(tmp->inputMap.size() == 1) {
         for(QualityMapArgs::iterator it=tmp->inputMap.begin(); it!=tmp->inputMap.end(); it++) {
-            testparameter = it->second;
+            inputPathVec.push_back(it->second.filePath);
         }
     } else if(tmp->inputMap.size() == 2) {
         for(QualityMapArgs::iterator it=tmp->inputMap.begin(); it!=tmp->inputMap.end(); it++) {
@@ -64,34 +65,35 @@ void* qualityInterface(void *args) {
     if(p_resMap == NULL) {
         return NULL;
     }
-    double qualityRes = 0;
+    vector<double> qualityRes;
     bool flag = false;
+    char* logfilepath = NULL;
     if(inputParamSize == 1) {
-        flag = mainClarity(testparameter, logfilepath, qualityRes);
+        flag = mainClarity(inputPathVec[2], logfilepath, qualityRes);
         p_resMap->res["Clarity_1_0"] = qualityRes;
-        flag = mainContrastRatio(testparameter, logfilepath, qualityRes);
+        flag = mainContrastRatio(inputPathVec[2], logfilepath, qualityRes);
         p_resMap->res["ContrastRatio_1_0"] = qualityRes;
-        flag = mainEntropy(testparameter, logfilepath, qualityRes);
+        flag = mainEntropy(inputPathVec[2], logfilepath, qualityRes);
         p_resMap->res["Entropy_1_0"] = qualityRes;
-        flag = mainMean(testparameter, logfilepath, qualityRes);
+        flag = mainMean(inputPathVec[2], logfilepath, qualityRes);
         p_resMap->res["Mean_1_0"] = qualityRes;
-        flag = mainSignaltoNoiseRatio(testparameter, logfilepath, qualityRes);
+        flag = mainSignaltoNoiseRatio(inputPathVec[2], logfilepath, qualityRes);
         p_resMap->res["SignaltoNoiseRatio_1_0"] = qualityRes;
-        flag = mainStriperesidual(testparameter, logfilepath, qualityRes);
+        flag = mainStriperesidual(inputPathVec[2], logfilepath, qualityRes);
         p_resMap->res["Striperesidual_1_0"] = qualityRes;
 
-        flag = mainDynamicRange(testparameter, logfilepath, qualityRes);
+        flag = mainDynamicRange(inputPathVec[2], logfilepath, qualityRes);
         p_resMap->res["DynamicRange_1_0"] = qualityRes;
-        flag = mainVariance(testparameter, logfilepath, qualityRes);
+        flag = mainVariance(inputPathVec[2], logfilepath, qualityRes);
         p_resMap->res["Variance_1_0"] = qualityRes;
     } else if(inputParamSize == 2) {
-        flag = mainCrossEntropy(inputPathVec[0], inputPathVec[1], logfilepath, qualityRes);
+        flag = mainCrossEntropy(inputPathVec[0], inputPathVec[2], logfilepath, qualityRes);
         p_resMap->res["CrossEntropy_1_0"] = qualityRes;
-        flag = mainMutualInformation(inputPathVec[0], inputPathVec[1], logfilepath, qualityRes);
+        flag = mainMutualInformation(inputPathVec[0], inputPathVec[2], logfilepath, qualityRes);
         p_resMap->res["MutualInformation_1_0"] = qualityRes;
-        flag = mainSpectralAngleMatrix(inputPathVec[0], inputPathVec[1], logfilepath, qualityRes);
+        flag = mainSpectralAngleMatrix(inputPathVec[1], inputPathVec[2], logfilepath, bandlist, qualityRes);
         p_resMap->res["SpectralAngleMatrix_1_0"] = qualityRes;
-        flag = mainStructureSimilarity(inputPathVec[0], inputPathVec[1], logfilepath, qualityRes);
+        flag = mainStructureSimilarity(inputPathVec[0], inputPathVec[2], logfilepath, qualityRes);
         p_resMap->res["StructureSimilarity_1_0"] = qualityRes;
     }
     return p_resMap;

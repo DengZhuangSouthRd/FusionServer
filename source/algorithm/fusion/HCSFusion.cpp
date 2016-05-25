@@ -125,7 +125,9 @@ bool HCSFusion::MeanStd_HCS_Fusion(const char* Input_PAN_FileName, const char* I
     int COLS = PAN_Width*PAN_Height;
 
     //对MS做HCS变换
-    HCS_Trans(New_MSData, PAN_Height, PAN_Width, MS_Bandcount);
+    if(HCS_Trans(New_MSData, PAN_Height, PAN_Width, MS_Bandcount) == false) {
+        return false;
+    }
 
     //对PAN影像灰度拉伸
     float mean,s;//均值 标准差
@@ -152,7 +154,9 @@ bool HCSFusion::MeanStd_HCS_Fusion(const char* Input_PAN_FileName, const char* I
     PANInf->ClearImageData();
 
     //HCS反变换
-    HCS_Itrans(New_MSData, PAN_Height, PAN_Width, MS_Bandcount);
+    if(HCS_Itrans(New_MSData, PAN_Height, PAN_Width, MS_Bandcount) == false) {
+        return false;
+    }
 
     //GDAL写文件
     Log(LogName,"01|04");//写入log日志

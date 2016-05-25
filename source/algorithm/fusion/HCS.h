@@ -26,10 +26,10 @@ class HCS{
 public:
 
     //将图像转换到HCS(hyperspherical color sharpening)空间
-    void HCS_Trans(float *MS_Mat,int height,int width,int bandcount);
+    bool HCS_Trans(float *MS_Mat,int height,int width,int bandcount);
 
     //将图像转换到原始空间
-    void HCS_Itrans(float *MS_Mat, int height, int width, int bandcount);
+    bool HCS_Itrans(float *MS_Mat, int height, int width, int bandcount);
 };
 
 

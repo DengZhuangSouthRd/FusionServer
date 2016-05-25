@@ -1,7 +1,7 @@
 #include "HCS.h"
 
 //将图像从原始的颜色空间转换到HCS空间（第一个为I分量与HIS区分开）
-void HCS::HCS_Trans(float *MS_Mat,int height,int width,int bandcount){
+bool HCS::HCS_Trans(float *MS_Mat,int height,int width,int bandcount){
 
     //HCS_Trans	原始的颜色空间转换到HCS空间
     //考虑节约内存，不返回值，而是在原数据基础上做变换
@@ -16,7 +16,7 @@ void HCS::HCS_Trans(float *MS_Mat,int height,int width,int bandcount){
     if (NULL == MS_hcs || NULL == MS_ncs) {
         cerr<<"HCS Transform Error."<<endl;
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
-        throw runtime_error("HCS_Trans error");
+        return false;
     }
     for (i = 0; i < pixelcount; i++) {
         for (j=0;j<bandcount;j++) {
@@ -43,10 +43,11 @@ void HCS::HCS_Trans(float *MS_Mat,int height,int width,int bandcount){
     }
     delete[] MS_hcs;
     delete[] MS_ncs;
+    return true;
 }
 
 //将图像从HCS空间转换到原始的颜色空间（第一个为I分量与HIS区分开）
-void HCS::HCS_Itrans(float *MS_Mat, int height, int width, int bandcount) {
+bool HCS::HCS_Itrans(float *MS_Mat, int height, int width, int bandcount) {
     //HCS_Trans	HCS空间转换到原始的颜色空间
     //考虑节约内存，不返回值，而是在原数据基础上做变换
     //日期：2016.3.2
@@ -61,7 +62,7 @@ void HCS::HCS_Itrans(float *MS_Mat, int height, int width, int bandcount) {
     if (NULL == MS_hcs || NULL == MS_ncs) {
         cerr<<"HCS Itransform Error."<<endl;
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
-        throw runtime_error("HCS_Trans error");
+        return false;
     }
     for (i = 0; i < pixelcount; i++) {
         for (j=0;j<bandcount;j++) {
@@ -90,4 +91,5 @@ void HCS::HCS_Itrans(float *MS_Mat, int height, int width, int bandcount) {
 
     delete[] MS_hcs;
     delete[] MS_ncs;
+    return true;
 }

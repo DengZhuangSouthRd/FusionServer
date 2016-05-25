@@ -1,7 +1,4 @@
 #include <stdlib.h>
-#include <stdio.h>
-//#include <malloc.h>
-
 #include "PCA.h"
 
 /*
@@ -136,22 +133,15 @@ int PCA::Tri_Symmetry_Diagonal_Eigenvector(int n, float b[], float c[],
     float d, f, h, g, p, r, e, s;
 
     c[n - 1] = 0.0; d = 0.0; f = 0.0;
-    for (j = 0; j <= n - 1; j++)
-    {
+    for (j = 0; j <= n - 1; j++) {
         it = 0;
         h = eps * (fabs(b[j]) + fabs(c[j]));
         if (h > d) d = h;
         m = j;
         while ((m <= n - 1) && (fabs(c[m]) > d)) m = m + 1;
-        if (m != j)
-        {
-            do
-            {
-                if (it == l)
-                {
-#ifdef ALGO_DEBUG
-                    cerr<<"fail."<<endl;
-#endif
+        if (m != j) {
+            do {
+                if (it == l) {
                     return(-1);
                 }
                 it = it + 1;
@@ -166,24 +156,19 @@ int PCA::Tri_Symmetry_Diagonal_Eigenvector(int n, float b[], float c[],
                 for (i = j + 1; i <= n - 1; i++)
                     b[i] = b[i] - h;
                 f = f + h; p = b[m]; e = 1.0; s = 0.0;
-                for (i = m - 1; i >= j; i--)
-                {
+                for (i = m - 1; i >= j; i--) {
                     g = e * c[i]; h = e * p;
-                    if (fabs(p) >= fabs(c[i]))
-                    {
+                    if (fabs(p) >= fabs(c[i])) {
                         e = c[i] / p; r = sqrt(e * e + 1.0);
                         c[i + 1] = s * p * r; s = e / r; e = 1.0 / r;
-                    }
-                    else
-                    {
+                    } else {
                         e = p / c[i]; r = sqrt(e * e + 1.0);
                         c[i + 1] = s * c[i] * r;
                         s = 1.0 / r; e = e / r;
                     }
                     p = e * b[i] - s * g;
                     b[i + 1] = h + s * (e * g + s * b[i]);
-                    for (k = 0; k <= n - 1; k++)
-                    {
+                    for (k = 0; k <= n - 1; k++) {
                         u = k * n + i + 1; v = u - 1;
                         h = q[u]; q[u] = s * q[v] + e * h;
                         q[v] = e * q[v] - s * h;
@@ -194,29 +179,24 @@ int PCA::Tri_Symmetry_Diagonal_Eigenvector(int n, float b[], float c[],
         }
         b[j] = b[j] + f;
     }
-    for (i = 0; i <= n - 1; i++)
-    {
+    for (i = 0; i <= n - 1; i++) {
         k = i; p = b[i];
-        if (i + 1 <= n - 1)
-        {
+        if (i + 1 <= n - 1) {
             j = i + 1;
-            while ((j <= n - 1) && (b[j] <= p))
-            {
+            while ((j <= n - 1) && (b[j] <= p)) {
                 k = j; p = b[j]; j = j + 1;
             }
         }
-        if (k != i)
-        {
+        if (k != i) {
             b[k] = b[i]; b[i] = p;
-            for (j = 0; j <= n - 1; j++)
-            {
+            for (j = 0; j <= n - 1; j++) {
                 u = j * n + i; v = j * n + k;
                 p = q[u]; q[u] = q[v]; q[v] = p;
             }
         }
     }
 
-    return(1);
+    return 1;
 }
 
 
@@ -234,17 +214,15 @@ EigenVector中的j列为与数组Eigen中第j个特征值
 维数组Eigen给出，特征向量组由二维数组EigenVector给出
 */
 int PCA::SymmetricRealMatrix_Eigen(float CovMatrix[], int n,
-                                   float Eigen[], float EigenVector[])
-{
+                                   float Eigen[], float EigenVector[]) {
     int k;
     float * subDiagonal;
 
     subDiagonal = (float *)malloc(sizeof(float) * n);
-    if (subDiagonal==NULL)
-    {
+    if (subDiagonal==NULL) {
         cerr<<"Memory Error.\n";
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
-        throw "PCA error";;
+        return -1;
     }
     Householder_Tri_Symetry_Diagonal(CovMatrix, n, EigenVector, Eigen, subDiagonal);
     k = Tri_Symmetry_Diagonal_Eigenvector(n, Eigen, subDiagonal, EigenVector, EPS, Iteration);
@@ -273,14 +251,12 @@ int PCA::PCAProject(float * data, int row, int col, float * mean, float * signal
     if (row <= 1 || col <= 1) return(-1);
     /* subtract off the mean for each dimension */
     data1 = (float *)malloc(sizeof(float) * row * col);
-    if (data1==NULL)
-    {
+    if (data1==NULL) {
         cerr<<"Memory Error.\n";
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
-        throw "PCA error";;
+        return -1;
     }
-    for (y = 0; y < row; y++) /* calculate mean */
-    {
+    for (y = 0; y < row; y++) {
         mean[y] = 0;
         for (x = 0; x < col; x++)
             mean[y] += data[y*col + x];
@@ -298,7 +274,8 @@ int PCA::PCAProject(float * data, int row, int col, float * mean, float * signal
     {
         cerr<<"Memory Error.\n";
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
-        throw "PCA error";;
+        free(data1);
+        return  -1;
     }
     for (y = 0; y < row; y++)
         for (x = 0; x < row; x++)
@@ -309,30 +286,31 @@ int PCA::PCAProject(float * data, int row, int col, float * mean, float * signal
             temp = temp / (col - 1);
             covariance[x*row + y] = temp;
         }
+
     /* find the eigenvectors and eigenvalues */
     rvalue = SymmetricRealMatrix_Eigen(covariance, row, V, PC);
-    if (rvalue<0)
-    {
+    if (rvalue<0) {
         cerr<<"PCA：Find the eigenvectors and eigenvalues error.\n";
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
-        throw "PCA error";;
+        free(covariance);
+        free(data1);
+        return rvalue;
     }
     free(covariance);covariance=NULL;
     /* sort the variances in decreasing order */
     no = (int *)malloc(sizeof(int) * row);
-    if (no==NULL)
-    {
+    if (no==NULL) {
         cerr<<"Memory Error.\n";
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
-        throw "PCA error";;
+        free(data1);
+        return -1;
     }
-    for (x = 0; x < row; x++) no[x] = x;
-    for (x = 0; x < row - 1; x++)
-    {
+    for (x = 0; x < row; x++)
+        no[x] = x;
+    for (x = 0; x < row - 1; x++) {
         temp = V[x];
         for (k = x; k < row; k++)
-            if (temp < V[k])
-            {
+            if (temp < V[k]) {
                 tp = no[k];
                 no[k] = no[x];
                 no[x] = tp;
@@ -342,14 +320,18 @@ int PCA::PCAProject(float * data, int row, int col, float * mean, float * signal
     /* exchange eigen value and vector in decreasing order */
     tV = (float *)malloc(sizeof(float) * row);
     tPC = (float *)malloc(sizeof(float) * row * row);
-    if (tV==NULL||tPC==NULL)
-    {
+    if (tV==NULL||tPC==NULL) {
         cerr<<"Memory Error.\n";
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
-        throw "PCA error";;
+        free(no);
+        free(data1);
+        if(tV != NULL) free(tV);
+        if(tPC != NULL) free(tPC);
+        return -1;
     }
 
-    for (x = 0; x < row; x++) tV[x] = V[x];
+    for (x = 0; x < row; x++)
+        tV[x] = V[x];
     for (x = 0; x < row; x++)
         for (y = 0; y < row; y++)
             tPC[x*row + y] = PC[x*row + y];
@@ -398,15 +380,15 @@ int PCA::PCAReproject(float * signal, int row, int col, float * mean, float * PC
     return 1;
 }
 
-int PCA::PCAProject(float * data, int row, int col, float * mean, float * PC, float * V)
-{
+int PCA::PCAProject(float * data, int row, int col, float * mean, float * PC, float * V) {
     int x, y, k;
 
     float *tPC, *tV;
     float * covariance, temp;
     int rvalue, *no, tp;
 
-    if (row <= 1 || col <= 1) return(-1);
+    if (row <= 1 || col <= 1)
+        return(-1);
     /* subtract off the mean for each dimension */
 
     for (y = 0; y < row; y++) /* calculate mean */
@@ -424,11 +406,10 @@ int PCA::PCAProject(float * data, int row, int col, float * mean, float * PC, fl
 
     /* calculate the covariance matrix */
     covariance = (float *)malloc(sizeof(float) * row * row);
-    if (covariance==NULL)
-    {
+    if (covariance==NULL) {
         cerr<<"Memory Error.\n";
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
-        throw "PCA error";;
+        return -1;
     }
     for (y = 0; y < row; y++){
         for (x = 0; x < row; x++)
@@ -438,27 +419,23 @@ int PCA::PCAProject(float * data, int row, int col, float * mean, float * PC, fl
                 temp += data[y*col + k] * data[x*col + k];
             temp = temp / (col - 1);
             covariance[x*row + y] = temp;
-            //cout<<temp<<" ";
         }
-        //	cout<<endl;
     }
     /* find the eigenvectors and eigenvalues */
     rvalue = SymmetricRealMatrix_Eigen(covariance, row, V, PC);
     free(covariance);covariance=NULL;
-    if (rvalue<0)
-    {
+    if (rvalue<0) {
         cerr<<"PCA：Find the eigenvectors and eigenvalues error.\n";
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
-        throw "PCA error";;
+        return -1;
     }
 
     /* sort the variances in decreasing order */
     no = (int *)malloc(sizeof(int) * row);
-    if (no==NULL)
-    {
+    if (no==NULL) {
         cerr<<"Memory Error.\n";
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
-        throw "PCA error";;
+        return -1;
     }
     for (x = 0; x < row; x++) no[x] = x;
     for (x = 0; x < row - 1; x++)
@@ -476,11 +453,13 @@ int PCA::PCAProject(float * data, int row, int col, float * mean, float * PC, fl
     /* exchange eigen value and vector in decreasing order */
     tV = (float *)malloc(sizeof(float) * row);
     tPC = (float *)malloc(sizeof(float) * row * row);
-    if (tV==NULL||tPC==NULL)
-    {
+    if (tV==NULL||tPC==NULL) {
         cerr<<"Memory Error.\n";
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
-        throw "PCA error";;
+        free(no);
+        if(tV != NULL) free(tV);
+        if(tPC != NULL) free(tPC);
+        return -1;
     }
 
     for (x = 0; x < row; x++) tV[x] = V[x];
@@ -500,21 +479,11 @@ int PCA::PCAProject(float * data, int row, int col, float * mean, float * PC, fl
     free(tV);tV=NULL;
     free(tPC);tPC=NULL;
 
-    /* project the original data: signals = PC' * data; */
-    //for (y = 0; y < row; y++)
-    //	for (x = 0; x < col; x++)
-    //	{
-    //		signals[y*col + x] = 0.0;
-    //		for (k = 0; k < row; k++)
-    //			signals[y*col + x] += PC[k*row + y] * data1[k*col + x];
-    //	}
-
-    float* tmp = new float[row];
-    if (NULL == tmp)
-    {
+    float* tmp = (float*)malloc(sizeof(float) * row);
+    if (NULL == tmp) {
         cerr<<"Memory Error.\n";
-        cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
-        throw "PCA error";;
+        cerr<<"file: "<<__FILE__<<"line: "<<__LINE__<<"time: "<<__DATE__<<" "<<__TIME__<<endl;
+        return -1;
     }
     for (x = 0; x < col; x++){
         for (y = 0; y < row; y++)
@@ -529,8 +498,7 @@ int PCA::PCAProject(float * data, int row, int col, float * mean, float * PC, fl
         }
     }
 
-    delete[] tmp;tmp = NULL;
-
+    free(tmp);
     return rvalue;
 }
 
@@ -539,12 +507,11 @@ int PCA::PCAReproject(float * signal, int row, int col, float * mean, float * PC
     int i;
     int x, y;
     /* back project the original data: newdata = PC * signal; */
-    float* tmp = new float[row];
-    if (NULL == tmp)
-    {
+    float* tmp = (float*)malloc(sizeof(float)*row);
+    if (NULL == tmp) {
         cerr<<"Memory Error.\n";
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
-        throw "PCA error";;
+        return -1;
     }
     for (x = 0; x < col; x++){
         for (y = 0; y < row; y++)
@@ -567,9 +534,7 @@ int PCA::PCAReproject(float * signal, int row, int col, float * mean, float * PC
         }
 
     }
-    delete[] tmp;tmp = NULL;
-
-
+    free(tmp);
     return 1;
 }
 

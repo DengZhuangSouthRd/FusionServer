@@ -147,7 +147,7 @@ bool HSIFusion::MeanStd_HSI_Fusion(const char* Input_PAN_FileName, const char* I
     PANInf->ClearImageData();
 
     //将MS从HSI变换到RGB空间
-    if(HSI2RGB(New_MSData, PAN_Height, PAN_Width, MS_Bandcount)) {
+    if(HSI2RGB(New_MSData, PAN_Height, PAN_Width, MS_Bandcount) == false) {
         return false;
     }
 

@@ -98,8 +98,6 @@ bool GramSchmidtFusion::GramSchmidt_Fusion(const char* Input_PAN_FileName, const
         delete MSInf;
         return false;
     }
-    //插值
-    //插值方法：Nearest/Linear/CubicConv
 
     Interpolation(MSData, MS_Height,MS_Width ,MS_Bandcount, New_MSData+PAN_Height*PAN_Width, PAN_Height, PAN_Width, InterpolationMethod);
 

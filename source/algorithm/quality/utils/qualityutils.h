@@ -53,7 +53,7 @@ bool mainCrossEntropy(string filepath1, string filepath3, char* logfilepath, vec
 bool mainMutualInformation(string filePath1, string filePath3, char* logfile, vector<double>& m_qRes);
 bool mainStructureSimilarity(string filepath1, string filepath3, char* logfile, vector<double>& m_qRes);
 
-bool mainSpectralAngleMatrix(string filepath2, string filepath3, char* logfile, vector<int> bandlist, vector<double>& m_qRes);
+bool mainSpectralAngleMatrix(string filepath2, string filepath3, char* logfile, vector<int> bandlist, string interkind, vector<double>& m_qRes);
 double mainComprehensiveEvaluate(vector<double> resultvalue);
 // interface
 void *qualityInterface(void* args);

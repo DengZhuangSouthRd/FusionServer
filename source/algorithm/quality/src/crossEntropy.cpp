@@ -67,11 +67,13 @@ int32_t CrossEntropy(char* filepath1,char* filepath2,char* logfilepath, vector<d
 		}
 	}
 
+	uint32_t histogram2[256]={0};
 	for(n=0;n<bandnum;n++) {
 		pband=poDataset2->GetRasterBand(n+1);
 		pband->RasterIO(GF_Read,0,0,width,height,banddata2,width,height,GDT_UInt16,0,0);
 
-		uint32_t histogram2[256]={0};
+		memset(histogram2, 0, 256* sizeof(uint32_t));
+
 		int64_t count2=0;
 		double sum=0.0;
 		int32_t max2=0;

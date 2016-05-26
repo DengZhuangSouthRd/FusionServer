@@ -28,8 +28,7 @@ void calculateAvg(vector<double>& result) {
     result.insert(result.begin(), total*1.0/result.size());
 }
 
-void* qualityInterface(void *args) {
-    map<string,int> evaluatealg;
+void init_evaluatealg(map<string,int>& evaluatealg) {
     evaluatealg["Clarity_1_0"]=1;
     evaluatealg["ContrastRatio_1_0"]=2;
     evaluatealg["Entropy_1_0"]=3;
@@ -45,12 +44,9 @@ void* qualityInterface(void *args) {
     evaluatealg["DynamicRange_1_0"] = 11;
     evaluatealg["Variance_1_0"] = 12;
     evaluatealg["RadiationUniform_1_0"] = 13;
+}
 
-    if(args == NULL) return NULL;
-    QualityInputStruct * tmp = (QualityInputStruct*)args;
-
-    vector<string> inputPathVec;
-    vector<int> bandlist;
+void combine_InputArgs(QualityInputStruct* tmp, vector<string>& inputPathVec, vector<int>& bandlist) {
     inputPathVec.resize(3);
     inputPathVec[0] = tmp->inputMap["f1"].filePath;
     inputPathVec[1] = tmp->inputMap["f2"].filePath;
@@ -65,15 +61,10 @@ void* qualityInterface(void *args) {
         strlist = strlist.substr(pos+1);
     }
     bandlist.push_back(stoi(strlist));
+}
 
-    QualityResMap* p_resMap = new(std::nothrow) QualityResMap;
-    if(p_resMap == NULL) {
-        return NULL;
-    }
-
-    vector<double> qualityRes;
-    bool flag = false;
-    char* logfilepath = NULL;
+void quality_calculate_part1(QualityResMap*p_resMap, vector<string> inputPathVec, char* logfilepath, vector<double> qualityRes) {
+    int flag;
     vector<double> avgVec;
     avgVec.resize(5);
 
@@ -102,6 +93,13 @@ void* qualityInterface(void *args) {
     p_resMap->res["SignaltoNoiseRatio_1_0"].assign(qualityRes.begin(), qualityRes.end());
     avgVec[0] = qualityRes[0];
 
+    double total_score = mainComprehensiveEvaluate(avgVec);
+    p_resMap->status = (int)(total_score+0.5);
+    Log::Info("Comprehensive Evaluate Scoree is %lf", total_score);
+}
+
+void quality_calculate_part2(QualityResMap*p_resMap, vector<string> inputPathVec, char* logfilepath, vector<double> qualityRes) {
+    int flag;
     flag = mainMean(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
     p_resMap->res["Mean_1_0"].assign(qualityRes.begin(), qualityRes.end());
@@ -117,7 +115,10 @@ void* qualityInterface(void *args) {
     flag = mainVariance(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
     p_resMap->res["Variance_1_0"].assign(qualityRes.begin(), qualityRes.end());
+}
 
+void quality_calculate_part3(QualityResMap*p_resMap, vector<string> inputPathVec, char* logfilepath, vector<double> qualityRes) {
+    int flag;
     flag = mainCrossEntropy(inputPathVec[0], inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
     p_resMap->res["CrossEntropy_1_0"].assign(qualityRes.begin(), qualityRes.end());
@@ -126,21 +127,44 @@ void* qualityInterface(void *args) {
     calculateAvg(qualityRes);
     p_resMap->res["MutualInformation_1_0"].assign(qualityRes.begin(), qualityRes.end());
 
-    flag = mainSpectralAngleMatrix(inputPathVec[1], inputPathVec[2], logfilepath, bandlist, qualityRes);
-    calculateAvg(qualityRes);
-    p_resMap->res["SpectralAngleMatrix_1_0"].assign(qualityRes.begin(), qualityRes.end());
-
     flag = mainStructureSimilarity(inputPathVec[0], inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
     p_resMap->res["StructureSimilarity_1_0"].assign(qualityRes.begin(), qualityRes.end());
+}
 
-    for(int i=0;i<avgVec.size();i++) {
-        cout << avgVec[i] << " $$ ";
+void quality_calculate_part4(QualityResMap* p_resMap, vector<string> inputPathVec, char* logfilepath, vector<int> bandlist, string interkind, vector<double> qualityRes) {
+    int flag;
+    flag = mainSpectralAngleMatrix(inputPathVec[1], inputPathVec[2], logfilepath, bandlist, interkind, qualityRes);
+    calculateAvg(qualityRes);
+    p_resMap->res["SpectralAngleMatrix_1_0"].assign(qualityRes.begin(), qualityRes.end());
+}
+
+void* qualityInterface(void *args) {
+    if(args == NULL)
+        return NULL;
+    QualityInputStruct * tmp = (QualityInputStruct*)args;
+
+    vector<string> inputPathVec;
+    vector<int> bandlist;
+
+    combine_InputArgs(tmp, inputPathVec, bandlist);
+    delete tmp;
+
+    QualityResMap* p_resMap = new(std::nothrow) QualityResMap;
+    if(p_resMap == NULL) {
+        return NULL;
     }
-    cout << endl;
 
-    double total_score = mainComprehensiveEvaluate(avgVec);
-    p_resMap->status = (int)(total_score+0.5);
-    Log::Info("Comprehensive Evaluate Scoree is %lf", total_score);
+    vector<double> qualityRes;
+    char* logfilepath = NULL;
+
+    quality_calculate_part1(p_resMap, inputPathVec, logfilepath, qualityRes);
+
+    quality_calculate_part2(p_resMap, inputPathVec, logfilepath, qualityRes);
+
+    quality_calculate_part3(p_resMap, inputPathVec, logfilepath, qualityRes);
+
+    quality_calculate_part4(p_resMap, inputPathVec, logfilepath, bandlist, tmp->algorithmkind, qualityRes);
+
     return p_resMap;
 }

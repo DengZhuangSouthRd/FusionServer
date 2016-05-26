@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(AlgorithmServer)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fno-stack-protector")
 
 include_directories("/usr/local/include")
 LINK_DIRECTORIES("/usr/local/lib")
@@ -40,6 +40,14 @@ set(SOURCE_FILES source/imagefusion.cpp
         source/algorithm/quality/src/mean.cpp
         source/algorithm/quality/src/signaltoNoiseRatio.cpp
         source/algorithm/quality/src/striperesidual.cpp
+        source/algorithm/quality/src/crossEntropy.cpp
+        source/algorithm/quality/src/mutualinformation.cpp
+        source/algorithm/quality/src/spectralanglematrix.cpp
+        source/algorithm/quality/src/structuresimilarity.cpp
+        source/algorithm/quality/src/variance.cpp
+        source/algorithm/quality/src/dynamicrange.cpp
+        source/algorithm/quality/src/comprehensiveEvaluate.cpp
+        source/algorithm/quality/src/radiationUniform.cpp
         source/algorithm/fusion/Fusion.cpp
         source/algorithm/fusion/BroveyFusion.cpp
         source/algorithm/fusion/BroveyFusion.h
@@ -155,15 +163,7 @@ set(SOURCE_FILES source/imagefusion.cpp
         source/algorithm/fusion/curvelet/fftw/timer.cpp
         source/algorithm/fusion/curvelet/fftw/twiddle.cpp
         source/algorithm/fusion/curvelet/fftw/wisdom.cpp
-        source/algorithm/fusion/curvelet/fftw/wisdomio.cpp
-        source/algorithm/quality/src/crossEntropy.cpp
-        source/algorithm/quality/src/mutualinformation.cpp
-        source/algorithm/quality/src/spectralanglematrix.cpp
-        source/algorithm/quality/src/structuresimilarity.cpp
-        source/algorithm/quality/src/variance.cpp
-        source/algorithm/quality/src/dynamicrange.cpp
-        source/algorithm/quality/src/comprehensiveEvaluate.cpp
-        source/algorithm/quality/src/radiationUniform.cpp)
+        source/algorithm/fusion/curvelet/fftw/wisdomio.cpp)
 
 add_executable(AlgorithmServer ${SOURCE_FILES})
 target_link_libraries(AlgorithmServer Ice IceUtil gdal proj pthread)

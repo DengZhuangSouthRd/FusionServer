@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include <map>
+#include <numeric>
 #include <vector>
 
 #include "../../../utils/log.h"
@@ -46,18 +47,20 @@ bool mainSignaltoNoiseRatio(string& filepath, char* logfilepath, vector<double> 
 bool mainStriperesidual(string& filepath, char* logfilepath, vector<double> &m_qRes);
 bool mainDynamicRange(string& filepath, char* logfilepath, vector<double> & m_qRes);
 bool mainVariance(string& filepath, char* logfilepath, vector<double> & m_qRes);
+bool mainRadiationUniform(string& filepath , char* logfilepath, vector<double>& m_qRes);
 
 bool mainCrossEntropy(string filepath1, string filepath3, char* logfilepath, vector<double> &m_qRes);
 bool mainMutualInformation(string filePath1, string filePath3, char* logfile, vector<double>& m_qRes);
 bool mainStructureSimilarity(string filepath1, string filepath3, char* logfile, vector<double>& m_qRes);
 
 bool mainSpectralAngleMatrix(string filepath2, string filepath3, char* logfile, vector<int> bandlist, vector<double>& m_qRes);
-
+double mainComprehensiveEvaluate(vector<double> resultvalue);
 // interface
 void *qualityInterface(void* args);
 
 // set intertimer to serialize the ImageQuality Data !
 void utils_serialize_quality(int);
 void serializeImageQualityOnTime(int seconds);
+void calculateAvg(vector<double>& result);
 
 #endif // UTILS_H

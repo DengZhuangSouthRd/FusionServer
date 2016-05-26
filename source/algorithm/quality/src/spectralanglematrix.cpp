@@ -17,10 +17,9 @@ int32_t SpectralAngleMatrix(char* filepath2,char* filepath3,char* logfilepath, v
     }
 
     int32_t n,i,j;
-    int32_t bandnum2,width2,height2;
+    int32_t width2,height2;
     int32_t bandnum3,width3,height3;
 
-    bandnum2=poDataset2->GetRasterCount();
     width2=poDataset2->GetRasterXSize();
     height2=poDataset2->GetRasterYSize();
 
@@ -33,6 +32,7 @@ int32_t SpectralAngleMatrix(char* filepath2,char* filepath3,char* logfilepath, v
         poDataset2=NULL;
         GDALClose(poDataset3);
         poDataset3=NULL;
+        WriteMsg(logfilepath, -1, "bandlist.size() != bandnum3 || width2 != width3 || height2 != height3");
         return -1;
     }
 
@@ -50,6 +50,7 @@ int32_t SpectralAngleMatrix(char* filepath2,char* filepath3,char* logfilepath, v
         pband->RasterIO(GF_Read,0,0,width2,height2,banddata2,width2,height2,GDT_UInt16,0,0);
         GDALClose(pband);
         pband=NULL;
+
         pband=poDataset3->GetRasterBand(n+1);
         pband->RasterIO(GF_Read,0,0,width3,height3,banddata3,width3,height3,GDT_UInt16,0,0);
         GDALClose(pband);

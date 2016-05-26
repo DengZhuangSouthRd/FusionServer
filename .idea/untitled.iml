@@ -124,18 +124,20 @@
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/PCAFusion.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/DWTFusion.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/fusion/PCA.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/dynamicrange.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/structuresimilarity.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/mutualinformation.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/entropy.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/striperesidual.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/mean.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/signaltoNoiseRatio.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/spectralanglematrix.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/clarity.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/variance.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/contrastRatio.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/structuresimilarity.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/signaltoNoiseRatio.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/radiationUniform.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/spectralanglematrix.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/mutualinformation.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/crossEntropy.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/dynamicrange.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/contrastRatio.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/mean.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/striperesidual.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/comprehensiveEvaluate.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/src/variance.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/utils/qualityutils.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/quality/utils/qualityutils.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/rpc/fusion/wisefuseRpc.h" isTestSource="false" />

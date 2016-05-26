@@ -106,6 +106,12 @@ int ImageQuality::qualityAsyn(const QualityInputStruct &inputArgs, const Ice::Cu
         return -1; // push task error
     }
 
+    args->id = inputArgs.id;
+    args->algorithmkind = inputArgs.algorithmkind;
+    for(auto it=inputArgs.inputMap.begin(); it!=inputArgs.inputMap.end(); it++) {
+        args->inputMap[it->first] = it->second;
+    }
+
     Task* task = new(std::nothrow) Task(&qualityInterface, (void*)args);
     if(task == NULL) {
         delete args;
@@ -120,7 +126,7 @@ int ImageQuality::qualityAsyn(const QualityInputStruct &inputArgs, const Ice::Cu
         delete task;
         return -1; // Means For Add Task Failed !
     }
-    return 1; // Means For Add Task Success !
+    return 3; // Means For Add Task Success !
 }
 
 QualityInfo ImageQuality::fetchQualityRes(const string &inputArgs, const Ice::Current &) {

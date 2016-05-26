@@ -138,15 +138,16 @@ QualityInfo ImageQuality::fetchQualityRes(const string &inputArgs, const Ice::Cu
     }
     Log::Info("fetchQualityRes ## inputArgs %s", task_id.c_str());
     TaskPackStruct tmp;
-    bool flag = p_threadPool->fetchResultByTaskID(task_id, tmp);
-    if(flag == false) {
-        obj.status = -1;
-        Log::Error("fetchQualityRes ## fetch task id %s result Failed !", task_id.c_str());
-    } else {
+    int flag = p_threadPool->fetchResultByTaskID(task_id, tmp);
+    if(flag == 0) {
+        obj.status = 0;
+        Log::Info("fetchQualityRes ## fetch task id %s Running !", task_id.c_str());
+    } else if(flag == 1){
         Log::Info("fetchQualityRes ## fetch task id %s Result Successful !", task_id.c_str());
         QualityResMap* t = (QualityResMap*)tmp.output;
         if(t != NULL) {
-            obj.status = t->status;
+            //obj.status = t->status;
+            obj.status = 100;
             for(auto it=t->res.begin(); it!=t->res.end(); it++) {
                 obj.imgsquality[it->first] = it->second;
             }
@@ -154,11 +155,9 @@ QualityInfo ImageQuality::fetchQualityRes(const string &inputArgs, const Ice::Cu
         log_OutputResult(obj);
         delete (QualityInputStruct*)(tmp.input);
         delete (QualityResMap*)(tmp.output);
-//        QualityTaskStaticResult res;
-//        flag = packTaskStaticStatus(res, task_id, tmp);
-//        if(flag == true) {
-//            m_finishMap[task_id] = res;
-//        }
+    } else if(flag == -1) {
+        obj.status = -1;
+        Log::Error("fetchQualityRes ## fetch task id %s result Failed !", task_id.c_str());
     }
     return obj;
 }

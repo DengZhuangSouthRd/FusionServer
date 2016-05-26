@@ -353,11 +353,11 @@ FusionInf ImageFusion::fetchFuseRes(const DirArgs& mapArg, const Ice::Current&) 
     }
 
     TaskPackStruct tmp;
-    bool flag = p_threadPool->fetchResultByTaskID(task_id, tmp);
-    if(flag == false) {
+    int flag = p_threadPool->fetchResultByTaskID(task_id, tmp);
+    if(flag == -1) {
         obj.status = -1;
         Log::Error("fetchFuseRes ## fetch task id %s result Failed !", task_id.c_str());
-    } else {
+    } else if(flag == 1){
         deepCopyTask2RpcResult(*(FusionStruct*)(tmp.output), obj);
         log_OutputResult(obj);
         FusionTaskStaticResult res;
@@ -367,6 +367,9 @@ FusionInf ImageFusion::fetchFuseRes(const DirArgs& mapArg, const Ice::Current&) 
         if(flag == true) {
             m_finishMap[task_id] = res;
         }
+    } else if(flag == 0) {
+        obj.status = 0;
+        Log::Info("fetchFuseRes ## fetch task id %s Running !", task_id.c_str());
     }
     return obj;
 }

@@ -68,10 +68,10 @@ void quality_calculate_part1(QualityResMap*p_resMap, vector<string> inputPathVec
     vector<double> avgVec;
     avgVec.resize(5);
 
-    flag = mainRadiationUniform(inputPathVec[2], logfilepath, qualityRes);
+    flag = mainSignaltoNoiseRatio(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["RadiationUniform_1_0"].assign(qualityRes.begin(), qualityRes.end());
-    avgVec[4] = qualityRes[0];
+    p_resMap->res["SignaltoNoiseRatio_1_0"].assign(qualityRes.begin(), qualityRes.end());
+    avgVec[0] = qualityRes[0];
 
     flag = mainClarity(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
@@ -88,10 +88,10 @@ void quality_calculate_part1(QualityResMap*p_resMap, vector<string> inputPathVec
     p_resMap->res["Entropy_1_0"].assign(qualityRes.begin(), qualityRes.end());
     avgVec[3] = qualityRes[0];
 
-    flag = mainSignaltoNoiseRatio(inputPathVec[2], logfilepath, qualityRes);
+    flag = mainRadiationUniform(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["SignaltoNoiseRatio_1_0"].assign(qualityRes.begin(), qualityRes.end());
-    avgVec[0] = qualityRes[0];
+    p_resMap->res["RadiationUniform_1_0"].assign(qualityRes.begin(), qualityRes.end());
+    avgVec[4] = qualityRes[0];
 
     double total_score = mainComprehensiveEvaluate(avgVec);
     p_resMap->status = (int)(total_score+0.5);
@@ -148,7 +148,6 @@ void* qualityInterface(void *args) {
     vector<int> bandlist;
 
     combine_InputArgs(tmp, inputPathVec, bandlist);
-    delete tmp;
 
     QualityResMap* p_resMap = new(std::nothrow) QualityResMap;
     if(p_resMap == NULL) {

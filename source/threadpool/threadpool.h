@@ -55,7 +55,7 @@ public:
     int runningNumbers();
     int getPoolCapacity();
     int add_task(Task* task, const string& task_id);
-    bool fetchResultByTaskID(const string task_id, TaskPackStruct& res);
+    int fetchResultByTaskID(const string task_id, TaskPackStruct& res);
 
     void* execute_task(pthread_t thread_id);
 

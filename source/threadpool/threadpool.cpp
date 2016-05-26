@@ -156,7 +156,7 @@ int ThreadPool::add_task(Task* task, const string &task_id) {
     return 0;
 }
 
-bool ThreadPool::fetchResultByTaskID(const string task_id, TaskPackStruct& res) {
+int ThreadPool::fetchResultByTaskID(const string task_id, TaskPackStruct& res) {
     // first step find in m_finishMap, if not in this Map
     // erase the finishMap[key] from the Map
     // second step find in m_taskMap, search it process status
@@ -169,13 +169,13 @@ bool ThreadPool::fetchResultByTaskID(const string task_id, TaskPackStruct& res) 
                 m_finishMap.erase(task_id);
         m_finishMap_mutex.unlock();
 
-        return true;
+        return 1;
     } else if(m_taskMap.count(task_id) != 0) {
         Log::Info("Fetch task id %s not finished !", task_id.c_str());
-        return false;
+        return 0; // running
     } else {
         Log::Error("Fetch task_id %s have not been push to this pool !", task_id.c_str());
-        return false;
+        return -1; // not in
     }
     return false;
 }

@@ -62,14 +62,14 @@ int32_t SpectralAngleMatrix(char* filepath2,char* filepath3,char* logfilepath, v
 
     for(n=0;n<bandnum3;n++) {
         pband=poDataset2->GetRasterBand(bandlist[n]);
-        pband->RasterIO(GF_Read,0,0,width2,height2,banddata2,width2,height2,GDT_CFloat32,0,0);
+        pband->RasterIO(GF_Read,0,0,width2,height2,banddata2,width2,height2,GDT_Float32,0,0);
         GDALClose(pband);
         pband=NULL;
 
         obj.Interpolation(banddata2,height2, width2, 1, new_data, height3, width3, m_interalg[interkind]);
 
         pband=poDataset3->GetRasterBand(n+1);
-        pband->RasterIO(GF_Read,0,0,width3,height3,banddata3,width3,height3,GDT_UInt16,0,0);
+        pband->RasterIO(GF_Read,0,0,width3,height3,banddata3,width3,height3,GDT_Float32,0,0);
         GDALClose(pband);
         pband=NULL;
 

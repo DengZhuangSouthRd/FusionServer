@@ -81,7 +81,7 @@ QualityInfo ImageQuality::qualitySyn(const QualityInputStruct &inputArgs, const 
     for(map<string, vector<double> >::iterator it=tmp->res.begin(); it!=tmp->res.end(); it++) {
         quaRes.imgsquality[it->first] = it->second;
     }
-    fillFinishTaskMap(task_id, inputArgs, quaRes);
+    //fillFinishTaskMap(task_id, inputArgs, quaRes);
     return quaRes;
 }
 
@@ -136,13 +136,14 @@ QualityInfo ImageQuality::fetchQualityRes(const string &inputArgs, const Ice::Cu
     if(m_finishMap.count(task_id) != 0) {
         return m_finishMap[task_id].output;
     }
-
+    Log::Info("fetchQualityRes ## inputArgs %s", task_id.c_str());
     TaskPackStruct tmp;
     bool flag = p_threadPool->fetchResultByTaskID(task_id, tmp);
     if(flag == false) {
         obj.status = -1;
         Log::Error("fetchQualityRes ## fetch task id %s result Failed !", task_id.c_str());
     } else {
+        Log::Info("fetchQualityRes ## fetch task id %s Result Successful !", task_id.c_str());
         QualityResMap* t = (QualityResMap*)tmp.output;
         if(t != NULL) {
             obj.status = t->status;
@@ -151,11 +152,13 @@ QualityInfo ImageQuality::fetchQualityRes(const string &inputArgs, const Ice::Cu
             }
         }
         log_OutputResult(obj);
-        QualityTaskStaticResult res;
-        flag = packTaskStaticStatus(res, task_id, tmp);
-        if(flag == true) {
-            m_finishMap[task_id] = res;
-        }
+        delete (QualityInputStruct*)(tmp.input);
+        delete (QualityResMap*)(tmp.output);
+//        QualityTaskStaticResult res;
+//        flag = packTaskStaticStatus(res, task_id, tmp);
+//        if(flag == true) {
+//            m_finishMap[task_id] = res;
+//        }
     }
     return obj;
 }
@@ -173,12 +176,7 @@ void ImageQuality::fillFinishTaskMap(const string &task_id, const QualityInputSt
 
 bool ImageQuality::packTaskStaticStatus(QualityTaskStaticResult &res, const string task_id, TaskPackStruct &tmp) {
     QualityResMap* out_res = (QualityResMap*)tmp.output;
-    if(out_res->status <= 0) {
-        return false;
-    }
-
     res.task_id.assign(task_id);
-
     res.output.status = out_res->status;
     for(auto it=out_res->res.begin(); it!=out_res->res.end(); it++) {
         res.output.imgsquality[it->first] = it->second;

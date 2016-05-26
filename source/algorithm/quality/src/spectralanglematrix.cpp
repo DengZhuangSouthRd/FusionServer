@@ -32,6 +32,10 @@ int32_t SpectralAngleMatrix(char* filepath2,char* filepath3,char* logfilepath, v
         poDataset2=NULL;
         GDALClose(poDataset3);
         poDataset3=NULL;
+        cerr << "bandlist.size() " << bandlist.size() << endl;
+        cerr << "bandnum3 " << bandnum3 << endl;
+        cerr << "width2 " << width2 << " width3 " << width3 << endl;
+        cerr << "height2 " << height2 << " height3 " << height3 << endl;
         WriteMsg(logfilepath, -1, "bandlist.size() != bandnum3 || width2 != width3 || height2 != height3");
         return -1;
     }

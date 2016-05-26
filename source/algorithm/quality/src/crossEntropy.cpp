@@ -35,9 +35,6 @@ int32_t CrossEntropy(char* filepath1,char* filepath2,char* logfilepath, vector<d
 	banddata1=(uint16_t *)CPLMalloc(sizeof(uint16_t)*width*height);
 	banddata2=(uint16_t *)CPLMalloc(sizeof(uint16_t)*width*height);
 
-	time_t starttime=0,endtime=0;
-	time(&starttime);
-
 	pband=poDataset1->GetRasterBand(1);
 	pband->RasterIO(GF_Read,0,0,width,height,banddata1,width,height,GDT_UInt16,0,0);
 	GDALClose(pband);
@@ -112,7 +109,6 @@ int32_t CrossEntropy(char* filepath1,char* filepath2,char* logfilepath, vector<d
 		temp = (temp>99) ? 99:temp;
 		WriteMsg(logfilepath,temp,"CrossEntropy algorithm is executing!");
 	}
-	time(&endtime);
 
 	CPLFree(banddata1);
 	banddata1=NULL;

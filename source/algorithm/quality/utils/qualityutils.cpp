@@ -64,6 +64,7 @@ void* qualityInterface(void *args) {
         bandlist.push_back(stoi(strlist.substr(0, pos)));
         strlist = strlist.substr(pos+1);
     }
+    bandlist.push_back(stoi(strlist));
 
     QualityResMap* p_resMap = new(std::nothrow) QualityResMap;
     if(p_resMap == NULL) {
@@ -78,62 +79,68 @@ void* qualityInterface(void *args) {
 
     flag = mainRadiationUniform(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["RadiationUniform_1_0"] = qualityRes;
+    p_resMap->res["RadiationUniform_1_0"].assign(qualityRes.begin(), qualityRes.end());
     avgVec[4] = qualityRes[0];
 
     flag = mainClarity(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["Clarity_1_0"] = qualityRes;
+    p_resMap->res["Clarity_1_0"].assign(qualityRes.begin(), qualityRes.end());
     avgVec[1] = qualityRes[0];
 
     flag = mainContrastRatio(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["ContrastRatio_1_0"] = qualityRes;
+    p_resMap->res["ContrastRatio_1_0"].assign(qualityRes.begin(), qualityRes.end());
     avgVec[2] = qualityRes[0];
 
     flag = mainEntropy(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["Entropy_1_0"] = qualityRes;
+    p_resMap->res["Entropy_1_0"].assign(qualityRes.begin(), qualityRes.end());
     avgVec[3] = qualityRes[0];
 
     flag = mainSignaltoNoiseRatio(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["SignaltoNoiseRatio_1_0"] = qualityRes;
+    p_resMap->res["SignaltoNoiseRatio_1_0"].assign(qualityRes.begin(), qualityRes.end());
     avgVec[0] = qualityRes[0];
 
     flag = mainMean(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["Mean_1_0"] = qualityRes;
+    p_resMap->res["Mean_1_0"].assign(qualityRes.begin(), qualityRes.end());
 
     flag = mainStriperesidual(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["Striperesidual_1_0"] = qualityRes;
+    p_resMap->res["Striperesidual_1_0"].assign(qualityRes.begin(), qualityRes.end());
 
     flag = mainDynamicRange(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["DynamicRange_1_0"] = qualityRes;
+    p_resMap->res["DynamicRange_1_0"].assign(qualityRes.begin(), qualityRes.end());
 
     flag = mainVariance(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["Variance_1_0"] = qualityRes;
+    p_resMap->res["Variance_1_0"].assign(qualityRes.begin(), qualityRes.end());
 
     flag = mainCrossEntropy(inputPathVec[0], inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["CrossEntropy_1_0"] = qualityRes;
+    p_resMap->res["CrossEntropy_1_0"].assign(qualityRes.begin(), qualityRes.end());
 
     flag = mainMutualInformation(inputPathVec[0], inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["MutualInformation_1_0"] = qualityRes;
+    p_resMap->res["MutualInformation_1_0"].assign(qualityRes.begin(), qualityRes.end());
 
     flag = mainSpectralAngleMatrix(inputPathVec[1], inputPathVec[2], logfilepath, bandlist, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["SpectralAngleMatrix_1_0"] = qualityRes;
+    p_resMap->res["SpectralAngleMatrix_1_0"].assign(qualityRes.begin(), qualityRes.end());
 
     flag = mainStructureSimilarity(inputPathVec[0], inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["StructureSimilarity_1_0"] = qualityRes;
+    p_resMap->res["StructureSimilarity_1_0"].assign(qualityRes.begin(), qualityRes.end());
+
+    for(int i=0;i<avgVec.size();i++) {
+        cout << avgVec[i] << " $$ ";
+    }
+    cout << endl;
 
     double total_score = mainComprehensiveEvaluate(avgVec);
     p_resMap->status = (int)(total_score+0.5);
+    Log::Info("Comprehensive Evaluate Scoree is %lf", total_score);
     return p_resMap;
 }

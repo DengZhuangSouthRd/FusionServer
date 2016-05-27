@@ -17,8 +17,7 @@
     <list default="true" id="5e31ccc9-ad64-4f0e-bad5-b95dae613dcf" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/comprehensiveEvaluate.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/comprehensiveEvaluate.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/radiationUniform.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/radiationUniform.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/quality/src/dynamicrange.cpp" afterPath="$PROJECT_DIR$/source/algorithm/quality/src/dynamicrange.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/server.cpp" afterPath="$PROJECT_DIR$/source/server.cpp" />
     </list>
     <ignored path="untitled.iws" />
@@ -49,7 +48,7 @@
       <file leaf-file-name="qualityutils.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
+            <state relative-caret-position="1350">
               <caret line="90" column="23" selection-start-line="90" selection-start-column="23" selection-end-line="90" selection-end-column="23" />
               <folding />
             </state>
@@ -59,14 +58,14 @@
       <file leaf-file-name="radiationUniform.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/radiationUniform.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
+            <state relative-caret-position="705">
               <caret line="47" column="59" selection-start-line="47" selection-start-column="59" selection-end-line="47" selection-end-column="59" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="comprehensiveEvaluate.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="comprehensiveEvaluate.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/comprehensiveEvaluate.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
@@ -76,20 +75,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mean.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/mean.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="signaltoNoiseRatio.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="signaltoNoiseRatio.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/signaltoNoiseRatio.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2070">
+            <state relative-caret-position="695">
               <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
               <folding />
             </state>
@@ -160,11 +149,11 @@
         <option value="$PROJECT_DIR$/source/threadpool/threadpool.cpp" />
         <option value="$PROJECT_DIR$/source/imagefusion.cpp" />
         <option value="$PROJECT_DIR$/source/imagequality.cpp" />
-        <option value="$PROJECT_DIR$/source/server.cpp" />
         <option value="$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp" />
         <option value="$PROJECT_DIR$/source/algorithm/quality/src/mean.cpp" />
         <option value="$PROJECT_DIR$/source/algorithm/quality/src/radiationUniform.cpp" />
         <option value="$PROJECT_DIR$/source/algorithm/quality/src/comprehensiveEvaluate.cpp" />
+        <option value="$PROJECT_DIR$/source/server.cpp" />
       </list>
     </option>
   </component>
@@ -614,19 +603,9 @@
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/source/algorithm/quality/src/mean.cpp</url>
-          <line>30</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp</url>
           <line>102</line>
           <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/source/algorithm/quality/src/mean.cpp</url>
-          <line>43</line>
-          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="22" />
@@ -929,13 +908,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/server.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="62" column="2" selection-start-line="62" selection-start-column="2" selection-end-line="62" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/imagefusion.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="389">
@@ -958,25 +930,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/signaltoNoiseRatio.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2070">
-          <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/mean.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/algorithm/quality/utils/qualityutils.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
+        <state relative-caret-position="1350">
           <caret line="90" column="23" selection-start-line="90" selection-start-column="23" selection-end-line="90" selection-end-column="23" />
           <folding />
         </state>
@@ -984,7 +940,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/radiationUniform.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
+        <state relative-caret-position="705">
           <caret line="47" column="59" selection-start-line="47" selection-start-column="59" selection-end-line="47" selection-end-column="59" />
           <folding />
         </state>
@@ -994,6 +950,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/server.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/mean.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/quality/src/signaltoNoiseRatio.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="695">
+          <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
           <folding />
         </state>
       </provider>

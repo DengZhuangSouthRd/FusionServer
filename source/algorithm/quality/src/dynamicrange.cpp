@@ -26,7 +26,7 @@ int32_t DynamicRange(char* filepath1,char* logfilepath, vector<double>& dynamicr
         int32_t maxvalue = 0;
         int32_t minvalue = 65536;
         int32_t tempnum;
-        uint64_t count;
+        uint64_t count = 0;
         for (i = 0; i < height; i++) {
             for (j = 0; j < width; j++) {
                 tempnum = banddata[i * width + j];

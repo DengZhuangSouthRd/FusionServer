@@ -13,7 +13,7 @@ double mainComprehensiveEvaluate(vector<double> resultvalue) {
             {85,75,65},//
             {4,2,1},//
             {3,2.5,2.0},//
-            {60,25,10}//
+            {90,75,40}//
     };
     double weight[5] = {1.2, 1.2, 1.0, 0.8, 0.8};
     double deduct[4] = {0, 1.0, 12.0, 42.0};

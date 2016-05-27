@@ -24,7 +24,7 @@ void serializeImageQualityOnTime(int seconds) {
 }
 
 void calculateAvg(vector<double>& result) {
-    double total = std::accumulate(result.begin(), result.end(), 0);
+    double total = std::accumulate(result.begin(), result.end(), 0.0);
     result.insert(result.begin(), total*1.0/result.size());
 }
 

@@ -45,7 +45,7 @@ int32_t RadiationUniform(char* filepath1, char* logfilepath, vector<double>& str
             sum = sum + (colmeans[j]-imgmean)*(colmeans[j]-imgmean)/width;
         }
 
-        striperesult.push_back(100.0*sqrt(sum)/imgmean);
+        striperesult.push_back(100.0*(1-sqrt(sum)/imgmean));
 
         CPLFree(colmeans);
         colmeans=NULL;

@@ -61,15 +61,15 @@ void Server::close() {
 }
 
 int main(int argc,char* argv[]) {
-#ifdef REALRUN
+#if defined(__clang__)
+    string configPath = "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/FusionServer/conf/configure.json";
+#elif defined(__GNUC__) || defined(__GNUG__)
     if(argc != 2) {
         cerr << "Argc and Argv Format Error !" << endl;
         cerr << "Please Enter the configure.json file path !" << endl;
         exit(1);
     }
     string configPath(argv[1]);
-#else
-    string configPath = "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/FusionServer/conf/configure.json";
 #endif
 
     try {

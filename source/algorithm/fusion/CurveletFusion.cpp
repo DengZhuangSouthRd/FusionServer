@@ -695,7 +695,6 @@ bool CurveletFusion::MeanStd_Curvelet_GramSchmidt_Fusion(const char* Input_PAN_F
     for(i=0; i<PAN_Height; i++)
         for(j=0; j<PAN_Width; j++){
             PanMat(i,j)= cpx(DATA2D(PANData, i, j, PAN_Width),0);
-            //IMat(i,j) = cpx(DATA2D(I->imgdata, i, j, PANData->width),0);
         }
     //释放内存
 
@@ -765,6 +764,7 @@ bool CurveletFusion::MeanStd_Curvelet_GramSchmidt_Fusion(const char* Input_PAN_F
 
     //释放内存
     PANInf->ClearImageData();PANData = NULL;
+    delete PANInf;	PANInf = NULL;
 
     //GDAL写文件
     Log(LogName,"01|04");//写入log日志
@@ -773,9 +773,8 @@ bool CurveletFusion::MeanStd_Curvelet_GramSchmidt_Fusion(const char* Input_PAN_F
     {
         cerr<<"Write MS Image Inf Error."<<endl;
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
-        delete PANInf;
-        delete MSInf;
-        delete New_MSData;
+        delete MSInf; MSInf = NULL;
+        delete[] New_MSData;
         return false;
     }
 
@@ -783,15 +782,15 @@ bool CurveletFusion::MeanStd_Curvelet_GramSchmidt_Fusion(const char* Input_PAN_F
     if(MSInf->WriteImageFromBuff(Output_MS_FileName,0,0,PAN_Width,PAN_Height)!=0){
         cerr<<"Write MS Image Data Error."<<endl;
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
-        delete PANInf;
-        delete MSInf;
-        delete New_MSData;
+        MSInf->SetImgData(NULL);
+        delete MSInf; MSInf = NULL;
+        delete[] New_MSData ;New_MSData = NULL;
         return false;
     }
     //释放内存
+    MSInf->SetImgData(NULL);
+    delete MSInf; MSInf = NULL;
     delete[] New_MSData ;New_MSData = NULL;
-    delete MSInf;	MSInf = NULL;
-    delete PANInf;	PANInf = NULL;
 
     Log(LogName,"01|05");//写入log日志
 

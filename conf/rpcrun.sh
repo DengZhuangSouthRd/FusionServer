@@ -10,5 +10,7 @@ slice2cpp qualityjudgeRpc.ice
 sed -i '/<qualityjudgeRpc.h>/s/<qualityjudgeRpc.h>/"qualityjudgeRpc.h"/g' qualityjudgeRpc.cpp
 
 cd ../../../
-cmake .
+mkdir build
+cd build
+cmake ../
 make

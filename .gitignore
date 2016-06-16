@@ -1,5 +1,4 @@
 data/*
-data/*
 !data/log/loginfo.log
 !data/README.md
 .idea/

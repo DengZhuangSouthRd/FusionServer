@@ -109,7 +109,6 @@ bool GramSchmidtFusion::GramSchmidt_Fusion(const char* Input_PAN_FileName, const
         cerr<<"Read PAN Image Data Error."<<endl;
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
         delete PANInf;
-        delete MSInf;
         delete New_MSData;
         return false;
     }
@@ -137,7 +136,6 @@ bool GramSchmidtFusion::GramSchmidt_Fusion(const char* Input_PAN_FileName, const
         cerr<<"RGramSchmidt Error."<<endl;
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
         delete PANInf;
-        delete MSInf;
         delete New_MSData;
         return false;
     }
@@ -196,14 +194,13 @@ bool GramSchmidtFusion::GramSchmidt_Fusion(const char* Input_PAN_FileName, const
 
     //释放内存
     PANInf->ClearImageData();PANData = NULL;
-
+    delete PANInf; PANInf = NULL;
     //GDAL写文件
     Log(LogName,"01|04");//写入log日志
 
     if (MSInf->WriteImageInf(Output_MS_FileName) != 0) {
         cerr<<"Write MS Image Inf Error."<<endl;
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
-        delete PANInf;
         delete MSInf;
         delete New_MSData;
         return false;
@@ -213,16 +210,14 @@ bool GramSchmidtFusion::GramSchmidt_Fusion(const char* Input_PAN_FileName, const
     if(MSInf->WriteImageFromBuff(Output_MS_FileName,0,0,PAN_Width,PAN_Height)!=0) {
         cerr<<"Write MS Image Data Error."<<endl;
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
-        delete PANInf;
         delete MSInf;
         delete New_MSData;
         return false;
     }
-
+    MSInf->SetImgData(NULL);
     //释放内存
+    delete MSInf; MSInf = NULL;
     delete[] New_MSData; New_MSData = NULL;
-    delete MSInf;	MSInf = NULL;
-    delete PANInf;	PANInf = NULL;
 
     Log(LogName,"01|05");//写入log日志
     return true;

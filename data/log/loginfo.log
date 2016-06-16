@@ -1838,3 +1838,14 @@
 [22:49:25 06/05/16] INFO  - RetrieveServer ## status 0
 [14:52:35 06/15/16] INFO  - LOG INITIALISED
 [14:52:35 06/15/16] INFO  - LOG FINALISED
+[14:25:55 06/16/16] INFO  - LOG INITIALISED
+[14:26:06 06/16/16] INFO  - algname=ramSchmidt_1_0#band=1|2|3#id=10000000sdssdkjbfdkjsbd#intername=Nearest_1_0#msurl=/Users/liuguiyang/Documents/CodeProj/ConsoleProj/GF1_2m_and_GF1_8m/GF1_MSS_8m_2.tif#outurl=/opt/tomcat/webapps/targetreg/userupload/test/1.jpg#panurl=/Users/liuguiyang/Documents/CodeProj/ConsoleProj/GF1_2m_and_GF1_8m/GF1_MSS_8m_1.tif#
+[14:26:06 06/16/16] ERROR - fuseSyn ## Image Fusion Parameters Error !
+[14:30:14 06/16/16] INFO  - LOG INITIALISED
+[14:30:18 06/16/16] INFO  - algname=ramSchmidt_1_0#band=1|2|3#id=10000000sdssdkjbfdkjsbd#intername=Nearest_1_0#msurl=/Users/liuguiyang/Documents/CodeProj/ConsoleProj/GF1_2m_and_GF1_8m/GF1_MSS_8m_2.tif#outurl=/Users/liuguiyang/Documents/CodeProj/ConsoleProj/GF1_2m_and_GF1_8m/GF1_MSS_8m_2xxxxxxxx.tif#panurl=/Users/liuguiyang/Documents/CodeProj/ConsoleProj/GF1_2m_and_GF1_8m/GF1_MSS_8m_1.tif#
+[14:30:18 06/16/16] ERROR - fuseSyn ## Image Fusion Parameters Error !
+[14:31:16 06/16/16] INFO  - LOG INITIALISED
+[14:31:27 06/16/16] INFO  - algname=GramSchmidt_1_0#band=1|2|3#id=10000000sdssdkjbfdkjsbd#intername=Nearest_1_0#msurl=/Users/liuguiyang/Documents/CodeProj/ConsoleProj/GF1_2m_and_GF1_8m/GF1_MSS_8m_2.tif#outurl=/Users/liuguiyang/Documents/CodeProj/ConsoleProj/GF1_2m_and_GF1_8m/GF1_MSS_8m_2xxxxxxxx.tif#panurl=/Users/liuguiyang/Documents/CodeProj/ConsoleProj/GF1_2m_and_GF1_8m/GF1_MSS_8m_1.tif#
+[14:43:16 06/16/16] INFO  - LOG INITIALISED
+[14:43:23 06/16/16] INFO  - algname=GramSchmidt_1_0#band=1|2|3#id=10000000sdssdkjbfdkjsbd#intername=Nearest_1_0#msurl=/Users/liuguiyang/Documents/CodeProj/ConsoleProj/GF1_2m_and_GF1_8m/GF1_MSS_8m_2.tif#outurl=/Users/liuguiyang/Documents/CodeProj/ConsoleProj/GF1_2m_and_GF1_8m/GF1_MSS_8m_2xxxxxxxx.tif#panurl=/Users/liuguiyang/Documents/CodeProj/ConsoleProj/GF1_2m_and_GF1_8m/GF1_MSS_8m_1.tif#
+[14:43:23 06/16/16] INFO  - brcoorvalidLatitude = 39.951334 brcoorvalidLongitude = 116.449971 brcoorwholeLatitude = 39.951334 brcoorwholeLongitude = 116.449971 ulcoorvalidLatitude = 4929693641667828960984982906829789417192708448252252011002430400953029760299760193910289836270971052780594293343072352213278598931046828997186654392215994991332574148331839501496558992017382804282692075520.000000 ulcoorvalidLongitude = 904044270770531669167142863115259553840468734627759790947111871829329308431297411472970753575

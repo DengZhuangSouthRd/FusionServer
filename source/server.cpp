@@ -60,8 +60,6 @@ void Server::close() {
     }
 }
 
-#define REALRUN
-
 int main(int argc,char* argv[]) {
 #ifdef REALRUN
     if(argc != 2) {
@@ -71,7 +69,7 @@ int main(int argc,char* argv[]) {
     }
     string configPath(argv[1]);
 #else
-    string configPath = "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/AlgorithmServer/conf/configure.json";
+    string configPath = "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/FusionServer/conf/configure.json";
 #endif
 
     try {

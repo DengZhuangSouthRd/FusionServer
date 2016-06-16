@@ -23,6 +23,7 @@ ImageFusion::ImageFusion() {
     m_interalg["Linear_1_0"]=2;
     m_interalg["CubicConv_1_0"]=3;
 
+#ifdef  SERIALIZE
     if(isExistsFile(m_serializePath) == false) {
         cerr << "Serialized File Does Not Exists !" << endl;
         Log::Error("Serialized File Does Not Exists !");
@@ -33,8 +34,6 @@ ImageFusion::ImageFusion() {
         Log::Error("Serialized Bak File Does Not Exists !");
         throw runtime_error("Serialized Bak File Does Not Exists !");
     }
-
-#ifdef  SERIALIZE
     getSerializeTaskResults(m_serializePath);
     g_ImgFusion = this;
     serializeImageFusionOnTime(atoi(g_ConfMap["SERIALIZETIME"].c_str()));

@@ -12,7 +12,7 @@ void ThreadPool::revokeSingleInstance() {
     p_ThreadPool = NULL;
 }
 
-ThreadPool::ThreadPool() : m_pool_size(DEFAULT_POOL_SIZE), m_task_size(DEFAULT_POOL_SIZE*1.5) {
+ThreadPool::ThreadPool() : m_pool_size(DEFAULT_POOL_SIZE), m_task_size(DEFAULT_POOL_SIZE*2) {
 
     m_threads.clear();
     m_run_threads.clear();
@@ -34,7 +34,7 @@ ThreadPool::~ThreadPool() {
 
 void ThreadPool::setPoolSize(const int pool_size) {
     m_pool_size = pool_size;
-    m_task_size = m_pool_size * 1.5;
+    m_task_size = m_pool_size * 2;
 }
 
 // We can't pass a member function to pthread_create.
@@ -71,7 +71,6 @@ int ThreadPool::destroy_threadpool() {
     m_task_mutex.lock();
     m_pool_state = STOPPED;
     m_task_mutex.unlock();
-    cout << "Broadcasting STOP signal to all threads..." << endl;
     Log::Info("Broadcasting STOP signal to all threads...");
     m_task_cond_var.broadcast(); // notify all threads we are shttung down
 
@@ -82,14 +81,6 @@ int ThreadPool::destroy_threadpool() {
     }
 
     return 0;
-}
-
-int ThreadPool::runningNumbers() {
-    return m_tasks.size();
-}
-
-int ThreadPool::getPoolCapacity() {
-    return m_pool_size;
 }
 
 void* ThreadPool::execute_task(pthread_t thread_id) {
@@ -107,11 +98,11 @@ void* ThreadPool::execute_task(pthread_t thread_id) {
             pthread_exit(NULL);
         }
 
-        cout << "Residue the task numebr " << m_tasks.size() << endl;
-        Log::Info("Residue the task numebr %d !", m_tasks.size());
-
         task = m_tasks.front();
         m_tasks.pop_front();
+        string tmp_id = task->getTaskID();
+        m_taskMap[tmp_id] = task;
+
         if(m_run_threads.count(thread_id) == 0) {
             m_run_threads.insert(thread_id);
         } else {
@@ -120,23 +111,25 @@ void* ThreadPool::execute_task(pthread_t thread_id) {
         }
         m_task_mutex.unlock();
 
+        Log::Info("Residue the task numebr %d !", m_tasks.size());
+
         task->run();
-        string tmp_id = task->getTaskID();
         TaskPackStruct tmp_SaveTask;
         task->packTaskStaticStatus(tmp_SaveTask);
+
+
         if(TASKCOMPELETE == task->getTaskStatus()) {
             m_finishMap_mutex.lock();
                     m_finishMap[tmp_id] = tmp_SaveTask;
-                    Log::Info("Finish Task size is %d !", m_finishMap.size());
             m_finishMap_mutex.unlock();
+            Log::Info("Task ID %s Finished !", tmp_id.c_str());
         } else {
             Log::Error("TaskID %s RunStatus Failed !", tmp_id.c_str());
         }
+
         m_taskMap_mutex.lock();
             delete task;
             m_taskMap[tmp_id] = NULL;
-            m_taskMap.erase(tmp_id);
-            Log::Info("TaskID %s have removed from TaskMap !", tmp_id.c_str());
         m_taskMap_mutex.unlock();
 
         m_run_threads.erase(thread_id);
@@ -149,7 +142,6 @@ int ThreadPool::add_task(Task* task, const string &task_id) {
     task->setTaskID(task_id);
     m_tasks.push_back(task);
     Log::Info("Now the task size is %d !", m_tasks.size());
-    m_taskMap[task_id] = task;
     // wake up one thread that is waiting for a task to be available
     m_task_cond_var.signal();
     m_task_mutex.unlock();
@@ -157,10 +149,6 @@ int ThreadPool::add_task(Task* task, const string &task_id) {
 }
 
 int ThreadPool::fetchResultByTaskID(const string task_id, TaskPackStruct& res) {
-    // first step find in m_finishMap, if not in this Map
-    // erase the finishMap[key] from the Map
-    // second step find in m_taskMap, search it process status
-
     if(m_finishMap.count(task_id) != 0) {
         res.input = m_finishMap.at(task_id).input;
         res.output = m_finishMap.at(task_id).output;
@@ -170,8 +158,8 @@ int ThreadPool::fetchResultByTaskID(const string task_id, TaskPackStruct& res) {
         m_finishMap_mutex.unlock();
 
         return 1;
-    } else if(m_taskMap.count(task_id) != 0) {
-        Log::Info("Fetch task id %s not finished !", task_id.c_str());
+    } else if(m_taskMap.count(task_id) != 0 && m_taskMap[task_id]) {
+        Log::Info("Fetch task id %s not finished, status is %d !", task_id.c_str(), m_taskMap[task_id]->getTaskStatus());
         return 0; // running
     } else {
         Log::Error("Fetch task_id %s have not been push to this pool !", task_id.c_str());

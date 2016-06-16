@@ -10,6 +10,7 @@ void* fusionInterface(void * args) {
     for(size_t i=0;i<param->band.size();++i)
         band[i] = param->band[i];
     pObj = fusion(param->panurl, param->msurl, param->outurl, param->logurl, param->idalg, band, param->idinter);
+    cout << "Fusion Interface finishd @@@@@@@@" << endl;
     return (void*)pObj;
 }
 

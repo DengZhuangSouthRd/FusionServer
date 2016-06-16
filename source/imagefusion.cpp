@@ -330,7 +330,7 @@ int ImageFusion::fuseAsyn(const DirArgs& mapArgs, const Ice::Current&) {
         delete task;
         return -1; // Means For Add Task Failed !
     }
-    return 30; // Means For Add Task Success !
+    return 120; // Means For Add Task Success !
 }
 
 string ImageFusion::askProcess(const DirArgs& mapArg, const Ice::Current&) {

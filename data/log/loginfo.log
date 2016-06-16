@@ -1873,3 +1873,8 @@
 [15:16:19 06/16/16] INFO  - LOG INITIALISED
 [15:16:24 06/16/16] INFO  - algname=Curvelet and GramSchmidt_1_0#band=1|2|3#id=10000000sdssdkjbfdkjsbd#intername=Nearest_1_0#msurl=/Users/liuguiyang/Documents/CodeProj/ConsoleProj/GF1_2m_and_GF1_8m/GF1_MSS_8m_2.tif#outurl=/Users/liuguiyang/Documents/CodeProj/ConsoleProj/GF1_2m_and_GF1_8m/GF1_MSS_8m_2xxxxxxxx.tif#panurl=/Users/liuguiyang/Documents/CodeProj/ConsoleProj/GF1_2m_and_GF1_8m/GF1_MSS_8m_1.tif#
 [15:16:40 06/16/16] INFO  - brcoorvalidLatitude = 39.951334 brcoorvalidLongitude = 116.449971 brcoorwholeLatitude = 39.951334 brcoorwholeLongitude = 116.449971 ulcoorvalidLatitude = -26815620778753358912469874918897509448769540414772363139465069168001095303399703756038980012288730781891040585953998137717538766848305922472516191034277888.000000 ulcoorvalidLongitude = 0.000000 ulcoorwholeLatitude = -27131426165714257552528626617231011085133630588451940798295279529821147652557332852353332194078989071452539846
+[17:07:03 06/16/16] INFO  - LOG INITIALISED
+[17:07:10 06/16/16] INFO  - algname=Curvelet and HCS_1_1#band=1|2|3#id=10000000sdssdkjbfdkjsbd#intername=Nearest_1_0#msurl=/Users/liuguiyang/Documents/CodeProj/ConsoleProj/GF1_2m_and_GF1_8m/GF1_MSS_8m_2.tif#outurl=/Users/liuguiyang/Documents/CodeProj/ConsoleProj/GF1_2m_and_GF1_8m/GF1_MSS_8m_2xxxxxxxx.tif#panurl=/Users/liuguiyang/Documents/CodeProj/ConsoleProj/GF1_2m_and_GF1_8m/GF1_MSS_8m_1.tif#
+[17:07:10 06/16/16] INFO  - Now the task size is 1 !
+[17:07:10 06/16/16] INFO  - Residue the task numebr 0 !
+[17:07:33 06/16/16] INFO  - Task ID 10000000sdssdkjbfdkjsbd Finished !

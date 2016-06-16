@@ -26,7 +26,7 @@
  * Who Malloc and New, who should pay attention to the memory management !
 */
 
-const int DEFAULT_POOL_SIZE = 5;
+const int DEFAULT_POOL_SIZE = 3;
 const int STARTED = 0;
 const int STOPPED = 1;
 
@@ -52,8 +52,6 @@ public:
     int initialize_threadpool();
     int destroy_threadpool();
 
-    int runningNumbers();
-    int getPoolCapacity();
     int add_task(Task* task, const string& task_id);
     int fetchResultByTaskID(const string task_id, TaskPackStruct& res);
 
@@ -66,15 +64,15 @@ private:
     ofstream *m_pOutLog;
 
     Mutex m_task_mutex;
-    Mutex m_finishMap_mutex;
     Mutex m_taskMap_mutex;
+    Mutex m_finishMap_mutex;
     CondVar m_task_cond_var;
 
     std::vector<pthread_t> m_threads;
     std::set<pthread_t> m_run_threads;
 
-    map<string, Task*> m_taskMap; // for <task_id, task*>
     map<string, TaskPackStruct> m_finishMap; // for <task_id, task_all_parameters>
     std::deque<Task*> m_tasks;
+    map<string, Task*> m_taskMap;
 };
 

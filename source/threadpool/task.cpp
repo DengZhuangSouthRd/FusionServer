@@ -13,6 +13,7 @@ Task::~Task() {
 void Task::run() {
     m_status = TASKRUNNING;
     m_result = (*m_fn_ptr)(m_arg);
+    cout << "In Task Run :: Status is Run Complete !!!!!!!!" << endl;
     m_status = TASKCOMPELETE;
 }
 

@@ -986,6 +986,8 @@ bool CurveletFusion::MeanStd_Curvelet_HCS_Fusion_New(const char* Input_PAN_FileN
     //IMat.~NumMat();
     delete[] IMat._data;IMat._data=NULL;//clear(IMat);
 
+    Log(LogName,"01|04");//写入log日志
+
     float pan_mean,pan_std,pan_entropy;
     float ms_mean,ms_std,ms_entropy;
     int localSize = 5;
@@ -1030,7 +1032,7 @@ bool CurveletFusion::MeanStd_Curvelet_HCS_Fusion_New(const char* Input_PAN_FileN
     HCS_Itrans(New_MSData, PAN_Height, PAN_Width, MS_Bandcount);
 
     //GDAL写文件
-    Log(LogName,"01|04");//写入log日志
+    Log(LogName,"01|05");//写入log日志
 
     //创建文件，写入头文件信息
     if (MSInf->WriteImageInf(Output_MS_FileName)!=0) {
@@ -1061,6 +1063,6 @@ bool CurveletFusion::MeanStd_Curvelet_HCS_Fusion_New(const char* Input_PAN_FileN
     delete MSInf;	MSInf = NULL;
     delete PANInf;	PANInf = NULL;
 
-    Log(LogName,"01|05");//写入log日志
+    Log(LogName,"01|06");//写入log日志
     return true;
 }

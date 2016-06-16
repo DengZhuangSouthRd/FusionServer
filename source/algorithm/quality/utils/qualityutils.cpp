@@ -70,27 +70,27 @@ void quality_calculate_part1(QualityResMap*p_resMap, vector<string> inputPathVec
 
     flag = mainSignaltoNoiseRatio(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["SignaltoNoiseRatio_1_0"].assign(qualityRes.begin(), qualityRes.end());
+    p_resMap->res["信噪比"].assign(qualityRes.begin(), qualityRes.end());
     avgVec[0] = qualityRes[0];
 
     flag = mainClarity(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["Clarity_1_0"].assign(qualityRes.begin(), qualityRes.end());
+    p_resMap->res["清晰度"].assign(qualityRes.begin(), qualityRes.end());
     avgVec[1] = qualityRes[0];
 
     flag = mainContrastRatio(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["ContrastRatio_1_0"].assign(qualityRes.begin(), qualityRes.end());
+    p_resMap->res["对比度"].assign(qualityRes.begin(), qualityRes.end());
     avgVec[2] = qualityRes[0];
 
     flag = mainEntropy(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["Entropy_1_0"].assign(qualityRes.begin(), qualityRes.end());
+    p_resMap->res["熵信息"].assign(qualityRes.begin(), qualityRes.end());
     avgVec[3] = qualityRes[0];
 
     flag = mainRadiationUniform(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["RadiationUniform_1_0"].assign(qualityRes.begin(), qualityRes.end());
+    p_resMap->res["均匀辐射"].assign(qualityRes.begin(), qualityRes.end());
     avgVec[4] = qualityRes[0];
 
     double total_score = mainComprehensiveEvaluate(avgVec);
@@ -102,41 +102,41 @@ void quality_calculate_part2(QualityResMap*p_resMap, vector<string> inputPathVec
     int flag;
     flag = mainMean(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["Mean_1_0"].assign(qualityRes.begin(), qualityRes.end());
+    p_resMap->res["均值"].assign(qualityRes.begin(), qualityRes.end());
 
     flag = mainStriperesidual(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["Striperesidual_1_0"].assign(qualityRes.begin(), qualityRes.end());
+    p_resMap->res["条纹残余度"].assign(qualityRes.begin(), qualityRes.end());
 
     flag = mainDynamicRange(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["DynamicRange_1_0"].assign(qualityRes.begin(), qualityRes.end());
+    p_resMap->res["动态变化范围"].assign(qualityRes.begin(), qualityRes.end());
 
     flag = mainVariance(inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["Variance_1_0"].assign(qualityRes.begin(), qualityRes.end());
+    p_resMap->res["方差"].assign(qualityRes.begin(), qualityRes.end());
 }
 
 void quality_calculate_part3(QualityResMap*p_resMap, vector<string> inputPathVec, char* logfilepath, vector<double> qualityRes) {
     int flag;
     flag = mainCrossEntropy(inputPathVec[0], inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["CrossEntropy_1_0"].assign(qualityRes.begin(), qualityRes.end());
+    p_resMap->res["交叉熵"].assign(qualityRes.begin(), qualityRes.end());
 
     flag = mainMutualInformation(inputPathVec[0], inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["MutualInformation_1_0"].assign(qualityRes.begin(), qualityRes.end());
+    p_resMap->res["互信息"].assign(qualityRes.begin(), qualityRes.end());
 
     flag = mainStructureSimilarity(inputPathVec[0], inputPathVec[2], logfilepath, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["StructureSimilarity_1_0"].assign(qualityRes.begin(), qualityRes.end());
+    p_resMap->res["结构相似度"].assign(qualityRes.begin(), qualityRes.end());
 }
 
 void quality_calculate_part4(QualityResMap* p_resMap, vector<string> inputPathVec, char* logfilepath, vector<int> bandlist, string interkind, vector<double> qualityRes) {
     int flag;
     flag = mainSpectralAngleMatrix(inputPathVec[1], inputPathVec[2], logfilepath, bandlist, interkind, qualityRes);
     calculateAvg(qualityRes);
-    p_resMap->res["SpectralAngleMatrix_1_0"].assign(qualityRes.begin(), qualityRes.end());
+    p_resMap->res["光谱角矩阵"].assign(qualityRes.begin(), qualityRes.end());
 }
 
 void* qualityInterface(void *args) {

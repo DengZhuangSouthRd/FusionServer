@@ -18,7 +18,7 @@
 // </auto-generated>
 //
 
-#include "qualityjudgeRpc.h"
+#include <qualityjudgeRpc.h>
 #include <IceUtil/PushDisableWarnings.h>
 #include <Ice/LocalException.h>
 #include <Ice/ObjectFactory.h>

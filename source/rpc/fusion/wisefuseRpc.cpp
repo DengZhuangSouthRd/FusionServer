@@ -18,7 +18,7 @@
 // </auto-generated>
 //
 
-#include "wisefuseRpc.h"
+#include <wisefuseRpc.h>
 #include <IceUtil/PushDisableWarnings.h>
 #include <Ice/LocalException.h>
 #include <Ice/ObjectFactory.h>

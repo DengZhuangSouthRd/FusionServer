@@ -292,7 +292,7 @@ FusionInf ImageFusion::fuseSyn(const DirArgs& mapArg, const Ice::Current &) {
     deepCopyTask2RpcResult(*test, obj);
     delete test;
     log_OutputResult(obj);
-    fillFinishTaskMap(task_id, args, obj);
+    //fillFinishTaskMap(task_id, args, obj);
     return obj;
 }
 

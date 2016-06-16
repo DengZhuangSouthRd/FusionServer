@@ -146,8 +146,12 @@ QualityInfo ImageQuality::fetchQualityRes(const string &inputArgs, const Ice::Cu
         Log::Info("fetchQualityRes ## fetch task id %s Result Successful !", task_id.c_str());
         QualityResMap* t = (QualityResMap*)tmp.output;
         if(t != NULL) {
-            //obj.status = t->status;
-            obj.status = 100;
+            if(t->status == 0.0) {
+                obj.status = 60;
+            } else {
+                obj.status = t->status;
+//            obj.status = 100;
+            }
             for(auto it=t->res.begin(); it!=t->res.end(); it++) {
                 obj.imgsquality[it->first] = it->second;
             }

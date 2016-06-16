@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(AlgorithmServer)
+project(FusionServer)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fno-stack-protector")
 
@@ -165,5 +165,5 @@ set(SOURCE_FILES source/imagefusion.cpp
         source/algorithm/fusion/curvelet/fftw/wisdom.cpp
         source/algorithm/fusion/curvelet/fftw/wisdomio.cpp)
 
-add_executable(AlgorithmServer ${SOURCE_FILES})
-target_link_libraries(AlgorithmServer Ice IceUtil gdal proj pthread)
+add_executable(FusionServer ${SOURCE_FILES})
+target_link_libraries(FusionServer Ice IceUtil gdal proj pthread)

@@ -9,9 +9,9 @@ double mainComprehensiveEvaluate(vector<double> resultvalue) {
         return -1;
     }
     double threshold[5][3] = {
-            {40,35,30}, //
-            {30,20,10},//
-            {4,2,1},//
+            {35,25,15}, //
+            {15,10,5},//
+            {0.5,0.1,0.05},//
             {3,2.5,2.0},//
             {90,75,40}//
     };

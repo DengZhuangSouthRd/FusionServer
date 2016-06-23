@@ -93,20 +93,18 @@ void Tools::Nearest_Interpolation(float* Mat, int height, int width, int bandcou
         return;
     }
 
-    int new_i, new_j, k;
     //反变换得到的浮点坐标为(i,j)=(real_i+complex_i,real_j+complex_j)
-    float i, j;
-    int real_i, real_j;//在原图位置的整数部分(四舍五入)
     float ratio=(float)height / new_height;
-    for (new_i = bound+1; new_i <= new_height-bound; new_i++){
-        i = new_i*ratio;
-        real_i = (int)(i+0.5);//四舍五入
+#pragma parallel for
+    for (int new_i = bound+1; new_i <= new_height-bound; new_i++){
+        float i = new_i*ratio;
+        int real_i = (int)(i+0.5);//四舍五入
         //real_i = (int)(i);
-        for (new_j = bound+1; new_j <= new_width-bound; new_j++){
-            j = new_j*ratio;
-            real_j = (int)(j+0.5);//四舍五入
+        for (int new_j = bound+1; new_j <= new_width-bound; new_j++){
+            float j = new_j*ratio;
+            int real_j = (int)(j+0.5);//四舍五入
             //real_j = (int)(j);
-            for (k = 0; k < bandcount; k++)
+            for (int k = 0; k < bandcount; k++)
             {
                 DATA3D(New_Mat, new_i-1, new_j-1, k, new_height, new_width) = \
                         DATA3D(Mat, real_i-1, real_j-1, k, height, width);
@@ -115,16 +113,16 @@ void Tools::Nearest_Interpolation(float* Mat, int height, int width, int bandcou
     }
 
     //边界处理
-    for (new_i=1;new_i<=bound;new_i++){
-        i = new_i*ratio;
-        real_i = (int)(i+0.5);//四舍五入
+#pragma parallel for
+    for (int new_i=1;new_i<=bound;new_i++){
+        float i = new_i*ratio;
+        int real_i = (int)(i+0.5);//四舍五入
         //real_i = (int)(i);
-        for(new_j=1;new_j<=new_width;new_j++){
-
-            j = new_j*ratio;
-            real_j = (int)(j+0.5);//四舍五入
+        for(int new_j=1;new_j<=new_width;new_j++){
+            float j = new_j*ratio;
+            int real_j = (int)(j+0.5);//四舍五入
             //real_j = (int)(j);
-            for (k = 0; k < bandcount; k++)
+            for (int k = 0; k < bandcount; k++)
             {
                 DATA3D(New_Mat, new_i-1, new_j-1, k, new_height, new_width) = \
                         Pixels(Mat, real_i-1, real_j-1, k, height, width);
@@ -132,15 +130,16 @@ void Tools::Nearest_Interpolation(float* Mat, int height, int width, int bandcou
         }
     }
 
-    for (new_i=new_height-bound;new_i<=new_height;new_i++){
-        i = new_i*ratio;
-        real_i = (int)(i+0.5);//四舍五入
+#pragma parallel for
+    for (int new_i=new_height-bound;new_i<=new_height;new_i++){
+        float i = new_i*ratio;
+        int real_i = (int)(i+0.5);//四舍五入
         //real_i = (int)(i);
-        for(new_j=1;new_j<=new_width;new_j++){
-            j = new_j*ratio;
-            real_j = (int)(j+0.5);//四舍五入
+        for(int new_j=1;new_j<=new_width;new_j++){
+            float j = new_j*ratio;
+            int real_j = (int)(j+0.5);//四舍五入
             //real_j = (int)(j);
-            for (k = 0; k < bandcount; k++)
+            for (int k = 0; k < bandcount; k++)
             {
                 DATA3D(New_Mat, new_i-1, new_j-1, k, new_height, new_width) = \
                         Pixels(Mat, real_i-1, real_j-1, k, height, width);
@@ -148,16 +147,16 @@ void Tools::Nearest_Interpolation(float* Mat, int height, int width, int bandcou
         }
     }
 
-    for (new_i=bound+1;new_i<=new_height-bound;new_i++){
-        i = new_i*ratio;
-        real_i = (int)(i+0.5);//四舍五入
+#pragma parallel for
+    for (int new_i=bound+1;new_i<=new_height-bound;new_i++){
+        float i = new_i*ratio;
+        int real_i = (int)(i+0.5);//四舍五入
         //real_i = (int)(i);
-        for(new_j=1;new_j<=bound;new_j++){
-
-            j = new_j*ratio;
-            real_j = (int)(j+0.5);//四舍五入
+        for(int new_j=1;new_j<=bound;new_j++){
+            float j = new_j*ratio;
+            int real_j = (int)(j+0.5);//四舍五入
             //real_j = (int)(j);
-            for (k = 0; k < bandcount; k++)
+            for (int k = 0; k < bandcount; k++)
             {
                 DATA3D(New_Mat, new_i-1, new_j-1, k, new_height, new_width) = \
                         Pixels(Mat, real_i-1, real_j-1, k, height, width);
@@ -165,16 +164,16 @@ void Tools::Nearest_Interpolation(float* Mat, int height, int width, int bandcou
         }
     }
 
-    for (new_i=bound+1;new_i<=new_height-bound;new_i++){
-        i = new_i*ratio;
-        real_i = (int)(i+0.5);//四舍五入
+#pragma parallel for
+    for (int new_i=bound+1;new_i<=new_height-bound;new_i++){
+        float i = new_i*ratio;
+        int real_i = (int)(i+0.5);//四舍五入
         //real_i = (int)(i);
-        for(new_j=new_width-bound;new_j<=new_width;new_j++){
-
-            j = new_j*ratio;
-            real_j = (int)(j+0.5);//四舍五入
+        for(int new_j=new_width-bound;new_j<=new_width;new_j++){
+            float j = new_j*ratio;
+            int real_j = (int)(j+0.5);//四舍五入
             //real_j = (int)(j);
-            for (k = 0; k < bandcount; k++)
+            for (int k = 0; k < bandcount; k++)
             {
                 DATA3D(New_Mat, new_i-1, new_j-1, k, new_height, new_width) = \
                         Pixels(Mat, real_i-1, real_j-1, k, height, width);
@@ -192,22 +191,20 @@ void Tools::Linear_Interpolation_Base(float* Mat, int height, int width, int ban
     //作者：YS
     //修改时间：2015.11.03
 
-    int new_i, new_j, k;
     //反变换得到的浮点坐标为(i,j)=(real_i+complex_i,real_j+complex_j)
-    float i, j;
-    int real_i, real_j;//在原图位置的整数部分
-    float complex_i, complex_j;//在原图位置的小数部分
 
     float ratio=(float)height / new_height;
-    for (new_i = 1; new_i <= new_height; new_i++){
-        i = new_i*ratio;
-        real_i = (int)i;
-        complex_i = i - real_i;
-        for (new_j = 1; new_j <= new_width; new_j++){
-            j = new_j*ratio;
-            real_j = (int)j;
-            complex_j = j - real_j;
-            for (k = 0; k < bandcount; k++)
+
+#pragma parallel for
+    for (int new_i = 1; new_i <= new_height; new_i++){
+        float i = new_i*ratio;
+        int real_i = (int)i;
+        float complex_i = i - real_i;
+        for (int new_j = 1; new_j <= new_width; new_j++){
+            float j = new_j*ratio;
+            int real_j = (int)j;
+            float complex_j = j - real_j;
+            for (int k = 0; k < bandcount; k++)
             {
                 //插值公式
                 //f(i+u,j+v) = (1-u)(1-v)f(i,j) + (1-u)vf(i,j+1) + u(1-v)f(i+1,j) + uvf(i+1,j+1)
@@ -241,22 +238,22 @@ void Tools::Linear_Interpolation(float* Mat, int height, int width, int bandcoun
         return;
     }
 
-    int new_i, new_j, k;
     //反变换得到的浮点坐标为(i,j)=(real_i+complex_i,real_j+complex_j)
-    float i, j;
-    int real_i, real_j;//在原图位置的整数部分
-    float complex_i, complex_j;//在原图位置的小数部分
 
     float ratio=(float)height / new_height;
-    for (new_i = bound+1; new_i <= new_height-bound; new_i++){
+#pragma parallel for
+    for (int new_i = bound+1; new_i <= new_height-bound; new_i++){
+        float i, j;
+        int real_i, real_j;//在原图位置的整数部分
+        float complex_i, complex_j;//在原图位置的小数部分
         i = new_i*ratio;
         real_i = (int)i;
         complex_i = i - real_i;
-        for (new_j = bound+1; new_j <= new_width-bound; new_j++){
+        for (int new_j = bound+1; new_j <= new_width-bound; new_j++){
             j = new_j*ratio;
             real_j = (int)j;
             complex_j = j - real_j;
-            for (k = 0; k < bandcount; k++)
+            for (int k = 0; k < bandcount; k++)
             {
                 //插值公式
                 //f(i+u,j+v) = (1-u)(1-v)f(i,j) + (1-u)vf(i,j+1) + u(1-v)f(i+1,j) + uvf(i+1,j+1)
@@ -271,15 +268,19 @@ void Tools::Linear_Interpolation(float* Mat, int height, int width, int bandcoun
     }
 
     //边界处理
-    for (new_i=1;new_i<=bound;new_i++){
+#pragma parallel for
+    for (int new_i=1;new_i<=bound;new_i++){
+        float i, j;
+        int real_i, real_j;//在原图位置的整数部分
+        float complex_i, complex_j;//在原图位置的小数部分
         i = new_i*ratio;
         real_i = (int)i;
         complex_i = i - real_i;
-        for(new_j=1;new_j<=new_width;new_j++){
+        for(int new_j=1;new_j<=new_width;new_j++){
             j = new_j*ratio;
             real_j = (int)j;
             complex_j = j - real_j;
-            for (k = 0; k < bandcount; k++)
+            for (int k = 0; k < bandcount; k++)
             {
                 //插值公式
                 //f(i+u,j+v) = (1-u)(1-v)f(i,j) + (1-u)vf(i,j+1) + u(1-v)f(i+1,j) + uvf(i+1,j+1)
@@ -293,15 +294,19 @@ void Tools::Linear_Interpolation(float* Mat, int height, int width, int bandcoun
         }
     }
 
-    for (new_i=new_height-bound;new_i<=new_height;new_i++){
+#pragma parallel for
+    for (int new_i=new_height-bound;new_i<=new_height;new_i++){
+        float i, j;
+        int real_i, real_j;//在原图位置的整数部分
+        float complex_i, complex_j;//在原图位置的小数部分
         i = new_i*ratio;
         real_i = (int)i;
         complex_i = i - real_i;
-        for(new_j=1;new_j<=new_width;new_j++){
+        for(int new_j=1;new_j<=new_width;new_j++){
             j = new_j*ratio;
             real_j = (int)j;
             complex_j = j - real_j;
-            for (k = 0; k < bandcount; k++)
+            for (int k = 0; k < bandcount; k++)
             {
                 //插值公式
                 //f(i+u,j+v) = (1-u)(1-v)f(i,j) + (1-u)vf(i,j+1) + u(1-v)f(i+1,j) + uvf(i+1,j+1)
@@ -315,16 +320,19 @@ void Tools::Linear_Interpolation(float* Mat, int height, int width, int bandcoun
         }
     }
 
-
-    for (new_i=bound+1;new_i<=new_height-bound;new_i++){
+#pragma parallel for
+    for (int new_i=bound+1;new_i<=new_height-bound;new_i++){
+        float i, j;
+        int real_i, real_j;//在原图位置的整数部分
+        float complex_i, complex_j;//在原图位置的小数部分
         i = new_i*ratio;
         real_i = (int)i;
         complex_i = i - real_i;
-        for(new_j=1;new_j<=bound;new_j++){
+        for(int new_j=1;new_j<=bound;new_j++){
             j = new_j*ratio;
             real_j = (int)j;
             complex_j = j - real_j;
-            for (k = 0; k < bandcount; k++)
+            for (int k = 0; k < bandcount; k++)
             {
                 //插值公式
                 //f(i+u,j+v) = (1-u)(1-v)f(i,j) + (1-u)vf(i,j+1) + u(1-v)f(i+1,j) + uvf(i+1,j+1)
@@ -338,15 +346,19 @@ void Tools::Linear_Interpolation(float* Mat, int height, int width, int bandcoun
         }
     }
 
-    for (new_i=bound+1;new_i<=new_height-bound;new_i++){
+#pragma parallel for
+    for (int new_i=bound+1;new_i<=new_height-bound;new_i++){
+        float i, j;
+        int real_i, real_j;//在原图位置的整数部分
+        float complex_i, complex_j;//在原图位置的小数部分
         i = new_i*ratio;
         real_i = (int)i;
         complex_i = i - real_i;
-        for(new_j=new_width-bound;new_j<=new_width;new_j++){
+        for(int new_j=new_width-bound;new_j<=new_width;new_j++){
             j = new_j*ratio;
             real_j = (int)j;
             complex_j = j - real_j;
-            for (k = 0; k < bandcount; k++)
+            for (int k = 0; k < bandcount; k++)
             {
                 //插值公式
                 //f(i+u,j+v) = (1-u)(1-v)f(i,j) + (1-u)vf(i,j+1) + u(1-v)f(i+1,j) + uvf(i+1,j+1)
@@ -359,8 +371,6 @@ void Tools::Linear_Interpolation(float* Mat, int height, int width, int bandcoun
             }
         }
     }
-
-
 }
 
 //三次卷积插值（只适用于放大图像）
@@ -374,30 +384,28 @@ void Tools::CubicConv_Interpolation_Base(float* Mat, int height, int width, int 
     //修改内容：截断
     //修改时间：2016.3.7
 
-    int new_i, new_j, k;
-    int n;
     //反变换得到的浮点坐标为(i,j)=(real_i+complex_i,real_j+complex_j)
-    float i, j;
-    int real_i, real_j;//在原图位置的整数部分
-    float complex_i, complex_j;//在原图位置的小数部分
 
     float ratio=(float)height / new_height;
-    float U[4]={0};
-    float V[4]={0};
-    for (new_i = 1; new_i <= new_height; new_i++){
+#pragma parallel for
+    for (int new_i = 1; new_i <= new_height; new_i++){
+        float U[4]={0};
+        float V[4]={0};
+        int real_i, real_j;//在原图位置的整数部分
+        float i, j;
         i = new_i*ratio;
         real_i = (int)i;
-        complex_i = i - real_i;
-        for (new_j = 1; new_j <= new_width; new_j++){
+        float complex_i = i - real_i;
+        for (int new_j = 1; new_j <= new_width; new_j++){
             j = new_j*ratio;
             real_j = (int)j;
-            complex_j = j - real_j;
-            for (n=0; n<4; n++)
+            float complex_j = j - real_j;
+            for (int n=0; n<4; n++)
             {
                 U[n]=SinXDivX(complex_i+1-n);
                 V[n]=SinXDivX(complex_j+1-n);
             }
-            for (k = 0; k < bandcount; k++)
+            for (int k = 0; k < bandcount; k++)
             {
                 //插值公式
                 //
@@ -434,30 +442,28 @@ void Tools::CubicConv_Interpolation(float* Mat, int height, int width, int bandc
         return;
     }
 
-    int new_i, new_j, k;
-    int n;
     //反变换得到的浮点坐标为(i,j)=(real_i+complex_i,real_j+complex_j)
-    float i, j;
-    int real_i, real_j;//在原图位置的整数部分
-    float complex_i, complex_j;//在原图位置的小数部分
 
     float ratio=(float)height / new_height;
-    float U[4]={0};
-    float V[4]={0};
-    for (new_i = bound+1; new_i <= new_height-bound; new_i++){
-        i = new_i*ratio;
-        real_i = (int)i;
+
+#pragma parallel for
+    for (int new_i = bound+1; new_i <= new_height-bound; new_i++){
+        float U[4]={0};
+        float V[4]={0};
+        float i = new_i*ratio;
+        float complex_i, complex_j;//在原图位置的小数部分
+        int real_i = (int)i;
         complex_i = i - real_i;
-        for (new_j = bound+1; new_j <= new_width-bound; new_j++){
-            j = new_j*ratio;
-            real_j = (int)j;
+        for (int new_j = bound+1; new_j <= new_width-bound; new_j++){
+            float j = new_j*ratio;
+            int real_j = (int)j;
             complex_j = j - real_j;
-            for (n=0; n<4; n++)
+            for (int n=0; n<4; n++)
             {
                 U[n]=SinXDivX(complex_i+1-n);
                 V[n]=SinXDivX(complex_j+1-n);
             }
-            for (k = 0; k < bandcount; k++)
+            for (int k = 0; k < bandcount; k++)
             {
                 //插值公式
                 //
@@ -474,20 +480,23 @@ void Tools::CubicConv_Interpolation(float* Mat, int height, int width, int bandc
     }
 
     //边界处理
-    for (new_i=1;new_i<=bound;new_i++){
-        i = new_i*ratio;
-        real_i = (int)i;
-        complex_i = i - real_i;
-        for(new_j=1;new_j<=new_width;new_j++){
-            j = new_j*ratio;
-            real_j = (int)j;
-            complex_j = j - real_j;
-            for (n=0; n<4; n++)
+#pragma parallel for
+    for (int new_i=1;new_i<=bound;new_i++){
+        float U[4]={0};
+        float V[4]={0};
+        float i = new_i*ratio;
+        int real_i = (int)i;
+        float complex_i = i - real_i;
+        for(int new_j=1;new_j<=new_width;new_j++){
+            float j = new_j*ratio;
+            int real_j = (int)j;
+            float complex_j = j - real_j;
+            for (int n=0; n<4; n++)
             {
                 U[n]=SinXDivX(complex_i+1-n);
                 V[n]=SinXDivX(complex_j+1-n);
             }
-            for (k = 0; k < bandcount; k++)
+            for (int k = 0; k < bandcount; k++)
             {
                 //插值公式
                 //f(i+u,j+v) = (1-u)(1-v)f(i,j) + (1-u)vf(i,j+1) + u(1-v)f(i+1,j) + uvf(i+1,j+1)
@@ -504,20 +513,23 @@ void Tools::CubicConv_Interpolation(float* Mat, int height, int width, int bandc
         }
     }
 
-    for (new_i=new_height-bound;new_i<=new_height;new_i++){
-        i = new_i*ratio;
-        real_i = (int)i;
-        complex_i = i - real_i;
-        for(new_j=1;new_j<=new_width;new_j++){
-            j = new_j*ratio;
-            real_j = (int)j;
-            complex_j = j - real_j;
-            for (n=0; n<4; n++)
+#pragma parallel for
+    for (int new_i=new_height-bound;new_i<=new_height;new_i++){
+        float U[4]={0};
+        float V[4]={0};
+        float i = new_i*ratio;
+        int real_i = (int)i;
+        float complex_i = i - real_i;
+        for(int new_j=1;new_j<=new_width;new_j++){
+            float j = new_j*ratio;
+            int real_j = (int)j;
+            float complex_j = j - real_j;
+            for (int n=0; n<4; n++)
             {
                 U[n]=SinXDivX(complex_i+1-n);
                 V[n]=SinXDivX(complex_j+1-n);
             }
-            for (k = 0; k < bandcount; k++)
+            for (int k = 0; k < bandcount; k++)
             {
                 //插值公式
                 //f(i+u,j+v) = (1-u)(1-v)f(i,j) + (1-u)vf(i,j+1) + u(1-v)f(i+1,j) + uvf(i+1,j+1)
@@ -534,21 +546,23 @@ void Tools::CubicConv_Interpolation(float* Mat, int height, int width, int bandc
         }
     }
 
-
-    for (new_i=bound+1;new_i<=new_height-bound;new_i++){
-        i = new_i*ratio;
-        real_i = (int)i;
-        complex_i = i - real_i;
-        for(new_j=1;new_j<=bound;new_j++){
-            j = new_j*ratio;
-            real_j = (int)j;
-            complex_j = j - real_j;
-            for (n=0; n<4; n++)
+#pragma parallel for
+    for (int new_i=bound+1;new_i<=new_height-bound;new_i++){
+        float U[4]={0};
+        float V[4]={0};
+        float i = new_i*ratio;
+        int real_i = (int)i;
+        float complex_i = i - real_i;
+        for(int new_j=1;new_j<=bound;new_j++){
+            float j = new_j*ratio;
+            int real_j = (int)j;
+            float complex_j = j - real_j;
+            for (int n=0; n<4; n++)
             {
                 U[n]=SinXDivX(complex_i+1-n);
                 V[n]=SinXDivX(complex_j+1-n);
             }
-            for (k = 0; k < bandcount; k++)
+            for (int k = 0; k < bandcount; k++)
             {
                 //插值公式
                 //f(i+u,j+v) = (1-u)(1-v)f(i,j) + (1-u)vf(i,j+1) + u(1-v)f(i+1,j) + uvf(i+1,j+1)
@@ -566,20 +580,23 @@ void Tools::CubicConv_Interpolation(float* Mat, int height, int width, int bandc
         }
     }
 
-    for (new_i=bound+1;new_i<=new_height-bound;new_i++){
-        i = new_i*ratio;
-        real_i = (int)i;
-        complex_i = i - real_i;
-        for(new_j=new_width-bound;new_j<=new_width;new_j++){
-            j = new_j*ratio;
-            real_j = (int)j;
-            complex_j = j - real_j;
-            for (n=0; n<4; n++)
+#pragma parallel for
+    for (int new_i=bound+1;new_i<=new_height-bound;new_i++){
+        float U[4]={0};
+        float V[4]={0};
+        float i = new_i*ratio;
+        int real_i = (int)i;
+        float complex_i = i - real_i;
+        for(int new_j=new_width-bound;new_j<=new_width;new_j++){
+            float j = new_j*ratio;
+            int real_j = (int)j;
+            float complex_j = j - real_j;
+            for (int n=0; n<4; n++)
             {
                 U[n]=SinXDivX(complex_i+1-n);
                 V[n]=SinXDivX(complex_j+1-n);
             }
-            for (k = 0; k < bandcount; k++)
+            for (int k = 0; k < bandcount; k++)
             {
                 //插值公式
                 //f(i+u,j+v) = (1-u)(1-v)f(i,j) + (1-u)vf(i,j+1) + u(1-v)f(i+1,j) + uvf(i+1,j+1)

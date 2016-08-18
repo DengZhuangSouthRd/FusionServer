@@ -87,10 +87,6 @@ bool CurveletFusion::MeanStd_Curvelet_HIS_Fusion(const char* Input_PAN_FileName,
         MSInf->SetBandCount(MS_Bandcount);
     }
 
-    MSInf->SetHeight(PAN_Height); //更新MS影像高度
-    MSInf->SetWidth(PAN_Width);	  //更新MS影像宽度
-    MSInf->SetGeoTransform(PANInf->GetGeoTransform());//更新地理信息
-
     float* PANData = NULL;    //记录PAN数据
     float* MSData = NULL;    //记录MS原始数据
     float* New_MSData = NULL;  //记录MS插值后数据
@@ -227,6 +223,10 @@ bool CurveletFusion::MeanStd_Curvelet_HIS_Fusion(const char* Input_PAN_FileName,
 
     //GDAL写文件
     Log(LogName,"01|04");//写入log日志
+    
+    MSInf->SetHeight(PAN_Height); //更新MS影像高度
+    MSInf->SetWidth(PAN_Width);	  //更新MS影像宽度
+    MSInf->SetGeoTransform(PANInf->GetGeoTransform());//更新地理信息
     //创建文件，写入头文件信息
     if (MSInf->WriteImageInf(Output_MS_FileName)!=0) {
         cerr<<"Write MS Image Inf Error."<<endl;
@@ -328,9 +328,6 @@ bool CurveletFusion::MeanStd_Curvelet_HCS_Fusion(const char* Input_PAN_FileName,
         MSInf->SetBandCount(MS_Bandcount);
     }
 
-    MSInf->SetHeight(PAN_Height); //更新MS影像高度
-    MSInf->SetWidth(PAN_Width);	  //更新MS影像宽度
-    MSInf->SetGeoTransform(PANInf->GetGeoTransform());//更新地理信息
 
     float* PANData = NULL;    //记录PAN数据
     float* MSData = NULL;    //记录MS原始数据
@@ -476,6 +473,9 @@ bool CurveletFusion::MeanStd_Curvelet_HCS_Fusion(const char* Input_PAN_FileName,
     //GDAL写文件
     Log(LogName,"01|04");//写入log日志
 
+    MSInf->SetHeight(PAN_Height); //更新MS影像高度
+    MSInf->SetWidth(PAN_Width);	  //更新MS影像宽度
+    MSInf->SetGeoTransform(PANInf->GetGeoTransform());//更新地理信息
     //创建文件，写入头文件信息
     if (MSInf->WriteImageInf(Output_MS_FileName)!=0) {
         cerr<<"Write MS Image Inf Error."<<endl;
@@ -578,9 +578,6 @@ bool CurveletFusion::MeanStd_Curvelet_GramSchmidt_Fusion(const char* Input_PAN_F
         MSInf->SetBandCount(MS_Bandcount);
     }
 
-    MSInf->SetHeight(PAN_Height); //更新MS影像高度
-    MSInf->SetWidth(PAN_Width);	  //更新MS影像宽度
-    MSInf->SetGeoTransform(PANInf->GetGeoTransform());//更新地理信息
 
     float* PANData =NULL;    //记录PAN数据
     float* MSData = NULL;    //记录MS原始数据
@@ -769,6 +766,9 @@ bool CurveletFusion::MeanStd_Curvelet_GramSchmidt_Fusion(const char* Input_PAN_F
     //GDAL写文件
     Log(LogName,"01|04");//写入log日志
 
+    MSInf->SetHeight(PAN_Height); //更新MS影像高度
+    MSInf->SetWidth(PAN_Width);	  //更新MS影像宽度
+    MSInf->SetGeoTransform(PANInf->GetGeoTransform());//更新地理信息
     if (MSInf->WriteImageInf(Output_MS_FileName)!=0) //创建文件，写入头文件信息
     {
         cerr<<"Write MS Image Inf Error."<<endl;
@@ -872,9 +872,6 @@ bool CurveletFusion::MeanStd_Curvelet_HCS_Fusion_New(const char* Input_PAN_FileN
         MSInf->SetBandCount(MS_Bandcount);
     }
 
-    MSInf->SetHeight(PAN_Height); //更新MS影像高度
-    MSInf->SetWidth(PAN_Width);	  //更新MS影像宽度
-    MSInf->SetGeoTransform(PANInf->GetGeoTransform());//更新地理信息
 
     float* PANData = NULL;    //记录PAN数据
     float* MSData = NULL;    //记录MS原始数据
@@ -1033,7 +1030,9 @@ bool CurveletFusion::MeanStd_Curvelet_HCS_Fusion_New(const char* Input_PAN_FileN
 
     //GDAL写文件
     Log(LogName,"01|05");//写入log日志
-
+    MSInf->SetHeight(PAN_Height); //更新MS影像高度
+    MSInf->SetWidth(PAN_Width);	  //更新MS影像宽度
+    MSInf->SetGeoTransform(PANInf->GetGeoTransform());//更新地理信息
     //创建文件，写入头文件信息
     if (MSInf->WriteImageInf(Output_MS_FileName)!=0) {
         cerr<<"Write MS Image Inf Error."<<endl;

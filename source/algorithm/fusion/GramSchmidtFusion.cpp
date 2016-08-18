@@ -69,9 +69,6 @@ bool GramSchmidtFusion::GramSchmidt_Fusion(const char* Input_PAN_FileName, const
         MSInf->SetBandCount(MS_Bandcount);
     }
 
-    MSInf->SetHeight(PAN_Height); //更新MS影像高度
-    MSInf->SetWidth(PAN_Width);	  //更新MS影像宽度
-    MSInf->SetGeoTransform(PANInf->GetGeoTransform());//更新地理信息
 
     float* PANData =NULL;    //记录PAN数据
     float* MSData = NULL;    //记录MS原始数据
@@ -198,6 +195,9 @@ bool GramSchmidtFusion::GramSchmidt_Fusion(const char* Input_PAN_FileName, const
     //GDAL写文件
     Log(LogName,"01|04");//写入log日志
 
+    MSInf->SetHeight(PAN_Height); //更新MS影像高度
+    MSInf->SetWidth(PAN_Width);	  //更新MS影像宽度
+    MSInf->SetGeoTransform(PANInf->GetGeoTransform());//更新地理信息
     if (MSInf->WriteImageInf(Output_MS_FileName) != 0) {
         cerr<<"Write MS Image Inf Error."<<endl;
         cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;

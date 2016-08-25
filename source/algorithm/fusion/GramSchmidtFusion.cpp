@@ -191,7 +191,7 @@ bool GramSchmidtFusion::GramSchmidt_Fusion(const char* Input_PAN_FileName, const
 
     //释放内存
     PANInf->ClearImageData();PANData = NULL;
-    delete PANInf; PANInf = NULL;
+    
     //GDAL写文件
     Log(LogName,"01|04");//写入log日志
 
@@ -217,6 +217,7 @@ bool GramSchmidtFusion::GramSchmidt_Fusion(const char* Input_PAN_FileName, const
     MSInf->SetImgData(NULL);
     //释放内存
     delete MSInf; MSInf = NULL;
+    delete PANInf; PANInf = NULL;
     delete[] New_MSData; New_MSData = NULL;
 
     Log(LogName,"01|05");//写入log日志

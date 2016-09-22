@@ -41,7 +41,7 @@ public:
     bool MeanStd_Curvelet_HCS_Fusion_New(const char* Input_PAN_FileName, const char* Input_MS_FileName, const char* Output_MS_FileName,const char* LogName,int* bandlist,int InterpolationMethod);
 
     //计算局部均值，标准差及方向信息熵
-    void LocalMeanStdEntropy(CpxNumMat Mat,int i,int j,int localSize,float & Mean,float &Std,float &Entropy){
+    void LocalMeanStdEntropy(CpxNumMat &Mat,int i,int j,int localSize,float & Mean,float &Std,float &Entropy){
         int p,q;
         int height= Mat.m();
         int width = Mat.n();
